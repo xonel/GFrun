@@ -1,0 +1,27 @@
+Garmin Connect Python Uploader Release Notes:
+
+Release 20120516:
+  Comments:
+  Fixed a problem where binary FIT files did not upload successfully to Garmin 
+  Connect in Windows.  
+
+  Changes:
+  1)  In UploadGarmin.py when uploading .FIT files, open files in 'rb' (read 
+      binary) mode.  In Python under Windows there is an important distinction
+      between opening files in binary and txt modes.  
+
+Release 20120129:
+  Comments:
+  No real change of features.  Mostly code cleanup.  
+
+  Changes:
+  1)  Obscure password when printing verbose output. This will reduce the 
+      chance of users unintentionally disclosing their password.
+  2)  When no credentials are given on the command line and no config file is
+      present, print the locations that were searched for the config file.
+  3)  Added text to help explaining the meaning of various STATUS outputs.
+  4)  Removed redundant os.path.expanduser() statement in line 112. 
+
+
+Release 20120121:
+  Initial Release

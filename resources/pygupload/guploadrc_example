@@ -1,0 +1,14 @@
+# Replace 'my_username' and 'my_pasword' below with your login credentials
+# on Garmin Connect.  NOTE - THIS IS NOT SECURE. ONLY DO THIS IF YOU ARE 
+# COMFORTABLE WITH YOUR LOGIN CREDENTIALS BEING STORED IN A CLEAR TEXT 
+# FILE.  Save this file as .guploadrc  (gupload.ini for Windows). 
+# gupload.py first looks for this config file in the current working 
+# directory, then your home directory (typicaly /home/<Linux_username> in
+# Linux, or c:\Documents and Settings\<win_username> in Windows. gupload.py 
+# prefers command line credentials first, then looks for a config file 
+# in the current directory, then the user's home directory.
+# Replace <username> and <password> below with your Garmin Connect 
+# loging credentials.
+[Credentials]
+username=<username>
+password=<password>
