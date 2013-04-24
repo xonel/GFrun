@@ -29,7 +29,7 @@ import ConfigParser
 _VERSION = "0.7.1"
 _DEBUG = 1
 _LOG_FILE = "/tmp/SetupGarmin.log"
-_CONF_FILE = "https://github.com/xonel/GFrun/raw/master/install/SetupGarmin.cfg"
+_CONF_FILE = "https://github.com/xonel/GFrun/raw/master/install/SetupGFrun.cfg"
 
 # System commands
 #-----------------------------------------------------------------------------
