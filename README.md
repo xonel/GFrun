@@ -23,12 +23,13 @@ CONFIGURATION DE TEST POUR DEV DU SCRIPT :
 
 INSTALL : (ATTENTION : Script en cours de dev !! Bugs possibles !! ...) :
 
-wget https://github.com/xonel/GFrun/raw/master/install/SetupGFrun.py
-chmod a+x SetupGFrun.py
-sudo ./SetupGFrun.py
+$ wget https://github.com/xonel/GFrun/raw/master/install/SetupGFrun.py
+$ chmod a+x SetupGFrun.py
+$ sudo ./SetupGFrun.py
 
-J'ai utilisé le script de "postinstall" de Nicolargo : http://nicolargo.github.io/ubuntupostinstall/
-avec les modifications nécessaires pour une installation simplifié de toutes ces briques.
+J'ai utilisé le script de "postinstall" de Nicolargo avec les modifications nécessaires pour une installation simplifié de toutes ces briques logicielles.
+http://nicolargo.github.io/ubuntupostinstall/
+
 
 FAIT :
 + installation et pres config de Garmin-Forerunner-610-Extractor : Version MASTER via GIT
