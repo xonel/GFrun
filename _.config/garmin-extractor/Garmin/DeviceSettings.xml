@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<Settings xmlns="http://www.garmin.com/xmlschemas/AntTransferSettings/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.garmin.com/xmlschemas/AntTransferSettings/v1 http://www.garmin.com/xmlschemas/AntTransferSettingsv1.xsd">
+
+  <SendToGarminConnect>true</SendToGarminConnect>
+
+  <SendToGarminTrainingCenter>false</SendToGarminTrainingCenter>
+
+  <EraseFitnessDataAfterTransfer>false</EraseFitnessDataAfterTransfer>
+
+  <LastTransferredTime>2013-04-07T12:14:34Z</LastTransferredTime>
+
+  <FinishPairing>false</FinishPairing>
+
+</Settings>
