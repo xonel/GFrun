@@ -38,7 +38,7 @@ FAIT :
 + installation et configuration du script : 40-convert_to_tcx.py
 
 A FAIRE :
-- récupérer le  <Id>3xx89xxxx9</Id> de la montre pour tout configurer automatiquement.
+- récupérer le  <Id>ID_MONTRE</Id> de la montre pour tout configurer automatiquement.
 - Modifier  Garmin-Forerunner-610-Extractor ou exploiter son dossier script pour automatiser auto-upload via gcpuploader.
 - Créer automatiquement la structure du dossier DEVICES pour garminplugin sans utiliser WINDOWS
 
