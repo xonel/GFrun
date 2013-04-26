@@ -1,7 +1,6 @@
 #!/bin/bash
 #
 # Configuration file for GARMIN FORERUNNER - GFrun
-# Original script : https://github.com/nicolargo/ubuntupostinstall
 # Modif by Le.NoX
 #
 ############################
