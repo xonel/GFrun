@@ -26,13 +26,13 @@
 dpkg -l > /tmp/pkg-before.txt
 
 ##[repos]
-sudo apt-add-repository ppa:andreas-diesner/garminplugin
+sudo apt-add-repository -y ppa:andreas-diesner/garminplugin
 sudo apt-get update
 
 ##[packages]
-sudo apt-get install git git-core 
-sudo apt-get install garminplugin
-sudo apt-get install python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial
+sudo apt-get install -y git git-core 
+sudo apt-get install -y garminplugin
+sudo apt-get install -y python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial
 sudo apt-get upgrade
 
 ##[postactions]
