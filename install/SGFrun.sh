@@ -14,6 +14,9 @@
 # wget https://github.com/xonel/GFrun/raw/master/install/SGFrun.sh
 # chmod a+x SGFrun.sh
 # sudo sh ./SGFrun.sh
+#
+# OneCopyColle : 
+# wget https://github.com/xonel/GFrun/raw/master/install/SGFrun.sh && chmod a+x SGFrun.sh && sudo sh ./SGFrun.sh
 ########################################################################
 #
 # Actions to be executed before all the others steps
@@ -67,9 +70,9 @@ cd $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/ && ln -s $HOME/.config/g
 src=/path/to/FIT-to-TCX/fittotcx.py && cibl=$HOME/Garmin-Forerunner-610-Extractor-master/resources/FIT-to-TCX-master/fittotcx.py && echo -e "sed -i 's|$src|$cibl|g' $HOME/.config/garmin-extractor/scripts/40-convert_to_tcx.py" >>/tmp/ligneCmd.sh
 src=ID_MA_MONTRE && cibl=$NUMERO_DE_MA_MONTRE && echo -e "sed -i 's|$src|$cibl|g' $HOME/.config/garmin-extractor/Garmin/GarminDevice.xml" >>/tmp/ligneCmd.sh
 src=MON_HOME && cibl=$HOME && echo -e "sed -i 's|$src|$cibl|g' $HOME/.config/garminplugin/garminplugin.xml" >>/tmp/ligneCmd.sh
-chmod u+x /tmp/ligneCmd.sh && sh /tmp/ligneCmd.sh
+cd /tmp/ && chmod u+x /tmp/ligneCmd.sh && sh /tmp/ligneCmd.sh
 chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-extractor $HOME/Garmin-Forerunner-610-Extractor-master
 chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/Garmin-Forerunner-610-Extractor-master/scripts/
 
 ##Nettoyage
-rm -Rf $HOME/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/pygupload_20120516.zip* $HOME/.config/_.GFrunGarminplugin.zip* /tmp/ligneCmd.sh*
+rm -Rf $HOME/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/pygupload_20120516.zip* $HOME/.config/_.GFrunGarminplugin.zip* #/tmp/ligneCmd.sh*
