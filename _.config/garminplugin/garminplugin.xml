@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<GarminPlugin logfile="~/garminplugin.log" level="DEBUG">
+<GarminPlugin logfile="MON_HOME/garminplugin.log" level="DEBUG">
     <Devices>
         <Device enabled="true">
             <Name>Forerunner 310XT</Name>
-            <StoragePath>~/.config/garmin-extractor/</StoragePath>
+            <StoragePath>MON_HOME/.config/garmin-extractor/</StoragePath>
             <StorageCommand></StorageCommand>
             <FitnessDataPath></FitnessDataPath>
             <GpxDataPath></GpxDataPath>
