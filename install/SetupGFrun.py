@@ -85,23 +85,23 @@ def syntax():
     """
     Print the script syntax
     """
-    print "post installation script version %s" % _VERSION
-    print ""
-    print "Syntax: postinstall.py [-c cfgfile] [-h] [-v]"
+    print "Installation SetpGFrun script version %s" % _VERSION
+    print "GARMIN FORERUNNER ANT-FS - LINUX"
+    print "Syntax: SetupGFrun.py [-c cfgfile] [-h] [-v]"
     print "  -c cfgfile: Use the cfgfile instead of the default one"
     print "  -h        : Print the syntax and exit"
     print "  -v        : Print the version and exit"
     print ""
     print "Exemples:"
     print ""
-    print " # postinstall.py"
+    print " # SetupGFrun.py"
     print " > Run the script with the default configuration file"
     print "   %s" % _CONF_FILE
     print ""
-    print " # postinstall.py -c ./myconf.cfg"
+    print " # SetupGFrun.py -c ./myconf.cfg"
     print " > Run the script with the ./myconf.cfg file"
     print ""
-    print " # postinstall.py -c http://mysite.com/myconf.cfg"
+    print " # SetupGFrun.py -c http://mysite.com/myconf.cfg"
     print " > Run the script with the http://mysite.com/myconf.cfg configuration file"
     print ""
 
@@ -264,7 +264,7 @@ def main(argv):
     
     # Read the configuration file
     if (config_file == ""):
-        config_file = "/tmp/postinstall.cfg"
+        config_file = "/tmp/SetupGFrun.cfg"
         showexec ("Download the configuration file", "rm -f "+config_file+" ; "+_WGET+" -O "+config_file+" "+config_url)        
     config = ConfigParser.RawConfigParser()
     config.read(config_file)
