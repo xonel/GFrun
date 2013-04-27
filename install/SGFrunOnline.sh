@@ -44,7 +44,7 @@ dpkg -l > /tmp/pkg-after.txt
 ##[postactions]
 pip install pyusb
 rm -Rf $HOME/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/pygupload_20120516.zip* $HOME/.config/_.GFrunGarminplugin.zip* /tmp/ligneCmd.sh*
-#action_Unzip_GFrunOffline = cd $HOME && unzip -o GFrunOffline.zip
+#cd $HOME && wget https://raw.github.com/xonel/GFrun/master/GFrunOffline.zip && unzip -o GFrunOffline.zip
 
 ##Garmin-Forerunner-610-Extractor
 cd $HOME && wget https://github.com/Tigge/Garmin-Forerunner-610-Extractor/archive/master.zip 
@@ -59,7 +59,7 @@ cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && unzip -o master.zi
 cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && git clone https://github.com/dtcooper/python-fitparse
 cp -Rf $HOME/Garmin-Forerunner-610-Extractor-master/resources/python-fitparse/fitparse $HOME/Garmin-Forerunner-610-Extractor-master/resources/FIT-to-TCX-master/
 
-##Auto-upload connect.garmin.com
+##gcpuploader (Auto-upload connect.garmin.com)
 cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && wget http://freefr.dl.sourceforge.net/project/gcpuploader/pygupload_20120516.zip 
 cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && unzip -o pygupload_20120516.zip
 cd $HOME/.config/ && wget https://raw.github.com/xonel/GFrun/master/Garmin-Forerunner-610-Extractor-master/resources/_.GFrunGarminplugin.zip
@@ -79,11 +79,11 @@ fi
 
 src=/path/to/FIT-to-TCX/fittotcx.py && cibl=$HOME/Garmin-Forerunner-610-Extractor-master/resources/FIT-to-TCX-master/fittotcx.py && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garmin-extractor/scripts/40-convert_to_tcx.py" >> /tmp/ligneCmd.sh
 src=MON_HOME && cibl=$HOME && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garminplugin/garminplugin.xml" >> /tmp/ligneCmd.sh
-cd /tmp/ && chmod u+x /tmp/ligneCmd.sh && sh /tmp/ligneCmd.sh
+chmod u+x /tmp/ligneCmd.sh && sh /tmp/ligneCmd.sh
 
 ###Chown Chmod
 chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-extractor $HOME/Garmin-Forerunner-610-Extractor-master
 chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/Garmin-Forerunner-610-Extractor-master/scripts/
 
 ##Nettoyage
-rm -Rf $HOME/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/pygupload_20120516.zip* $HOME/.config/_.GFrunGarminplugin.zip* #/tmp/ligneCmd.sh*
+rm -Rf $HOME/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/pygupload_20120516.zip* $HOME/.config/_.GFrunGarminplugin.zip* /tmp/ligneCmd.sh*

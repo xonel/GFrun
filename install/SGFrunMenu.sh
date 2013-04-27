@@ -52,10 +52,12 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 	echo `color 32 " ========================================================================================="`
 	echo ""
 #        echo "============================"
-        echo `color 32 "1. Full Install - GFrunOnline"`
-        echo `color 33 "2. Config Garminplugin - www.connect.garmin.com"`
+        echo `color 32 "1. Full Install DEV - GFrunOnline"`
+        echo `color 33 "2. Full Install STABLE - GFrunOffline"`
+        echo""
         echo `color 34 "3. Config Auto-Upload - gcpuploader"`
-        echo `color 35 "4. Full Install - GFrunOffline"`
+        echo `color 35 "4. Config Garminplugin - www.connect.garmin.com"`
+        echo""
         echo `color 36 "5. Telecharger Activités en Local"`
         echo `color 37 "6. Uploader Activites - www.connect.garmin.com"`
 #        echo `color 32 "7. "`
@@ -88,7 +90,7 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
           *2*) # Lancer le Script pour : 
 		####################################################################
 		VChemin="$VChemin"
-		Vscript="Conf_Garminplugin.sh"
+		Vscript="GFrunOffline.sh"
 
 		GoScript
 		####################################################################
@@ -106,7 +108,7 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
           *4*) # Lancer le Script pour : 
 		####################################################################
 		VChemin=$VChemin
-		Vscript="GFrunOffline.sh"
+		Vscript="Conf_Garminplugin.sh"
 		
 		GoScript
 		####################################################################  			
