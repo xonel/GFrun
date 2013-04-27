@@ -71,11 +71,10 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
         echo
         echo -n "Faite votre choix : "
 
-        read VARIABLE
+        read Vchoix
 
         case $Vchoix
         in
-
           1) # Lancer le Script pour : 
 		####################################################################
 		VChemin="$VChemin"
