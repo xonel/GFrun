@@ -1,6 +1,6 @@
 
 ===============================================================================
-#GFrun - Garmin Forerunner 310XT ANT- Inside Linux (Ubuntu 12.04 =<OK>= 13.04)
+#GFrun - Garmin Forerunner 310XT ANT- Inside Linux
 ===============================================================================
 
 Nous avons donc tout pour connecter nos montres Garmin Forerunner (ANT-FS  => ex: 310XT) sous LINUX :
