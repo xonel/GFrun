@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# Configuration file for GARMIN FORERUNNER - GFrun
-# Modif by Le.NoX
+# GARMIN FORERUNNER - GFrun
+# Le.NoX
 #
 ############################
 #     Auteurs : Le.NoX ;o) 
@@ -9,6 +9,8 @@
 #     Licence: GNU
 ############################
 # zip fichier de config offline (GFrunOffline.zip) + config garminplugin (_.GFrunGarminplugin.zip)
-zip -r GFrunOffline.zip  master.zip _.config/ Garmin-Forerunner-610-Extractor-master/
-cd _.config/ && zip -r _.GFrunGarminplugin.zip garmin-extractor/ garminplugin/
+mv _.config/ .config/
+zip -r GFrunOffline.zip  master.zip .config/ Garmin-Forerunner-610-Extractor-master/ install/
+cd .config/ && zip -r _.GFrunGarminplugin.zip garmin-extractor/ garminplugin/
+cd .. && mv .config/ _.config/
 echo "FIN"
