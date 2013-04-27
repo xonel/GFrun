@@ -87,4 +87,6 @@ chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-e
 chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/Garmin-Forerunner-610-Extractor-master/scripts/
 
 ##Nettoyage
+echo "======================= Clean Up =================== "
 rm -Rf $HOME/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/pygupload_20120516.zip* $HOME/.config/_.GFrunGarminplugin.zip* /tmp/ligneCmd.sh*
+echo "PROCEDURE TERMINEE"
