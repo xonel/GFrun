@@ -10,12 +10,12 @@
 ############################
 #
 ########################################################################
-# wget https://github.com/xonel/GFrun/raw/master/install/SGFrunMenu.sh
-# chmod a+x SGFrunMenu.sh
-# sudo sh ./SGFrunMenu.sh
+# wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh
+# chmod a+x GFrunMenu.sh
+# sudo sh ./GFrunMenu.sh
 #
 # OneCopyColle : 
-# wget https://github.com/xonel/GFrun/raw/master/install/SGFrunMenu.sh && chmod a+x SGFrunMenu.sh && sudo sh ./SGFrunMenu.sh
+# wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ########################################################################
 #
 ##Configuration des fichiers de config avec le #HOME et le $NUMERO_DE_MA_MONTRE

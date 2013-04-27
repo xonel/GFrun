@@ -10,12 +10,12 @@
 ############################
 #
 ########################################################################
-# wget https://github.com/xonel/GFrun/raw/master/install/SGFrunMenu.sh
-# chmod a+x SGFrunMenu.sh
-# sudo sh ./SGFrunMenu.sh
+# wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh
+# chmod a+x GFrunMenu.sh
+# sudo sh ./GFrunMenu.sh
 #
 # OneCopyColle : 
-# wget https://github.com/xonel/GFrun/raw/master/install/SGFrunMenu.sh && chmod a+x SGFrunMenu.sh && sudo sh ./SGFrunMenu.sh
+# wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ########################################################################
 #
 VChemin="https://github.com/xonel/GFrun/raw/master/install/"
@@ -81,7 +81,7 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
           1) # Lancer le Script pour : 
 		####################################################################
 		VChemin="$VChemin"
-		Vscript="SGFrunOnline.sh"
+		Vscript="GFrunOnline.sh"
 
 		GoScript
 		####################################################################

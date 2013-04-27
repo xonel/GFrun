@@ -10,14 +10,13 @@
 ############################
 #
 ########################################################################
-# wget https://github.com/xonel/GFrun/raw/master/install/SGFrunMenu.sh
-# chmod a+x SGFrunMenu.sh
-# sudo sh ./SGFrunMenu.sh
+# wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh
+# chmod a+x GFrunMenu.sh
+# sudo sh ./GFrunMenu.sh
 #
 # OneCopyColle : 
-# wget https://github.com/xonel/GFrun/raw/master/install/SGFrunMenu.sh && chmod a+x SGFrunMenu.sh && sudo sh ./SGFrunMenu.sh
+# wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ########################################################################
-#
 #
 echo "#:'######:::'########:'########::'##::::'##:'##::: ##:
 #   '##... ##:: ##.....:: ##.... ##: ##:::: ##: ###:: ##:
@@ -45,25 +44,25 @@ dpkg -l > /tmp/pkg-after.txt
 ##[postactions]
 pip install pyusb
 rm -Rf $HOME/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/pygupload_20120516.zip* $HOME/.config/_.GFrunGarminplugin.zip* /tmp/ligneCmd.sh*
-#cd $HOME && wget https://raw.github.com/xonel/GFrun/master/GFrunOffline.zip && unzip -o GFrunOffline.zip
+cd $HOME && wget https://raw.github.com/xonel/GFrun/master/GFrunOffline.zip && unzip -o GFrunOffline.zip
 
 ##Garmin-Forerunner-610-Extractor
-cd $HOME && wget https://github.com/Tigge/Garmin-Forerunner-610-Extractor/archive/master.zip 
+#cd $HOME && wget https://github.com/Tigge/Garmin-Forerunner-610-Extractor/archive/master.zip 
 cd $HOME && unzip -o master.zip
 cp $HOME/Garmin-Forerunner-610-Extractor-master/resources/ant-usbstick2.rules /etc/udev/rules.d
 mkdir -p $HOME/.config/garmin-extractor/scripts/ && mkdir -p $HOME/.config/garmin-extractor/Garmin
 
 ##Convert fit to tcx
 cp -f $HOME/Garmin-Forerunner-610-Extractor-master/scripts/40-convert_to_tcx.py $HOME/.config/garmin-extractor/scripts/
-cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && wget https://github.com/Tigge/FIT-to-TCX/archive/master.zip
+#cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && wget https://github.com/Tigge/FIT-to-TCX/archive/master.zip
 cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && unzip -o master.zip
-cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && git clone https://github.com/dtcooper/python-fitparse
+#cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && git clone https://github.com/dtcooper/python-fitparse
 cp -Rf $HOME/Garmin-Forerunner-610-Extractor-master/resources/python-fitparse/fitparse $HOME/Garmin-Forerunner-610-Extractor-master/resources/FIT-to-TCX-master/
 
 ##gcpuploader (Auto-upload connect.garmin.com)
-cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && wget http://freefr.dl.sourceforge.net/project/gcpuploader/pygupload_20120516.zip 
+#cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && wget http://freefr.dl.sourceforge.net/project/gcpuploader/pygupload_20120516.zip 
 cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && unzip -o pygupload_20120516.zip
-cd $HOME/.config/ && wget https://raw.github.com/xonel/GFrun/master/Garmin-Forerunner-610-Extractor-master/resources/_.GFrunGarminplugin.zip
+#cd $HOME/.config/ && wget https://raw.github.com/xonel/GFrun/master/Garmin-Forerunner-610-Extractor-master/resources/_.GFrunGarminplugin.zip
 cd $HOME/.config/ && unzip -o _.GFrunGarminplugin.zip
 
 ##1ere connection GExtractor
