@@ -21,17 +21,18 @@
 VChemin="https://github.com/xonel/GFrun/raw/master/install/"
 Vscript=" "
 VWget=" "
+
 color()
 {
 printf '\033[%sm%s\033[m\n' "$@"
 }
 
-installscript()
+GoScript()
 {
 VWget=$VChemin""$Vscript
-echo `color 32 "============================"`
-echo "voici les variables pour Wget:" $VWget
-echo `color 32 "============================"`
+echo `color 32 "================================================================================================"`
+echo "Wget:" $VWget
+echo `color 32 "================================================================================================"`
 wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 }
 ########################################################################################################################
@@ -51,12 +52,12 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 	echo `color 32 " ========================================================================================="`
 	echo ""
 #        echo "============================"
-        echo `color 32 "1. Full Install - GFrun"`
+        echo `color 32 "1. Full Install - GFrunOnline"`
         echo `color 33 "2. Config Garminplugin - www.connect.garmin.com"`
         echo `color 34 "3. Config Auto-Upload - gcpuploader"`
-#        echo `color 33 "4. "`
-#        echo `color 34 "5. "`
-#        echo `color 32 "6. "`
+        echo `color 35 "4. Full Install - GFrunOffline"`
+        echo `color 36 "5. Telecharger Activités en Local"`
+        echo `color 37 "6. Uploader Activites - www.connect.garmin.com"`
 #        echo `color 32 "7. "`
 #        echo `color 32 "8. "`
 #        echo `color 32 "9. "`
@@ -78,9 +79,9 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
           1) # Lancer le Script pour : 
 		####################################################################
 		VChemin="$VChemin"
-		Vscript="SGFrun.sh"
+		Vscript="SGFrunOnline.sh"
 
-		installscript
+		GoScript
 		####################################################################
             ;;
 
@@ -89,43 +90,43 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 		VChemin="$VChemin"
 		Vscript="Conf_Garminplugin.sh"
 
-		installscript
+		GoScript
 		####################################################################
             ;;
 
-          *3*) # Lancer le Script pour :   Setup_FreeNx_0.1.sh     
+          *3*) # Lancer le Script pour :     
 		####################################################################
 		VChemin="$VChemin"
 		Vscript="Conf_gcpuploader.sh"
 
-		installscript
+		GoScript
 		####################################################################
             ;;
 
           *4*) # Lancer le Script pour : 
 		####################################################################
-		#VChemin=$VChemin
-		#Vscript="Setup_GDivFix.sh"
-		#
-		#installscript
+		VChemin=$VChemin
+		Vscript="GFrunOffline.sh"
+		
+		GoScript
 		####################################################################  			
             ;;
 
           *5*) # Lancer le Script pour : 
 		####################################################################
-		#VChemin=$VChemin
-		#Vscript="Setup_GDivFix.sh"
-		#
-		#installscript
+		VChemin=$VChemin
+		Vscript="Go_GF610E.sh"
+		
+		GoScript
 		####################################################################           
             ;;
 
           *6*) # Lancer le Script pour : 
 		####################################################################
-		#VChemin=$VChemin
-		#Vscript="Setup_GDivFix.sh"
-		#
-		#installscript
+		VChemin=$VChemin
+		Vscript="Go_gcpuploader.sh"
+		
+		GoScript
 		#################################################################### 
             ;;
 
@@ -134,7 +135,7 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 		#VChemin=$VChemin
 		#Vscript="Setup_GDivFix.sh"
 		#
-		#installscript
+		#GoScript
 		#################################################################### 
             ;;
 
@@ -143,7 +144,7 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 		#VChemin=$VChemin
 		#Vscript="Setup_GDivFix.sh"
 		#
-		#installscript
+		#GoScript
 		#################################################################### 
             ;;
 
@@ -152,7 +153,7 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 		#VChemin=$VChemin
 		#Vscript="Setup_GDivFix.sh"
 		#
-		#installscript
+		#GoScript
 		#################################################################### 
             ;;
 
@@ -161,7 +162,7 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 		#VChemin=$VChemin
 		#Vscript="Setup_GDivFix.sh"
 		#
-		#installscript
+		#GoScript
 		#################################################################### 
             ;;
 
@@ -170,7 +171,7 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 		#VChemin=$VChemin
 		#Vscript="Setup_GDivFix.sh"
 		#
-		#installscript
+		#GoScript
 		#################################################################### 
             ;;
             
@@ -187,7 +188,7 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 		#VChemin=$VChemin
 		#Vscript="Setup_GDivFix.sh"
 		#
-		#installscript
+		#GoScript
 		#################################################################### 
             ;;
             
@@ -196,7 +197,7 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 		#VChemin=$VChemin
 		#Vscript="Setup_GDivFix.sh"
 		#
-		#installscript
+		#GoScript
 		#################################################################### 
             ;;
                       
@@ -205,7 +206,7 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 		#VChemin=$VChemin
 		#Vscript="Setup_GDivFix.sh"
 		#
-		#installscript
+		#GoScript
 		#################################################################### 
             ;;
             
@@ -214,7 +215,7 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 		#VChemin=$VChemin
 		#Vscript="Setup_GDivFix.sh"
 		#
-		#installscript
+		#GoScript
 		#################################################################### 
 
              ;;
