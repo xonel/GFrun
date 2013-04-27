@@ -5,32 +5,22 @@
 #
 ############################
 #     Auteurs : Le.NoX ;o) 
-#      Version="0.3.2"
+#      Version="0.2"
 #     Licence: GNU
 ############################
 #
 ########################################################################
-# wget https://github.com/xonel/GFrun/raw/master/install/SGFrun.sh
-# chmod a+x SGFrun.sh
-# sudo sh ./SGFrun.sh
+# wget https://github.com/xonel/GFrun/raw/master/install/SGFrunMenu.sh
+# chmod a+x SGFrunMenu.sh
+# sudo sh ./SGFrunMenu.sh
 #
 # OneCopyColle : 
-# wget https://github.com/xonel/GFrun/raw/master/install/SGFrun.sh && chmod a+x SGFrun.sh && sudo sh ./SGFrun.sh
+# wget https://github.com/xonel/GFrun/raw/master/install/SGFrunMenu.sh && chmod a+x SGFrunMenu.sh && sudo sh ./SGFrunMenu.sh
 ########################################################################
 #
-echo "#:'######:::'########:'########::'##::::'##:'##::: ##:
-#   '##... ##:: ##.....:: ##.... ##: ##:::: ##: ###:: ##:
-#    ##:::..::: ##::::::: ##:::: ##: ##:::: ##: ####: ##:
-#    ##::'####: ######::: ########:: ##:::: ##: ## ## ##:
-#    ##::: ##:: ##...:::: ##.. ##::: ##:::: ##: ##. ####:
-#    ##::: ##:: ##::::::: ##::. ##:: ##:::: ##: ##:. ###:
-#   . ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:
-#   :......::::..::::::::..:::::..:::.......:::..::::..::"
-#
-#
-ScriptChemin="https://github.com/xonel/GFrun/raw/master/install/"
-ScriptVariable=" "
-WgetVariable=" "
+VChemin="https://github.com/xonel/GFrun/raw/master/install/"
+Vscript=" "
+VWget=" "
 color()
 {
 printf '\033[%sm%s\033[m\n' "$@"
@@ -38,17 +28,11 @@ printf '\033[%sm%s\033[m\n' "$@"
 
 installscript()
 {
-
-WgetVariable=$ScriptChemin""$ScriptVariable
-
+VWget=$VChemin""$Vscript
 echo `color 32 "============================"`
-echo "voici les variables pour Wget:" $WgetVariable
+echo "voici les variables pour Wget:" $VWget
 echo `color 32 "============================"`
-
-wget $WgetVariable
-sleep 5
-chmod +x ./$ScriptVariable
-/bin/sh ./$ScriptVariable
+wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 }
 ########################################################################################################################
 #                                                  Le Menu du NoX
@@ -62,16 +46,16 @@ chmod +x ./$ScriptVariable
 	echo "   88     88 88'  .88  .8bd8'       88   88   88 88ooood8 88'  .88 88    88 " 
 	echo "   88     88 88.  .88  .d88b.       88   88   88 88.  ... 88    88 88.  .88 " 
 	echo "   dP     dP .88888P' dP'  .dP  dP  dP   dP   dP .88888P' dP    dP .88888P. " 
-	echo `color 30 " ========================================================================================="`
+	echo `color 29 " ========================================================================================="`
 	echo `color 32 " ========================================================================================="`
- 	echo ""
+ 	echo " Garmin Forerunner - Inside Linux (GFrun / Garmin-Forerunner-610-Extractor / garminplugin / gcpuploader) "
 	echo ""
 #        echo "============================"
-        echo `color 30 "1. Full Install GFrun"`
+        echo `color 29 "1. Full Install - GFrun"`
         echo `color 31 "2. Config Garminplugin - www.connect.garmin.com"`
         echo `color 32 "3. Config Auto-Upload - gcpuploader"`
-        echo `color 33 "4. "`
-        echo `color 34 "5. "`
+#        echo `color 33 "4. "`
+#        echo `color 34 "5. "`
 #        echo `color 32 "6. "`
 #        echo `color 32 "7. "`
 #        echo `color 32 "8. "`
@@ -89,13 +73,13 @@ chmod +x ./$ScriptVariable
 
         read VARIABLE
 
-        case $VARIABLE
+        case $Vchoix
         in
 
           1) # Lancer le Script pour : 
 		####################################################################
-		ScriptChemin="$ScriptChemin"
-		ScriptVariable="SGFrun.sh"
+		VChemin="$VChemin"
+		Vscript="SGFrun.sh"
 
 		installscript
 		####################################################################
@@ -103,8 +87,8 @@ chmod +x ./$ScriptVariable
 
           *2*) # Lancer le Script pour : 
 		####################################################################
-		ScriptChemin="$ScriptChemin"
-		ScriptVariable="Conf_Garminplugin.sh"
+		VChemin="$VChemin"
+		Vscript="Conf_Garminplugin.sh"
 
 		installscript
 		####################################################################
@@ -112,8 +96,8 @@ chmod +x ./$ScriptVariable
 
           *3*) # Lancer le Script pour :   Setup_FreeNx_0.1.sh     
 		####################################################################
-		ScriptChemin="$ScriptChemin"
-		ScriptVariable="Conf_gcpuploader.sh"
+		VChemin="$VChemin"
+		Vscript="Conf_gcpuploader.sh"
 
 		installscript
 		####################################################################
@@ -121,8 +105,8 @@ chmod +x ./$ScriptVariable
 
           *4*) # Lancer le Script pour : 
 		####################################################################
-		#ScriptChemin=$ScriptChemin
-		#ScriptVariable="Setup_GDivFix.sh"
+		#VChemin=$VChemin
+		#Vscript="Setup_GDivFix.sh"
 		#
 		#installscript
 		####################################################################  			
@@ -130,8 +114,8 @@ chmod +x ./$ScriptVariable
 
           *5*) # Lancer le Script pour : 
 		####################################################################
-		#ScriptChemin=$ScriptChemin
-		#ScriptVariable="Setup_GDivFix.sh"
+		#VChemin=$VChemin
+		#Vscript="Setup_GDivFix.sh"
 		#
 		#installscript
 		####################################################################           
@@ -139,50 +123,56 @@ chmod +x ./$ScriptVariable
 
           *6*) # Lancer le Script pour : 
 		####################################################################
-		#wget http://ordiboy.free.fr/open/Linux/Setup_Gwol.sh
-		#chmod +x ./Setup_Gwol.sh
-		#./Setup_Gwol.sh
-		####################################################################
+		#VChemin=$VChemin
+		#Vscript="Setup_GDivFix.sh"
+		#
+		#installscript
+		#################################################################### 
             ;;
 
           *7*) # Lancer le Script pour : 
 		####################################################################
-		#wget http://ordiboy.free.fr/open/Linux/Setup_Gwol.sh
-		#chmod +x ./Setup_Gwol.sh
-		#./Setup_Gwol.sh
-		####################################################################
+		#VChemin=$VChemin
+		#Vscript="Setup_GDivFix.sh"
+		#
+		#installscript
+		#################################################################### 
             ;;
 
           *8*) # Lancer le Script pour : 
 		####################################################################
-		#wget http://ordiboy.free.fr/open/Linux/Setup_Gwol.sh
-		#chmod +x ./Setup_Gwol.sh
-		#./Setup_Gwol.sh
-		####################################################################
+		#VChemin=$VChemin
+		#Vscript="Setup_GDivFix.sh"
+		#
+		#installscript
+		#################################################################### 
             ;;
 
           *9*) # Lancer le Script pour : 
 		####################################################################
-		#wget http://ordiboy.free.fr/open/Linux/Setup_Gwol.sh
-		#chmod +x ./Setup_Gwol.sh
-		#./Setup_Gwol.sh
-		####################################################################
+		#VChemin=$VChemin
+		#Vscript="Setup_GDivFix.sh"
+		#
+		#installscript
+		#################################################################### 
             ;;
 
           [aA]) # Lancer le Script pour : 
 		####################################################################
-		#wget http://ordiboy.free.fr/open/Linux/Setup_Gwol.sh
-		#chmod +x ./Setup_Gwol.sh
-		#./Setup_Gwol.sh
-		####################################################################
+		#VChemin=$VChemin
+		#Vscript="Setup_GDivFix.sh"
+		#
+		#installscript
+		#################################################################### 
             ;;
 
           [bB]) # Lancer le Script pour : 
 		####################################################################
-		#wget http://ordiboy.free.fr/open/Linux/Setup_Gwol.sh
-		#chmod +x ./Setup_Gwol.sh
-		#./Setup_Gwol.sh
-		####################################################################
+		#VChemin=$VChemin
+		#Vscript="Setup_GDivFix.sh"
+		#
+		#installscript
+		#################################################################### 
             ;;
             
           [cC]) # Lancer le Script pour : 
@@ -195,34 +185,38 @@ chmod +x ./$ScriptVariable
             
           [dD]) # Lancer le Script pour : 
 		####################################################################
-		#wget http://ordiboy.free.fr/open/Linux/Setup_Gwol.sh
-		#chmod +x ./Setup_Gwol.sh
-		#./Setup_Gwol.sh
-		####################################################################
+		#VChemin=$VChemin
+		#Vscript="Setup_GDivFix.sh"
+		#
+		#installscript
+		#################################################################### 
             ;;
             
           [eE]) # Lancer le Script pour : 
 		####################################################################
-		#wget http://ordiboy.free.fr/open/Linux/Setup_Gwol.sh
-		#chmod +x ./Setup_Gwol.sh
-		#./Setup_Gwol.sh
-		####################################################################
+		#VChemin=$VChemin
+		#Vscript="Setup_GDivFix.sh"
+		#
+		#installscript
+		#################################################################### 
             ;;
                       
           [fF]) # Lancer le Script pour : 
- 		####################################################################
-		#wget http://ordiboy.free.fr/open/Linux/Setup_Gwol.sh
-		#chmod +x ./Setup_Gwol.sh
-		#./Setup_Gwol.sh
-		#####################################################################
+		####################################################################
+		#VChemin=$VChemin
+		#Vscript="Setup_GDivFix.sh"
+		#
+		#installscript
+		#################################################################### 
             ;;
             
           [gG]) # Lancer le Script pour : 
 		####################################################################
-		#wget http://ordiboy.free.fr/open/Linux/Setup_Gwol.sh
-		#chmod +x ./Setup_Gwol.sh
-		#./Setup_Gwol.sh
-		####################################################################
+		#VChemin=$VChemin
+		#Vscript="Setup_GDivFix.sh"
+		#
+		#installscript
+		#################################################################### 
 
              ;;
           [xX]) # exit
@@ -232,7 +226,7 @@ chmod +x ./$ScriptVariable
           *) # anything else
 
             echo
-            echo "\"$VARIABLE\" n'est pas une entrée Valide."
+            echo "\"$Vchoix\" n'est pas une entrée Valide."
             sleep 3
 
             ;;
