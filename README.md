@@ -22,12 +22,13 @@ CONFIGURATION DE TEST POUR DEV DU SCRIPT :
 
 
 INSTALL : (ATTENTION : Script en cours de dev !! Bugs possibles !! ...) :
-wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh
-chmod a+x GFrunMenu.sh
-sudo sh ./GFrunMenu.sh
 
-# OneCopyColle : 
-wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
++ wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh
++ chmod a+x GFrunMenu.sh
++ sudo sh ./GFrunMenu.sh
+
+OneCopyColle : 
++ wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 
 Voici la nouvelle version de GFrun, au programme :
 - Un Menu un peut plus convivial.
@@ -37,17 +38,17 @@ Voici la nouvelle version de GFrun, au programme :
 
 voici un aperçu :
 
-========================================================================================
- =========================================================================================
-   888888ba                         8888ba.88ba 
-   88    .8b                        88  .8b  .8b 
-   88     88 .d8888b. dP.  .dP      88   88   88 .d8888b. 88d888b. dP    dP 
-   88     88 88'  .88  .8bd8'       88   88   88 88ooood8 88'  .88 88    88 
-   88     88 88.  .88  .d88b.       88   88   88 88.  ... 88    88 88.  .88 
-   dP     dP .88888P' dP'  .dP  dP  dP   dP   dP .88888P' dP    dP .88888P. 
- =========================================================================================
- Garmin Forerunner (GFrun / Garmin-Forerunner-610-Extractor / garminplugin / gcpuploader)
- =========================================================================================
++ ========================================================================================
++ =========================================================================================
++   888888ba                         8888ba.88ba 
++   88    .8b                        88  .8b  .8b 
++   88     88 .d8888b. dP.  .dP      88   88   88 .d8888b. 88d888b. dP    dP 
++   88     88 88'  .88  .8bd8'       88   88   88 88ooood8 88'  .88 88    88 
++   88     88 88.  .88  .d88b.       88   88   88 88.  ... 88    88 88.  .88 
++   dP     dP .88888P' dP'  .dP  dP  dP   dP   dP .88888P' dP    dP .88888P. 
++ =========================================================================================
++ Garmin Forerunner (GFrun / Garmin-Forerunner-610-Extractor / garminplugin / gcpuploader)
++ =========================================================================================
 
 1. Full Install DEV - GFrunOnline
 2. Full Install STABLE - GFrunOffline
@@ -61,7 +62,7 @@ voici un aperçu :
 Faite votre choix :
 
 
-FAIT :
+#FAIT :
 + installation et pres config de Garmin-Forerunner-610-Extractor : Version MASTER via GIT
 + installation du dépôt pour garminplugin_0.3.16-1 
 + installation de gcpuploader (mais pas encore activé en automatique)
@@ -71,7 +72,7 @@ FAIT :
 + récupérer le  <Id>3xx89xxxx9</Id> de la montre pour tout configurer automatiquement.
 + Version Offline/Stable sans les masters Git.
 
-A FAIRE :
+#A FAIRE :
 - Modifier  Garmin-Forerunner-610-Extractor ou exploiter son dossier script pour automatiser auto-upload via gcpuploader.
 - faire un .desktop / raccourci Unity / mettre dans le bin/ ou autre chose
 - une Gui serait un plus
