@@ -1,3 +1,23 @@
+#!/bin/bash
+#
+# Configuration file for GARMIN FORERUNNER - GFrun
+# Modif by Le.NoX
+#
+############################
+#     Auteurs : Le.NoX ;o) 
+#      Version="0.2"
+#     Licence: GNU
+############################
+#
+########################################################################
+# wget https://github.com/xonel/GFrun/raw/master/install/SGFrunMenu.sh
+# chmod a+x SGFrunMenu.sh
+# sudo sh ./SGFrunMenu.sh
+#
+# OneCopyColle : 
+# wget https://github.com/xonel/GFrun/raw/master/install/SGFrunMenu.sh && chmod a+x SGFrunMenu.sh && sudo sh ./SGFrunMenu.sh
+########################################################################
+#
 ##Configuration des fichiers de config avec le #HOME et le $NUMERO_DE_MA_MONTRE
 NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts)
 

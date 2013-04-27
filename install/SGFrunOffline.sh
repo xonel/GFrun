@@ -5,18 +5,19 @@
 #
 ############################
 #     Auteurs : Le.NoX ;o) 
-#      Version="0.3.2"
+#      Version="0.3.3"
 #     Licence: GNU
 ############################
 #
 ########################################################################
-# wget https://github.com/xonel/GFrun/raw/master/install/SGFrun.sh
-# chmod a+x SGFrun.sh
-# sudo sh ./SGFrun.sh
+# wget https://github.com/xonel/GFrun/raw/master/install/SGFrunMenu.sh
+# chmod a+x SGFrunMenu.sh
+# sudo sh ./SGFrunMenu.sh
 #
 # OneCopyColle : 
-# wget https://github.com/xonel/GFrun/raw/master/install/SGFrun.sh && chmod a+x SGFrun.sh && sudo sh ./SGFrun.sh
+# wget https://github.com/xonel/GFrun/raw/master/install/SGFrunMenu.sh && chmod a+x SGFrunMenu.sh && sudo sh ./SGFrunMenu.sh
 ########################################################################
+#
 #
 echo "#:'######:::'########:'########::'##::::'##:'##::: ##:
 #   '##... ##:: ##.....:: ##.... ##: ##:::: ##: ###:: ##:
