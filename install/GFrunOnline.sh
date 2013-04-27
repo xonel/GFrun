@@ -74,7 +74,7 @@ NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep
 
 if [ -n "$NUMERO_DE_MA_MONTRE" ]; then
 	cd $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
-	ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities Activites && mv Activities $HOME/.config/garmin-extractor/Garmin/Activities
+	ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities Activities && mv Activities $HOME/.config/garmin-extractor/Garmin/Activities
 	src=ID_MA_MONTRE && cibl=$NUMERO_DE_MA_MONTRE && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garmin-extractor/Garmin/GarminDevice.xml" >> /tmp/ligneCmd.sh
 fi
 
