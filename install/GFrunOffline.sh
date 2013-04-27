@@ -56,8 +56,9 @@ mkdir -p $HOME/.config/garmin-extractor/scripts/ && mkdir -p $HOME/.config/garmi
 cp -f $HOME/Garmin-Forerunner-610-Extractor-master/scripts/40-convert_to_tcx.py $HOME/.config/garmin-extractor/scripts/
 #cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && wget https://github.com/Tigge/FIT-to-TCX/archive/master.zip
 cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && unzip -o master.zip
-#cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && wget https://github.com/dtcooper/python-fitparse/archive/master.zip
+#cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/FIT-to-TCX-master/ && wget https://github.com/dtcooper/python-fitparse/archive/master.zip
 cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/FIT-to-TCX-master/ && unzip -o master.zip
+mv $HOME/Garmin-Forerunner-610-Extractor-master/resources/FIT-to-TCX-master/python-fitparse-master/fitparse $HOME/Garmin-Forerunner-610-Extractor-master/resources/FIT-to-TCX-master/
 
 ##gcpuploader (Auto-upload connect.garmin.com)
 #cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && wget http://freefr.dl.sourceforge.net/project/gcpuploader/pygupload_20120516.zip 
@@ -87,5 +88,5 @@ chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/Garmin-Forerunner-610
 
 ##Nettoyage
 echo "======================= Clean Up =================== "
-rm -Rf $HOME/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/FIT-to-TCX-master/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/pygupload_20120516.zip* $HOME/.config/_.GFrunGarminplugin.zip* /tmp/ligneCmd.sh*
+rm -Rf $HOME/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/FIT-to-TCX-master/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/FIT-to-TCX-master/python-fitparse-master/ $HOME/Garmin-Forerunner-610-Extractor-master/resources/master.zip* $HOME/Garmin-Forerunner-610-Extractor-master/resources/pygupload_20120516.zip* $HOME/.config/_.GFrunGarminplugin.zip* /tmp/ligneCmd.sh*
 echo "PROCEDURE TERMINEE"
