@@ -47,13 +47,13 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 	echo "   88     88 88.  .88  .d88b.       88   88   88 88.  ... 88    88 88.  .88 " 
 	echo "   dP     dP .88888P' dP'  .dP  dP  dP   dP   dP .88888P' dP    dP .88888P. " 
 	echo `color 32 " ========================================================================================="`
+ 	echo `color 31 " Garmin Forerunner (GFrun / Garmin-Forerunner-610-Extractor / garminplugin / gcpuploader)"`
 	echo `color 32 " ========================================================================================="`
- 	echo `color 31 " Garmin Forerunner - Inside Linux (GFrun / Garmin-Forerunner-610-Extractor / garminplugin / gcpuploader)"`
 	echo ""
 #        echo "============================"
-        echo `color 33 "1. Full Install - GFrun"`
-        echo `color 31 "2. Config Garminplugin - www.connect.garmin.com"`
-        echo `color 32 "3. Config Auto-Upload - gcpuploader"`
+        echo `color 32 "1. Full Install - GFrun"`
+        echo `color 33 "2. Config Garminplugin - www.connect.garmin.com"`
+        echo `color 34 "3. Config Auto-Upload - gcpuploader"`
 #        echo `color 33 "4. "`
 #        echo `color 34 "5. "`
 #        echo `color 32 "6. "`
