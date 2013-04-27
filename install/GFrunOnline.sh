@@ -63,7 +63,7 @@ cp -Rf $HOME/Garmin-Forerunner-610-Extractor-master/resources/python-fitparse/fi
 ##gcpuploader (Auto-upload connect.garmin.com)
 cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && wget http://freefr.dl.sourceforge.net/project/gcpuploader/pygupload_20120516.zip 
 cd $HOME/Garmin-Forerunner-610-Extractor-master/resources/ && unzip -o pygupload_20120516.zip
-cd $HOME/.config/ && wget https://raw.github.com/xonel/GFrun/master/Garmin-Forerunner-610-Extractor-master/resources/_.GFrunGarminplugin.zip
+cd $HOME/.config/ && wget https://raw.github.com/xonel/GFrun/master/_.config/_.GFrunGarminplugin.zip
 cd $HOME/.config/ && unzip -o _.GFrunGarminplugin.zip
 
 ##1ere connection GExtractor
