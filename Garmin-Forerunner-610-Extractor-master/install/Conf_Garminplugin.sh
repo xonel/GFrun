@@ -10,12 +10,12 @@
 ############################
 #
 ########################################################################
-# wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh
+# wget https://github.com/xonel/GFrun/raw/master//Garmin-Forerunner-610-Extractor-master/install/GFrunMenu.sh
 # chmod a+x GFrunMenu.sh
 # sudo sh ./GFrunMenu.sh
 #
 # OneCopyColle : 
-# wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+# wget https://github.com/xonel/GFrun/raw/master//Garmin-Forerunner-610-Extractor-master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ########################################################################
 #
 echo "# Prerequis : Configurer plugin GarminPlugin - www.connect.garmin.com'
@@ -24,6 +24,7 @@ echo "# Prerequis : Configurer plugin GarminPlugin - www.connect.garmin.com'
 # ou'
 # + USB ANT+ connecté et fonctionnelle'
 # + Montre allumée et mode couplage activée"
+sleep 5
 
 ##1ere connection GExtractor
 xterm -e 'cd $HOME/Garmin-Forerunner-610-Extractor-master/ && python ./garmin.py'

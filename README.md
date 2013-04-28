@@ -27,12 +27,12 @@ INSTALL :
 ---------
 (ATTENTION : Script en cours de developpement !! Bugs possibles !! ...) :
 
-+ wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh
++ wget https://github.com/xonel/GFrun/raw/master//Garmin-Forerunner-610-Extractor-master/install/GFrunMenu.sh
 + chmod a+x GFrunMenu.sh
 + sudo sh ./GFrunMenu.sh
 
 OneCopyColle : 
-+ wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
++ wget https://github.com/xonel/GFrun/raw/master//Garmin-Forerunner-610-Extractor-master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 
 Voici la nouvelle version de GFrun, au programme :
 - Un Menu un peut plus convivial.
@@ -45,10 +45,15 @@ voici un aperçu :
 + =========================================================================================
 + Garmin Forerunner (GFrun / Garmin-Forerunner-610-Extractor / garminplugin / gcpuploader)
 + =========================================================================================
+INSTALL :
 1. Full Install DEV - GFrunOnline
 2. Full Install STABLE - GFrunOffline
+
+CONFIGURATION :
 3. Config Auto-Upload - gcpuploader
 4. Config Garminplugin - www.connect.garmin.com
+
+APPLICATION:
 5. Telecharger Activités en Local
 6. Uploader Activites - www.connect.garmin.com
 
@@ -60,19 +65,19 @@ FAIT :
 -----
 + installation et pres config de Garmin-Forerunner-610-Extractor : Version MASTER via GIT
 + installation du dépôt pour garminplugin_0.3.16-1 
-+ installation de gcpuploader (mais pas encore activé en automatique)
++ installation de gcpuploader (script config OK / Script upload via GFrunMenu OK)
 + installation de python-fitparse :  Version MASTER via GIT
 + installation et configuration du script : 40-convert_to_tcx.py
 + Créer automatiquement la structure du dossier DEVICES pour garminplugin sans utiliser WINDOWS
-+ récupérer le  <Id>3xx89xxxx9</Id> de la montre pour tout configurer automatiquement.
++ récupérer le  <Id>ID_MA_MONTRE</Id> de la montre pour tout configurer automatiquement.
 + Version Offline/Stable sans les masters Git.
++ .desktop / raccourci Unity disponible dans le dash "GFrun"
 
 A FAIRE :
 --------
 - Modifier  Garmin-Forerunner-610-Extractor ou exploiter son dossier script pour automatiser auto-upload via gcpuploader.
-- faire un .desktop / raccourci Unity / mettre dans le bin/ ou autre chose
 - une Gui serait un plus
 - Faire une petite Doc/Tuto
-- Faire du vrai 'Bash'
+- Apprendre à Faire du 'Bash' ;O)
 
 Forum : http://forum.ubuntu-fr.org/viewtopic.php?pid=13312901#p13312901

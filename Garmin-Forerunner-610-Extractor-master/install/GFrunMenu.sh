@@ -10,15 +10,15 @@
 ############################
 #
 ########################################################################
-# wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh
+# wget https://github.com/xonel/GFrun/raw/master//Garmin-Forerunner-610-Extractor-master/install/GFrunMenu.sh
 # chmod a+x GFrunMenu.sh
 # sudo sh ./GFrunMenu.sh
 #
 # OneCopyColle : 
-# wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+# wget https://github.com/xonel/GFrun/raw/master//Garmin-Forerunner-610-Extractor-master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ########################################################################
 #
-VChemin="https://github.com/xonel/GFrun/raw/master/install/"
+VChemin="https://github.com/xonel/GFrun/raw/master//Garmin-Forerunner-610-Extractor-master/install/"
 Vscript=" "
 VWget=" "
 
@@ -52,14 +52,17 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 	echo `color 32 " ========================================================================================="`
 	echo ""
 #        echo "============================"
-        echo `color 32 "1. Full Install DEV - GFrunOnline"`
-        echo `color 33 "2. Full Install STABLE - GFrunOffline"`
-        echo""
-        echo `color 34 "3. Config Auto-Upload - gcpuploader"`
-        echo `color 35 "4. Config Garminplugin - www.connect.garmin.com"`
-        echo""
-        echo `color 36 "5. Telecharger Activités en Local"`
-        echo `color 37 "6. Uploader Activites - www.connect.garmin.com"`
+        echo "**** INSTALLATION :"
+        echo `color 32 "1. Full Install DEV - (GFrunOnline)"`
+        echo `color 33 "2. Full Install STABLE - (GFrunOffline)"`
+        echo ""
+        echo "**** CONFIGURATION :"
+        echo `color 34 "3. Config Auto-Upload - (gcpuploader)"`
+        echo `color 35 "4. Config Garminplugin -(connect.garmin.com)"`
+        echo ""
+        echo "**** APPLICATION :"
+        echo `color 36 "5. Telecharger Activites - (Montre > Local)"`
+        echo `color 37 "6. Uploader Activites - (Local > connect.garmin.com)"`
 #        echo `color 32 "7. "`
 #        echo `color 32 "8. "`
 #        echo `color 32 "9. "`
