@@ -19,7 +19,8 @@ echo "#:'######:::'########:'########::'##::::'##:'##::: ##:
 #
 # zip fichier de config offline (GFrunOffline.zip) + config garminplugin (_.GFrunGarminplugin.zip)
 mv _.config/ .config/
-zip -r GFrunOffline.zip  master.zip .config/ Garmin-Forerunner-610-Extractor-master/ install/
+mv _.local/ .local/
+zip -r GFrunOffline.zip  master.zip .config/ .local/ Garmin-Forerunner-610-Extractor-master/ install/
 cd .config/ && zip -r _.GFrunGarminplugin.zip garmin-extractor/ garminplugin/
-cd .. && mv .config/ _.config/
+cd .. && mv .config/ _.config/ && mv .local/ _.local/
 echo "FIN"
