@@ -40,22 +40,23 @@ Voici la nouvelle version de GFrun, au programme :
 - Une Mini Toolbox de script pour automatiser les configs (plugin, ID montre,etc).
 
 voici un aperçu :
++ =========================================================================================
++ Garmin Forerunner (GFrun / Garmin-Forerunner-610-Extractor / garminplugin / gcpuploader)
++ =========================================================================================
 
-    =========================================================================================
-    Garmin Forerunner (GFrun / Garmin-Forerunner-610-Extractor / garminplugin / gcpuploader)
-    =========================================================================================
-    Full Install DEV - GFrunOnline
-    Full Install STABLE - GFrunOffline
-    
-    Config Auto-Upload - gcpuploader
-    Config Garminplugin - www.connect.garmin.com
-    
-    Telecharger Activités en Local
-    Uploader Activites - www.connect.garmin.com
++ **** INSTALLATION :
++ 1. Full Install DEV - (GFrunOnline)
++ 2. Full Install STABLE - (GFrunOffline)
 
-Faite votre choix :
++ **** CONFIGURATION :
++ 3. Config Auto-Upload - (gcpuploader)
++ 4. Config Garminplugin -(connect.garmin.com)
 
-    ========================================================================================
++ **** APPLICATION :
++ 5. Telecharger Activites - (Montre > Local)
++ 6. Uploader Activites - (Local > connect.garmin.com)
+
++ Faite votre choix : 6
 
 FAIT :
 -----
