@@ -50,4 +50,4 @@ myusername = toto
 mypassword = passworddetoto
 activities = 2013-*
 
-cd $HOME/.config/garmin-extractor/Garmin/Activities && xterm -e "python $HOME/Garmin-Forerunner-610-Extractor-master/resources/gupload.py -l $myusername $mypassword &activities"
+cd $HOME/.config/garmin-extractor/Garmin/Activities && python $HOME/Garmin-Forerunner-610-Extractor-master/resources/pygupload/gupload.py -l $myusername $mypassword &activities
