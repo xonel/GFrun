@@ -18,7 +18,6 @@
 # wget https://github.com/xonel/GFrun/raw/master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ########################################################################
 #
-#
 echo "
 #      :'######:::'########:'########::'##::::'##:'##::: ##:
 #      '##... ##:: ##.....:: ##.... ##: ##:::: ##: ###:: ##:
@@ -46,6 +45,7 @@ echo "
 #
 #Upload file using config file for credentials, name file, verbose output:
 #gupload.py -v 1 -a 'Run at park - 12/23' myfile.tcx
+#
 myusername=toto
 mypassword=passworddetoto
 activities=2013-*
