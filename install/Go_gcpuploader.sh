@@ -46,8 +46,9 @@ echo "
 #
 #Upload file using config file for credentials, name file, verbose output:
 #gupload.py -v 1 -a 'Run at park - 12/23' myfile.tcx
-myusername = toto
-mypassword = passworddetoto
-activities = 2013-*
+myusername=toto
+mypassword=passworddetoto
+activities=2013-*
 
-cd $HOME/.config/garmin-extractor/Garmin/Activities && python $HOME/Garmin-Forerunner-610-Extractor-master/resources/pygupload/gupload.py -l $myusername $mypassword &activities
+cd $HOME/.config/garmin-extractor/Garmin/Activities
+python $HOME/Garmin-Forerunner-610-Extractor-master/resources/pygupload/gupload.py -l $myusername $mypassword $activities
