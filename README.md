@@ -1,4 +1,3 @@
-
 ===============================================================================
 #GFrun - Garmin Forerunner 310XT ANT- Inside Linux
 ===============================================================================
@@ -42,24 +41,21 @@ Voici la nouvelle version de GFrun, au programme :
 
 voici un aperçu :
 
-+ =========================================================================================
-+ Garmin Forerunner (GFrun / Garmin-Forerunner-610-Extractor / garminplugin / gcpuploader)
-+ =========================================================================================
-INSTALL :
-1. Full Install DEV - GFrunOnline
-2. Full Install STABLE - GFrunOffline
-
-CONFIGURATION :
-3. Config Auto-Upload - gcpuploader
-4. Config Garminplugin - www.connect.garmin.com
-
-APPLICATION:
-5. Telecharger Activités en Local
-6. Uploader Activites - www.connect.garmin.com
+    =========================================================================================
+    Garmin Forerunner (GFrun / Garmin-Forerunner-610-Extractor / garminplugin / gcpuploader)
+    =========================================================================================
+    Full Install DEV - GFrunOnline
+    Full Install STABLE - GFrunOffline
+    
+    Config Auto-Upload - gcpuploader
+    Config Garminplugin - www.connect.garmin.com
+    
+    Telecharger Activités en Local
+    Uploader Activites - www.connect.garmin.com
 
 Faite votre choix :
 
-+ ========================================================================================
+    ========================================================================================
 
 FAIT :
 -----
