@@ -18,7 +18,7 @@
 # wget https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ########################################################################
 #
-VChemin="https://github.com/xonel/GFrun/raw/master/GFrun/install/"
+VChemin="https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/"
 Vscript=""
 Varg=""
 VWget=""
