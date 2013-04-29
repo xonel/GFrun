@@ -5,7 +5,7 @@
 #
 ############################
 #     Auteurs : Le.NoX ;o) 
-#      Version="0.1"
+#      Version="0.2"
 #     Licence: GNU
 ############################
 echo "
@@ -24,7 +24,8 @@ mv _.config/ .config/
 mv _.local/ .local/
 
 cd .local/ && unzip -o  share.zip
-cd .. && zip -r GFrunOffline.zip  master.zip .config/ .local/ Garmin-Forerunner-610-Extractor-master/ install/
+cd .. && zip -r Garmin-Forerunner-610-Extractor-master.zip  master.zip .config/ .local/ Garmin-Forerunner-610-Extractor-master/ install/
+zip -r GFrunOffline.zip  master.zip .config/ .local/ GFrun/ install/
 
 rm -r .local/share/
 
