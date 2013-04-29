@@ -115,52 +115,52 @@ echo "#:'######:::'########:'########::'##::::'##:'##::: ##:
 #    ##::: ##:: ##::::::: ##::. ##:: ##:::: ##: ##:. ###:
 #   . ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:
 #   :......::::..::::::::..:::::..:::.......:::..::::..::"
-echo "<<<<<<" $1 "<<<<<<"
+echo "Arg : >>>>>>>" $1 "<<<<<<"
 
 	case $1
 		in
           1) # Lancer le Script pour : 
 		####################################################################
-				F_clear()
-				F_chk_GFrunOffline()
-				F_apt()
-				F_wget()
-				F_unzip()
-				F_cpmv()
-				F_extractfit()
-				F_configfiles()
-				F_chownchmod()
-				F_clear()
+				F_clear
+				F_chk_GFrunOffline
+				F_apt
+				F_wget
+				F_unzip
+				F_cpmv
+				F_extractfit
+				F_configfiles
+				F_chownchmod
+				F_clear
 		####################################################################
             ;;
 
           *2*) # Lancer le Script pour : 
 		####################################################################
-				F_clear()
-				F_chk_GFrunOffline()
-				F_apt()
-				F_wget()
-				F_unzip()
-				F_cpmv()
-				F_extractfit()
-				F_configfiles()
-				F_chownchmod()
-				F_clear()
+				F_clear
+				F_chk_GFrunOffline
+				F_apt
+				F_wget
+				F_unzip
+				F_cpmv
+				F_extractfit
+				F_configfiles
+				F_chownchmod
+				F_clear
 		####################################################################
             ;;
 
           *3*) # Lancer le Script pour : 
 		####################################################################
-				F_clear()
-				F_chk_GFrunOffline()
-				F_apt()
-				F_wget()
-				F_unzip()
-				F_cpmv()
-				F_extractfit()
-				F_configfiles()
-				F_chownchmod()
-				F_clear()
+				F_clear
+				F_chk_GFrunOffline
+				F_apt
+				F_wget
+				F_unzip
+				F_cpmv
+				F_extractfit
+				F_configfiles
+				F_chownchmod
+				F_clear
 		####################################################################
              ;;
           [xX]) # exit
