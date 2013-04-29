@@ -12,6 +12,7 @@ Nous avons donc tout pour connecter nos montres Garmin Forerunner (ANT-FS  => ex
 - gcpuploader
       + upload automatiquement les "FIT/TCX" sur http://connect.garmin.com
 
+GFrun = Garmin Forerunner + ANT FS ( 60, 405CX, 310XT, 610, 910XT) + ( Extracts / Convert / Auto-upload / garminplugin ) + USB ANT-FS
 
 CONFIGURATION :
 ---------------
