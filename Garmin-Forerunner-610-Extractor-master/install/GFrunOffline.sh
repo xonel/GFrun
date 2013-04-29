@@ -10,12 +10,12 @@
 ############################
 #
 ########################################################################
-# wget https://github.com/xonel/GFrun/raw/master/Garmin-Forerunner-610-Extractor-master/install/GFrunMenu.sh
+# wget https://github.com/xonel/GFrun/raw/master//Garmin-Forerunner-610-Extractor-master/install/GFrunMenu.sh
 # chmod a+x GFrunMenu.sh
 # sudo sh ./GFrunMenu.sh
 #
 # OneCopyColle : 
-# wget https://github.com/xonel/GFrun/raw/master/Garmin-Forerunner-610-Extractor-master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+# wget https://github.com/xonel/GFrun/raw/master//Garmin-Forerunner-610-Extractor-master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ########################################################################
 #
 echo "#:'######:::'########:'########::'##::::'##:'##::: ##:
