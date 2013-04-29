@@ -119,16 +119,48 @@ echo $1
 
 case $1
 	        in
-          1) # Lancer le Script pour : 
+          d) # Lancer le Script pour : 
 		####################################################################
-		VChemin="$VChemin"
-		Vscript="GFrun.sh"
-		Varg="-d"
-
-		GoScript
+				F_clear()
+#				F_chk_GFrunOffline()
+				F_apt()
+				F_wget()
+				F_unzip()
+				F_cpmv()
+				F_extractfit()
+				F_configfiles()
+				F_chownchmod()
+				F_clear()
 		####################################################################
             ;;
-
+          s) # Lancer le Script pour : 
+		####################################################################
+				F_clear()
+				F_chk_GFrunOffline()
+				F_apt()
+#				F_wget()
+				F_unzip()
+				F_cpmv()
+				F_extractfit()
+				F_configfiles()
+				F_chownchmod()
+				F_clear()
+		####################################################################
+            ;;
+          l) # Lancer le Script pour : 
+		####################################################################
+				F_clear()
+				F_chk_GFrunOffline()
+#				F_apt()
+#				F_wget()
+				F_unzip()
+				F_cpmv()
+				F_extractfit()
+				F_configfiles()
+				F_chownchmod()
+				F_clear()
+		####################################################################
+            ;;            
 esac
 
 echo "PROCEDURE TERMINEE"
