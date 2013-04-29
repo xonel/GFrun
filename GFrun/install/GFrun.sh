@@ -102,7 +102,7 @@ F_chownchmod(){
 
 F_chk_GFrunOffline(){
 if [ ! -d $HOME/GFrunOffline.zip ]; then
-	cd $HOME && wget https://raw.github.com/xonel/GFrun/Vbranche/GFrunOffline.zip && unzip -o GFrunOffline.zip
+	cd $HOME && wget https://raw.github.com/xonel/GFrun/$Vbranche/GFrunOffline.zip && unzip -o GFrunOffline.zip
 fi
 }
 
