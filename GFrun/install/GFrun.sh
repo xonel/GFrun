@@ -122,7 +122,7 @@ echo "Arg : >>>>>>>" $1 "<<<<<<"
           -d) # Lancer le Script pour : 
 		####################################################################
 				F_clear
-				F_chk_GFrunOffline
+#				F_chk_GFrunOffline
 				F_apt
 				F_wget
 				F_unzip
@@ -139,7 +139,7 @@ echo "Arg : >>>>>>>" $1 "<<<<<<"
 				F_clear
 				F_chk_GFrunOffline
 				F_apt
-				F_wget
+#				F_wget
 				F_unzip
 				F_cpmv
 				F_extractfit
@@ -153,8 +153,8 @@ echo "Arg : >>>>>>>" $1 "<<<<<<"
 		####################################################################
 				F_clear
 				F_chk_GFrunOffline
-				F_apt
-				F_wget
+#				F_apt
+#				F_wget
 				F_unzip
 				F_cpmv
 				F_extractfit
