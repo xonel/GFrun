@@ -53,7 +53,7 @@ rm -Rf $HOME/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources
 
 ##Garmin-Forerunner-610-Extractor
 cd $HOME && wget https://github.com/Tigge/Garmin-Forerunner-610-Extractor/archive/master.zip 
-cd $HOME && unzip -o master.zip
+cd $HOME && unzip -o master.zip -d GFrun && mv $HOME/GFrun/Garmin-Forerunner-610-Extractor-master/* $HOME/GFrun
 cp $HOME/GFrun/resources/ant-usbstick2.rules /etc/udev/rules.d
 mkdir -p $HOME/.config/garmin-extractor/scripts/ && mkdir -p $HOME/.config/garmin-extractor/Garmin
 
@@ -93,5 +93,5 @@ chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/GFrun/scripts/
 
 ##Nettoyage
 echo "======================= Clean Up =================== "
-rm -Rf $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master/ $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* $HOME/.config/_.GFrunGarminplugin.zip* /tmp/ligneCmd.sh*
+rm -Rf $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master/ $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* $HOME/.config/_.GFrunGarminplugin.zip* /tmp/ligneCmd.sh* $HOME/GFrun/Garmin-Forerunner-610-Extractor-master
 echo "PROCEDURE TERMINEE"
