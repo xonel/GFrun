@@ -25,13 +25,15 @@ Config de test pour le developpement du script "GFrun" :
 INSTALL :
 ---------
 (ATTENTION : Script en cours de developpement !! Bugs possibles !! ...) :
-
-+ wget https://github.com/xonel/GFrun/raw/master//Garmin-Forerunner-610-Extractor-master/install/GFrunMenu.sh
-+ chmod a+x GFrunMenu.sh
-+ sudo sh ./GFrunMenu.sh
+<pre><code>wget https://github.com/xonel/GFrun/raw/master/Garmin-Forerunner-610-Extractor-master/install/GFrunMenu.sh
+chmod a+x GFrunMenu.sh
+sudo sh ./GFrunMenu.sh
+</code></pre>
 
 OneCopyColle : 
-+ wget https://github.com/xonel/GFrun/raw/master//Garmin-Forerunner-610-Extractor-master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+<pre><code>
+wget https://github.com/xonel/GFrun/raw/master/Garmin-Forerunner-610-Extractor-master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+</code></pre>
 
 Voici la nouvelle version de GFrun, au programme :
 - Un Menu un peut plus convivial.
