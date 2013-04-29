@@ -42,23 +42,32 @@ Voici la nouvelle version de GFrun, au programme :
 - Une Mini Toolbox de script pour automatiser les configs (plugin, ID montre,etc).
 
 voici un aperçu :
-+ =========================================================================================
-+ Garmin Forerunner (GFrun / Garmin-Forerunner-610-Extractor / garminplugin / gcpuploader)
-+ =========================================================================================
+<pre><code>
+ =========================================================================================
+   888888ba                         8888ba.88ba 
+   88    .8b                        88  .8b  .8b 
+   88     88 .d8888b. dP.  .dP      88   88   88 .d8888b. 88d888b. dP    dP 
+   88     88 88'  .88  .8bd8'       88   88   88 88ooood8 88'  .88 88    88 
+   88     88 88.  .88  .d88b.       88   88   88 88.  ... 88    88 88.  .88 
+   dP     dP .88888P' dP'  .dP  dP  dP   dP   dP .88888P' dP    dP .88888P. 
+ =========================================================================================
+ Garmin Forerunner (GFrun / Garmin-Forerunner-610-Extractor / garminplugin / gcpuploader)
+ =========================================================================================
+ 
+INSTALLATION :
+1. Full Install DEV - (GFrunOnline)
+2. Full Install STABLE - (GFrunOffline)
 
-+ **** INSTALLATION :
-+ 1. Full Install DEV - (GFrunOnline)
-+ 2. Full Install STABLE - (GFrunOffline)
+CONFIGURATION :
+3. Config Auto-Upload - (gcpuploader)
+4. Config Garminplugin -(connect.garmin.com)
 
-+ **** CONFIGURATION :
-+ 3. Config Auto-Upload - (gcpuploader)
-+ 4. Config Garminplugin -(connect.garmin.com)
+APPLICATION :
+5. Telecharger Activites - (Montre > Local)
+6. Uploader Activites - (Local > connect.garmin.com)
 
-+ **** APPLICATION :
-+ 5. Telecharger Activites - (Montre > Local)
-+ 6. Uploader Activites - (Local > connect.garmin.com)
-
-+ Faite votre choix : 6
+Faite votre choix : 
+</code></pre>
 
 FAIT :
 -----
