@@ -35,6 +35,9 @@ echo "Wget:" $VWget
 echo `color 32 "================================================================================================"`
 wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 }
+
+rm GFrunDev.sh* GFrunOffline.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_GF610E.sh* Go_gcpuploader.sh*
+
 ########################################################################################################################
 #                                                  Le Menu du NoX
 ########################################################################################################################
@@ -53,16 +56,17 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 	echo ""
 #        echo "============================"
         echo "**** INSTALLATION :"
-        echo `color 32 "1. Full Install DEV - (GFrunOnline)"`
-        echo `color 33 "2. Full Install STABLE - (GFrunOffline)"`
+        echo `color 32 "1. Full Install DEV - (GFrunDev)"`
+        echo `color 33 "2. Full Install STABLE - (GFrunStable)"`
+        echo `color 33 "3. Full Install LOCAL - (GFrunLocal)"`
         echo ""
         echo "**** CONFIGURATION :"
-        echo `color 34 "3. Config Auto-Upload - (gcpuploader)"`
-        echo `color 35 "4. Config Garminplugin -(connect.garmin.com)"`
+        echo `color 34 "4. Config Auto-Upload - (gcpuploader)"`
+        echo `color 35 "5. Config Garminplugin -(connect.garmin.com)"`
         echo ""
         echo "**** APPLICATION :"
-        echo `color 36 "5. Telecharger Activites - (Montre > Local)"`
-        echo `color 37 "6. Uploader Activites - (Local > connect.garmin.com)"`
+        echo `color 36 "6. Telecharger Activites - (Montre > Local)"`
+        echo `color 37 "7. Uploader Activites - (Local > connect.garmin.com)"`
 #        echo `color 32 "7. "`
 #        echo `color 32 "8. "`
 #        echo `color 32 "9. "`
@@ -84,7 +88,7 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
           1) # Lancer le Script pour : 
 		####################################################################
 		VChemin="$VChemin"
-		Vscript="GFrunOnline.sh"
+		Vscript="GFrunDev.sh"
 
 		GoScript
 		####################################################################
@@ -98,8 +102,17 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 		GoScript
 		####################################################################
             ;;
+            
+          *3*) # Lancer le Script pour : 
+		####################################################################
+		VChemin="$VChemin"
+		Vscript="GFrunLocal.sh"
 
-          *3*) # Lancer le Script pour :     
+		GoScript
+		####################################################################
+		
+            ;;
+          *4*) # Lancer le Script pour :     
 		####################################################################
 		VChemin="$VChemin"
 		Vscript="Conf_gcpuploader.sh"
@@ -108,7 +121,7 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 		####################################################################
             ;;
 
-          *4*) # Lancer le Script pour : 
+          *5*) # Lancer le Script pour : 
 		####################################################################
 		VChemin=$VChemin
 		Vscript="Conf_Garminplugin.sh"
@@ -117,7 +130,7 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 		####################################################################  			
             ;;
 
-          *5*) # Lancer le Script pour : 
+          *6*) # Lancer le Script pour : 
 		####################################################################
 		VChemin=$VChemin
 		Vscript="Go_GF610E.sh"
@@ -126,21 +139,12 @@ wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
 		####################################################################           
             ;;
 
-          *6*) # Lancer le Script pour : 
+          *7*) # Lancer le Script pour : 
 		####################################################################
 		VChemin=$VChemin
 		Vscript="Go_gcpuploader.sh"
 		
 		GoScript
-		#################################################################### 
-            ;;
-
-          *7*) # Lancer le Script pour : 
-		####################################################################
-		#VChemin=$VChemin
-		#Vscript="Setup_GDivFix.sh"
-		#
-		#GoScript
 		#################################################################### 
             ;;
 
