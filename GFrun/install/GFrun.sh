@@ -67,7 +67,7 @@ F_unzip(){
 F_cpmv(){
 	##Convert fit to tcx
 	cp -f $HOME/GFrun/scripts/40-convert_to_tcx.py $HOME/.config/garmin-extractor/scripts/
-	mv $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master/fitparse $HOME/GFrun/resources/FIT-to-TCX-master/
+	mv -f $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master/fitparse $HOME/GFrun/resources/FIT-to-TCX-master/
 }
 
 F_extractfit(){
@@ -82,7 +82,7 @@ F_configfiles(){
 	#GarminDevice.xml
 	if [ -n "$NUMERO_DE_MA_MONTRE" ]; then
 		cd $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
-		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities Activities && mv Activities $HOME/.config/garmin-extractor/Garmin/Activities
+		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities Activities && mv Activities $HOME/.config/garmin-extractor/Garmin
 		src=ID_MA_MONTRE && cibl=$NUMERO_DE_MA_MONTRE && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garmin-extractor/Garmin/GarminDevice.xml" >> /tmp/ligneCmd.sh
 	fi
 
@@ -101,7 +101,7 @@ F_chownchmod(){
 }
 
 F_chk_GFrunOffline(){
-if [ ! -d $HOME/GFrunOffline.zip ]; then
+if [ ! -f $HOME/GFrunOffline.zip ]; then
 	cd $HOME && wget https://raw.github.com/xonel/GFrun/$Vbranche/GFrunOffline.zip && unzip -o GFrunOffline.zip
 fi
 }
