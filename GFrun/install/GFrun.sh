@@ -99,7 +99,7 @@ F_chownchmod(){
 	chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/GFrun/scripts/
 }
 
-F_chk_GFrunOffline.zip(){
+F_chk_GFrunOffline(){
 if [ ! -d $HOME/GFrunOffline.zip ]; then
 	cd $HOME && wget https://raw.github.com/xonel/GFrun/master/GFrunOffline.zip && unzip -o GFrunOffline.zip
 fi
