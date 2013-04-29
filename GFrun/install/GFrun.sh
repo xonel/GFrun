@@ -162,8 +162,20 @@ echo "<<<<<<" $1
 				F_chownchmod()
 				F_clear()
 		####################################################################
-            ;;            
-	esac
+             ;;
+          [xX]) # exit
+
+            ;;
+
+          *) # anything else
+
+            echo
+            echo "\"$Vchoix\" n'est pas une entrée Valide."
+            sleep 3
+
+            ;;
+
+        esac
 
 echo "PROCEDURE TERMINEE"
 exit
