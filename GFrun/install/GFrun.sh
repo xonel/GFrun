@@ -53,8 +53,6 @@ F_wget(){
 F_unzip(){
 	#Garmin-Forerunner-610-Extractor-master
 	cd $HOME && unzip -o master.zip -d GFrun
-	#.config/garmin-extractor
-	mkdir -p $HOME/.config/garmin-extractor/scripts/ && mkdir -p $HOME/.config/garmin-extractor/Garmin
 	#FIT-to-TCX-master
 	cd $HOME/GFrun/resources/ && unzip -o master.zip
 	#python-fitparse-master
@@ -66,8 +64,9 @@ F_unzip(){
 
 F_cpmv(){
 	#Garmin-Forerunner-610-Extractor-master
-	mv -f $HOME/GFrun/Garmin-Forerunner-610-Extractor-master/* $HOME/GFrun
+	cp -Rf $HOME/GFrun/Garmin-Forerunner-610-Extractor-master/* $HOME/GFrun
 	##Convert fit to tcx
+	mkdir -p $HOME/.config/garmin-extractor/scripts/
 	cp -f $HOME/GFrun/scripts/40-convert_to_tcx.py $HOME/.config/garmin-extractor/scripts/
 	mv -f $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master/fitparse $HOME/GFrun/resources/FIT-to-TCX-master/
 }
