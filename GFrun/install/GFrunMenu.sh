@@ -37,7 +37,7 @@ echo `color 32 "================================================================
 wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
 }
 
-rm GFrunDev.sh* GFrunOffline.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_GF610E.sh* Go_gcpuploader.sh*
+rm -f GFrun.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_GF610E.sh* Go_gcpuploader.sh*
 
 ########################################################################################################################
 #                                                  Le Menu du NoX
