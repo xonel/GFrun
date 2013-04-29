@@ -118,9 +118,9 @@ echo "#:'######:::'########:'########::'##::::'##:'##::: ##:
 
 case $1
 	in
-		-d)
+		-d )
 				F_clear()
-#				F_chk_GFrunOffline.zip()
+#				F_chk_GFrunOffline()
 				F_apt()
 				F_wget()
 				F_unzip()
@@ -129,11 +129,11 @@ case $1
 				F_configfiles()
 				F_chownchmod()
 				F_clear()
-		  
-		;;
-		-s)
+			;;
+
+		-s )
 				F_clear()
-				F_chk_GFrunOffline.zip()
+				F_chk_GFrunOffline()
 				F_apt()
 #				F_wget()
 				F_unzip()
@@ -142,10 +142,11 @@ case $1
 				F_configfiles()
 				F_chownchmod()
 				F_clear()
-		;;
-		-l)
+			;;
+
+		-l )
 		  		F_clear()
-				F_chk_GFrunOffline.zip()
+				F_chk_GFrunOffline()
 #				F_apt()
 #				F_wget()
 				F_unzip()
@@ -154,7 +155,7 @@ case $1
 				F_configfiles()
 				F_chownchmod()
 				F_clear()
-		;;
+			;;
 esac
 
 echo "PROCEDURE TERMINEE"
