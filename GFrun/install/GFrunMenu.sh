@@ -19,8 +19,9 @@
 ########################################################################
 #
 VChemin="https://github.com/xonel/GFrun/raw/master/GFrun/install/"
-Vscript=" "
-VWget=" "
+Vscript=""
+Varg=""
+VWget=""
 
 color()
 {
@@ -33,7 +34,7 @@ VWget=$VChemin""$Vscript
 echo `color 32 "================================================================================================"`
 echo "Wget:" $VWget
 echo `color 32 "================================================================================================"`
-wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript
+wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
 }
 
 rm GFrunDev.sh* GFrunOffline.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_GF610E.sh* Go_gcpuploader.sh*
@@ -88,7 +89,8 @@ rm GFrunDev.sh* GFrunOffline.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_G
           1) # Lancer le Script pour : 
 		####################################################################
 		VChemin="$VChemin"
-		Vscript="GFrunDev.sh"
+		Vscript="GFrun.sh"
+		Varg="-d"
 
 		GoScript
 		####################################################################
@@ -97,7 +99,8 @@ rm GFrunDev.sh* GFrunOffline.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_G
           *2*) # Lancer le Script pour : 
 		####################################################################
 		VChemin="$VChemin"
-		Vscript="GFrunOffline.sh"
+		Vscript="GFrun.sh"
+		Varg="-s"
 
 		GoScript
 		####################################################################
@@ -106,7 +109,8 @@ rm GFrunDev.sh* GFrunOffline.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_G
           *3*) # Lancer le Script pour : 
 		####################################################################
 		VChemin="$VChemin"
-		Vscript="GFrunLocal.sh"
+		Vscript="GFrun.sh"
+		Varg="-l"
 
 		GoScript
 		####################################################################
