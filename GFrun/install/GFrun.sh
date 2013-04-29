@@ -18,6 +18,7 @@
 # wget https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ########################################################################
 #
+Vbranche="GFrun"
 
 F_clear(){
 	#Nettoyage
@@ -46,7 +47,7 @@ F_wget(){
 	cd $HOME/GFrun/resources/ && wget https://github.com/Tigge/FIT-to-TCX/archive/master.zip
 	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && wget https://github.com/dtcooper/python-fitparse/archive/master.zip
 	cd $HOME/GFrun/resources/ && wget http://freefr.dl.sourceforge.net/project/gcpuploader/pygupload_20120516.zip
-	cd $HOME/.config/ && wget https://raw.github.com/xonel/GFrun/master/_.config/_.GFrunGarminplugin.zip
+	cd $HOME/.config/ && wget https://raw.github.com/xonel/GFrun/$Vbranche/_.config/_.GFrunGarminplugin.zip
 }
 
 F_unzip(){
@@ -101,7 +102,7 @@ F_chownchmod(){
 
 F_chk_GFrunOffline(){
 if [ ! -d $HOME/GFrunOffline.zip ]; then
-	cd $HOME && wget https://raw.github.com/xonel/GFrun/master/GFrunOffline.zip && unzip -o GFrunOffline.zip
+	cd $HOME && wget https://raw.github.com/xonel/GFrun/Vbranche/GFrunOffline.zip && unzip -o GFrunOffline.zip
 fi
 }
 
