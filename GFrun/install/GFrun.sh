@@ -22,7 +22,8 @@ Vbranche="GFrun"
 
 F_clear(){
 	#Nettoyage
-	rm -Rf $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master/ $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* $HOME/.config/_.config_GFrun.zip* /tmp/ligneCmd.sh* $HOME/GFrun/Garmin-Forerunner-610-Extractor-master
+	rm -f $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* $HOME/.local/share.zip* $HOME/.config/_.config_GFrun.zip* /tmp/ligneCmd.sh*
+	rm -Rf  $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master $HOME/GFrun/Garmin-Forerunner-610-Extractor-master
 }
 
 F_apt(){
@@ -68,7 +69,7 @@ F_cpmv(){
 	##Convert fit to tcx
 	mkdir -p $HOME/.config/garmin-extractor/scripts/
 	cp -f $HOME/GFrun/scripts/40-convert_to_tcx.py $HOME/.config/garmin-extractor/scripts/
-	mv -f $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master/fitparse $HOME/GFrun/resources/FIT-to-TCX-master/
+	cp -Rf $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master/fitparse $HOME/GFrun/resources/FIT-to-TCX-master/
 }
 
 F_extractfit(){
