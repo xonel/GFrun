@@ -5,7 +5,7 @@
 #
 ############################
 #     Auteurs : Le.NoX ;o) 
-#      Version="0.3"
+#      Version="0.4"
 #     Licence: GNU
 ############################
 echo "
@@ -27,6 +27,5 @@ cd .local/ && unzip -o  share.zip
 cd .. && zip -r GFrunOffline.zip  master.zip .config/ .local/ GFrun/ install/
 rm -r .local/share/
 
-cd .config/ && zip -r _.GFrunGarminplugin.zip garmin-extractor/ garminplugin/
 cd .. && mv .config/ _.config/ && mv .local/ _.local/
 echo "FIN"
