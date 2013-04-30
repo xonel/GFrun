@@ -256,7 +256,7 @@ echo ""
 
 echo "PROCEDURE TERMINEE"
 
-	if [-f $HOME/GFrunMenu.sh ]; then
+	if [ -f $HOME/GFrunMenu.sh ]; then
 		sleep 5
 		sh $HOME/GFrunMenu.sh
 	fi

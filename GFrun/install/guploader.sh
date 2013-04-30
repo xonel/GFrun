@@ -71,7 +71,7 @@ echo " (W) - Week -> don't work :o( "
 echo " (M) - Month"
 echo " (Y) - Years" 
 echo ""
-echo -n `color 32"choise { Tt | Ww | Mm | Yy} : "`
+echo -n `color 32"choise { Tt | Ww | Mm | Yy} : "
 read Vchoix
 
         case $Vchoix
@@ -111,7 +111,7 @@ read Vchoix
 echo "PROCEDURE TERMINEE"
 sleep 5
 
-	if [-f $HOME/GFrunMenu.sh ]; then
+	if [ -f $HOME/GFrunMenu.sh ]; then
 		sleep 5
 		sh $HOME/GFrunMenu.sh
 	fi
