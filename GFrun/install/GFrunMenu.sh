@@ -30,11 +30,16 @@ printf '\033[%sm%s\033[m\n' "$@"
 
 GoScript()
 {
-VWget=$VChemin""$Vscript
-echo `color 32 "================================================================================================"`
-echo "Wget:" $VWget
-echo `color 32 "================================================================================================"`
-wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
+	VWget=$VChemin""$Vscript
+	echo `color 32 "================================================================================================"`
+	echo "Wget:" $VWget
+	echo `color 32 "================================================================================================"`
+
+	if [ ! -f $HOME/GFrun/install/$Vscript ]; then
+			cd $HOME/GFrun/install/ && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
+		else
+			wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
+	fi
 }
 
 rm -f GFrun.sh* guploader.sh*

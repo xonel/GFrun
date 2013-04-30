@@ -255,6 +255,7 @@ echo ""
         esac
 
 echo "PROCEDURE TERMINEE"
+sleep 5
 sh $HOME/GFrunMenu.sh
 exit
 
