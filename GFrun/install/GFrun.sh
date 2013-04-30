@@ -1,30 +1,36 @@
 #!/bin/bash
 #
-# Configuration file for GARMIN FORERUNNER - GFrun
-# Modif by Le.NoX
+# GARMIN FORERUNNER - GFrun
 #
 ############################
-#     Auteurs : Le.NoX ;o) 
-#      Version="0.3.3"
+#     Auteurs : Le.NoX ;o)
+#     M@il : le.nox @ free.fr
+#     Version="0.4.0"
 #     Licence: GNU
 ############################
 #
-########################################################################
-# wget https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh
+################################################################################################################################################
+# wget https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh
 # chmod a+x GFrunMenu.sh
 # sudo sh ./GFrunMenu.sh
 #
 # OneCopyColle : 
-# wget https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
-########################################################################
+# wget https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+################################################################################################################################################
 #
 Vbranche="GFrun"
 #Vbranche="master"
 
 F_clear(){
 	#Nettoyage
-	rm -f $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* $HOME/.local/share.zip* $HOME/.config/_.config_GFrun.zip* /tmp/ligneCmd.sh*
+	rm -f $HOME/GFrun.sh* $HOME/guploader.sh* $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* $HOME/.local/share.zip* $HOME/.config/_.config_GFrun.zip* /tmp/ligneCmd.sh*
 	rm -Rf  $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master $HOME/GFrun/Garmin-Forerunner-610-Extractor-master
+}
+
+F_mkdir(){
+	mkdir -p $HOME/GFrun/resources/FIT-to-TCX-master/
+	mkdir -p $HOME/.config/garmin-extractor/scripts/
+	mkdir -p $HOME/.config/garminplugin
 }
 
 F_apt(){
@@ -45,7 +51,6 @@ F_apt(){
 	}
 
 F_wget(){
-	mkdir -p $HOME/GFrun/resources/FIT-to-TCX-master/
 	cd $HOME && wget https://github.com/Tigge/Garmin-Forerunner-610-Extractor/archive/master.zip
 	cd $HOME/GFrun/resources/ && wget https://github.com/Tigge/FIT-to-TCX/archive/master.zip
 	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && wget https://github.com/dtcooper/python-fitparse/archive/master.zip
@@ -70,7 +75,6 @@ F_cpmv(){
 	#Garmin-Forerunner-610-Extractor-master
 	cp -Rf $HOME/GFrun/Garmin-Forerunner-610-Extractor-master/* $HOME/GFrun
 	##Convert fit to tcx
-	mkdir -p $HOME/.config/garmin-extractor/scripts/
 	cp -f $HOME/GFrun/scripts/40-convert_to_tcx.py $HOME/.config/garmin-extractor/scripts/
 	cp -Rf $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master/fitparse $HOME/GFrun/resources/FIT-to-TCX-master/
 }
@@ -158,6 +162,7 @@ echo ""
           -d) # 1. Full Install DEV - (GFrunDev)
 		####################################################################
 				F_clear
+				F_mkdir
 #				F_chk_GFrunOffline
 				F_apt
 				F_wget
@@ -173,6 +178,7 @@ echo ""
           -s) # 2. Full Install STABLE - (GFrunStable)
 		####################################################################
 				F_clear
+				F_mkdir
 				F_chk_GFrunOffline
 				F_apt
 #				F_wget
@@ -188,6 +194,7 @@ echo ""
           -l) # 3. Full Install LOCAL - (GFrunLocal)
 		####################################################################
 				F_clear
+				F_mkdir
 				F_chk_GFrunOffline
 #				F_apt
 #				F_wget
@@ -203,6 +210,7 @@ echo ""
           -c) # 5. Config Garminplugin -(connect.garmin.com)
 		####################################################################
 #				F_clear
+#				F_mkdir
 #				F_chk_GFrunOffline
 #				F_apt
 #				F_wget
@@ -218,6 +226,7 @@ echo ""
           -e) # 6. Telecharger Activites - (Montre > Local) 
 		####################################################################
 #				F_clear
+#				F_mkdir
 #				F_chk_GFrunOffline
 #				F_apt
 #				F_wget

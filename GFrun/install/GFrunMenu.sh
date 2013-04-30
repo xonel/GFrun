@@ -5,17 +5,17 @@
 #
 ############################
 #     Auteurs : Le.NoX ;o) 
-#      Version="0.2"
+#      Version="0.4.0"
 #     Licence: GNU
 ############################
 #
 ########################################################################
-# wget https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh
+# wget https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh
 # chmod a+x GFrunMenu.sh
 # sudo sh ./GFrunMenu.sh
 #
 # OneCopyColle : 
-# wget https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+# wget https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ########################################################################
 #
 VChemin="https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/"
@@ -57,13 +57,13 @@ rm -f GFrun.sh* guploader.sh*
 	echo ""
 #        echo "============================"
         echo "**** INSTALLATION :"
-        echo `color 32 "1. Full Install DEV 				(GFrun.sh -d)"`
-        echo `color 32 "2. Full Install STABLE	 			(GFrun.sh -s)"`
-        echo `color 32 "3. Full Install LOCAL				(GFrun.sh -l)"`
+        echo `color 32 "1. DEV 								(GFrun.sh -d)"`
+        echo `color 32 "2. STABLE				 			(GFrun.sh -s)"`
+        echo `color 32 "3. LOCAL							(GFrun.sh -l)"`
         echo ""
         echo "**** CONFIGURATION :"
-        echo `color 33 "4. Config guploader					(GFrun.sh -g)"`
-        echo `color 33 "5. Config Garmin.com				(GFrun.sh -c)"`
+        echo `color 33 "4. guploader						(GFrun.sh -g)"`
+        echo `color 33 "5. Garmin.com						(GFrun.sh -c)"`
         echo ""
         echo "**** ACTIVITIES :"
         echo `color 35 "6. Extract.Fit >> PC				(GFrun.sh -e)"`
