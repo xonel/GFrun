@@ -60,7 +60,7 @@ rm -f GFrun.sh* guploader.sh*
         echo "-------------"
         echo `color 32 "1. DEV ...........................(GFrun.sh -d)"`
         echo `color 32 "2. STABLE.........................(GFrun.sh -s)"`
-        echo `color 32 "3. LOCAL..........................(GFrun.sh -l)"`
+        echo `color 32 "3. OFFLINE........................(GFrun.sh -o)"`
         echo ""
         echo "CONFIGURATION :"
         echo "--------------"
@@ -70,7 +70,7 @@ rm -f GFrun.sh* guploader.sh*
         echo "ACTIVITIES :"
         echo "-----------"
         echo `color 35 "6. Extract.Fit >> PC..............(GFrun.sh -e)"`
-        echo `color 35 "7. Upload.Fit  >> garmin.com .....(GFrun.sh -u)"`
+        echo `color 35 "7. Upload.Fit >> garmin.com ......(GFrun.sh -u)"`
 #        echo `color 32 "7. "`
 #        echo `color 32 "8. "`
 #        echo `color 32 "9. "`
@@ -111,7 +111,7 @@ rm -f GFrun.sh* guploader.sh*
 		####################################################################
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
-		Varg="-l"
+		Varg="-o"
 		GoScript
 		####################################################################
 		
