@@ -58,16 +58,16 @@ rm -f GFrun.sh* guploader.sh*
 #        echo "============================"
         echo "**** INSTALLATION :"
         echo `color 32 "1. Full Install DEV 				(GFrun.sh -d)"`
-        echo `color 33 "2. Full Install STABLE	 			(GFrun.sh -s)"`
-        echo `color 33 "3. Full Install LOCAL				(GFrun.sh -l)"`
+        echo `color 32 "2. Full Install STABLE	 			(GFrun.sh -s)"`
+        echo `color 32 "3. Full Install LOCAL				(GFrun.sh -l)"`
         echo ""
         echo "**** CONFIGURATION :"
-        echo `color 34 "4. Config guploader				(GFrun.sh -g)"`
-        echo `color 35 "5. Config Garminplugin				(GFrun.sh -c)"`
+        echo `color 33 "4. Config guploader					(GFrun.sh -g)"`
+        echo `color 33 "5. Config Garmin.com				(GFrun.sh -c)"`
         echo ""
         echo "**** ACTIVITIES :"
-        echo `color 36 "6. Extract.Fit >> PC				(GFrun.sh -e)"`
-        echo `color 37 "7. Upload.Fit  >> garmin.com 		(GFrun.sh -u)"`
+        echo `color 35 "6. Extract.Fit >> PC				(GFrun.sh -e)"`
+        echo `color 35 "7. Upload.Fit  >> garmin.com 		(GFrun.sh -u)"`
 #        echo `color 32 "7. "`
 #        echo `color 32 "8. "`
 #        echo `color 32 "9. "`
