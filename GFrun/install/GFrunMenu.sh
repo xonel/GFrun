@@ -104,7 +104,7 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 #        echo `color 32 "e. "`
 #        echo `color 32 "f. "`
 #        echo `color 32 "g. "`
-        echo
+        echo""
         echo -n "Faite votre choix : "
 
         read Vchoix
