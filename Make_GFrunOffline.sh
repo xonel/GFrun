@@ -18,7 +18,7 @@ echo "
 #     .  ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:
 #     :......::::..::::::::..:::::..:::.......:::..::::..::"
 #
-# zip fichier de config offline (GFrunOffline.zip) + config garminplugin (_.GFrunGarminplugin.zip)
+# zip fichier de config offline (GFrunOffline.zip) + config garminplugin
 #
 
 rm GFrunOffline.zip

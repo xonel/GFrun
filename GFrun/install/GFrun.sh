@@ -262,7 +262,12 @@ echo ""
             ;;
         esac
 echo ""
-echo "PROCEDURE TERMINEE"
+echo "                                !!!            o           _   _     "
+echo "    -*~*-          ###        `  _ _  '      ` /_\ '       '\\-//`    "
+echo "    (o o)         (o o)      -  (OXO)  -    - (o o) -       (o o)     "
+echo "ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-"
+echo ""
+echo ".........................PROCEDURE TERMINEE..........................."
 
 	if [ -f $HOME/GFrunMenu.sh ]; then
 		sleep 5
