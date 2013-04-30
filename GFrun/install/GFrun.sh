@@ -142,11 +142,11 @@ echo `color 32 "============================================="`
 			echo "username="$Read_user"" >> $HOME/.guploadrc
 			echo "password="$Read_password"" >> $HOME/.guploadrc	
 		else
-echo `color 32 "============================================="`
-			echo "Configuration file already exist"
-echo `color 32 "============================================="`
-			echo ""
 			cat  $HOME/.guploadrc
+			echo ""
+			echo `color 32 "============================================="`
+						echo "Configuration file already exist"
+			echo `color 32 "============================================="`
 	fi
 }
 

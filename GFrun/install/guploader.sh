@@ -62,7 +62,7 @@ GoScript()
 echo ""
 echo ""
 echo `color 32 "=================================="`
-echo "SELECT ACTIVITIES PERIOD UPLOAD"
+echo "SELECT ACTIVITIES PERIOD"
 echo `color 32 "=================================="`
 echo ""
 echo " (T) - Today"
@@ -70,7 +70,7 @@ echo " (W) - Week -> don't work :o( "
 echo " (M) - Month"
 echo " (Y) - Years" 
 echo ""
-echo -n `color 32"choise { Tt | Ww | Mm | Yy} : "
+echo -n `color 32"choise { Tt | Ww | Mm | Yy} : "`
 read Vchoix
 
         case $Vchoix

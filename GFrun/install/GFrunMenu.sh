@@ -34,15 +34,16 @@ GoScript()
 	echo `color 32 "================================================================================================"`
 	echo "Wget:" $VWget
 	echo `color 32 "================================================================================================"`
-
+	echo ""
+	echo ""
 	if [ ! -f $HOME/GFrun/install/$Vscript ]; then
-			wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
+			cd $HOME/ && wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
 		else
 			cd $HOME/GFrun/install/ && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
 	fi
 }
 
-rm -f GFrun.sh* guploader.sh*
+rm -f $HOME/GFrun.sh* $HOME/guploader.sh*
 
 ########################################################################################################################
 #                                                  Le Menu du NoX
