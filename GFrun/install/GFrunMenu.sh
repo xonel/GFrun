@@ -56,18 +56,21 @@ rm -f GFrun.sh* guploader.sh*
 	echo `color 32 " ========================================================================================="`
 	echo ""
 #        echo "============================"
-        echo "**** INSTALLATION :"
-        echo `color 32 "1. DEV 								(GFrun.sh -d)"`
-        echo `color 32 "2. STABLE				 			(GFrun.sh -s)"`
-        echo `color 32 "3. LOCAL							(GFrun.sh -l)"`
+        echo "INSTALLATION :"
+        echo "-------------"
+        echo `color 32 "1. DEV ...........................(GFrun.sh -d)"`
+        echo `color 32 "2. STABLE.........................(GFrun.sh -s)"`
+        echo `color 32 "3. LOCAL..........................(GFrun.sh -l)"`
         echo ""
-        echo "**** CONFIGURATION :"
-        echo `color 33 "4. guploader						(GFrun.sh -g)"`
-        echo `color 33 "5. Garmin.com						(GFrun.sh -c)"`
+        echo "CONFIGURATION :"
+        echo "--------------"
+        echo `color 33 "4. guploader......................(GFrun.sh -g)"`
+        echo `color 33 "5. Garmin.com.....................(GFrun.sh -c)"`
         echo ""
-        echo "**** ACTIVITIES :"
-        echo `color 35 "6. Extract.Fit >> PC				(GFrun.sh -e)"`
-        echo `color 35 "7. Upload.Fit  >> garmin.com 		(GFrun.sh -u)"`
+        echo "ACTIVITIES :"
+        echo "-----------"
+        echo `color 35 "6. Extract.Fit >> PC..............(GFrun.sh -e)"`
+        echo `color 35 "7. Upload.Fit  >> garmin.com .....(GFrun.sh -u)"`
 #        echo `color 32 "7. "`
 #        echo `color 32 "8. "`
 #        echo `color 32 "9. "`
