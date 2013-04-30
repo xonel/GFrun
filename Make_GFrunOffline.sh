@@ -24,6 +24,7 @@ mv _.config/ .config/
 mv _.local/ .local/
 
 cd .local/ && unzip -o  share.zip
+
 cd .. && zip -r GFrunOffline.zip  master.zip .config/ .local/ GFrun/ install/
 rm -r .local/share/
 

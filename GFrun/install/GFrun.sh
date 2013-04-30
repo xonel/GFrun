@@ -59,8 +59,9 @@ F_unzip(){
 	cd $HOME/GFrun/resources/ && unzip -o master.zip
 	#python-fitparse-master
 	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && unzip -o master.zip
-	#gcpuploader
+	#guploader
 	cd $HOME/GFrun/resources/ && unzip -o pygupload_20120516.zip
+	#connect.garmin.com
 	cd $HOME/.config/ && unzip -o _.config_GFrun.zip
 }
 
