@@ -45,6 +45,7 @@ F_apt(){
 	}
 
 F_wget(){
+	mkdir -p $HOME/GFrun/resources/FIT-to-TCX-master/
 	cd $HOME && wget https://github.com/Tigge/Garmin-Forerunner-610-Extractor/archive/master.zip
 	cd $HOME/GFrun/resources/ && wget https://github.com/Tigge/FIT-to-TCX/archive/master.zip
 	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && wget https://github.com/dtcooper/python-fitparse/archive/master.zip
