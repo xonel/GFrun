@@ -1,22 +1,33 @@
 #!/bin/bash
 #
-# Configuration file for GARMIN FORERUNNER - GFrun
-# Modif by Le.NoX
+# GFrun
 #
-############################
-#     Auteurs : Le.NoX ;o) 
-#      Version="0.4.0"
-#     Licence: GNU
-############################
+#  Auteurs : Le.NoX ;o)
+#  M@il : le.nox @ free.fr
+#  Version="0.4.0"
 #
-########################################################################
-# wget https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh
+#  Licence: GNU GPL
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##################################################################################################################################
+# wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh
 # chmod a+x GFrunMenu.sh
 # sudo sh ./GFrunMenu.sh
-#
-# OneCopyColle : 
-# wget https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
-########################################################################
+# 
+# wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+##################################################################################################################################
 #
 VChemin="https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/"
 Vscript=""
@@ -50,17 +61,18 @@ rm -f $HOME/GFrun.sh* $HOME/guploader.sh*
 ####################################################################################
  clear
 	echo `color 32 " =============================================================="`
- 	echo `color 31 " GFrun - Garmin Forerunner 60 - 405CX - 310XT - 610 - 910XT "`
+ 	echo `color 31 "   GFrun - Garmin Forerunner 60 - 405CX - 310XT - 610 - 910XT "`
 	echo `color 32 " =============================================================="`
-	echo `color 36 " ........######...########.########..##.....##.##....##..."`
-	echo `color 36 " .......##....##..##.......##.....##.##.....##.###...##..."`
-	echo `color 37 " .......##........##.......##.....##.##.....##.####..##..."`
-	echo `color 31 " .......##...####.######...########..##.....##.##.##.##..."`
-	echo `color 37 " .......##....##..##.......##...##...##.....##.##..####..."`
-	echo `color 36 " .......##....##..##.......##....##..##.....##.##...###..."`
-	echo `color 36 " ........######...##.......##.....##..#######..##....##..."`
+echo "   : '######...'########.'########..'##....'##.'##... ##:
+   :'##... ##.. ##....... ##.... ##. ##.... ##. ###.. ##:
+   : ##:::..::: ##::::::: ##:::: ##: ##:::: ##: ####: ##:
+   : ##..'####. ######... ########.. ##.... ##. ## ## ##.
+   : ##::: ##:: ##...:::: ##.. ##::: ##:::: ##: ##. ####:
+   : ##... ##.. ##....... ##... ##.. ##.... ##. ##.. ###:
+   :  ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:
+   :....................................................:"
 	echo `color 32 " =============================================================="`
- 	echo `color 31 " Garmin-Forerunner-610-Extractor - garminplugin - gcpuploader "`
+ 	echo `color 31 "   Garmin-Forerunner-610-Extractor - garminplugin - gcpuploader "`
 	echo `color 32 " =============================================================="`
 	echo ""
 #        echo "============================"
@@ -243,14 +255,24 @@ rm -f $HOME/GFrun.sh* $HOME/guploader.sh*
 
              ;;
           [xX]) # exit
-
+				echo ""
+				echo "                                !!!            o           _   _     "
+				echo "    -*~*-          ###        `  _ _  '      ` /_\ '       '\\-//`    "
+				echo "    (o o)         (o o)      -  (OXO)  -    - (o o) -       (o o)     "
+				echo "ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-"
+				echo ""
+				echo ".........................PROCEDURE TERMINEE..........................."
+				sleep 3
             ;;
 
           *) # anything else
 		#################################################################### 
             echo
             echo "\"$Vchoix\" NO VALID ENTRY"
-            sleep 3
+			if [ -f $HOME/GFrunMenu.sh ]; then
+				sleep 3
+				sh $HOME/GFrunMenu.sh
+			fi
 		#################################################################### 
             ;;
         esac
