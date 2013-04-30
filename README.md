@@ -32,14 +32,10 @@ sudo sh ./GFrunMenu.sh
 wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 </code></pre>
 
-Voici la nouvelle version de GFrun, au programme :
-- Un Menu un peut plus convivial.
-- Une Version GFrunOnline (version DEV - derniere version des Master git garminplugin/gcpuploader/etc...)
-- Une version GFrunOffline (version STABLE au 23/04/2013).
-- Une Mini Toolbox de script pour automatiser les configs (plugin, ID montre,etc).
-
 VISUEL :
 ---------
+
+<a href='http://pix.toile-libre.org/?img=1367361876.png'><img src='http://pix.toile-libre.org/upload/img/1367361876.png' /></a>
 
 <pre><code> ==============================================================
  GFrun - Garmin Forerunner 60 - 405CX - 310XT - 610 - 910XT 
@@ -79,11 +75,11 @@ Faite votre choix :
 
 Voici les briques principales de GFrun :
 + garminplugin_0.3.16-1 : ( https://github.com/adiesner/GarminPlugin )
-  Permet de connecter notre firefox au site http:// connect.garmin.com
+  - Permet de connecter notre firefox au site http:// connect.garmin.com
 + Garmin-Forerunner-610-Extractor : ( https://github.com/Tigge/Garmin-Forerunner-610-Extractor) 
-  Récupère les fichiers .FIT de nos montres (ANT-FS) et convertit les .FIT en .TCX à l'aide du script (40-convert_to_tcx.py)
+  - Récupère les fichiers .FIT de nos montres (ANT-FS) et convertit les .FIT en .TCX à l'aide du script (40-convert_to_tcx.py)
 + gcpuploader : ( http://sourceforge.net/projects/gcpuploader/ )
-  upload automatiquement les "FIT/TCX" sur http:// connect.garmin.com
+  - upload automatiquement les "FIT/TCX" sur http:// connect.garmin.com
 
 FAIT :
 -----
