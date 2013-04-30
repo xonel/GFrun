@@ -37,42 +37,6 @@ VISUEL :
 
 <a href='http://pix.toile-libre.org/?img=1367361876.png'><img src='http://pix.toile-libre.org/upload/img/1367361876.png' /></a>
 
-<pre><code> ==============================================================
- GFrun - Garmin Forerunner 60 - 405CX - 310XT - 610 - 910XT 
- ==============================================================
-   : '######...'########.'########..'##....'##.'##... ##:
-   :'##... ##.. ##....... ##.... ##. ##.... ##. ###.. ##:
-   : ##:::..::: ##::::::: ##:::: ##: ##:::: ##: ####: ##:
-   : ##..'####. ######... ########.. ##.... ##. ## ## ##.
-   : ##::: ##:: ##...:::: ##.. ##::: ##:::: ##: ##. ####:
-   : ##... ##.. ##....... ##... ##.. ##.... ##. ##.. ###:
-   :  ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:
-   :....................................................:
- ==============================================================
- Garmin-Forerunner-610-Extractor - garminplugin - gcpuploader 
- ==============================================================
-
-INSTALLATION :
--------------
-1. DEV ...........................(GFrun.sh -d)
-2. STABLE.........................(GFrun.sh -s)
-3. OFFLINE........................(GFrun.sh -o)
-
-CONFIGURATION :
---------------
-4. guploader......................(GFrun.sh -g)
-5. Garmin.com.....................(GFrun.sh -c)
-
-ACTIVITIES :
------------
-6. Extract.Fit >> PC..............(GFrun.sh -e)
-7. Upload.Fit >> garmin.com ......(GFrun.sh -u)
-
-EXIT : Select [x] and [enter]
-
-Faite votre choix : 
-</code></pre>
-
 Voici les briques principales de GFrun :
 + garminplugin_0.3.16-1 : ( https://github.com/adiesner/GarminPlugin )
   - Permet de connecter notre firefox au site http:// connect.garmin.com
