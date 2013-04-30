@@ -21,6 +21,11 @@
 Vbranche="GFrun"
 #Vbranche="master"
 
+color()
+{
+printf '\033[%sm%s\033[m\n' "$@"
+}
+
 F_clear(){
 	#Nettoyage
 	rm -f $HOME/GFrun.sh* $HOME/guploader.sh* $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* $HOME/.local/share.zip* $HOME/.config/_.config_GFrun.zip* /tmp/ligneCmd.sh*
@@ -125,9 +130,9 @@ F_conf_guploader(){
 	# RISK.  Username and password are stored as clear text in a file
 	# format that is consistent with Microsoft (r) INI files."
 	echo ""
-	echo '"====================================================="'
+echo `color 32 "============================================="`
 	echo "Configuration Auto-Upload on connect.garmin.com"
-	echo "====================================================="
+echo `color 32 "============================================="`
 
 	if [ ! -f $HOME/.guploadrc ]; then
 			read -p 'USERNAME : on connect.garmin.com >> ' Read_user
@@ -137,23 +142,26 @@ F_conf_guploader(){
 			echo "username="$Read_user"" >> $HOME/.guploadrc
 			echo "password="$Read_password"" >> $HOME/.guploadrc	
 		else
+echo `color 32 "============================================="`
 			echo "Configuration file already exist"
+echo `color 32 "============================================="`
 			echo ""
 			cat  $HOME/.guploadrc
 	fi
 }
 
 ## MAIN ##
-
-echo "
-#   :'######:::'########:'########::'##::::'##:'##::: ##:
-#   '##... ##:: ##.....:: ##.... ##: ##:::: ##: ###:: ##:
-#    ##:::..::: ##::::::: ##:::: ##: ##:::: ##: ####: ##:
-#    ##::'####: ######::: ########:: ##:::: ##: ## ## ##:
-#    ##::: ##:: ##...:::: ##.. ##::: ##:::: ##: ##. ####:
-#    ##::: ##:: ##::::::: ##::. ##:: ##:::: ##: ##:. ###:
-#   . ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:
-#   :......::::..::::::::..:::::..:::.......:::..::::..::"
+echo `color 32 "========================================================================"`
+echo "#     :......::::..::::::::..:::::..:::.......:::..::::..::"
+echo "#      :'######:::'########:'########::'##::::'##:'##::: ##:"
+echo "#      '##... ##:: ##.....:: ##.... ##: ##:::: ##: ###:: ##:"
+echo "#       ##:::..::: ##::::::: ##:::: ##: ##:::: ##: ####: ##:"
+echo "#       ##::'####: ######::: ########:: ##:::: ##: ## ## ##:"
+echo "#       ##::: ##:: ##...:::: ##.. ##::: ##:::: ##: ##. ####:"
+echo "#       ##::: ##:: ##::::::: ##::. ##:: ##:::: ##: ##:. ###:"
+echo "#     .  ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:"
+echo "#     :......::::..::::::::..:::::..:::.......:::..::::..::"
+echo `color 32 "======================================================================="`
 echo "Arg :.........>>>>>>>" $1 "<<<<<<................"
 echo ""
 echo ""
