@@ -126,7 +126,7 @@ F_conf_guploader(){
 	# format that is consistent with Microsoft (r) INI files."
 	echo ""
 	echo '"====================================================="'
-	echo "Configuration Auto-Upload 'http:\\connect.garmin.com'"
+	echo "Configuration Auto-Upload on connect.garmin.com"
 	echo "====================================================="
 
 	if [ ! -f $HOME/.guploadrc ]; then
@@ -255,5 +255,6 @@ echo ""
         esac
 
 echo "PROCEDURE TERMINEE"
+sh $HOME/GFrunMenu.sh
 exit
 
