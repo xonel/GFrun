@@ -56,11 +56,11 @@ F_apt(){
 	}
 
 F_wget(){
-	cd $HOME && wget https://github.com/Tigge/Garmin-Forerunner-610-Extractor/archive/master.zip
-	cd $HOME/GFrun/resources/ && wget https://github.com/Tigge/FIT-to-TCX/archive/master.zip
-	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && wget https://github.com/dtcooper/python-fitparse/archive/master.zip
-	cd $HOME/GFrun/resources/ && wget http://freefr.dl.sourceforge.net/project/gcpuploader/pygupload_20120516.zip
-	cd $HOME/.config/ && wget https://raw.github.com/xonel/GFrun/$Vbranche/_.config/_.config_GFrun.zip
+	cd $HOME && wget -N https://github.com/Tigge/Garmin-Forerunner-610-Extractor/archive/master.zip
+	cd $HOME/GFrun/resources/ && wget -N https://github.com/Tigge/FIT-to-TCX/archive/master.zip
+	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && wget -N https://github.com/dtcooper/python-fitparse/archive/master.zip
+	cd $HOME/GFrun/resources/ && wget -N http://freefr.dl.sourceforge.net/project/gcpuploader/pygupload_20120516.zip
+	cd $HOME/.config/ && wget -N https://raw.github.com/xonel/GFrun/$Vbranche/_.config/_.config_GFrun.zip
 }
 
 F_unzip(){
@@ -144,9 +144,9 @@ echo `color 32 "============================================="`
 		else
 			cat  $HOME/.guploadrc
 			echo ""
-			echo `color 32 "============================================="`
+			echo `color 31 "============================================="`
 						echo "Configuration file already exist"
-			echo `color 32 "============================================="`
+			echo `color 31 "============================================="`
 	fi
 }
 
@@ -261,7 +261,7 @@ echo ""
 		####################################################################
             ;;
         esac
-
+echo ""
 echo "PROCEDURE TERMINEE"
 
 	if [ -f $HOME/GFrunMenu.sh ]; then

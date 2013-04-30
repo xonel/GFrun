@@ -54,8 +54,8 @@ echo `color 32 "================================================================
 
 GoScript()
 {
-	echo " >>> python $HOME/GFrun/resources/pygupload/gupload.py -v 1 $Vactivities"
-	echo ""
+		echo ""
+	echo " Script >>> python $HOME/GFrun/resources/pygupload/gupload.py -v 1 $Vactivities"
 	cd $HOME/.config/garmin-extractor/Garmin/Activities
 	python $HOME/GFrun/resources/pygupload/gupload.py -v 1 $Vactivities
 }
@@ -70,7 +70,7 @@ echo " (W) - Week -> don't work :o( "
 echo " (M) - Month"
 echo " (Y) - Years" 
 echo ""
-echo -n `color 32"choise { Tt | Ww | Mm | Yy} : "`
+echo -n "Choise :  Tt | Ww | Mm | Yy "
 read Vchoix
 
         case $Vchoix

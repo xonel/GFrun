@@ -20,6 +20,9 @@ echo "
 #
 # zip fichier de config offline (GFrunOffline.zip) + config garminplugin (_.GFrunGarminplugin.zip)
 #
+
+rm GFrunOffline.zip
+
 mv _.config/ .config/
 mv _.local/ .local/
 
