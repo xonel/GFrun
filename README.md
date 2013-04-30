@@ -1,39 +1,35 @@
 ===============================================================================
-#GFrun - Garmin Forerunner 310XT ANT- Inside Linux
+#GFrun - Garmin Forerunner 60 - 405CX - 310XT - 610 - 910XT - Inside Linux
 ===============================================================================
 
-Nous avons donc tout pour connecter nos montres Garmin Forerunner (ANT-FS  => ex: 310XT) sous LINUX :
-
-- garminplugin_0.3.16-1 :
-      + Permet de connecter notre firefox au site http://connect.garmin.com
-- Garmin-Forerunner-610-Extractor :
-      + Récupère les fichiers via ANT+ de nos montres (ANT-FS)
-      + convertit les .FIT en .TCX à l'aide du script (40-convert_to_tcx.py)
-- gcpuploader
-      + upload automatiquement les "FIT/TCX" sur http://connect.garmin.com
-
-GFrun = Garmin Forerunner + ANT FS ( 60, 405CX, 310XT, 610, 910XT) + ( Extracts / Convert / Auto-upload / garminplugin )
+GFrun :
+-------
+GFrun est capable de :
+   + Simplifier l'installation des différents modules.
+   + Configurer les fichiers de config en fonction de la config utilisateur.
+   + Extraitre le .FIT des montres Garmin Forerunner
+   + Convertir les .FIT en .TCX
+   + Uploader les "activites" sur http://connect.garmin.com
 
 CONFIGURATION :
 ---------------
-Config de test pour le developpement du script "GFrun" :
-
-+ Garmin Forerunner 310XT (Allumée)
-+ Clef Usb ANT (connecté à l'ordinateur) 
-+ Ubuntu 13.10 64bit (25/04/2013 UpDate) / Ubuntu 12.04 64bit
-
+Configuration de test pour le developpement du script "GFrun" :
+   + Garmin Forerunner 310XT (Allumée)
+   + Clef Usb ANT (connecté à l'ordinateur) 
+   + Ubuntu 13.10 64bit (25/04/2013 UpDate) / Ubuntu 12.04 64bit
 
 INSTALL :
 ---------
 (ATTENTION : Script en cours de developpement !! Bugs possibles !! ...) :
-<pre><code>wget https://github.com/xonel/GFrun/raw/master/Garmin-Forerunner-610-Extractor-master/install/GFrunMenu.sh
+
+<pre><code>
+wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh
 chmod a+x GFrunMenu.sh
 sudo sh ./GFrunMenu.sh
 </code></pre>
 
-OneCopyColle : 
 <pre><code>
-wget https://github.com/xonel/GFrun/raw/master/Garmin-Forerunner-610-Extractor-master/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 </code></pre>
 
 Voici la nouvelle version de GFrun, au programme :
@@ -42,33 +38,52 @@ Voici la nouvelle version de GFrun, au programme :
 - Une version GFrunOffline (version STABLE au 23/04/2013).
 - Une Mini Toolbox de script pour automatiser les configs (plugin, ID montre,etc).
 
-voici un aperçu :
-<pre><code>
- =========================================================================================
-   888888ba                         8888ba.88ba 
-   88    .8b                        88  .8b  .8b 
-   88     88 .d8888b. dP.  .dP      88   88   88 .d8888b. 88d888b. dP    dP 
-   88     88 88'  .88  .8bd8'       88   88   88 88ooood8 88'  .88 88    88 
-   88     88 88.  .88  .d88b.       88   88   88 88.  ... 88    88 88.  .88 
-   dP     dP .88888P' dP'  .dP  dP  dP   dP   dP .88888P' dP    dP .88888P. 
- =========================================================================================
- Garmin Forerunner (GFrun / Garmin-Forerunner-610-Extractor / garminplugin / gcpuploader)
- =========================================================================================
- 
+VISUEL :
+---------
+
+<pre><code> ==============================================================
+ GFrun - Garmin Forerunner 60 - 405CX - 310XT - 610 - 910XT 
+ ==============================================================
+   : '######...'########.'########..'##....'##.'##... ##:
+   :'##... ##.. ##....... ##.... ##. ##.... ##. ###.. ##:
+   : ##:::..::: ##::::::: ##:::: ##: ##:::: ##: ####: ##:
+   : ##..'####. ######... ########.. ##.... ##. ## ## ##.
+   : ##::: ##:: ##...:::: ##.. ##::: ##:::: ##: ##. ####:
+   : ##... ##.. ##....... ##... ##.. ##.... ##. ##.. ###:
+   :  ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:
+   :....................................................:
+ ==============================================================
+ Garmin-Forerunner-610-Extractor - garminplugin - gcpuploader 
+ ==============================================================
+
 INSTALLATION :
-1. Full Install DEV - (GFrunOnline)
-2. Full Install STABLE - (GFrunOffline)
+-------------
+1. DEV ...........................(GFrun.sh -d)
+2. STABLE.........................(GFrun.sh -s)
+3. OFFLINE........................(GFrun.sh -o)
 
 CONFIGURATION :
-3. Config Auto-Upload - (gcpuploader)
-4. Config Garminplugin -(connect.garmin.com)
+--------------
+4. guploader......................(GFrun.sh -g)
+5. Garmin.com.....................(GFrun.sh -c)
 
-APPLICATION :
-5. Telecharger Activites - (Montre > Local)
-6. Uploader Activites - (Local > connect.garmin.com)
+ACTIVITIES :
+-----------
+6. Extract.Fit >> PC..............(GFrun.sh -e)
+7. Upload.Fit >> garmin.com ......(GFrun.sh -u)
+
+EXIT : Select [x] and [enter]
 
 Faite votre choix : 
 </code></pre>
+
+Voici les briques principales de GFrun :
++ garminplugin_0.3.16-1 : ( https://github.com/adiesner/GarminPlugin )
+  Permet de connecter notre firefox au site http:// connect.garmin.com
++ Garmin-Forerunner-610-Extractor : ( https://github.com/Tigge/Garmin-Forerunner-610-Extractor) 
+  Récupère les fichiers .FIT de nos montres (ANT-FS) et convertit les .FIT en .TCX à l'aide du script (40-convert_to_tcx.py)
++ gcpuploader : ( http://sourceforge.net/projects/gcpuploader/ )
+  upload automatiquement les "FIT/TCX" sur http:// connect.garmin.com
 
 FAIT :
 -----
@@ -89,4 +104,4 @@ A FAIRE :
 - Faire une petite Doc/Tuto
 - Apprendre à Faire du 'Bash' ;O)
 
-Forum : http://forum.ubuntu-fr.org/viewtopic.php?pid=13312901#p13312901
+Forum : http://forum.ubuntu-fr.org/viewtopic.php?id=1267521
