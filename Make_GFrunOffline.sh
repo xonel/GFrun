@@ -27,5 +27,6 @@ cd .local/ && unzip -o  share.zip
 cd .. && zip -r GFrunOffline.zip  master.zip .config/ .local/ GFrun/ install/
 rm -r .local/share/
 
+cd .config/ && zip -r _.config_GFrun.zip garmin-extractor/ garminplugin/
 cd .. && mv .config/ _.config/ && mv .local/ _.local/
 echo "FIN"
