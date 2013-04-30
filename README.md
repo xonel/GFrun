@@ -35,7 +35,7 @@ wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && c
 VISUEL :
 ---------
 
-<a href='http://pix.toile-libre.org/?img=1367361876.png'><img src='http://pix.toile-libre.org/upload/img/1367361876.png' /></a>
+<a href='http://pix.toile-libre.org/upload/original/1367361876.png'><img src='http://pix.toile-libre.org/upload/original/1367361876.png' /></a>
 
 <pre><code> ==============================================================
  GFrun - Garmin Forerunner 60 - 405CX - 310XT - 610 - 910XT 
