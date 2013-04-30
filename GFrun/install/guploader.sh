@@ -119,8 +119,8 @@ read Vchoix
             ;;
         esac
 echo ""
-echo "                                !!!            o           _   _     "
-echo "    -*~*-          ###        `  _ _  '      ` /_\ '       '\\-//`    "
+echo "                                 !!!            o           _   _     "
+echo "    -*~*-          ###           _ _           /_\          \\-//     "
 echo "    (o o)         (o o)      -  (OXO)  -    - (o o) -       (o o)     "
 echo "ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-"
 echo ""

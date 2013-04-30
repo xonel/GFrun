@@ -58,10 +58,9 @@ rm -r .local/share/
 cd .config/ && zip -r _.config_GFrun.zip garmin-extractor/ garminplugin/
 cd .. && mv .config/ _.config/ && mv .local/ _.local/
 echo ""
-echo "                                !!!            o           _   _     "
-echo "    -*~*-          ###        `  _ _  '      ` /_\ '       '\\-//`    "
+echo "                                 !!!            o           _   _     "
+echo "    -*~*-          ###           _ _           /_\          \\-//     "
 echo "    (o o)         (o o)      -  (OXO)  -    - (o o) -       (o o)     "
 echo "ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-"
 echo ""
 echo ".........................PROCEDURE TERMINEE..........................."
-sleep 3
