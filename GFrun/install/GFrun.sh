@@ -166,7 +166,7 @@ echo ""
 				F_extractfit
 				F_configfiles
 				F_chownchmod
-#				F_clear
+				F_clear
 		####################################################################
             ;;
 
