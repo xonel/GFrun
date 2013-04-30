@@ -57,21 +57,21 @@ rm -f GFrun.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_GF610E.sh* Go_gcpu
 	echo ""
 #        echo "============================"
         echo "**** INSTALLATION :"
-        echo `color 32 "1. Full Install DEV - (GFrunDev)"`
-        echo `color 33 "2. Full Install STABLE - (GFrunStable)"`
-        echo `color 33 "3. Full Install LOCAL - (GFrunLocal)"`
+        echo `color 32 "1. Full Install DEV 				(GFrun.sh -d)"`
+        echo `color 33 "2. Full Install STABLE	 			(GFrun.sh -s)"`
+        echo `color 33 "3. Full Install LOCAL				(GFrun.sh -l)"`
         echo ""
         echo "**** CONFIGURATION :"
-        echo `color 34 "4. Config Auto-Upload - (gcpuploader)"`
-        echo `color 35 "5. Config Garminplugin -(connect.garmin.com)"`
+        echo `color 34 "4. Config gcpuploader				(GFrun.sh -g)"`
+        echo `color 35 "5. Config Garminplugin				(GFrun.sh -c)"`
         echo ""
-        echo "**** APPLICATION :"
-        echo `color 36 "6. Telecharger Activites - (Montre > Local)"`
-        echo `color 37 "7. Uploader Activites - (Local > connect.garmin.com)"`
+        echo "**** ACTIVITIES :"
+        echo `color 36 "6. Extract.Fit >> PC				(GFrun.sh -e)"`
+        echo `color 37 "7. Upload.Fit  >> garmin.com 		(GFrun.sh -u)"`
 #        echo `color 32 "7. "`
 #        echo `color 32 "8. "`
 #        echo `color 32 "9. "`
-#        echo `color 32 "============================"`
+#        echo `color 32 "="`
 #        echo `color 32 "a. "`
 #        echo `color 32 "b. "`
 #        echo `color 32 "c. "`
@@ -91,7 +91,6 @@ rm -f GFrun.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_GF610E.sh* Go_gcpu
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
 		Varg="-d"
-
 		GoScript
 		####################################################################
             ;;
@@ -101,7 +100,6 @@ rm -f GFrun.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_GF610E.sh* Go_gcpu
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
 		Varg="-s"
-
 		GoScript
 		####################################################################
             ;;
@@ -111,7 +109,6 @@ rm -f GFrun.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_GF610E.sh* Go_gcpu
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
 		Varg="-l"
-
 		GoScript
 		####################################################################
 		
@@ -119,26 +116,26 @@ rm -f GFrun.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_GF610E.sh* Go_gcpu
           *4*) # Lancer le Script pour :     
 		####################################################################
 		VChemin="$VChemin"
-		Vscript="Conf_gcpuploader.sh"
-
+		Vscript="GFrun.sh"
+		Varg="-g"
 		GoScript
-		####################################################################
+		#################################################################### 
             ;;
 
           *5*) # Lancer le Script pour : 
 		####################################################################
-		VChemin=$VChemin
-		Vscript="Conf_Garminplugin.sh"
-		
+		VChemin="$VChemin"
+		Vscript="GFrun.sh"
+		Varg="-c"
 		GoScript
-		####################################################################  			
+		####################################################################
             ;;
 
           *6*) # Lancer le Script pour : 
 		####################################################################
-		VChemin=$VChemin
-		Vscript="Go_GF610E.sh"
-		
+		VChemin="$VChemin"
+		Vscript="GFrun.sh"
+		Varg="-e"
 		GoScript
 		####################################################################           
             ;;
@@ -147,9 +144,9 @@ rm -f GFrun.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_GF610E.sh* Go_gcpu
 		####################################################################
 		VChemin=$VChemin
 		Vscript="Go_gcpuploader.sh"
-		
+		Varg=""
 		GoScript
-		#################################################################### 
+		####################################################################
             ;;
 
           *8*) # Lancer le Script pour : 
@@ -237,11 +234,11 @@ rm -f GFrun.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_GF610E.sh* Go_gcpu
             ;;
 
           *) # anything else
-
+		#################################################################### 
             echo
             echo "\"$Vchoix\" n'est pas une entrée Valide."
             sleep 3
-
+		#################################################################### 
             ;;
 
         esac

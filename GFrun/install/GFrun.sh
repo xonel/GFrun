@@ -19,6 +19,7 @@
 ########################################################################
 #
 Vbranche="GFrun"
+#Vbranche="master"
 
 F_clear(){
 	#Nettoyage
@@ -110,9 +111,36 @@ if [ ! -f $HOME/GFrunOffline.zip ]; then
 fi
 }
 
+F_conf_gcpuploader(){
+	echo "
+	# Username and password credentials may be placed in a configuration file
+	# located either in the current working directory, or in the user's home
+	# directory.  WARNING, THIS IS NOT SECURE. USE THIS OPTION AT YOUR OWN
+	# RISK.  Username and password are stored as clear text in a file
+	# format that is consistent with Microsoft (r) INI files."
+	echo ""
+	echo "====================================================="
+	echo "Configuration Auto-Upload http:\\connect.garmin.com"
+	echo "====================================================="
+
+	if [ ! -f $HOME/.guploadrc ]; then
+			read -p 'USERNAME on connect.garmin.com : ' Read_user
+			read -p 'PASSWORD on connect.garmin.com : ' Read_password
+
+			echo "[Credentials]" >> $HOME/.guploadrc
+			echo "username="$Read_user"" >> $HOME/.guploadrc
+			echo "password="$Read_password"" >> $HOME/.guploadrc	
+		else
+			echo "Configuration file already exist"
+			echo ""
+			cat  $HOME/.guploadrc
+	fi
+}
+
 ## MAIN ##
 
-echo "#:'######:::'########:'########::'##::::'##:'##::: ##:
+echo "
+#   :'######:::'########:'########::'##::::'##:'##::: ##:
 #   '##... ##:: ##.....:: ##.... ##: ##:::: ##: ###:: ##:
 #    ##:::..::: ##::::::: ##:::: ##: ##:::: ##: ####: ##:
 #    ##::'####: ######::: ########:: ##:::: ##: ## ## ##:
@@ -120,11 +148,12 @@ echo "#:'######:::'########:'########::'##::::'##:'##::: ##:
 #    ##::: ##:: ##::::::: ##::. ##:: ##:::: ##: ##:. ###:
 #   . ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:
 #   :......::::..::::::::..:::::..:::.......:::..::::..::"
-echo "Arg : >>>>>>>" $1 "<<<<<<"
-
+echo "Arg :         >>>>>>>" $1 "<<<<<<"
+echo ""
+echo ""
 	case $1
 		in
-          -d) # Lancer le Script pour : 
+          -d) # 1. Full Install DEV - (GFrunDev)
 		####################################################################
 				F_clear
 #				F_chk_GFrunOffline
@@ -139,7 +168,7 @@ echo "Arg : >>>>>>>" $1 "<<<<<<"
 		####################################################################
             ;;
 
-          -s) # Lancer le Script pour : 
+          -s) # 2. Full Install STABLE - (GFrunStable)
 		####################################################################
 				F_clear
 				F_chk_GFrunOffline
@@ -154,7 +183,7 @@ echo "Arg : >>>>>>>" $1 "<<<<<<"
 		####################################################################
             ;;
 
-          -l) # Lancer le Script pour : 
+          -l) # 3. Full Install LOCAL - (GFrunLocal)
 		####################################################################
 				F_clear
 				F_chk_GFrunOffline
@@ -169,6 +198,42 @@ echo "Arg : >>>>>>>" $1 "<<<<<<"
 		####################################################################
              ;;
              
+          -c) # 5. Config Garminplugin -(connect.garmin.com)
+		####################################################################
+#				F_clear
+#				F_chk_GFrunOffline
+#				F_apt
+#				F_wget
+#				F_unzip
+#				F_cpmv
+				F_extractfit
+				F_configfiles
+#				F_chownchmod
+#				F_clear
+		####################################################################
+             ;;
+
+          -e) # 6. Telecharger Activites - (Montre > Local) 
+		####################################################################
+#				F_clear
+#				F_chk_GFrunOffline
+#				F_apt
+#				F_wget
+#				F_unzip
+#				F_cpmv
+				F_extractfit
+#				F_configfiles
+#				F_chownchmod
+#				F_clear
+		####################################################################
+             ;;
+
+          -g) # 4. Config Auto-Upload		(gcpuploader) 
+		####################################################################
+				F_conf_gcpuploader
+		####################################################################
+             ;;
+
           *) # anything else
 		####################################################################
             echo
