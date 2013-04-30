@@ -77,7 +77,7 @@ rm -f GFrun.sh* guploader.sh*
         echo `color 35 "6. Extract.Fit >> PC..............(GFrun.sh -e)"`
         echo `color 35 "7. Upload.Fit >> garmin.com ......(GFrun.sh -u)"`
         echo ""
-		echo `color 31 "EXIT : Select [X] and [enter]"`
+		echo `color 31 "EXIT : Select [x] and [enter]"`
 #        echo `color 32 "7. "`
 #        echo `color 32 "8. "`
 #        echo `color 32 "9. "`
@@ -246,9 +246,8 @@ rm -f GFrun.sh* guploader.sh*
           *) # anything else
 		#################################################################### 
             echo
-            echo "\"$Vchoix\" n'est pas une entrée Valide."
+            echo "\"$Vchoix\" NO VALID ENTRY"
             sleep 3
 		#################################################################### 
             ;;
-
         esac

@@ -248,14 +248,17 @@ echo ""
           *) # anything else
 		####################################################################
             echo
-            echo "\"$1\" n'est pas une entrée Valide."
+            echo "\"$1\" NO VALID ENTRY "
             sleep 3
 		####################################################################
             ;;
         esac
 
 echo "PROCEDURE TERMINEE"
-sleep 5
-sh $HOME/GFrunMenu.sh
+
+	if [-f $HOME/GFrunMenu.sh ]; then
+		sleep 5
+		sh $HOME/GFrunMenu.sh
+	fi
 exit
 

@@ -18,6 +18,12 @@
 # wget https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ########################################################################
 #
+color()
+{
+printf '\033[%sm%s\033[m\n' "$@"
+}
+
+echo `color 32 "========================================================================"`
 echo "
 #      :'######:::'########:'########::'##::::'##:'##::: ##:
 #      '##... ##:: ##.....:: ##.... ##: ##:::: ##: ###:: ##:
@@ -27,7 +33,7 @@ echo "
 #       ##::: ##:: ##::::::: ##::. ##:: ##:::: ##: ##:. ###:
 #     .  ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:
 #     :......::::..::::::::..:::::..:::.......:::..::::..::"
-#
+echo `color 32 "======================================================================="`
 #Example '.guploadrc'
 #[Credentials]
 #username=<myusername>
@@ -56,16 +62,16 @@ GoScript()
 }
 echo ""
 echo ""
-echo "=================================="
+echo `color 32 "=================================="`
 echo "SELECT ACTIVITIES PERIOD UPLOAD"
-echo "=================================="
+echo `color 32 "=================================="`
 echo ""
 echo " (T) - Today"
 echo " (W) - Week -> don't work :o( " 
 echo " (M) - Month"
 echo " (Y) - Years" 
 echo ""
-echo -n "choise { Tt | Ww | Mm | Yy} : "
+echo -n `color 32"choise { Tt | Ww | Mm | Yy} : "`
 read Vchoix
 
         case $Vchoix
@@ -102,3 +108,10 @@ read Vchoix
 		####################################################################  			
             ;;
         esac
+echo "PROCEDURE TERMINEE"
+sleep 5
+
+	if [-f $HOME/GFrunMenu.sh ]; then
+		sleep 5
+		sh $HOME/GFrunMenu.sh
+	fi
