@@ -65,7 +65,7 @@ rm -f GFrun.sh* guploader.sh*
         echo "-------------"
         echo `color 32 "1. DEV ...........................(GFrun.sh -d)"`
         echo `color 32 "2. STABLE.........................(GFrun.sh -s)"`
-        echo `color 32 "3. OFFLINE........................(GFrun.sh -o)"`
+        echo `color 32 "3. OFFLINE........................(GFrun.sh -f)"`
         echo ""
         echo "CONFIGURATION :"
         echo "--------------"
@@ -116,7 +116,7 @@ rm -f GFrun.sh* guploader.sh*
 		####################################################################
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
-		Varg="-o"
+		Varg="-f"
 		GoScript
 		####################################################################
 		
