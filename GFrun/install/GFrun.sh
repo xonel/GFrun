@@ -111,7 +111,7 @@ if [ ! -f $HOME/GFrunOffline.zip ]; then
 fi
 }
 
-F_conf_gcpuploader(){
+F_conf_guploader(){
 	echo "
 	# Username and password credentials may be placed in a configuration file
 	# located either in the current working directory, or in the user's home
@@ -228,9 +228,9 @@ echo ""
 		####################################################################
              ;;
 
-          -g) # 4. Config Auto-Upload		(gcpuploader) 
+          -g) # 4. Config Auto-Upload		(guploader) 
 		####################################################################
-				F_conf_gcpuploader
+				F_conf_guploader
 		####################################################################
              ;;
 

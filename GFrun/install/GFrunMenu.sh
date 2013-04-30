@@ -37,7 +37,7 @@ echo `color 32 "================================================================
 wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
 }
 
-rm -f GFrun.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_GF610E.sh* Go_gcpuploader.sh*
+rm -f GFrun.sh* guploader.sh*
 
 ########################################################################################################################
 #                                                  Le Menu du NoX
@@ -62,7 +62,7 @@ rm -f GFrun.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_GF610E.sh* Go_gcpu
         echo `color 33 "3. Full Install LOCAL				(GFrun.sh -l)"`
         echo ""
         echo "**** CONFIGURATION :"
-        echo `color 34 "4. Config gcpuploader				(GFrun.sh -g)"`
+        echo `color 34 "4. Config guploader				(GFrun.sh -g)"`
         echo `color 35 "5. Config Garminplugin				(GFrun.sh -c)"`
         echo ""
         echo "**** ACTIVITIES :"
@@ -143,7 +143,7 @@ rm -f GFrun.sh* Conf_gcpuploader.sh* Conf_Garminplugin.sh* Go_GF610E.sh* Go_gcpu
           *7*) # Lancer le Script pour : 
 		####################################################################
 		VChemin=$VChemin
-		Vscript="Go_gcpuploader.sh"
+		Vscript="guploader.sh"
 		Varg=""
 		GoScript
 		####################################################################
