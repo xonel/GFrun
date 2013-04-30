@@ -36,9 +36,9 @@ GoScript()
 	echo `color 32 "================================================================================================"`
 
 	if [ ! -f $HOME/GFrun/install/$Vscript ]; then
-			cd $HOME/GFrun/install/ && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
-		else
 			wget $VWget && sleep 5 && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
+		else
+			cd $HOME/GFrun/install/ && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
 	fi
 }
 
