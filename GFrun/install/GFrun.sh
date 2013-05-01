@@ -39,7 +39,7 @@ printf '\033[%sm%s\033[m\n' "$@"
 
 F_clear(){
 	#Nettoyage
-	rm -f $HOME/GFrun.sh* $HOME/guploader.sh* $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* $HOME/.local/share.zip* $HOME/.config/_.config_GFrun.zip* /tmp/ligneCmd.sh*
+	rm -f $HOME/GFrun.sh* $HOME/guploader.sh* $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* $HOME/ $HOME/.config/_.config_GFrun.zip* /tmp/ligneCmd.sh*
 	rm -Rf  $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master $HOME/GFrun/Garmin-Forerunner-610-Extractor-master
 }
 
