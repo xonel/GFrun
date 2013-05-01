@@ -42,18 +42,29 @@ echo "
 #     .  ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:
 #     :......::::..::::::::..:::::..:::.......:::..::::..::"
 #
-# zip fichier de config offline (GFrunOffline.zip) + config garminplugin
+# zip config offline : GFrunOffline.zip 
 #
+mv ./_.config/ ./.config/
+mv ./_.local/ ./.local/
+mv ./GFrun/ressources/master_fitpars.zip ./GFrun/ressources/master.zip
+mv ./GFrun/ressources/master_extractor.zip ./master.zip
 
-mv _.config/ .config/
-mv _.local/ .local/
+#Vexclude="./local/share.zip
+#./GFrun/ressources/xxxx.zip
+#./GFrun/ressources/yyyy.zip"
 
-cd .local/ && unzip -o  share.zip
-cd .. && zip -ur GFrunOffline.zip .config/ GFrun/ install .local/ -x \./local/share.zip
-rm -r .local/share/
+unzip -o ./.local/share.zip -d ./.local/
 
-cd .config/ && zip -ur _.config_GFrun.zip garmin-extractor/ garminplugin/
-cd .. && mv .config/ _.config/ && mv .local/ _.local/
+zip -ur ./GFrunOffline.zip ./.config/ ./GFrun/ ./.local/ -x $Vexclude
+zip -ur ./.config/_.config_GFrun.zip ./.config/garmin-extractor/ ./.config/garminplugin/ -d ./.config/ 
+
+rm -r ./.local/share/
+
+mv ./.config/ ./_.config/
+mv ./.local/ ./_.local/
+mv ./GFrun/ressources/master.zip ./GFrun/ressources/master_fitpars.zip 
+mv ./master.zip ./GFrun/ressources/master_extractor.zip 
+
 echo ""
 echo "                                 !!!            o           _   _     "
 echo "    -*~*-          ###           _ _           /_\          \\-//     "
