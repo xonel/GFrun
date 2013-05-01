@@ -1,89 +1,118 @@
-#!/usr/bin/python
-#
-#This script was inspired from tmcw's Ruby script doing the same thing:
-#
-#    https://gist.github.com/tmcw/1098861
-#
-#The goal is to iteratively download all detailed information from Garmin Connect
-#and store it locally for further perusal and analysis. This is still very much
-#preliminary; future versions should include the ability to seamlessly merge
-#all the data into a single file, filter by workout type, and other features
-#to be determined.
-#
-#Modif 2 :
-#https://raw.github.com/magsol/garmin/master/download.py
+#!/usr/bin/env python
 
-import argparse
-from getpass import getpass
+# Copyright (c) 2012, Mattias Lidman
+# All rights reserved.
+# 
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#     * Redistributions in binary form must reproduce the above copyright
+#       notice, this list of conditions and the following disclaimer in the
+#       documentation and/or other materials provided with the distribution.
+#     * Neither the name of the <organization> nor the
+#       names of its contributors may be used to endorse or promote products
+#       derived from this software without specific prior written permission.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL MATTIAS LIDMAN BE LIABLE FOR ANY
+# DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+# Creates a local back-up of a Garmin Connect users activity files in GPX, TCX
+# and KLM format.
+
+import urllib2
+import urllib
+import re
 import json
-import mechanize as me
 import os
+import getpass
 
-LOGIN = "https://connect.garmin.com/signin"
-ACTIVITIES = "http://connect.garmin.com/proxy/activity-search-service-1.0/json/activities?start=%s&limit=%s"
-TCX = "https://connect.garmin.com/proxy/activity-service-1.1/tcx/activity/%s?full=true"
-GPX = "https://connect.garmin.com/proxy/activity-service-1.1/gpx/activity/%s?full=true"
-KML = "https://connect.garmin.com/proxy/activity-service-1.0/kml/activity/%s?full=true"
+class GarminConnectClient():
 
-def login(agent, username, password):
-    global LOGIN
-    agent.open(LOGIN)
-    agent.select_form(name = 'login')
-    agent['login:loginUsernameField'] = username
-    agent['login:password'] = password
+    def __init__(self, username, password, gc_host='connect.garmin.com'):
+        # Signs user in to Garmin Connect.
+        self.gc_host = 'https://' + gc_host
+        signin_path = '/signin'
+        username_path = '/user/username'
 
-    agent.submit()
-    if agent.title().find('Sign In') > -1:
-        quit('Login incorrect! Check your credentials.')
+        self.opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(),
+                                           urllib2.BaseHandler)
+        urllib2.install_opener(self.opener)
 
-def activities(agent, outdir, increment = 100):
-    global ACTIVITIES
-    currentIndex = 0
-    initUrl = ACTIVITIES % (currentIndex, increment) # 100 activities seems a nice round number
-    response = agent.open(initUrl)
-    search = json.loads(response.get_data())
-    totalActivities = int(search['results']['search']['totalFound'])
-    while True:
-        for item in search['results']['activities']:
-            # Read this list of activities and save the files.
-            print '.'
-            activityId = item['activity']['activityId']
-            url = TCX % activityId
-            datafile = agent.open(url).get_data()
-            f = open("%s%s.tcx" % (outdir, activityId), "w")
-            f.write(datafile)
-            f.close()
+        params = {'javax.faces.ViewState': 'j_id1',
+                  'login': 'login',
+                  'login:loginUsernameField' : username,
+                  'login:password': password,
+                  'login:signInButton': 'Sign In'}
+        params = urllib.urlencode(params)
 
-        if (currentIndex + increment) > totalActivities:
-            # All done!
-            break
+        self.opener.open(self.gc_host + signin_path).read()
+        self.opener.open(self.gc_host + signin_path, params)
 
-        # We still have at least 1 activity.
-        currentIndex += increment
-        url = ACTIVITIES % (currentIndex, increment)
-        response = agent.open(url)
-        search = json.loads(response.get_data())
+        # The signin method will return a 200 OK even if the signin failed,
+        # so verify by getting the username instead:
+        username_json = self.opener.open(self.gc_host + username_path).read()
+        if not json.loads(username_json)['username'] == username:
+            exit("Login failed.")
 
-parser = argparse.ArgumentParser(description = 'Garmin Data Scraper',
-    epilog = 'Because the hell with APIs!', add_help = 'How to use',
-    prog = 'python download.py -u <username> -o <output dir>')
-parser.add_argument('-u', '--user', required = True,
-    help = 'Garmin username. This will NOT be saved!')
-parser.add_argument('-o', '--output', required = True,
-    help = 'Output directory.')
+    def get_activity_ids(self):
+        # Scrape the Activities page for activity IDs.
+        # NOTE: I have no idea if this will work when you start having a large
+        # number of activities on your page. Presumably Garmin Connect does
+        # some sort of paging.
+        activities_page = self.opener.open(self.gc_host + '/activities').read()
+        id_matches = re.search('/activity/[0-9]+', activities_page)
+        id_matches = re.findall('/activity/[0-9]+', activities_page)
+        ids = [ id.replace('/activity/', '') for id in id_matches ]
+        return ids
 
-args = vars(parser.parse_args())
-password = getpass('Garmin account password (NOT saved): ')
-username = args['user']
-output = args['output']
+    def dump_activities(self, activity_ids, path, overwrite_existing=False, gpx=True, tcx=True, kml=True):
+        # Save all activities in a list of IDs to disk, in one or more of the
+        # following formats:
+        #   GPX (GPS eXchange Format): Common format that is basically a
+        #   collection of timestamped GPS points.
+        #   TCX (Training Center XML): Garmin format that extends GPX but does
+        #   not seem to be a strict superset. For instance, GPX files downloaded
+        #   from GC contains the name of the activity but the TCX does not.
+        #   KML (Keyhole Markup Language): Google Earth format.
 
-# Create the agent and log in.
-agent = me.Browser()
-login(agent, username, password)
+        gpx_path = '/proxy/activity-service-1.1/gpx/activity/'
+        tcx_path = '/proxy/activity-service-1.1/tcx/activity/'
+        kml_path = '/proxy/activity-service-1.0/kml/activity/'
+        for activity_id in activity_ids:
+            if gpx and (not os.path.isfile(path+'/gpx/'+activity_id+'.gpx') or overwrite_existing):
+                activity = self.opener.open(self.gc_host + gpx_path + activity_id + '?full=true').read()
+                self._write_to_disk(path+'/gpx/', activity_id+'.gpx', activity, overwrite_existing)
+            if tcx and (not os.path.isfile(path+'/tcx/'+activity_id+'.tcx') or overwrite_existing):
+                if os.path.isfile(path+'/tcx/'+activity_id+'.tcx') and not overwrite_existing:
+                    continue
+                activity = self.opener.open(self.gc_host + tcx_path + activity_id + '?full=true').read()
+                self._write_to_disk(path+'/tcx/', activity_id+'.tcx', activity, overwrite_existing)
+            if kml and (not os.path.isfile(path+'/kml/'+activity_id+'.kml') or overwrite_existing):
+                if os.path.isfile(path+'/kml/'+activity_id+'.kml') and not overwrite_existing:
+                    continue
+                activity = self.opener.open(self.gc_host + kml_path + activity_id + '?full=true').read()
+                self._write_to_disk(path+'/kml/', activity_id+'.kml', activity, overwrite_existing)
 
-# Create output directory (if it does not already exist).
-if not os.path.exists(output):
-    os.mkdir(output)
+    def _write_to_disk(self, path, filename, activity, overwrite):
+        if not os.path.exists(path):
+            os.makedirs(path)
+        with open(path + filename, "w") as text_file:
+            text_file.write(activity)
 
-# Scrape all the activities.
-activities(agent, output)
+username = raw_input("Garmin Connect username: ")
+password = getpass.getpass()
+directory = raw_input("Destination directory (default: current):")
+directory = '.' if directory == '' else directory
+directory = os.path.expanduser(directory)
+client = GarminConnectClient(username, password)
+ids = client.get_activity_ids()
+client.dump_activities(ids, directory)
