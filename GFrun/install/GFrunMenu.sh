@@ -84,13 +84,14 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
         echo ""
         echo "CONFIGURATION :"
         echo "--------------"
-        echo `color 33 "4. guploader......................(GFrun.sh -g)"`
+        echo `color 33 "4. guploader......................(           )"`
         echo `color 33 "5. Garmin.com.....................(GFrun.sh -c)"`
         echo ""
         echo "ACTIVITIES :"
         echo "-----------"
-        echo `color 35 "6. Extract.Fit >> PC..............(GFrun.sh -e)"`
-        echo `color 35 "7. Upload.Fit >> garmin.com ......(GFrun.sh -u)"`
+        echo `color 35 "6. Extract.Fit >> Local..............(GFrun.sh -e)"`
+        echo `color 35 "7. Upload.Fit >> garmin.com .........(GFrun.sh -u)"`
+        echo `color 35 "8. Dump_garmin.com >> Local .........(           )"`
         echo ""
 		echo `color 31 "EXIT : Select [x] and [enter]"`
 #        echo `color 32 "7. "`
@@ -176,11 +177,11 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 
           *8*) # Lancer le Script pour : 
 		####################################################################
-		#VChemin=$VChemin
-		#Vscript="Setup_GDivFix.sh"
-		#
-		#GoScript
-		#################################################################### 
+		VChemin=$VChemin
+		Vscript="dump_gconnect.py"
+		Varg=""
+		GoScript
+		####################################################################
             ;;
 
           *9*) # Lancer le Script pour : 
