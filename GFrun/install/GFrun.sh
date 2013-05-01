@@ -22,15 +22,15 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##################################################################################################################################
-# wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh
+# wget -N https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh
 # chmod a+x GFrunMenu.sh
 # sudo sh ./GFrunMenu.sh
 # 
-# wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+# wget -N https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ##################################################################################################################################
 #
-Vbranche="GFrun"
-#Vbranche="master"
+#Vbranche="GFrun"
+Vbranche="master"
 
 color()
 {
