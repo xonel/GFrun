@@ -45,17 +45,14 @@ echo "
 # zip fichier de config offline (GFrunOffline.zip) + config garminplugin
 #
 
-rm GFrunOffline.zip
-
 mv _.config/ .config/
 mv _.local/ .local/
 
 cd .local/ && unzip -o  share.zip
-
-cd .. && zip -r GFrunOffline.zip  master.zip .config/ .local/ GFrun/ install/
+cd .. && zip -ur GFrunOffline.zip .config/ GFrun/ install .local/ -x \./local/share.zip
 rm -r .local/share/
 
-cd .config/ && zip -r _.config_GFrun.zip garmin-extractor/ garminplugin/
+cd .config/ && zip -ur _.config_GFrun.zip garmin-extractor/ garminplugin/
 cd .. && mv .config/ _.config/ && mv .local/ _.local/
 echo ""
 echo "                                 !!!            o           _   _     "
