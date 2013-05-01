@@ -71,7 +71,7 @@ F_wget(){
 	cd $HOME/GFrun/resources/ && wget -N https://github.com/Tigge/FIT-to-TCX/archive/master.zip
 	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && wget -N https://github.com/dtcooper/python-fitparse/archive/master.zip
 	cd $HOME/GFrun/resources/ && wget -N http://freefr.dl.sourceforge.net/project/gcpuploader/pygupload_20120516.zip
-	cd $HOME/.config/ && wget -N https://raw.github.com/xonel/GFrun/$Vbranche/_.config/_.config_GFrun.zip
+	cd $HOME/.config/ && wget -N https://github.com/xonel/GFrun/raw/$Vbranche/_.config/_.config_GFrun.zip
 }
 
 F_unzip(){
@@ -127,7 +127,7 @@ F_chownchmod(){
 
 F_chk_GFrunOffline(){
 if [ ! -f $HOME/GFrunOffline.zip ]; then
-	cd $HOME && wget https://raw.github.com/xonel/GFrun/$Vbranche/GFrunOffline.zip && unzip -o GFrunOffline.zip
+	cd $HOME && wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrunOffline.zip && unzip -o GFrunOffline.zip
 	else
 	cd $HOME && unzip -o GFrunOffline.zip
 fi
