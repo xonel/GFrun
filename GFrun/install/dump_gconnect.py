@@ -1,19 +1,17 @@
-"""
-This script was inspired from tmcw's Ruby script doing the same thing:
-
-    https://gist.github.com/tmcw/1098861
-
-The goal is to iteratively download all detailed information from Garmin Connect
-and store it locally for further perusal and analysis. This is still very much
-preliminary; future versions should include the ability to seamlessly merge
-all the data into a single file, filter by workout type, and other features
-to be determined.
-
-Modif 2 :
-https://raw.github.com/magsol/garmin/master/download.py
-
-
-"""
+#!/usr/bin/python
+#
+#This script was inspired from tmcw's Ruby script doing the same thing:
+#
+#    https://gist.github.com/tmcw/1098861
+#
+#The goal is to iteratively download all detailed information from Garmin Connect
+#and store it locally for further perusal and analysis. This is still very much
+#preliminary; future versions should include the ability to seamlessly merge
+#all the data into a single file, filter by workout type, and other features
+#to be determined.
+#
+#Modif 2 :
+#https://raw.github.com/magsol/garmin/master/download.py
 
 import argparse
 from getpass import getpass
