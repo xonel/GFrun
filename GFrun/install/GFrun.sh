@@ -72,6 +72,8 @@ F_wget(){
 	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && wget -N https://github.com/dtcooper/python-fitparse/archive/master.zip
 	cd $HOME/GFrun/resources/ && wget -N http://freefr.dl.sourceforge.net/project/gcpuploader/pygupload_20120516.zip
 	cd $HOME/.config/ && wget -N https://github.com/xonel/GFrun/raw/$Vbranche/_.config/_.config_GFrun.zip
+	#cd $HOME/GFrun/install/ && wget -N https://github.com/xonel/GFrun/raw/$Vbranche/GFrun/install/install.zip
+	#cd $HOME && wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrunOffline.zip
 }
 
 F_unzip(){
