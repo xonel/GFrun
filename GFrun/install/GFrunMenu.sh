@@ -54,7 +54,7 @@ GoScript()
 	fi
 }
 
-rm -f $HOME/GFrun.sh* $HOME/guploader.sh*
+rm -f $HOME/GFrun.sh.*
 
 ####################################################################################
 #                                                  Le Menu du NoX
