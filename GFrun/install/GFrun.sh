@@ -38,10 +38,10 @@ printf '\033[%sm%s\033[m\n' "$@"
 }
 
 F_uninstall(){
-echo -n " !! UNINSTALL !! >> FGrun + ConfigFiles + Activities [Yes / No] :"
+echo -n " !! UNINSTALL !! >> FGrun + ConfigFiles + Activities [YES / NO] Default = NO:"
 read Vchoix
 
-	if [ $Vchoix = [yY] ]; then
+	if [ "$Vchoix" = "YES" ]; then
 			rm -Rf  $HOME/GFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin
 		else
 			sh $HOME/GFrun/install/GFrunMenu.sh
@@ -280,8 +280,8 @@ echo ""
 
           -x) # 6. Telecharger Activites - (Montre > Local) 
 		####################################################################
-				F_clear
 				F_uninstall
+				F_clear
 		####################################################################
              ;;
 
