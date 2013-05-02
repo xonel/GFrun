@@ -76,22 +76,24 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 	echo `color 32 " =============================================================="`
 	echo ""
 #        echo "============================"
-        echo "INSTALLATION :"
-        echo "-------------"
+        echo "INSTALL :"
+        echo "---------"
         echo `color 32 "1. DEV ...........................(GFrun.sh -d)"`
         echo `color 32 "2. STABLE.........................(GFrun.sh -s)"`
         echo `color 32 "3. OFFLINE........................(GFrun.sh -o)"`
         echo ""
-        echo "CONFIGURATION :"
-        echo "--------------"
+        echo "CONFIG :"
+        echo "--------"
         echo `color 33 "4. guploader......................(           )"`
         echo `color 33 "5. Garmin.com.....................(GFrun.sh -c)"`
         echo ""
         echo "ACTIVITIES :"
         echo "-----------"
-        echo `color 35 "6. Extract.Fit >> Local..............(GFrun.sh -e)"`
-        echo `color 35 "7. Upload.Fit >> garmin.com .........(GFrun.sh -u)"`
-        echo `color 35 "8. Dump_garmin.com >> Local .........(           )"`
+        echo `color 35 "6. Extract.Fit >> Local...........(GFrun.sh -e)"`
+        echo `color 35 "7. Upload.Fit >> garmin.com ......(GFrun.sh -u)"`
+        echo `color 35 "8. Dump_garmin.com >> Local ......(           )"`
+        echo ""
+        echo `color 32 "9. UNINSTALL......................(GFrun.sh -x)"`
         echo ""
 		echo `color 31 "EXIT : Select [x] and [enter]"`
 #        echo `color 32 "7. "`
@@ -186,11 +188,11 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 
           *9*) # Lancer le Script pour : 
 		####################################################################
-		#VChemin=$VChemin
-		#Vscript="Setup_GDivFix.sh"
-		#
-		#GoScript
-		#################################################################### 
+		VChemin="$VChemin"
+		Vscript="GFrun.sh"
+		Varg="-x"
+		GoScript
+		####################################################################  
             ;;
 
           [aA]) # Lancer le Script pour : 

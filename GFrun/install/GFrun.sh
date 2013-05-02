@@ -37,6 +37,17 @@ color()
 printf '\033[%sm%s\033[m\n' "$@"
 }
 
+F_uninstall(){
+echo -n " !! UNINSTALL !! >> FGrun + ConfigFiles + Activities [Yes / No] :"
+read Vchoix
+
+	if [ $Vchoix = [yY] ]; then
+			rm -Rf  $HOME/GFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin
+		else
+			sh $HOME/GFrun/install/GFrunMenu.sh
+	fi
+}
+
 F_clear(){
 	#Nettoyage
 	rm -f $HOME/GFrun.sh* $HOME/guploader.sh* $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* $HOME/ $HOME/.config/_.config_GFrun.zip* /tmp/ligneCmd.sh*
@@ -72,8 +83,7 @@ F_wget(){
 	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && wget -N https://github.com/dtcooper/python-fitparse/archive/master.zip
 	cd $HOME/GFrun/resources/ && wget -N http://freefr.dl.sourceforge.net/project/gcpuploader/pygupload_20120516.zip
 	cd $HOME/.config/ && wget -N https://github.com/xonel/GFrun/raw/$Vbranche/_.config/_.config_GFrun.zip
-	#cd $HOME/GFrun/install/ && wget -N https://github.com/xonel/GFrun/raw/$Vbranche/GFrun/install/install.zip
-	#cd $HOME && wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrunOffline.zip
+	cd $HOME && wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrunOffline.zip
 }
 
 F_unzip(){
@@ -87,6 +97,8 @@ F_unzip(){
 	cd $HOME/GFrun/resources/ && unzip -o pygupload_20120516.zip
 	#connect.garmin.com
 	cd $HOME/.config/ && unzip -o _.config_GFrun.zip
+	#script install
+	cd $HOME/ && unzip -oC GFrunOffline.zip "GFrun/install/*" "GFrun/resources/dump_gconnect.py" -d $HOME/
 }
 
 F_cpmv(){
@@ -263,6 +275,13 @@ echo ""
           -g) # 4. Config Auto-Upload		(guploader) 
 		####################################################################
 				F_conf_guploader
+		####################################################################
+             ;;
+
+          -x) # 6. Telecharger Activites - (Montre > Local) 
+		####################################################################
+				F_clear
+				F_uninstall
 		####################################################################
              ;;
 
