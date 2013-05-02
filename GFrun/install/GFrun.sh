@@ -38,7 +38,10 @@ printf '\033[%sm%s\033[m\n' "$@"
 }
 
 F_uninstall(){
-echo -n " !! UNINSTALL !! >> FGrun + ConfigFiles + Activities [YES / NO] Default = NO:"
+echo `color 31 "======================================================================="`
+echo " !! UNINSTALL !! WARNING !! UNINSTALL !!"
+echo `color 31 "======================================================================="`
+echo -n "ERASE ALL (FGrun + ConfigFiles + Activities) >> YES / [NO] :"
 read Vchoix
 
 	if [ "$Vchoix" = "YES" ]; then
