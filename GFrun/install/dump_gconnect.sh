@@ -45,4 +45,21 @@ echo "#     .  ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:"
 echo "#     :......::::..::::::::..:::::..:::.......:::..::::..::"
 echo `color 32 "======================================================================="`
 
-python $HOME/GFrun/resources/dump_gconnect.py
+mkdir -p $HOME/.config/garmin-extractor/dump_gconnect/
+cd $HOME/.config/garmin-extractor/dump_gconnect/ && python $HOME/GFrun/resources/dump_gconnect.py
+
+echo ""
+echo "                                 !!!            o           _   _     "
+echo "    -*~*-          ###           _ _           /_\          \\-//     "
+echo "    (o o)         (o o)      -  (OXO)  -    - (o o) -       (o o)     "
+echo "ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-"
+echo ""
+echo ".........................PROCEDURE TERMINEE..........................."
+
+	if [ -f $HOME/GFrunMenu.sh ]; then
+		sleep 5
+		sh $HOME/GFrunMenu.sh
+		else
+		sleep 5
+		sh $HOME/GFrun/install/GFrunMenu.sh
+	fi
