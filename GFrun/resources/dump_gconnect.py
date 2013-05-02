@@ -110,6 +110,7 @@ class GarminConnectClient():
 
 username = raw_input("Garmin Connect username: ")
 password = getpass.getpass()
+print "[ default ] = ~/.config/garmin-extractor/dump_gconnect/"
 directory = raw_input("Destination directory (default: current):")
 directory = '.' if directory == '' else directory
 directory = os.path.expanduser(directory)
