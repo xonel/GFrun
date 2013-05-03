@@ -1,4 +1,5 @@
-#!/bin/bash
+#! /bin/bash
+exec >& >(tee -a /tmp/GFrun_DEBUG)
 #
 # GFrun
 #
@@ -31,8 +32,6 @@
 #
 #Vbranche="GFrun"
 Vbranche="master"
-
-exec >& >(tee -a /tmp/GFrun_DEBUG)
 
 if [ ! "$SUDO_USER" ]; then
 	echo "Installing GFrun requires administrator rights."
