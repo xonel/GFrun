@@ -48,7 +48,7 @@ GoScript()
 	echo ""
 	echo ""
 	if [ ! -f $HOME/GFrun/install/$Vscript ]; then
-			cd $HOME/ && wget $VWget && sleep 3 && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
+			cd $HOME/ && wget -N $VWget && sleep 3 && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
 		else
 			cd $HOME/GFrun/install/ && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
 	fi
