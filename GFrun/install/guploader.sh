@@ -77,7 +77,7 @@ echo "SELECT ACTIVITIES PERIOD"
 echo `color 32 "=================================="`
 echo ""
 echo " (T) - Today"
-echo " (W) - Week -> don't work :o( " 
+echo " (W) - Week" 
 echo " (M) - Month"
 echo " (Y) - Years" 
 echo ""

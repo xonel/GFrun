@@ -38,10 +38,10 @@ printf '\033[%sm%s\033[m\n' "$@"
 }
 
 F_uninstall(){
-echo `color 31 "======================================================================="`
+echo `color 31 "======================================================"`
 echo " !! UNINSTALL !! WARNING !! UNINSTALL !!"
-echo `color 31 "======================================================================="`
-echo -n "ERASE ALL (FGrun + ConfigFiles + Activities) >> YES / [NO] :"
+echo `color 31 "======================================================"`
+echo -n "UNINSTALL ALL (FGrun + ConfigFiles + Activities) >> YES / [NO] :"
 read Vchoix
 
 	if [ "$Vchoix" = "YES" ]; then
@@ -114,7 +114,7 @@ F_cpmv(){
 
 F_extractfit(){
 	#Garmin-Forerunner-610-Extractor
-	xterm -e 'cd $HOME/GFrun/ && python ./garmin.py'
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 35x35 -e 'cd $HOME/GFrun/ && python ./garmin.py'
 }
 
 F_configfiles(){
