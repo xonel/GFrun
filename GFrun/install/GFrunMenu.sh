@@ -89,7 +89,7 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
         echo "-----------"
         echo `color 35 "6. Extract.Fit >> Local...........(GFrun.sh -e)"`
         echo `color 35 "7. Upload.Fit >> garmin.com ......(guploader  )"`
-        echo `color 35 "8. garmin.com >> Local ......(           )"`
+        echo `color 35 "8. garmin.com >> Local ...........(           )"`
         echo `color 35 "9. Extract>>Local>>garmin.com.....(GFrun.sh -a)"`
         echo ""
         echo `color 32 "U. UNINSTALL......................(GFrun.sh -u)"`
@@ -174,7 +174,7 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
           *8*) 
 		#############################
 		VChemin=$VChemin
-		Vscript="dump_gconnect.sh"
+		Vscript="gconnect.sh"
 		Varg=""
 		GoScript
 		#############################

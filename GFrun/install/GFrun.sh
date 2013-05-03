@@ -32,9 +32,10 @@
 #Vbranche="GFrun"
 Vbranche="master"
 
+exec >& >(tee -a /tmp/GFrun_DEBUG)
+
 if [ ! "$SUDO_USER" ]; then
-	msg2="Installing GFrun requires administrator rights."
-	zenity --info --text "<b>${msg2}</b>"
+	echo "Installing GFrun requires administrator rights."
 fi
 	xterm -e "sudo "$0""
 	exit 0
@@ -89,11 +90,9 @@ F_apt(){
 	fi
 
 	#[packages]
-	sudo apt-get install -y git git-core 
 	sudo apt-get install -y python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial
 	sudo apt-get install -y garminplugin
 	sudo apt-get upgrade
-
 	pip install pyusb
 	dpkg -l > /tmp/pkg-after.txt
 	}
@@ -116,7 +115,7 @@ F_unzip(){
 	#guploader
 	cd $HOME/GFrun/resources/ && unzip -o pygupload_20120516.zip
 	#script install
-	cd $HOME/ && unzip -oC GFrunOffline.zip "GFrun/install/*" "GFrun/resources/gconnect.py" ".config/*" ".local/*" -d $HOME/
+	unzip -oC GFrunOffline.zip "GFrun/install/*" "GFrun/resources/gconnect.py" ".config/*" ".local/*" -d $HOME/
 }
 
 F_cpmv(){
@@ -125,16 +124,18 @@ F_cpmv(){
 	##Convert fit to tcx
 	cp -f $HOME/GFrun/scripts/40-convert_to_tcx.py $HOME/.config/garmin-extractor/scripts/
 	cp -Rf $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master/fitparse $HOME/GFrun/resources/FIT-to-TCX-master/
+	mv -f $HOME/GFrunOffline.zip $HOME/GFrun/resources/
 }
 
 F_extractfit(){
-	#Garmin-Forerunner-610-Extractor
+	#Extractor FIT
 	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 35x35 -e 'cd $HOME/GFrun/ && python ./garmin.py'
 }
 
 F_configfiles(){
 	#$NUMERO_DE_MA_MONTRE
-	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts)
+	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts | grep -v gconnect)
+	$NUMERO_DE_MA_MONTRE >> $HOME/GFrun/resources/IDs
 
 	#GarminDevice.xml
 	if [ -n "$NUMERO_DE_MA_MONTRE" ]; then
@@ -142,6 +143,12 @@ F_configfiles(){
 		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities -T $HOME/.config/garmin-extractor/Garmin/Activities
 		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE -T $HOME/GFrun/$NUMERO_DE_MA_MONTRE
 		src=ID_MA_MONTRE && cibl=$NUMERO_DE_MA_MONTRE && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garmin-extractor/Garmin/GarminDevice.xml" >> /tmp/ligneCmd.sh
+	else
+		echo `color 31 "============================================="`
+		echo "Check : Garmin ForeRunner [ ON ] + [PARING MODE ]"
+		echo "Check : USB ANT+ connection"
+		echo `color 31 "============================================="`
+		Sleep 5
 	fi
 
 	#40-convert_to_tcx.py
@@ -159,10 +166,15 @@ F_chownchmod(){
 }
 
 F_chk_GFrunOffline(){
-if [ ! -f $HOME/GFrunOffline.zip ]; then
-	cd $HOME && wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrunOffline.zip && unzip -o GFrunOffline.zip
+if [ -f $HOME/GFrunOffline.zip ] ; then
+		unzip -o $HOME/GFrunOffline.zip -d $HOME/
 	else
-	cd $HOME && unzip -o GFrunOffline.zip
+		if [ -f $HOME/GFrun/resources/GFrunOffline.zip ] ; then
+			unzip -o $HOME/GFrun/resources/GFrunOffline.zip -d $HOME/
+			else
+				cd $HOME && wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrunOffline.zip && unzip -o GFrunOffline.zip
+				unzip -o $HOME/GFrunOffline.zip -d $HOME/
+		fi
 fi
 }
 
@@ -184,7 +196,7 @@ echo `color 32 "============================================="`
 
 			echo "[Credentials]" >> $HOME/.guploadrc
 			echo "username="$Read_user"" >> $HOME/.guploadrc
-			echo "password="$Read_password"" >> $HOME/.guploadrc	
+			echo "password="$Read_password"" >> $HOME/.guploadrc
 		else
 			cat  $HOME/.guploadrc
 			echo ""
