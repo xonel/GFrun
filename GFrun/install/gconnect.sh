@@ -48,10 +48,11 @@ echo ""
 echo `color 32 "======================================================================="`
 echo ">>>>>  DUMP ALL ACTIVITIES FROM CONNECT GARMIN <<<<<< " 
 echo `color 32 "======================================================================="`
-echo " 1er DUMP ~ 10 mins - PLEASE WAIT ... "
-
+echo ""
+echo " (10 ~ 20) mins - PLEASE WAIT ... "
+echo ""
 cd $HOME/.config/garmin-extractor/gconnect/ && python $HOME/GFrun/resources/gconnect.py
-
+chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor/gconnect
 echo ""
 echo "                                 !!!            o           _   _     "
 echo "    -*~*-          ###           _ _           /_\          \\-//     "

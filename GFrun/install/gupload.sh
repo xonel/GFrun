@@ -112,8 +112,9 @@ read Vchoix
 
           [wW])  # Lancer le Script pour : 
 		################################	
-		for ((i=0 ; 7 - $i ; i++))
-			do Vactivities=$(date "+%Y-%m-%d_*" -d "$i days ago")
+		for (( i=0; 7 - $i; i++ ))
+			do 
+			Vactivities=$(date "+%Y-%m-%d_*" -d "$i days ago")
 			GoScript
 		done
 		################################
