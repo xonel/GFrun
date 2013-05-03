@@ -140,13 +140,14 @@ echo `color 32 ">>> F_extractfit"`
 F_configfiles(){
 echo `color 32 ">>> F_configfiles"`
 		echo `color 31 "============================================="`
-		echo "Garmin ForeRunner [ ON ] + [PARING MODE ]"
-		echo "USB ANT+ pluged"
+		echo "NEED TO WORK :"
+		echo "...............> Garmin ForeRunner [ ON ] + [PARING MODE ]"
+		echo "...............> USB ANT+ plugued"
 		echo `color 31 "============================================="`
 
 	#$NUMERO_DE_MA_MONTRE
 	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts | grep -v gconnect)
-	$NUMERO_DE_MA_MONTRE >> $HOME/GFrun/resources/IDs
+	echo $NUMERO_DE_MA_MONTRE >> $HOME/GFrun/resources/IDs
 
 	#GarminDevice.xml
 	if [ -n "$NUMERO_DE_MA_MONTRE" ]; then
