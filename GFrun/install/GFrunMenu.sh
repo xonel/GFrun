@@ -88,11 +88,11 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
         echo "ACTIVITIES :"
         echo "-----------"
         echo `color 35 "6. Extract.Fit >> Local...........(GFrun.sh -e)"`
-        echo `color 35 "7. Upload.Fit >> garmin.com ......(GFrun.sh -u)"`
+        echo `color 35 "7. Upload.Fit >> garmin.com ......(guploader  )"`
         echo `color 35 "8. Dump_garmin.com >> Local ......(           )"`
         echo `color 35 "9. Extract>>Local>>garmin.com.....(GFrun.sh -a)"`
         echo ""
-        echo `color 32 "U. UNINSTALL......................(GFrun.sh -x)"`
+        echo `color 32 "U. UNINSTALL......................(GFrun.sh -u)"`
         echo ""
 		echo `color 31 "EXIT : Select [x] and [enter]"`
 #        echo `color 32 "7. "`

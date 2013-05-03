@@ -63,9 +63,25 @@ echo `color 32 "================================================================
 #gupload.py -v 1 -a 'Run at park - 12/23' myfile.tcx
 #
 
+# MEMO :
+#  Ecrire HASH password 
+#  Croiser login/pass avec dump_gconnect
+#  
+
+case $1
+	in
+	  -auto) #9. Extract>>Local>>garmin.com.....(GFrun.sh -a) $HOME/GFrun/install/guploader.sh -auto
+	###########################################
+	Vactivities=$(date +%Y-%m-*)
+	GoScript
+	exit
+	###########################################
+		;;
+esac
+
 GoScript()
 {
-		echo ""
+	echo ""
 	echo " Script >>> python $HOME/GFrun/resources/pygupload/gupload.py -v 1 $Vactivities"
 	cd $HOME/.config/garmin-extractor/Garmin/Activities
 	python $HOME/GFrun/resources/pygupload/gupload.py -v 1 $Vactivities
@@ -81,42 +97,42 @@ echo " (W) - Week"
 echo " (M) - Month"
 echo " (Y) - Years" 
 echo ""
-echo -n "Choise :  Tt | Ww | Mm | Yy "
+echo -n "Choise : (t) . (w) . (m) . (y) "
 read Vchoix
 
         case $Vchoix
         in
-          [tT]) # Lancer le Script pour : 2013-04-14_10-29-04-80-9375.fit
-		####################################################################
+          [tT]) # 2013-04-14_10-29-04-80-9375.fit
+		################################
 		Vactivities=$(date +%Y-%m-%d_*)
 
 		GoScript
-		####################################################################
+		################################
             ;;
 
           [wW])  # Lancer le Script pour : 
-		####################################################################	
+		################################	
 		for ((i=0 ; 7 - $i ; i++))
 			do Vactivities=$(date "+%Y-%m-%d_*" -d "$i days ago")
 			GoScript
 		done
-		####################################################################
+		################################
             ;;
 
           [mM]) # Lancer le Script pour :     
-		####################################################################
+		################################
 		Vactivities=$(date +%Y-%m-*)
 		
 		GoScript
-		####################################################################
+		################################
             ;;
 
           [yY]) # Lancer le Script pour : 
-		####################################################################
+		################################
 		Vactivities=$(date +%Y-*)
 				
 		GoScript
-		####################################################################  			
+		################################  			
             ;;
         esac
 echo ""

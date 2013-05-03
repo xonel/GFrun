@@ -124,7 +124,8 @@ F_configfiles(){
 	#GarminDevice.xml
 	if [ -n "$NUMERO_DE_MA_MONTRE" ]; then
 		cd $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
-		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities Activities && mv -f Activities $HOME/.config/garmin-extractor/Garmin
+		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities -T $HOME/.config/garmin-extractor/Garmin/Activities
+		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE -T $HOME/GFrun/$NUMERO_DE_MA_MONTRE
 		src=ID_MA_MONTRE && cibl=$NUMERO_DE_MA_MONTRE && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garmin-extractor/Garmin/GarminDevice.xml" >> /tmp/ligneCmd.sh
 	fi
 
@@ -275,13 +276,20 @@ echo ""
 		####################################################################
              ;;
 
+          -a) # 9. Extract>>Local>>garmin.com.....(GFrun.sh -a) 
+		####################################################################
+				F_extractfit
+				$HOME/GFrun/install/guploader.sh -auto
+		####################################################################
+             ;;
+
           -g) # 4. Config Auto-Upload		(guploader) 
 		####################################################################
 				F_conf_guploader
 		####################################################################
              ;;
 
-          -x) # 6. Telecharger Activites - (Montre > Local) 
+          -u) U. UNINSTALL......................(GFrun.sh -x) 
 		####################################################################
 				F_uninstall
 				F_clear
