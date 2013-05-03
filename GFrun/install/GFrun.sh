@@ -32,6 +32,14 @@
 #Vbranche="GFrun"
 Vbranche="master"
 
+if [ ! "$SUDO_USER" ]; then
+	msg2="Installing GFrun requires administrator rights."
+	zenity --info --text "<b>${msg2}</b>"
+fi
+	xterm -e "sudo "$0""
+	exit 0
+fi
+
 color()
 {
 printf '\033[%sm%s\033[m\n' "$@"
@@ -53,7 +61,7 @@ read Vchoix
 
 F_clear(){
 	#Nettoyage
-	rm -f $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* $HOME/.config/_.config_GFrun.zip* /tmp/ligneCmd.sh*
+	rm -f $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* /tmp/ligneCmd.sh*
 	rm -Rf  $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master $HOME/GFrun/Garmin-Forerunner-610-Extractor-master
 }
 
@@ -67,8 +75,18 @@ F_apt(){
 	dpkg -l > /tmp/pkg-before.txt
 
 	#[repos]
-	sudo apt-add-repository -y ppa:andreas-diesner/garminplugin
-	sudo apt-get update
+	if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin $(lsb_release -cs) main" < /etc/apt/sources.list
+	 then
+		if [ "$(lsb_release -is)" == "ubuntu" ]; then
+			sudo apt-add-repository -y ppa:andreas-diesner/garminplugin
+		else
+			echo "deb http://ppa.launchpad.net/andreas-diesner/garminplugin $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list
+			sudo apt-get update >> /dev/null 2> /tmp/${NAME}_apt_add_key.txt
+			key=`cat /tmp/${NAME}_apt_add_key.txt | cut -d":" -f6 | cut -d" " -f3`
+			apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $key
+			rm -rf /tmp/${NAME}_apt_add_key.txt
+		fi
+	fi
 
 	#[packages]
 	sudo apt-get install -y git git-core 
@@ -85,7 +103,6 @@ F_wget(){
 	cd $HOME/GFrun/resources/ && wget -N https://github.com/Tigge/FIT-to-TCX/archive/master.zip
 	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && wget -N https://github.com/dtcooper/python-fitparse/archive/master.zip
 	cd $HOME/GFrun/resources/ && wget -N http://freefr.dl.sourceforge.net/project/gcpuploader/pygupload_20120516.zip
-	cd $HOME/.config/ && wget -N https://github.com/xonel/GFrun/raw/$Vbranche/_.config/_.config_GFrun.zip
 	cd $HOME && wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrunOffline.zip
 }
 
@@ -98,10 +115,8 @@ F_unzip(){
 	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && unzip -o master.zip
 	#guploader
 	cd $HOME/GFrun/resources/ && unzip -o pygupload_20120516.zip
-	#connect.garmin.com
-	cd $HOME/.config/ && unzip -o _.config_GFrun.zip
 	#script install
-	cd $HOME/ && unzip -oC GFrunOffline.zip "GFrun/install/*" "GFrun/resources/dump_gconnect.py" -d $HOME/
+	cd $HOME/ && unzip -oC GFrunOffline.zip "GFrun/install/*" "GFrun/resources/gconnect.py" ".config/*" ".local/*" -d $HOME/
 }
 
 F_cpmv(){
