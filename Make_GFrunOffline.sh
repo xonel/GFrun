@@ -51,7 +51,6 @@ mv GFrun/resources/master_fittotcx.zip GFrun/resources/master.zip
 mv GFrun/resources/master_extractor.zip master.zip
 
 zip -ur  GFrunOffline.zip  master.zip .config/ GFrun/ .local/
-#zip -ur .config/_.config.zip .config/garmin-extractor/ .config/garminplugin/
 
 mv .config/ _.config/
 mv .local/ _.local/

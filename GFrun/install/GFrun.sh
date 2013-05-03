@@ -33,11 +33,9 @@
 #Vbranche="GFrun"
 Vbranche="master"
 
+echo `color 31 ">>> SUDO_USER"`
 if [ ! "$SUDO_USER" ]; then
 	echo "Installing GFrun requires administrator rights."
-fi
-	xterm -e "sudo "$0""
-	exit 0
 fi
 
 color()
@@ -60,12 +58,14 @@ read Vchoix
 }
 
 F_clear(){
+echo `color 31 ">>> F_clear"`
 	#Nettoyage
 	rm -f $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* /tmp/ligneCmd.sh*
 	rm -Rf  $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master $HOME/GFrun/Garmin-Forerunner-610-Extractor-master
 }
 
 F_mkdir(){
+echo `color 31 ">>> F_mkdir"`
 	mkdir -p $HOME/GFrun/resources/FIT-to-TCX-master/
 	mkdir -p $HOME/.config/garmin-extractor/scripts/
 	mkdir -p $HOME/.config/garminplugin
@@ -73,6 +73,7 @@ F_mkdir(){
 }
 
 F_apt(){
+echo `color 31 ">>> F_apt"`
 	dpkg -l > /tmp/pkg-before.txt
 
 	#[repos]
@@ -98,6 +99,7 @@ F_apt(){
 	}
 
 F_wget(){
+echo `color 31 ">>> F_wget"`
 	cd $HOME && wget -N https://github.com/Tigge/Garmin-Forerunner-610-Extractor/archive/master.zip
 	cd $HOME/GFrun/resources/ && wget -N https://github.com/Tigge/FIT-to-TCX/archive/master.zip
 	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && wget -N https://github.com/dtcooper/python-fitparse/archive/master.zip
@@ -106,6 +108,7 @@ F_wget(){
 }
 
 F_unzip(){
+echo `color 31 ">>> F_unzip"`
 	#Garmin-Forerunner-610-Extractor-master
 	cd $HOME && unzip -o master.zip -d GFrun
 	#FIT-to-TCX-master
@@ -115,10 +118,11 @@ F_unzip(){
 	#gupload
 	cd $HOME/GFrun/resources/ && unzip -o pygupload_20120516.zip
 	#script install
-	unzip -oC GFrunOffline.zip "GFrun/install/*" "GFrun/resources/gconnect.py" ".config/*" ".local/*" -d $HOME/
+	cd $HOME && unzip -oC GFrunOffline.zip "GFrun/install/*" "GFrun/resources/gconnect.py" ".config/*" ".local/*" -d $HOME/
 }
 
 F_cpmv(){
+echo `color 31 ">>> F_cpmv"`
 	#Garmin-Forerunner-610-Extractor-master
 	cp -Rf $HOME/GFrun/Garmin-Forerunner-610-Extractor-master/* $HOME/GFrun
 	##Convert fit to tcx
@@ -128,11 +132,13 @@ F_cpmv(){
 }
 
 F_extractfit(){
+echo `color 31 ">>> F_extractfit"`
 	#Extractor FIT
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 35x35 -e 'cd $HOME/GFrun/ && python ./garmin.py'
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/ && python ./garmin.py'
 }
 
 F_configfiles(){
+echo `color 31 ">>> F_configfiles"`
 	#$NUMERO_DE_MA_MONTRE
 	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts | grep -v gconnect)
 	$NUMERO_DE_MA_MONTRE >> $HOME/GFrun/resources/IDs
@@ -148,7 +154,7 @@ F_configfiles(){
 		echo "Check : Garmin ForeRunner [ ON ] + [PARING MODE ]"
 		echo "Check : USB ANT+ connection"
 		echo `color 31 "============================================="`
-		Sleep 5
+		sleep 5
 	fi
 
 	#40-convert_to_tcx.py
@@ -160,12 +166,14 @@ F_configfiles(){
 }
 
 F_chownchmod(){
+echo `color 31 ">>> F_chownchmod"`
 	#Chown Chmod
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-extractor $HOME/GFrun
-	chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/GFrun/scripts/
+	chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/GFrun/install/ $HOME/GFrun/scripts/
 }
 
 F_chk_GFrunOffline(){
+echo `color 31 ">>> F_chk_GFrunOffline"`
 if [ -f $HOME/GFrunOffline.zip ] ; then
 		unzip -o $HOME/GFrunOffline.zip -d $HOME/
 	else
@@ -306,7 +314,7 @@ echo ""
           -a) # 9. Extract>>Local>>garmin.com.....(GFrun.sh -a) 
 		####################################################################
 				F_extractfit
-				$HOME/GFrun/install/gupload.sh -auto
+				sh $HOME/GFrun/install/gupload.sh -auto
 		####################################################################
              ;;
 
@@ -316,7 +324,7 @@ echo ""
 		####################################################################
              ;;
 
-          -u) U. UNINSTALL......................(GFrun.sh -x) 
+          -u) #U. UNINSTALL......................(GFrun.sh -x) 
 		####################################################################
 				F_uninstall
 				F_clear
