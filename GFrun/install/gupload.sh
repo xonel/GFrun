@@ -70,7 +70,7 @@ echo `color 32 "================================================================
 
 case $1
 	in
-	  -auto) #9. Extract>>Local>>garmin.com.....(GFrun.sh -a) $HOME/GFrun/install/guploader.sh -auto
+	  -auto) #9. Extract>>Local>>garmin.com.....(GFrun.sh -a) $HOME/GFrun/install/gupload.sh -auto
 	###########################################
 	Vactivities=$(date +%Y-%m-*)
 	GoScript

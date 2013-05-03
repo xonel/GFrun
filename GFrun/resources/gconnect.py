@@ -27,6 +27,8 @@
 
 # Creates a local back-up of a Garmin Connect users activity files in GPX, TCX
 # and KLM format.
+#
+# Modif 03/04/2013 - by xonel 
 
 import urllib2
 import urllib
@@ -34,6 +36,7 @@ import re
 import json
 import os
 import getpass
+import ConfigParser
 
 class GarminConnectClient():
 
@@ -108,10 +111,43 @@ class GarminConnectClient():
         with open(path + filename, "w") as text_file:
             text_file.write(activity)
 
-username = raw_input("Garmin Connect username: ")
-password = getpass.getpass()
-print "[ default ] = ~/.config/garmin-extractor/dump_gconnect/"
-directory = raw_input("Destination directory (default: current):")
+# ----Login Credentials for Garmin Connect----
+# If credentials are given on command line, use them.
+# If no credentials are given on command line, look in 
+# current directory for a .guploadrc file (or gupload.ini
+# for windows).  If no .guploadrc/gupload.ini file exists
+#  in the current directory look in the user's home directory.
+# Copyright (c) David Lotton 01/2012 <yellow56@gmail.com>
+# All rights reserved.
+# License: GNU General Public License (GPL)
+configCurrentDir=os.path.abspath(os.path.normpath('./.guploadrc'))
+configHomeDir=os.path.expanduser(os.path.normpath('~/.guploadrc'))
+
+if myargs.l:
+    logging.debug('Using credentials from command line.')
+    username=myargs.l[0]
+    password=myargs.l[1]
+elif os.path.isfile(configCurrentDir):
+    logging.debug('Using credentials from \'' + configCurrentDir + '\'.')
+    config=ConfigParser.RawConfigParser()
+    config.read(configCurrentDir)
+    username=config.get('Credentials', 'username')
+    password=config.get('Credentials', 'password')
+elif os.path.isfile(configHomeDir):
+    logging.debug('Using credentials from \'' + configHomeDir + '\'.')
+    config=ConfigParser.RawConfigParser()
+    config.read(configHomeDir)
+    username=config.get('Credentials', 'username')
+    password=config.get('Credentials', 'password')
+else:
+    cwd = os.path.abspath(os.path.normpath('./'))
+    homepath = os.path.expanduser(os.path.normpath('~/'))
+    logging.critical('\'' + configFile + '\' file does not exist in current directory (' + cwd + ') or home directory (' + homepath + ').  Use -l option.')
+    username = raw_input("Garmin Connect username: ")
+	password = getpass.getpass()
+
+print "[ default ] = ~/.config/garmin-extractor/gconnect/"
+directory = "~/.config/garmin-extractor/gconnect/"
 directory = '.' if directory == '' else directory
 directory = os.path.expanduser(directory)
 client = GarminConnectClient(username, password)

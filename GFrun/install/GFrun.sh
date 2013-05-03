@@ -70,6 +70,7 @@ F_mkdir(){
 	mkdir -p $HOME/GFrun/resources/FIT-to-TCX-master/
 	mkdir -p $HOME/.config/garmin-extractor/scripts/
 	mkdir -p $HOME/.config/garminplugin
+	mkdir -p $HOME/.config/garmin-extractor/gconnect/
 }
 
 F_apt(){
@@ -112,7 +113,7 @@ F_unzip(){
 	cd $HOME/GFrun/resources/ && unzip -o master.zip
 	#python-fitparse-master
 	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && unzip -o master.zip
-	#guploader
+	#gupload
 	cd $HOME/GFrun/resources/ && unzip -o pygupload_20120516.zip
 	#script install
 	unzip -oC GFrunOffline.zip "GFrun/install/*" "GFrun/resources/gconnect.py" ".config/*" ".local/*" -d $HOME/
@@ -178,7 +179,7 @@ if [ -f $HOME/GFrunOffline.zip ] ; then
 fi
 }
 
-F_conf_guploader(){
+F_conf_gupload(){
 	echo "
 	# Username and password credentials may be placed in a configuration file
 	# located either in the current working directory, or in the user's home
@@ -306,13 +307,13 @@ echo ""
           -a) # 9. Extract>>Local>>garmin.com.....(GFrun.sh -a) 
 		####################################################################
 				F_extractfit
-				$HOME/GFrun/install/guploader.sh -auto
+				$HOME/GFrun/install/gupload.sh -auto
 		####################################################################
              ;;
 
-          -g) # 4. Config Auto-Upload		(guploader) 
+          -g) # 4. Config Auto-Upload		(gupload) 
 		####################################################################
-				F_conf_guploader
+				F_conf_gupload
 		####################################################################
              ;;
 

@@ -82,14 +82,14 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
         echo ""
         echo "CONFIG :"
         echo "--------"
-        echo `color 33 "4. guploader......................(           )"`
+        echo `color 33 "4. gupload........................(GFrun.sh -g)"`
         echo `color 33 "5. Garmin.com.....................(GFrun.sh -c)"`
         echo ""
         echo "ACTIVITIES :"
         echo "-----------"
         echo `color 35 "6. Extract.Fit >> Local...........(GFrun.sh -e)"`
-        echo `color 35 "7. Upload.Fit >> garmin.com ......(guploader  )"`
-        echo `color 35 "8. garmin.com >> Local ...........(           )"`
+        echo `color 35 "7. Upload.Fit >> garmin.com ......(gupload    )"`
+        echo `color 35 "8. garmin.com >> Local ...........(gconnect   )"`
         echo `color 35 "9. Extract>>Local>>garmin.com.....(GFrun.sh -a)"`
         echo ""
         echo `color 32 "U. UNINSTALL......................(GFrun.sh -u)"`
@@ -165,7 +165,7 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
           *7*) 
 		#############################
 		VChemin=$VChemin
-		Vscript="guploader.sh"
+		Vscript="gupload.sh"
 		Varg=""
 		GoScript
 		#############################

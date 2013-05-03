@@ -44,9 +44,13 @@ echo "#       ##::: ##:: ##::::::: ##::. ##:: ##:::: ##: ##:. ###:"
 echo "#     .  ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:"
 echo "#     :......::::..::::::::..:::::..:::.......:::..::::..::"
 echo `color 32 "======================================================================="`
+echo ""
+echo `color 32 "======================================================================="`
+echo ">>>>>  DUMP ALL ACTIVITIES FROM CONNECT GARMIN " <<<<<<
+echo `color 32 "======================================================================="`
+echo " 1er DUMP ~ 10 mins - PLEASE WAIT ... "
 
-mkdir -p $HOME/.config/garmin-extractor/dump_gconnect/
-cd $HOME/.config/garmin-extractor/dump_gconnect/ && python $HOME/GFrun/resources/dump_gconnect.py
+cd $HOME/.config/garmin-extractor/gconnect/ && python $HOME/GFrun/resources/gconnect.py
 
 echo ""
 echo "                                 !!!            o           _   _     "
