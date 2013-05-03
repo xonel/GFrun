@@ -46,17 +46,15 @@ echo "
 #
 mv _.config/ .config/
 mv _.local/ .local/
-mv .local/_share .local/share
 
 mv GFrun/resources/master_fittotcx.zip GFrun/resources/master.zip
 mv GFrun/resources/master_extractor.zip master.zip
 
-zip -ur  GFrunOffline.zip  master.zip .config/ GFrun/ .local/ -x\.local/share.zip
-zip -ur .config/_.config.zip .config/garmin-extractor/ .config/garminplugin/
+zip -ur  GFrunOffline.zip  master.zip .config/ GFrun/ .local/
+#zip -ur .config/_.config.zip .config/garmin-extractor/ .config/garminplugin/
 
 mv .config/ _.config/
 mv .local/ _.local/
-mv _.local/share _.local/_share
 mv GFrun/resources/master.zip GFrun/resources/master_fittotcx.zip 
 mv master.zip GFrun/resources/master_extractor.zip 
 
