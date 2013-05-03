@@ -1,5 +1,5 @@
 #! /bin/bash
-exec >& >(tee -a /tmp/GFrun_DEBUG)
+#exec >& >(tee -a /tmp/GFrun_DEBUG)
 #
 # GFrun
 #
