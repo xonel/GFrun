@@ -33,7 +33,7 @@
 #Vbranche="GFrun"
 Vbranche="master"
 
-echo `color 31 ">>> SUDO_USER"`
+echo `color 32 ">>> SUDO_USER"`
 if [ ! "$SUDO_USER" ]; then
 	echo "Installing GFrun requires administrator rights."
 fi
@@ -58,14 +58,14 @@ read Vchoix
 }
 
 F_clear(){
-echo `color 31 ">>> F_clear"`
+echo `color 32 ">>> F_clear"`
 	#Nettoyage
 	rm -f $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* /tmp/ligneCmd.sh*
 	rm -Rf  $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master $HOME/GFrun/Garmin-Forerunner-610-Extractor-master
 }
 
 F_mkdir(){
-echo `color 31 ">>> F_mkdir"`
+echo `color 32 ">>> F_mkdir"`
 	mkdir -p $HOME/GFrun/resources/FIT-to-TCX-master/
 	mkdir -p $HOME/.config/garmin-extractor/scripts/
 	mkdir -p $HOME/.config/garminplugin
@@ -73,7 +73,7 @@ echo `color 31 ">>> F_mkdir"`
 }
 
 F_apt(){
-echo `color 31 ">>> F_apt"`
+echo `color 32 ">>> F_apt"`
 	dpkg -l > /tmp/pkg-before.txt
 
 	#[repos]
@@ -99,7 +99,7 @@ echo `color 31 ">>> F_apt"`
 	}
 
 F_wget(){
-echo `color 31 ">>> F_wget"`
+echo `color 32 ">>> F_wget"`
 	cd $HOME && wget -N https://github.com/Tigge/Garmin-Forerunner-610-Extractor/archive/master.zip
 	cd $HOME/GFrun/resources/ && wget -N https://github.com/Tigge/FIT-to-TCX/archive/master.zip
 	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && wget -N https://github.com/dtcooper/python-fitparse/archive/master.zip
@@ -108,7 +108,7 @@ echo `color 31 ">>> F_wget"`
 }
 
 F_unzip(){
-echo `color 31 ">>> F_unzip"`
+echo `color 32 ">>> F_unzip"`
 	#Garmin-Forerunner-610-Extractor-master
 	cd $HOME && unzip -o master.zip -d GFrun
 	#FIT-to-TCX-master
@@ -122,7 +122,7 @@ echo `color 31 ">>> F_unzip"`
 }
 
 F_cpmv(){
-echo `color 31 ">>> F_cpmv"`
+echo `color 32 ">>> F_cpmv"`
 	#Garmin-Forerunner-610-Extractor-master
 	cp -Rf $HOME/GFrun/Garmin-Forerunner-610-Extractor-master/* $HOME/GFrun
 	##Convert fit to tcx
@@ -132,13 +132,18 @@ echo `color 31 ">>> F_cpmv"`
 }
 
 F_extractfit(){
-echo `color 31 ">>> F_extractfit"`
+echo `color 32 ">>> F_extractfit"`
 	#Extractor FIT
 	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/ && python ./garmin.py'
 }
 
 F_configfiles(){
-echo `color 31 ">>> F_configfiles"`
+echo `color 32 ">>> F_configfiles"`
+		echo `color 31 "============================================="`
+		echo "Garmin ForeRunner [ ON ] + [PARING MODE ]"
+		echo "USB ANT+ pluged"
+		echo `color 31 "============================================="`
+
 	#$NUMERO_DE_MA_MONTRE
 	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts | grep -v gconnect)
 	$NUMERO_DE_MA_MONTRE >> $HOME/GFrun/resources/IDs
@@ -149,12 +154,6 @@ echo `color 31 ">>> F_configfiles"`
 		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities -T $HOME/.config/garmin-extractor/Garmin/Activities
 		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE -T $HOME/GFrun/$NUMERO_DE_MA_MONTRE
 		src=ID_MA_MONTRE && cibl=$NUMERO_DE_MA_MONTRE && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garmin-extractor/Garmin/GarminDevice.xml" >> /tmp/ligneCmd.sh
-	else
-		echo `color 31 "============================================="`
-		echo "Check : Garmin ForeRunner [ ON ] + [PARING MODE ]"
-		echo "Check : USB ANT+ connection"
-		echo `color 31 "============================================="`
-		sleep 5
 	fi
 
 	#40-convert_to_tcx.py
@@ -166,14 +165,14 @@ echo `color 31 ">>> F_configfiles"`
 }
 
 F_chownchmod(){
-echo `color 31 ">>> F_chownchmod"`
+echo `color 32 ">>> F_chownchmod"`
 	#Chown Chmod
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-extractor $HOME/GFrun
 	chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/GFrun/install/ $HOME/GFrun/scripts/
 }
 
 F_chk_GFrunOffline(){
-echo `color 31 ">>> F_chk_GFrunOffline"`
+echo `color 32 ">>> F_chk_GFrunOffline"`
 if [ -f $HOME/GFrunOffline.zip ] ; then
 		unzip -o $HOME/GFrunOffline.zip -d $HOME/
 	else
@@ -206,7 +205,7 @@ echo `color 32 "============================================="`
 			echo "username="$Read_user"" >> $HOME/.guploadrc
 			echo "password="$Read_password"" >> $HOME/.guploadrc
 		else
-			cat  $HOME/.guploadrc
+			echo  "CHECK >> $HOME/.guploadrc
 			echo ""
 			echo `color 31 "============================================="`
 						echo "Configuration file already exist"
@@ -288,6 +287,7 @@ echo ""
 #				F_wget
 #				F_unzip
 #				F_cpmv
+				F_configfiles
 				F_extractfit
 				F_configfiles
 #				F_chownchmod
