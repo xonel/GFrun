@@ -1,5 +1,4 @@
 #! /bin/bash
-#exec >& >(tee -a /tmp/GFrun_DEBUG)
 #
 # GFrun
 #
@@ -33,15 +32,16 @@
 #Vbranche="GFrun"
 Vbranche="master"
 
-echo `color 32 ">>> SUDO_USER"`
-if [ ! "$SUDO_USER" ]; then
-	echo "Installing GFrun requires administrator rights."
-fi
-
 color()
 {
 printf '\033[%sm%s\033[m\n' "$@"
 }
+
+echo `color 32 ">>> SUDO_USER"`
+
+if [ ! "$SUDO_USER" ]; then
+	echo "Installing GFrun requires administrator rights."
+fi
 
 F_uninstall(){
 echo `color 31 "======================================================"`
@@ -205,7 +205,7 @@ echo `color 32 "============================================="`
 			echo "username="$Read_user"" >> $HOME/.guploadrc
 			echo "password="$Read_password"" >> $HOME/.guploadrc
 		else
-			echo  "CHECK >> $HOME/.guploadrc
+			echo  "CHECK >> $HOME/.guploadrc"
 			echo ""
 			echo `color 31 "============================================="`
 						echo "Configuration file already exist"
