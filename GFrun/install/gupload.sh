@@ -67,6 +67,13 @@ echo `color 32 "================================================================
 #  Ecrire HASH password 
 #  Croiser login/pass avec dump_gconnect
 #  
+GoScript()
+{
+	echo ""
+	echo " Script >>> python $HOME/GFrun/resources/pygupload/gupload.py -v 1 $Vactivities"
+	cd $HOME/.config/garmin-extractor/Garmin/Activities
+	python $HOME/GFrun/resources/pygupload/gupload.py -v 1 $Vactivities
+}
 
 case $1
 	in
@@ -79,13 +86,6 @@ case $1
 		;;
 esac
 
-GoScript()
-{
-	echo ""
-	echo " Script >>> python $HOME/GFrun/resources/pygupload/gupload.py -v 1 $Vactivities"
-	cd $HOME/.config/garmin-extractor/Garmin/Activities
-	python $HOME/GFrun/resources/pygupload/gupload.py -v 1 $Vactivities
-}
 echo ""
 echo ""
 echo `color 32 "=================================="`
@@ -112,9 +112,9 @@ read Vchoix
 
           [wW])  # Lancer le Script pour : 
 		################################	
-		for (( i=0; 7 - $i; i++ ))
+		for c in 1 2 3 4 5 6 7
 			do 
-			Vactivities=$(date "+%Y-%m-%d_*" -d "$i days ago")
+			Vactivities=$(date "+%Y-%m-%d_*" -d "$c days ago")
 			GoScript
 		done
 		################################
