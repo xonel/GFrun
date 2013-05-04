@@ -180,17 +180,14 @@ configCurrentDir=os.path.abspath(os.path.normpath('./.guploadrc'))
 configHomeDir=os.path.expanduser(os.path.normpath('~/.guploadrc'))
 
 if myargs.l:
-    logging.debug('Using credentials from command line.')
     username=myargs.l[0]
     password=myargs.l[1]
 elif os.path.isfile(configCurrentDir):
-    logging.debug('Using credentials from \'' + configCurrentDir + '\'.')
     config=ConfigParser.RawConfigParser()
     config.read(configCurrentDir)
     username=config.get('Credentials', 'username')
     password=config.get('Credentials', 'password')
 elif os.path.isfile(configHomeDir):
-    logging.debug('Using credentials from \'' + configHomeDir + '\'.')
     config=ConfigParser.RawConfigParser()
     config.read(configHomeDir)
     username=config.get('Credentials', 'username')
@@ -198,7 +195,6 @@ elif os.path.isfile(configHomeDir):
 else:
     cwd = os.path.abspath(os.path.normpath('./'))
     homepath = os.path.expanduser(os.path.normpath('~/'))
-    logging.critical('\'' + configFile + '\' file does not exist in current directory (' + cwd + ') or home directory (' + homepath + ').  Use -l option.')
     username = raw_input("Garmin Connect username: ")
     password = getpass.getpass()
 
