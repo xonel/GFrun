@@ -34,7 +34,7 @@ wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && c
 VISUEL :
 ---------
 
-<a href='http://pix.toile-libre.org/upload/original/1367361876.png'><img src='http://pix.toile-libre.org/upload/original/1367361876.png' /></a>
+<a href='http://pix.toile-libre.org/upload/original/1367627754.png'><img src='http://pix.toile-libre.org/upload/original/1367627754.png' /></a>
 
 Voici les briques principales de GFrun :
 + garminplugin_0.3.16-1 : ( https://github.com/adiesner/GarminPlugin )
