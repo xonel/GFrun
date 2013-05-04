@@ -27,8 +27,7 @@ chmod a+x GFrunMenu.sh
 sudo sh ./GFrunMenu.sh
 </code></pre>
 
-<pre><code>
-wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+<pre><code>wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 </code></pre>
 
 VISUEL :
