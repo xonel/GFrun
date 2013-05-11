@@ -240,6 +240,7 @@ echo ""
 				F_wget
 				F_unzip
 				F_cpmv
+				F_configfiles
 				F_extractfit
 				F_configfiles
 				F_chownchmod
@@ -256,6 +257,7 @@ echo ""
 #				F_wget
 				F_unzip
 				F_cpmv
+				F_configfiles
 				F_extractfit
 				F_configfiles
 				F_chownchmod
@@ -272,6 +274,7 @@ echo ""
 #				F_wget
 				F_unzip
 				F_cpmv
+				F_configfiles
 				F_extractfit
 				F_configfiles
 				F_chownchmod
