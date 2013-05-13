@@ -129,12 +129,20 @@ echo `color 32 ">>> F_cpmv"`
 	cp -f $HOME/GFrun/scripts/40-convert_to_tcx.py $HOME/.config/garmin-extractor/scripts/
 	cp -Rf $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master/fitparse $HOME/GFrun/resources/FIT-to-TCX-master/
 	mv -f $HOME/GFrunOffline.zip $HOME/GFrun/resources/
+	#Icons
+	cp -f $HOME/.local/share/icons/GFrun.svg /usr/share/icons/
 }
 
 F_extractfit(){
 echo `color 32 ">>> F_extractfit"`
 	#Extractor FIT
 	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/ && python ./garmin.py'
+}
+
+F_getkey(){
+echo `color 32 ">>> F_getkey"`
+	#Extractor FIT
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/ && python ./getkey.py'
 }
 
 F_configfiles(){
@@ -292,7 +300,8 @@ echo ""
 #				F_unzip
 #				F_cpmv
 				F_configfiles
-				F_extractfit
+				F_getkey
+#				F_extractfit
 				F_configfiles
 #				F_chownchmod
 #				F_clear
