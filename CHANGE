@@ -1,6 +1,14 @@
 DONE :
 -----
-
+0.4
++ getkey.py extract only the keypass form Forerunner use procedure AutoConfig.
++ icons GFrun.svg
++ gconnect and guploader share same "user/pass"
++ Uninstall+Backup Activities option on Graphic Main
++ arguments for "GFrun.sh -arg"
++ Make_GFrunOffline.sh
++ Multi version DEV/STABLE/OFFLINE
++ Option "9" Graphic Main :  Extract > local > Garmin Connect
 
 0.3.3
 + Créer automatiquement la structure du dossier DEVICES pour garminplugin sans utiliser WINDOWS
@@ -18,7 +26,6 @@ DONE :
 
 TO DO:
 --------
-- Modifier  Garmin-Forerunner-610-Extractor ou exploiter son dossier script pour automatiser auto-upload via gcpuploader.
 - une Gui serait un plus
 - Faire une petite Doc/Tuto
 - Apprendre à Faire du 'Bash' ;O)

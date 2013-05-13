@@ -51,7 +51,9 @@ echo -n "UNINSTALL ALL (FGrun + ConfigFiles + Activities) >> YES / [NO] :"
 read Vchoix
 
 	if [ "$Vchoix" = "YES" ]; then
+			zip -ur  $HOME/GFrun_Activities_Backup.zip  $HOME/.config/garmin-extractor/
 			rm -Rf  $HOME/GFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin
+			echo " Backup Activities DONE : $HOME/GFrun_Activities_Backup.zip "
 		else
 			sh $HOME/GFrun/install/GFrunMenu.sh
 	fi
@@ -131,6 +133,8 @@ echo `color 32 ">>> F_cpmv"`
 	mv -f $HOME/GFrunOffline.zip $HOME/GFrun/resources/
 	#Icons
 	cp -f $HOME/.local/share/icons/GFrun.svg /usr/share/icons/
+	#getkey.py
+	cp -f $HOME/GFrun/resources/getkey.py $HOME/GFrun/
 }
 
 F_extractfit(){
