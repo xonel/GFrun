@@ -164,10 +164,10 @@ echo `color 32 ">>> F_configfiles"`
 
 	#$NUMERO_DE_MA_MONTRE
 	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts | grep -v gconnect)
-	echo $NUMERO_DE_MA_MONTRE >> $HOME/GFrun/resources/IDs
 
 	#GarminDevice.xml
 	if [ -n "$NUMERO_DE_MA_MONTRE" ]; then
+		echo $NUMERO_DE_MA_MONTRE >> $HOME/GFrun/resources/IDs
 		cd $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
 		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities -T $HOME/.config/garmin-extractor/Garmin/Activities
 		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE -T $HOME/GFrun/$NUMERO_DE_MA_MONTRE
