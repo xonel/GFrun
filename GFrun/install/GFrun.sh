@@ -83,7 +83,7 @@ echo `color 32 ">>> F_apt"`
 	#[repos]
 	if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin $(lsb_release -cs) main" < /etc/apt/sources.list
 	 then
-		if [ "$(lsb_release -is)" == "ubuntu" ]; then
+		if [ "$(lsb_release -is)" = "ubuntu" ]; then
 			sudo apt-add-repository -y ppa:andreas-diesner/garminplugin
 		else
 			echo "deb http://ppa.launchpad.net/andreas-diesner/garminplugin $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list
