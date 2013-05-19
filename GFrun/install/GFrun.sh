@@ -182,7 +182,7 @@ F_chownchmod(){
 echo `color 32 ">>> F_chownchmod"`
 	#Chown Chmod
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-extractor $HOME/GFrun
-	chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/GFrun/install/ $HOME/GFrun/scripts/
+	chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/GFrun/install/ $HOME/GFrun/scripts/ $HOME/.local/share/
 }
 
 F_chk_GFrunOffline(){
