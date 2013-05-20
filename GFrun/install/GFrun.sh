@@ -170,15 +170,15 @@ echo `color 32 ">>> F_configfiles"`
 	if [ -n "$NUMERO_DE_MA_MONTRE" ]; then
 		echo $NUMERO_DE_MA_MONTRE >> $HOME/GFrun/resources/IDs
 		cd $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
-		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities -T $HOME/.config/garmin-extractor/Garmin/Activities
-		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE -T $HOME/GFrun/$NUMERO_DE_MA_MONTRE
+		ln -sf $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities -T $HOME/.config/garmin-extractor/Garmin/Activities
+		ln -sf $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE -T $HOME/GFrun/$NUMERO_DE_MA_MONTRE
 		src=ID_MA_MONTRE && cibl=$NUMERO_DE_MA_MONTRE && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garmin-extractor/Garmin/GarminDevice.xml" >> /tmp/ligneCmd.sh
 	else
 		if [ $Vcpt -lt 3 ]; then
 			Vcpt=$(($Vcpt+1))
 					
 			echo `color 31 "============================================="`
-			echo "...............> Key Forerunner - TEST $c / 3" 
+			echo "...............> Key Forerunner - TEST " $Vcpt "/3" 
 			echo `color 31 "============================================="`	
 			echo "You need :"	
 			echo "...............1) Garmin ForeRunner [ ON ] + [PARING MODE ]"
