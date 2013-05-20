@@ -363,8 +363,13 @@ echo ""
 echo ".........................PROCEDURE TERMINEE..........................."
 
 	if [ -f $HOME/GFrunMenu.sh ]; then
-		sleep 5
+		sleep 3
 		sh $HOME/GFrunMenu.sh
+	else
+		if [ -f $HOME/GFrun/install/GFrunMenu.sh ]; then
+			sleep 3
+			sh $HOME/GFrun/install/GFrunMenu.sh
+		fi
 	fi
 exit
 
