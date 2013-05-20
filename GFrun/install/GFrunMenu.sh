@@ -72,7 +72,8 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 	echo `color 32 " =============================================================="`
  	echo `color 31 "   Garmin-Forerunner-610-Extractor - garminplugin - gcpuploader "`
 	echo `color 32 " =============================================================="`
-	echo "Version :" $Version
+	echo "Ver:" $Version
+	echo""
 #        echo "============================"
         echo "INSTALL :"
         echo "---------"
@@ -82,8 +83,8 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
         echo ""
         echo "CONFIG :"
         echo "--------"
-        echo `color 33 "4. gupload........................(GFrun.sh -g)"`
-        echo `color 33 "5. Garmin.com.....................(GFrun.sh -c)"`
+        echo `color 33 "4. Conf-gupload........................(GFrun.sh -g)"`
+        echo `color 33 "5. Conf-Garmin.com.....................(GFrun.sh -c)"`
         echo ""
         echo "ACTIVITIES :"
         echo "-----------"

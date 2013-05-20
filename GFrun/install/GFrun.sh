@@ -178,7 +178,7 @@ echo `color 32 ">>> F_configfiles"`
 			Vcpt=$(($Vcpt+1))
 					
 			echo `color 31 "============================================="`
-			echo "...............> Grab Key from Forerunner - TEST " $Vcpt "/3" 
+			echo "...............> Grab Key from Forerunner - Testing" $Vcpt "/3" 
 			echo `color 31 "============================================="`	
 			echo "You need :"	
 			echo "...............1) Garmin ForeRunner [ ON ] + [PARING MODE ]"
@@ -187,7 +187,7 @@ echo `color 32 ">>> F_configfiles"`
 			echo `color 31 "============================================="`
 			F_getkey
 			F_configfiles
-			sleep 10 #Delay USB-ANT time out connect 
+			sleep 5 #Delay USB-ANT time out connect 
 		fi
 	fi
 
@@ -315,17 +315,7 @@ echo ""
              
           -c) # 5. Config Garminplugin -(connect.garmin.com)
 		####################################################################
-#				F_clear
-#				F_mkdir
-#				F_chk_GFrunOffline
-#				F_apt
-#				F_wget
-#				F_unzip
-#				F_cpmv
 				F_configfiles
-#				F_extractfit
-#				F_chownchmod
-#				F_clear
 		####################################################################
              ;;
 
