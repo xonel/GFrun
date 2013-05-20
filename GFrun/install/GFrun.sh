@@ -186,6 +186,7 @@ echo `color 32 ">>> F_configfiles"`
 			echo ""
 			echo `color 31 "============================================="`
 			F_getkey
+			sleep 3
 			F_configfiles
 			sleep 5 #Delay USB-ANT time out connect 
 		fi
