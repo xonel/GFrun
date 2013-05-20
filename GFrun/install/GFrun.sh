@@ -275,8 +275,8 @@ echo ""
 				F_unzip
 				F_cpmv
 				F_configfiles
-				F_extractfit
 				F_chownchmod
+				F_extractfit
 				F_clear
 		####################################################################
             ;;
@@ -291,8 +291,8 @@ echo ""
 				F_unzip
 				F_cpmv
 				F_configfiles
-				F_extractfit
 				F_chownchmod
+				F_extractfit
 				F_clear
 		####################################################################
             ;;
@@ -307,8 +307,8 @@ echo ""
 				F_unzip
 				F_cpmv
 				F_configfiles
-				F_extractfit
 				F_chownchmod
+				F_extractfit
 				F_clear
 		####################################################################
              ;;
