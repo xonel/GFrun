@@ -21,12 +21,14 @@ Version="0.4.1"
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##################################################################################################################################
+##########################################################################################################################################################
 #(STABLE - GFrun)  : wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 #(DEV    - MASTER) : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
-##################################################################################################################################
+##########################################################################################################################################################
 #
-VChemin="https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/"
+#Vbranche="GFrun"
+Vbranche="master"
+VChemin="https://github.com/xonel/GFrun/raw/"$Vbranche"/GFrun/install/"
 Vscript=""
 Varg=""
 VWget=""
