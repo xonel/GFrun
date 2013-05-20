@@ -4,7 +4,7 @@
 #
 #  Auteurs : Le.NoX ;o)
 #  M@il : le.nox @ free.fr
-#  Version="0.4.0"
+#  Version="0.4.1"
 #
 #  Licence: GNU GPL
 #
@@ -65,11 +65,13 @@ echo `color 32 "================================================================
 
 # MEMO :
 #  Ecrire HASH password 
-#  Croiser login/pass avec dump_gconnect
 #  
 GoScript()
 {
-	echo ""
+	echo `color 31 "============================================="`
+	echo " LOCAL > ...> Upload Activities on going >... > GARMIN.COM" 
+	echo `color 31 "============================================="`	
+			
 	echo " Script >>> python $HOME/GFrun/resources/pygupload/gupload.py -v 1 $Vactivities"
 	cd $HOME/.config/garmin-extractor/Garmin/Activities
 	python $HOME/GFrun/resources/pygupload/gupload.py -v 1 $Vactivities

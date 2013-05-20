@@ -4,7 +4,7 @@
 #
 #  Auteurs : Le.NoX ;o)
 #  M@il : le.nox @ free.fr
-#  Version="0.4.0"
+#  Version="0.4.1"
 #
 #  Licence: GNU GPL
 #
@@ -31,6 +31,7 @@
 #
 #Vbranche="GFrun"
 Vbranche="master"
+Vcpt=0
 
 color()
 {
@@ -81,12 +82,12 @@ echo `color 32 ">>> F_apt"`
 	sudo apt-get install -y lsb_release python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial
 	
 	#[repos]
-	if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin $(lsb_release -cs) main" < /etc/apt/sources.list
+	if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list
 	 then
 		if [ "$(lsb_release -is)" = "ubuntu" ]; then
 			sudo apt-add-repository -y ppa:andreas-diesner/garminplugin
 		else
-			echo "deb http://ppa.launchpad.net/andreas-diesner/garminplugin $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list
+			echo "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list
 			sudo apt-get update >> /dev/null 2> /tmp/${NAME}_apt_add_key.txt
 			key=`cat /tmp/${NAME}_apt_add_key.txt | cut -d":" -f6 | cut -d" " -f3`
 			apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $key
@@ -157,11 +158,11 @@ echo `color 32 ">>> F_getkey"`
 F_configfiles(){
 echo `color 32 ">>> F_configfiles"`
 		echo `color 31 "============================================="`
-		echo "NEED TO WORK :"
-		echo "...............> Garmin ForeRunner [ ON ] + [PARING MODE ]"
-		echo "...............> USB ANT+ plugued"
+		echo "YOU NEED :"
+		echo "..............1) Garmin ForeRunner [ ON ] + [PARING MODE ]"
+		echo "..............2) Dongle USB-ANT plugged"
 		echo `color 31 "============================================="`
-
+		
 	#$NUMERO_DE_MA_MONTRE
 	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts | grep -v gconnect)
 
@@ -172,6 +173,21 @@ echo `color 32 ">>> F_configfiles"`
 		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities -T $HOME/.config/garmin-extractor/Garmin/Activities
 		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE -T $HOME/GFrun/$NUMERO_DE_MA_MONTRE
 		src=ID_MA_MONTRE && cibl=$NUMERO_DE_MA_MONTRE && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garmin-extractor/Garmin/GarminDevice.xml" >> /tmp/ligneCmd.sh
+	else
+		if [ $Vcpt -lt 3 ]; then
+			Vcpt=$(($Vcpt+1))
+					
+			echo `color 31 "============================================="`
+			echo "...............> Key Forerunner - TEST $c / 3" 
+			echo `color 31 "============================================="`	
+			echo "You need :"	
+			echo "...............1) Garmin ForeRunner [ ON ] + [PARING MODE ]"
+			echo "...............2) Dongle USB-ANT plugged"
+			echo ""
+			echo `color 31 "============================================="`
+			F_getkey
+			F_configfiles
+		fi
 	fi
 
 	#40-convert_to_tcx.py
@@ -248,7 +264,7 @@ echo ""
 echo ""
 	case $1
 		in
-          -d) # 1. Full Install DEV - (GFrunDev)
+          -d) # 1. Full Install DEV
 		####################################################################
 				F_clear
 				F_mkdir
@@ -265,7 +281,7 @@ echo ""
 		####################################################################
             ;;
 
-          -s) # 2. Full Install STABLE - (GFrunStable)
+          -s) # 2. Full Install STABLE
 		####################################################################
 				F_clear
 				F_mkdir
@@ -282,7 +298,7 @@ echo ""
 		####################################################################
             ;;
 
-          -o) # 3. Full Install LOCAL - (GFrunLocal)
+          -o) # 3. Full Install LOCAL / UPDATE
 		####################################################################
 				F_clear
 				F_mkdir
@@ -319,17 +335,7 @@ echo ""
 
           -e) # 6. Telecharger Activites - (Montre > Local) 
 		####################################################################
-#				F_clear
-#				F_mkdir
-#				F_chk_GFrunOffline
-#				F_apt
-#				F_wget
-#				F_unzip
-#				F_cpmv
 				F_extractfit
-#				F_configfiles
-#				F_chownchmod
-#				F_clear
 		####################################################################
              ;;
 
