@@ -13,5 +13,6 @@ Name=GFrun
 Comment= GFrun - Garmin ForeRunner
 
 # icône à appliquer au lanceur
-Icon=/usr/share/icons/unity-icon-theme/apps/128/softwarecentre.svg
-#Icon=$HOME/GFrun/resources/gfrun.svg
+#Icon=/usr/share/icons/unity-icon-theme/apps/128/softwarecentre.svg
+#Icon=$HOME/.local/share/icons/GFrun/GFrun.svg
+Icon=/usr/share/icons/unity-icon-theme/apps/128/GFrun.svg
