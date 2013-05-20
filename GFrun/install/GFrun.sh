@@ -79,7 +79,7 @@ F_apt(){
 echo `color 32 ">>> F_apt"`
 	dpkg -l > /tmp/pkg-before.txt
 	
-	sudo apt-get install -y lsb_release python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial
+	sudo apt-get install -y lsb-release python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial
 	
 	#[repos]
 	if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list
