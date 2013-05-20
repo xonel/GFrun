@@ -45,14 +45,18 @@ if [ ! "$SUDO_USER" ]; then
 fi
 
 F_uninstall(){
+echo " Backup Activities WILL BE DONE before UNINSTALL: " $HOME"/GFrun_Activities_Backup.zip "
+echo""
 echo `color 31 "======================================================"`
 echo " !! UNINSTALL !! WARNING !! UNINSTALL !!"
 echo `color 31 "======================================================"`
 echo -n "UNINSTALL ALL (FGrun + ConfigFiles + Activities) >> YES / [NO] :"
+
 read Vchoix
 
 	if [ "$Vchoix" = "YES" ]; then
 			zip -ur  $HOME/GFrun_Activities_Backup.zip  $HOME/.config/garmin-extractor/
+			rm -f  $HOME/.local/share/icons/GFrun.svg $HOME/.local/share/applications/GFrun.desktop /usr/share/icons/GFrun.svg
 			rm -Rf  $HOME/GFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin
 			echo " Backup Activities DONE : $HOME/GFrun_Activities_Backup.zip "
 		else
