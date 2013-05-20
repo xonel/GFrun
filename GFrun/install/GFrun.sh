@@ -275,7 +275,6 @@ echo ""
 				F_cpmv
 				F_configfiles
 				F_extractfit
-				F_configfiles
 				F_chownchmod
 				F_clear
 		####################################################################
@@ -292,7 +291,6 @@ echo ""
 				F_cpmv
 				F_configfiles
 				F_extractfit
-				F_configfiles
 				F_chownchmod
 				F_clear
 		####################################################################
@@ -309,7 +307,6 @@ echo ""
 				F_cpmv
 				F_configfiles
 				F_extractfit
-				F_configfiles
 				F_chownchmod
 				F_clear
 		####################################################################
@@ -325,9 +322,7 @@ echo ""
 #				F_unzip
 #				F_cpmv
 				F_configfiles
-				F_getkey
 #				F_extractfit
-				F_configfiles
 #				F_chownchmod
 #				F_clear
 		####################################################################
