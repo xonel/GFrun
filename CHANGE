@@ -1,24 +1,32 @@
 DONE :
 -----
-
+0.4.1
+	+ getkey.py extract only the keypass form Forerunner use procedure AutoConfig.
+	+ icons GFrun.svg
+	+ gconnect and guploader share same "user/pass"
+	+ Uninstall+Backup Activities option on Graphic Main
+	+ arguments for "GFrun.sh -arg"
+	+ Make_GFrunOffline.sh
+	+ Multi version DEV/STABLE/OFFLINE
+	+ Option "9" Graphic Main :  Extract > local > Garmin Connect
+	+ Dump Garmin Connect.com > LOCAL
 
 0.3.3
-+ Créer automatiquement la structure du dossier DEVICES pour garminplugin sans utiliser WINDOWS
-+ récupérer le  <Id>ID_MA_MONTRE</Id> de la montre pour tout configurer automatiquement.
-+ Version Offline/Stable sans les masters Git.
-+ .desktop / raccourci Unity disponible dans le dash "GFrun"
+	+ Créer automatiquement la structure du dossier DEVICES pour garminplugin sans utiliser WINDOWS
+	+ récupérer le  <Id>ID_MA_MONTRE</Id> de la montre pour tout configurer automatiquement.
+	+ Version Offline/Stable sans les masters Git.
+	+ .desktop / raccourci Unity disponible dans le dash "GFrun"
 
 0.2
-+ installation et pres config de Garmin-Forerunner-610-Extractor : Version MASTER via GIT
-+ installation du dépôt pour garminplugin_0.3.16-1 
-+ installation de gcpuploader (script config OK / Script upload via GFrunMenu OK)
-+ installation de python-fitparse :  Version MASTER via GIT
-+ installation et configuration du script : 40-convert_to_tcx.py
+	+ installation et pres config de Garmin-Forerunner-610-Extractor : Version MASTER via GIT
+	+ installation du dépôt pour garminplugin_0.3.16-1 
+	+ installation de gcpuploader (script config OK / Script upload via GFrunMenu OK)
+	+ installation de python-fitparse :  Version MASTER via GIT
+	+ installation et configuration du script : 40-convert_to_tcx.py
 
 
 TO DO:
 --------
-- Modifier  Garmin-Forerunner-610-Extractor ou exploiter son dossier script pour automatiser auto-upload via gcpuploader.
 - une Gui serait un plus
 - Faire une petite Doc/Tuto
 - Apprendre à Faire du 'Bash' ;O)

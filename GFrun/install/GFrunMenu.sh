@@ -4,7 +4,7 @@
 #
 #  Auteurs : Le.NoX ;o)
 #  M@il : le.nox @ free.fr
-#  Version="0.4.0"
+Version="0.4.1"
 #
 #  Licence: GNU GPL
 #
@@ -69,21 +69,23 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
    : ##... ##.. ##....... ##... ##.. ##.... ##. ##.. ###:
    :  ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:
    :....................................................:"
+   	echo "                                                   " $Version
 	echo `color 32 " =============================================================="`
  	echo `color 31 "   Garmin-Forerunner-610-Extractor - garminplugin - gcpuploader "`
 	echo `color 32 " =============================================================="`
-	echo ""
+
+	echo""
 #        echo "============================"
         echo "INSTALL :"
         echo "---------"
-        echo `color 32 "1. DEV ...........................(GFrun.sh -d)"`
-        echo `color 32 "2. STABLE.........................(GFrun.sh -s)"`
-        echo `color 32 "3. OFFLINE........................(GFrun.sh -o)"`
+        echo `color 32 "1. STABLE.........................(GFrun.sh -s)"`
+        echo `color 32 "2. DEV ...........................(GFrun.sh -d)"`
+        echo `color 32 "3. UPDATE.........................(GFrun.sh -o)"`
         echo ""
         echo "CONFIG :"
         echo "--------"
-        echo `color 33 "4. gupload........................(GFrun.sh -g)"`
-        echo `color 33 "5. Garmin.com.....................(GFrun.sh -c)"`
+        echo `color 33 "4. Conf-gupload........................(GFrun.sh -g)"`
+        echo `color 33 "5. Conf-Garmin.com.....................(GFrun.sh -c)"`
         echo ""
         echo "ACTIVITIES :"
         echo "-----------"
@@ -112,16 +114,16 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 		#############################
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
-		Varg="-d"
+		Varg="-s"
 		GoScript
-		#############################
+		#############################          
             ;;
 
           *2*) 
 		#############################
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
-		Varg="-s"
+		Varg="-d"
 		GoScript
 		#############################
             ;;

@@ -4,7 +4,7 @@
 #
 #  Auteurs : Le.NoX ;o)
 #  M@il : le.nox @ free.fr
-#  Version="0.4.0"
+#  Version="0.4.1"
 #
 #  Licence: GNU GPL
 #
@@ -22,15 +22,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##################################################################################################################################
-# wget -N https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh
-# chmod a+x GFrunMenu.sh
-# sudo sh ./GFrunMenu.sh
-# 
-# wget -N https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+#(STABLE - GFrun)  : wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+#(DEV    - MASTER) : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ##################################################################################################################################
 #
-Vbranche="GFrun"
-#Vbranche="master"
+#Vbranche="GFrun"
+Vbranche="master"
+Vcpt=0
 
 color()
 {
@@ -44,14 +42,20 @@ if [ ! "$SUDO_USER" ]; then
 fi
 
 F_uninstall(){
+echo " BACKUP WILL BE DONE INSIDE : " $HOME"/GFrun_Activities_Backup.zip "
+echo""
 echo `color 31 "======================================================"`
 echo " !! UNINSTALL !! WARNING !! UNINSTALL !!"
 echo `color 31 "======================================================"`
 echo -n "UNINSTALL ALL (FGrun + ConfigFiles + Activities) >> YES / [NO] :"
+
 read Vchoix
 
 	if [ "$Vchoix" = "YES" ]; then
+			zip -ur  $HOME/GFrun_Activities_Backup.zip  $HOME/.config/garmin-extractor/
+			rm -f  $HOME/.local/share/icons/GFrun.svg $HOME/.local/share/applications/GFrun.desktop /usr/share/icons/GFrun.svg
 			rm -Rf  $HOME/GFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin
+			echo " Backup Activities DONE : $HOME/GFrun_Activities_Backup.zip "
 		else
 			sh $HOME/GFrun/install/GFrunMenu.sh
 	fi
@@ -60,7 +64,7 @@ read Vchoix
 F_clear(){
 echo `color 32 ">>> F_clear"`
 	#Nettoyage
-	rm -f $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* /tmp/ligneCmd.sh*
+	rm -f $HOME/GFrun.sh* $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* /tmp/ligneCmd.sh*
 	rm -Rf  $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master $HOME/GFrun/Garmin-Forerunner-610-Extractor-master
 }
 
@@ -75,14 +79,16 @@ echo `color 32 ">>> F_mkdir"`
 F_apt(){
 echo `color 32 ">>> F_apt"`
 	dpkg -l > /tmp/pkg-before.txt
-
+	
+	sudo apt-get install -y lsb-release python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial
+	
 	#[repos]
-	if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin $(lsb_release -cs) main" < /etc/apt/sources.list
+	if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list
 	 then
-		if [ "$(lsb_release -is)" == "ubuntu" ]; then
+		if [ "$(lsb_release -is)" = "ubuntu" ]; then
 			sudo apt-add-repository -y ppa:andreas-diesner/garminplugin
 		else
-			echo "deb http://ppa.launchpad.net/andreas-diesner/garminplugin $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list
+			echo "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list
 			sudo apt-get update >> /dev/null 2> /tmp/${NAME}_apt_add_key.txt
 			key=`cat /tmp/${NAME}_apt_add_key.txt | cut -d":" -f6 | cut -d" " -f3`
 			apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $key
@@ -91,7 +97,6 @@ echo `color 32 ">>> F_apt"`
 	fi
 
 	#[packages]
-	sudo apt-get install -y python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial
 	sudo apt-get install -y garminplugin
 	sudo apt-get upgrade
 	pip install pyusb
@@ -123,12 +128,20 @@ echo `color 32 ">>> F_unzip"`
 
 F_cpmv(){
 echo `color 32 ">>> F_cpmv"`
+	
+	cp -f $HOME/GFrun/resources/ant-usbstick2.rules /etc/udev/rules.d/
+	udevadm control --reload-rules
+	
 	#Garmin-Forerunner-610-Extractor-master
 	cp -Rf $HOME/GFrun/Garmin-Forerunner-610-Extractor-master/* $HOME/GFrun
 	##Convert fit to tcx
 	cp -f $HOME/GFrun/scripts/40-convert_to_tcx.py $HOME/.config/garmin-extractor/scripts/
 	cp -Rf $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master/fitparse $HOME/GFrun/resources/FIT-to-TCX-master/
 	mv -f $HOME/GFrunOffline.zip $HOME/GFrun/resources/
+	#Icons
+	cp -f $HOME/.local/share/icons/GFrun.svg /usr/share/icons/
+	#getkey.py
+	cp -f $HOME/GFrun/resources/getkey.py $HOME/GFrun/
 }
 
 F_extractfit(){
@@ -137,24 +150,45 @@ echo `color 32 ">>> F_extractfit"`
 	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/ && python ./garmin.py'
 }
 
+F_getkey(){
+echo `color 32 ">>> F_getkey"`
+	#Extractor FIT
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/ && python ./getkey.py'
+}
+
 F_configfiles(){
 echo `color 32 ">>> F_configfiles"`
-		echo `color 31 "============================================="`
-		echo "NEED TO WORK :"
-		echo "...............> Garmin ForeRunner [ ON ] + [PARING MODE ]"
-		echo "...............> USB ANT+ plugued"
-		echo `color 31 "============================================="`
 
 	#$NUMERO_DE_MA_MONTRE
 	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts | grep -v gconnect)
-	echo $NUMERO_DE_MA_MONTRE >> $HOME/GFrun/resources/IDs
 
 	#GarminDevice.xml
 	if [ -n "$NUMERO_DE_MA_MONTRE" ]; then
+		echo $NUMERO_DE_MA_MONTRE >> $HOME/GFrun/resources/IDs
 		cd $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
-		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities -T $HOME/.config/garmin-extractor/Garmin/Activities
-		ln -s $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE -T $HOME/GFrun/$NUMERO_DE_MA_MONTRE
+		ln -sf $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities -T $HOME/.config/garmin-extractor/Garmin/Activities
+		ln -sf $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE -T $HOME/GFrun/$NUMERO_DE_MA_MONTRE
 		src=ID_MA_MONTRE && cibl=$NUMERO_DE_MA_MONTRE && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garmin-extractor/Garmin/GarminDevice.xml" >> /tmp/ligneCmd.sh
+		
+		echo `color 32 "============================================="`
+		echo "...> CONFIG KEY Forerunner - OK - : " $Vcpt 
+		echo `color 32 "============================================="`	
+	else
+		if [ $Vcpt -lt 3 ]; then
+			Vcpt=$(($Vcpt+1))
+					
+			echo `color 31 "============================================="`
+			echo "...> Grab Key from Forerunner - Testing" $Vcpt "/3" 
+			echo `color 31 "============================================="`	
+			echo "You need :"	
+			echo "...1) Garmin ForeRunner [ ON ] + [PARING MODE ]"
+			echo "...2) Dongle USB-ANT plugged"
+			echo ""
+			echo `color 31 "============================================="`
+			F_getkey
+			F_configfiles
+			sleep 5 #Delay USB-ANT time out connect 
+		fi
 	fi
 
 	#40-convert_to_tcx.py
@@ -168,8 +202,8 @@ echo `color 32 ">>> F_configfiles"`
 F_chownchmod(){
 echo `color 32 ">>> F_chownchmod"`
 	#Chown Chmod
-	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-extractor $HOME/GFrun
-	chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/GFrun/install/ $HOME/GFrun/scripts/
+	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-extractor $HOME/GFrun $HOME/.local/share/
+	chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/GFrun/install/ $HOME/GFrun/scripts/ 
 }
 
 F_chk_GFrunOffline(){
@@ -231,7 +265,7 @@ echo ""
 echo ""
 	case $1
 		in
-          -d) # 1. Full Install DEV - (GFrunDev)
+          -d) # 1. Full Install DEV
 		####################################################################
 				F_clear
 				F_mkdir
@@ -240,14 +274,14 @@ echo ""
 				F_wget
 				F_unzip
 				F_cpmv
-				F_extractfit
 				F_configfiles
 				F_chownchmod
+				F_extractfit
 				F_clear
 		####################################################################
             ;;
 
-          -s) # 2. Full Install STABLE - (GFrunStable)
+          -s) # 2. Full Install STABLE
 		####################################################################
 				F_clear
 				F_mkdir
@@ -256,14 +290,14 @@ echo ""
 #				F_wget
 				F_unzip
 				F_cpmv
-				F_extractfit
 				F_configfiles
 				F_chownchmod
+				F_extractfit
 				F_clear
 		####################################################################
             ;;
 
-          -o) # 3. Full Install LOCAL - (GFrunLocal)
+          -o) # 3. Full Install LOCAL / UPDATE
 		####################################################################
 				F_clear
 				F_mkdir
@@ -272,43 +306,22 @@ echo ""
 #				F_wget
 				F_unzip
 				F_cpmv
-				F_extractfit
 				F_configfiles
 				F_chownchmod
+				F_extractfit
 				F_clear
 		####################################################################
              ;;
              
           -c) # 5. Config Garminplugin -(connect.garmin.com)
 		####################################################################
-#				F_clear
-#				F_mkdir
-#				F_chk_GFrunOffline
-#				F_apt
-#				F_wget
-#				F_unzip
-#				F_cpmv
 				F_configfiles
-				F_extractfit
-				F_configfiles
-#				F_chownchmod
-#				F_clear
 		####################################################################
              ;;
 
           -e) # 6. Telecharger Activites - (Montre > Local) 
 		####################################################################
-#				F_clear
-#				F_mkdir
-#				F_chk_GFrunOffline
-#				F_apt
-#				F_wget
-#				F_unzip
-#				F_cpmv
 				F_extractfit
-#				F_configfiles
-#				F_chownchmod
-#				F_clear
 		####################################################################
              ;;
 
