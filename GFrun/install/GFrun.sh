@@ -42,7 +42,7 @@ if [ ! "$SUDO_USER" ]; then
 fi
 
 F_uninstall(){
-echo " Backup Activities WILL BE DONE before UNINSTALL: " $HOME"/GFrun_Activities_Backup.zip "
+echo " BACKUP WILL BE DONE INSIDE : " $HOME"/GFrun_Activities_Backup.zip "
 echo""
 echo `color 31 "======================================================"`
 echo " !! UNINSTALL !! WARNING !! UNINSTALL !!"
@@ -171,18 +171,18 @@ echo `color 32 ">>> F_configfiles"`
 		src=ID_MA_MONTRE && cibl=$NUMERO_DE_MA_MONTRE && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garmin-extractor/Garmin/GarminDevice.xml" >> /tmp/ligneCmd.sh
 		
 		echo `color 32 "============================================="`
-		echo "...............> CONFIG KEY Forerunner - OK - : " $Vcpt 
+		echo "...> CONFIG KEY Forerunner - OK - : " $Vcpt 
 		echo `color 32 "============================================="`	
 	else
 		if [ $Vcpt -lt 3 ]; then
 			Vcpt=$(($Vcpt+1))
 					
 			echo `color 31 "============================================="`
-			echo "...............> Grab Key from Forerunner - Testing" $Vcpt "/3" 
+			echo "...> Grab Key from Forerunner - Testing" $Vcpt "/3" 
 			echo `color 31 "============================================="`	
 			echo "You need :"	
-			echo "...............1) Garmin ForeRunner [ ON ] + [PARING MODE ]"
-			echo "...............2) Dongle USB-ANT plugged"
+			echo "...1) Garmin ForeRunner [ ON ] + [PARING MODE ]"
+			echo "...2) Dongle USB-ANT plugged"
 			echo ""
 			echo `color 31 "============================================="`
 			F_getkey
