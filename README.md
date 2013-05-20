@@ -20,7 +20,7 @@ Configuration de test pour le developpement du script "GFrun" :
 
 INSTALL :
 ---------
-(ATTENTION : Script en cours de developpement !! Bugs possibles !! ...) :
+(ATTENTION : !! Bugs possibles !! ...) :
 
 <pre><code>wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh
 chmod a+x GFrunMenu.sh
@@ -28,6 +28,10 @@ sudo sh ./GFrunMenu.sh
 </code></pre>
 
 <pre><code>wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+</code></pre>
+
+Version DEVELOPPEMENT (branch MASTER) :
+<pre><code>wget -N https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 </code></pre>
 
 VISUEL :

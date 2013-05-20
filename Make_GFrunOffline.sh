@@ -8,7 +8,7 @@
 #
 #  Auteurs : Le.NoX ;o)
 #  M@il : le.nox @ free.fr
-#  Version="0.4.0"
+#  Version="0.4.1"
 #
 #  Licence: GNU GPL
 #
