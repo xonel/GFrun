@@ -64,7 +64,7 @@ read Vchoix
 F_clear(){
 echo `color 32 ">>> F_clear"`
 	#Nettoyage
-	rm -f $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* /tmp/ligneCmd.sh*
+	rm -f $HOME/GFrun.sh* $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* /tmp/ligneCmd.sh*
 	rm -Rf  $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master $HOME/GFrun/Garmin-Forerunner-610-Extractor-master
 }
 
@@ -158,12 +158,7 @@ echo `color 32 ">>> F_getkey"`
 
 F_configfiles(){
 echo `color 32 ">>> F_configfiles"`
-		echo `color 31 "============================================="`
-		echo "YOU NEED :"
-		echo "..............1) Garmin ForeRunner [ ON ] + [PARING MODE ]"
-		echo "..............2) Dongle USB-ANT plugged"
-		echo `color 31 "============================================="`
-		
+
 	#$NUMERO_DE_MA_MONTRE
 	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts | grep -v gconnect)
 
@@ -174,12 +169,16 @@ echo `color 32 ">>> F_configfiles"`
 		ln -sf $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities -T $HOME/.config/garmin-extractor/Garmin/Activities
 		ln -sf $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE -T $HOME/GFrun/$NUMERO_DE_MA_MONTRE
 		src=ID_MA_MONTRE && cibl=$NUMERO_DE_MA_MONTRE && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garmin-extractor/Garmin/GarminDevice.xml" >> /tmp/ligneCmd.sh
+		
+		echo `color 32 "============================================="`
+		echo "...............> CONFIG KEY Forerunner - OK - : " $Vcpt 
+		echo `color 32 "============================================="`	
 	else
 		if [ $Vcpt -lt 3 ]; then
 			Vcpt=$(($Vcpt+1))
 					
 			echo `color 31 "============================================="`
-			echo "...............> Key Forerunner - TEST " $Vcpt "/3" 
+			echo "...............> Grab Key from Forerunner - TEST " $Vcpt "/3" 
 			echo `color 31 "============================================="`	
 			echo "You need :"	
 			echo "...............1) Garmin ForeRunner [ ON ] + [PARING MODE ]"
@@ -188,6 +187,7 @@ echo `color 32 ">>> F_configfiles"`
 			echo `color 31 "============================================="`
 			F_getkey
 			F_configfiles
+			sleep 5
 		fi
 	fi
 
