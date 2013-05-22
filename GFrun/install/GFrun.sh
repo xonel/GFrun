@@ -148,12 +148,14 @@ F_extractfit(){
 echo `color 32 ">>> F_extractfit"`
 	#Extractor FIT
 	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/ && python ./garmin.py'
+	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
 }
 
 F_getkey(){
 echo `color 32 ">>> F_getkey"`
 	#Extractor FIT
 	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/ && python ./getkey.py'
+	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
 }
 
 F_configfiles(){
@@ -363,8 +365,13 @@ echo ""
 echo ".........................PROCEDURE TERMINEE..........................."
 
 	if [ -f $HOME/GFrunMenu.sh ]; then
-		sleep 5
+		sleep 3
 		sh $HOME/GFrunMenu.sh
+	else
+		if [ -f $HOME/GFrun/install/GFrunMenu.sh ]; then
+			sleep 3
+			sh $HOME/GFrun/install/GFrunMenu.sh
+		fi
 	fi
 exit
 
