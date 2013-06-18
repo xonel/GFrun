@@ -4,7 +4,7 @@
 #
 #  Auteurs : Le.NoX ;o)
 #  M@il : le.nox @ free.fr
-#  Version="0.4.1"
+#  Version="0.4.2"
 #
 #  Licence: GNU GPL
 #
@@ -26,8 +26,8 @@
 #(DEV    - MASTER) : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ##########################################################################################################################################################
 #
-Vbranche="GFrun"
-#Vbranche="master"
+#Vbranche="GFrun"
+Vbranche="master"
 Vcpt=0
 
 color()
@@ -105,7 +105,7 @@ echo `color 32 ">>> F_apt"`
 
 F_wget(){
 echo `color 32 ">>> F_wget"`
-	cd $HOME && wget -N https://github.com/Tigge/Garmin-Forerunner-610-Extractor/archive/master.zip
+	cd $HOME && wget -N https://github.com/Tigge/Garmin-Forerunner-610-Extractor/archive/drivers.zip && mv drivers.zip master.zip
 	cd $HOME/GFrun/resources/ && wget -N https://github.com/Tigge/FIT-to-TCX/archive/master.zip
 	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && wget -N https://github.com/dtcooper/python-fitparse/archive/master.zip
 	cd $HOME/GFrun/resources/ && wget -N http://freefr.dl.sourceforge.net/project/gcpuploader/pygupload_20120516.zip
@@ -268,23 +268,8 @@ echo ""
 echo ""
 	case $1
 		in
-          -d) # 1. Full Install DEV
-		####################################################################
-				F_clear
-				F_mkdir
-#				F_chk_GFrunOffline
-				F_apt
-				F_wget
-				F_unzip
-				F_cpmv
-				F_configfiles
-				F_chownchmod
-				F_extractfit
-				F_clear
-		####################################################################
-            ;;
 
-          -s) # 2. Full Install STABLE
+          -s) # 1. Full Install STABLE
 		####################################################################
 				F_clear
 				F_mkdir
@@ -299,8 +284,22 @@ echo ""
 				F_clear
 		####################################################################
             ;;
-
-          -o) # 3. Full Install LOCAL / UPDATE
+          -d) # 2. Full Install DEV
+		####################################################################
+				F_clear
+				F_mkdir
+#				F_chk_GFrunOffline
+				F_apt
+				F_wget
+				F_unzip
+				F_cpmv
+				F_configfiles
+				F_chownchmod
+				F_extractfit
+				F_clear
+		####################################################################
+            ;;
+          -o) # 3.  UPDATE
 		####################################################################
 				F_clear
 				F_mkdir
@@ -316,9 +315,16 @@ echo ""
 		####################################################################
              ;;
              
-          -c) # 5. Config Garminplugin -(connect.garmin.com)
+          -g) # 5. Config Garminplugin -(connect.garmin.com)
 		####################################################################
 				F_configfiles
+				F_conf_gupload
+		####################################################################
+             ;;
+             
+          -p) # 4. Config PAIRING 
+		####################################################################
+				F_getkey
 		####################################################################
              ;;
 
@@ -334,12 +340,13 @@ echo ""
 				sh $HOME/GFrun/install/gupload.sh -auto
 		####################################################################
              ;;
-
-          -g) # 4. Config Auto-Upload		(gupload) 
+             
+          -dg) #D. Diagnostic......................(GFrun.sh -dg) 
 		####################################################################
-				F_conf_gupload
+				echo " DIAGNOSTIC FONCTION OFF"
 		####################################################################
              ;;
+
 
           -u) #U. UNINSTALL......................(GFrun.sh -x) 
 		####################################################################

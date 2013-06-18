@@ -4,7 +4,7 @@
 #
 #  Auteurs : Le.NoX ;o)
 #  M@il : le.nox @ free.fr
-Version="0.4.1"
+Version="0.4.2"
 #
 #  Licence: GNU GPL
 #
@@ -26,8 +26,8 @@ Version="0.4.1"
 #(DEV    - MASTER) : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ##########################################################################################################################################################
 #
-Vbranche="GFrun"
-#Vbranche="master"
+#Vbranche="GFrun"
+Vbranche="master"
 VChemin="https://github.com/xonel/GFrun/raw/"$Vbranche"/GFrun/install/"
 Vscript=""
 Varg=""
@@ -83,8 +83,8 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
         echo ""
         echo "CONFIG :"
         echo "--------"
-        echo `color 33 "4. Conf-gupload........................(GFrun.sh -g)"`
-        echo `color 33 "5. Conf-Garmin.com.....................(GFrun.sh -c)"`
+        echo `color 33 "4. Conf-Pairing........................(GFrun.sh -p)"`
+        echo `color 33 "5. Conf-Garmin.com.....................(GFrun.sh -g)"`
         echo ""
         echo "ACTIVITIES :"
         echo "-----------"
@@ -92,6 +92,8 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
         echo `color 35 "7. Upload.Fit >> garmin.com ......(gupload    )"`
         echo `color 35 "8. garmin.com >> Local ...........(gconnect   )"`
         echo `color 35 "9. Extract>>Local>>garmin.com.....(GFrun.sh -a)"`
+        echo ""
+        echo `color 32 "D. Diagnostic......................(GFrun.sh -dg)"`
         echo ""
         echo `color 32 "U. UNINSTALL......................(GFrun.sh -u)"`
         echo ""
@@ -140,7 +142,7 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 		#############################
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
-		Varg="-g"
+		Varg="-p"
 		GoScript
 		############################# 
             ;;
@@ -149,7 +151,7 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 		#############################
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
-		Varg="-c"
+		Varg="-g"
 		GoScript
 		#############################
             ;;
@@ -198,13 +200,13 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 		#############################  
             ;;
 
-          [aA])
+          [dD])
 		#############################
-		#VChemin=$VChemin
-		#Vscript="Setup_GDivFix.sh"
-		#
-		#GoScript
-		############################# 
+		VChemin="$VChemin"
+		Vscript="GFrun.sh"
+		Varg="-dg"
+		GoScript
+		#############################  
             ;;
 
           [bB]) 
