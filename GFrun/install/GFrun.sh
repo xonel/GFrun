@@ -134,8 +134,9 @@ echo `color 32 ">>> F_cpmv"`
 	
 	#Garmin-Forerunner-610-Extractor-master
 	cp -Rf $HOME/GFrun/Garmin-Forerunner-610-Extractor-master/* $HOME/GFrun
-	##Convert fit to tcx
+	##Convert fit to tcx & auto-Upload ConnectGarmin
 	cp -f $HOME/GFrun/scripts/40-convert_to_tcx.py $HOME/.config/garmin-extractor/scripts/
+	cp -f $HOME/GFrun/scripts/01-upload-garmin-connect.py $HOME/.config/garmin-extractor/scripts/
 	cp -Rf $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master/fitparse $HOME/GFrun/resources/FIT-to-TCX-master/
 	mv -f $HOME/GFrunOffline.zip $HOME/GFrun/resources/
 	#Icons
@@ -240,6 +241,7 @@ echo `color 32 "============================================="`
 			read -p 'PASSWORD : on connect.garmin.com >> ' Read_password
 
 			echo "[Credentials]" >> $HOME/.guploadrc
+			echo "enabled = True" >> $HOME/.guploadrc
 			echo "username="$Read_user"" >> $HOME/.guploadrc
 			echo "password="$Read_password"" >> $HOME/.guploadrc
 		else

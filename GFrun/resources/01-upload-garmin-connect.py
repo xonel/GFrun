@@ -108,9 +108,9 @@ def main(action, filename):
     if not read:
         return read
     try:
-        if cfg.getboolean("garmin.connect", "enabled"):
-            username = cfg.get("garmin.connect", "username")
-            password = cfg.get("garmin.connect", "password")
+        if cfg.getboolean("Credentials", "enabled"):
+            username = cfg.get("Credentials", "username")
+            password = cfg.get("Credentials", "password")
             client = GarminConnect(username, password)
             client.login()
             client.upload("fit", filename)
