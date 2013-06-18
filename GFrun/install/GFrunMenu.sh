@@ -26,8 +26,8 @@ Version="0.4.1"
 #(DEV    - MASTER) : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ##########################################################################################################################################################
 #
-#Vbranche="GFrun"
-Vbranche="master"
+Vbranche="GFrun"
+#Vbranche="master"
 VChemin="https://github.com/xonel/GFrun/raw/"$Vbranche"/GFrun/install/"
 Vscript=""
 Varg=""
