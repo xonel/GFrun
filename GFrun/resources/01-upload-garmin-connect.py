@@ -41,7 +41,7 @@ import glob
 import logging
 import ConfigParser
 
-DEFAULT_CONFIG_LOCATION = os.path.expanduser("~/.config/garmin-extractor/uploader.cfg")
+DEFAULT_CONFIG_LOCATION = os.path.expanduser("~/.guploadrc")
 _log = logging.getLogger("garmin-upload")
 
 class GarminConnect():
