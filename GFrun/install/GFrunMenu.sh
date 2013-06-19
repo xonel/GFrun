@@ -85,6 +85,7 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
         echo "--------"
         echo `color 33 "4. Conf-Pairing........................(GFrun.sh -p)"`
         echo `color 33 "5. Conf-Garmin.com.....................(GFrun.sh -g)"`
+        echo `color 33 "D. Conf-Diag ..........................(GFrun.sh -dg)"`
         echo ""
         echo "ACTIVITIES :"
         echo "-----------"
@@ -93,7 +94,6 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
         echo `color 35 "8. garmin.com >> Local ...........(gconnect   )"`
         echo `color 35 "9. Extract>>Local>>garmin.com.....(GFrun.sh -a)"`
         echo ""
-        echo `color 32 "D. Diagnostic......................(GFrun.sh -dg)"`
         echo ""
         echo `color 32 "U. UNINSTALL......................(GFrun.sh -u)"`
         echo ""
