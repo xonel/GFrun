@@ -282,7 +282,8 @@ echo ""
 				F_cpmv
 				F_configfiles
 				F_chownchmod
-				F_extractfit
+				F_conf_gupload
+#				F_extractfit
 				F_clear
 		####################################################################
             ;;
@@ -297,7 +298,8 @@ echo ""
 				F_cpmv
 				F_configfiles
 				F_chownchmod
-				F_extractfit
+				F_conf_gupload
+#				F_extractfit
 				F_clear
 		####################################################################
             ;;
