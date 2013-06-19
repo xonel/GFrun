@@ -192,6 +192,92 @@ class Garmin(Application):
                 print "FAILED"
                 return False
 
+    def on_transport(self, beacon):
+
+        directory = self.download_directory()
+        #directory.print_list()
+        
+        # Map local files to FIT file types
+        local_files  = {}
+        for folder, filetype in _directories.items():
+            local_files[filetype] = []
+            path = os.path.join(self._device.get_path(), folder)
+            for filename in os.listdir(path):
+                if os.path.splitext(filename)[1].lower() == ".fit":
+                    local_files[filetype] += [filename]
+
+        # Map remote files to FIT file types
+        remote_files = {}
+        for filetype in _filetypes:
+            remote_files[filetype] = []
+        for fil in directory.get_files():
+            if fil.get_fit_sub_type() in remote_files:
+                remote_files[fil.get_fit_sub_type()] += [fil]
+
+        # Calculate remote and local file diff
+        # TODO: rework when adding delete support
+        downloading, uploading, download_total, upload_total = {}, {}, 0, 0
+        for filetype in _filetypes:
+            downloading[filetype] = filter(lambda fil: self.get_filename(fil)
+                    not in local_files[filetype], remote_files[filetype])
+            download_total += len(downloading[filetype])
+            uploading[filetype] = filter(lambda name: name not in
+                    map(self.get_filename, remote_files[filetype]),
+                    local_files[filetype])
+            upload_total += len(uploading[filetype])
+
+        print "Downloading", download_total, "file(s)", \
+              "and uploading", upload_total, "file(s)"
+
+    def get_filename(self, fil):
+        return str.format("{0}_{1}_{2}.fit",
+                fil.get_date().strftime("%Y-%m-%d_%H-%M-%S"),
+                fil.get_fit_sub_type(), fil.get_fit_file_number())
+
+    def get_filepath(self, fil):
+        path = os.path.join(self._device.get_path(),
+                _filetypes[fil.get_fit_sub_type()])
+        return os.path.join(path, self.get_filename(fil))
+
+
+    def _get_progress_callback(self):
+        def callback(new_progress):
+            diff = int(new_progress * 10.0) - int(callback.progress * 10.0)
+            sys.stdout.write("." * diff)
+            sys.stdout.flush()
+            callback.progress = new_progress
+        callback.progress = 0.0
+        return callback
+
+    def download_file(self, fil):
+
+        sys.stdout.write("Downloading " + self.get_filename(fil) + " [")
+        sys.stdout.flush()
+        def callback(new_progress):
+            diff = int(new_progress * 10.0) - int(callback.progress * 10.0)
+            sys.stdout.write("." * diff)
+            sys.stdout.flush()
+            callback.progress = new_progress
+        callback.progress = 0.0
+        data = self.download(fil.get_index(), self._get_progress_callback())
+        with open(self.get_filepath(fil), "w") as fd:
+            data.tofile(fd)
+        sys.stdout.write("]\n")
+        sys.stdout.flush()
+        
+        self.scriptr.run_download(self.get_filepath(fil), fil.get_fit_sub_type())
+
+    def upload_file(self, typ, filename):
+        sys.stdout.write("Uploading " + filename + " [")
+        sys.stdout.flush()
+        with open(os.path.join(self._device.get_path(), _filetypes[typ],
+                filename), 'r') as fd:
+            data = array.array('B', fd.read())
+        index = self.create(typ, data, self._get_progress_callback())
+        sys.stdout.write("]\n")
+        sys.stdout.flush()
+        return index
+
 def main():
     
     parser = OptionParser()
