@@ -26,6 +26,7 @@
 #from ant.easy.node import Node, Message
 #from ant.easy.channel import Channel
 from ant.fs.manager import Application, AntFSAuthenticationException
+from ant.fs.file import File
 
 import utilities
 import scripting
@@ -33,26 +34,105 @@ import scripting
 import array
 import logging
 import time
+from optparse import OptionParser   
 import os
 import struct
 import sys
 import traceback
 
-ID_VENDOR  = 0x0fcf
-ID_PRODUCT = 0x1008
-
-PRODUCT_NAME = "garmin-extractor"
-
 _logger = logging.getLogger("garmin")
+
+_directories = {
+    ".":          File.Identifier.DEVICE,
+    "activities": File.Identifier.ACTIVITY,
+    "courses":    File.Identifier.COURSE,
+    #"profile":   File.Identifier.?
+    #"goals?":    File.Identifier.GOALS,
+    #"bloodprs":  File.Identifier.BLOOD_PRESSURE,
+    #"summaries": File.Identifier.ACTIVITY_SUMMARY,
+    "settings":   File.Identifier.SETTING,
+    "sports":     File.Identifier.SPORT_SETTING,
+    "totals":     File.Identifier.TOTALS,
+    "weight":     File.Identifier.WEIGHT,
+    "workouts":   File.Identifier.WORKOUT}
+
+_filetypes = dict((v, k) for (k, v) in _directories.items())
+
+
+class Device:
+    
+    class ProfileVersionException(Exception):
+        pass
+    
+    _PROFILE_VERSION      = 1
+    _PROFILE_VERSION_FILE = "profile_version"
+    
+    def __init__(self, basedir, serial, name):
+        self._path   = os.path.join(basedir, str(serial))
+        self._serial = serial
+        self._name   = name
+        
+        # Check profile version, if not a new device
+        if os.path.isdir(self._path):
+            if self.get_profile_version() < self._PROFILE_VERSION:
+                raise Device.ProfileVersionException("Profile version mismatch, too old")
+            elif self.get_profile_version() > self._PROFILE_VERSION:
+                raise Device.ProfileVersionException("Profile version mismatch, to new")
+
+        # Create directories
+        utilities.makedirs_if_not_exists(self._path)
+        for directory in _directories:
+            directory_path = os.path.join(self._path, directory)
+            utilities.makedirs_if_not_exists(directory_path)
+
+        # Write profile version (If none)
+        path = os.path.join(self._path, self._PROFILE_VERSION_FILE)
+        if not os.path.exists(path):
+            with open(path, 'wb') as f:
+                f.write(str(self._PROFILE_VERSION))
+
+    def get_path(self):
+        return self._path
+
+    def get_serial(self):
+        return self._serial
+
+    def get_name(self):
+        return self._name
+
+    def get_profile_version(self):
+        path = os.path.join(self._path, self._PROFILE_VERSION_FILE)
+        try:
+            with open(path, 'rb') as f:
+                return int(f.read())
+        except IOError as e:
+            # TODO
+            return 0
+
+    def read_passkey(self):
+
+        try:
+            with open(os.path.join(self._path, "authfile"), 'rb') as f:
+                d = array.array('B', f.read())
+                _logger.debug("loaded authfile: %r", d)
+                return d
+        except:
+            return None
+            
+    def write_passkey(self, passkey):
+
+        with open(os.path.join(self._path, "authfile"), 'wb') as f:
+            passkey.tofile(f)
+            _logger.debug("wrote authfile: %r, %r", self._serial, passkey)
+
+
+
 
 class Garmin(Application):
 
-    ID_VENDOR  = 0x0fcf
-    ID_PRODUCT = 0x1008
-
     PRODUCT_NAME = "garmin-extractor"
 
-    def __init__(self):
+    def __init__(self, uploading):
         Application.__init__(self)
         
         _logger.debug("Creating directories")
@@ -62,27 +142,9 @@ class Garmin(Application):
         utilities.makedirs_if_not_exists(self.script_dir)
         
         self.scriptr  = scripting.Runner(self.script_dir)
-
-    def read_passkey(self, serial):
-
-        try:
-            path = os.path.join(self.config_dir, str(serial))
-            with open(os.path.join(path, "authfile"), 'rb') as f:
-                d = array.array('B', f.read())
-                _logger.debug("loaded authfile: %r", d)
-                return d
-        except:
-            return None
-            
-    def write_passkey(self, serial, passkey):
-    
-        path = os.path.join(self.config_dir, str(serial))
-        utilities.makedirs_if_not_exists(path)
-        utilities.makedirs_if_not_exists(os.path.join(path, "activities"))
         
-        with open(os.path.join(path, "authfile"), 'wb') as f:
-            passkey.tofile(f)
-            _logger.debug("wrote authfile: %r, %r", serial, passkey)
+        self.device = None
+        self._uploading = uploading
 
     def setup_channel(self, channel):
         channel.set_period(4096)
@@ -103,15 +165,17 @@ class Garmin(Application):
 
     def on_authentication(self, beacon):
         _logger.debug("on authentication")
-        self.serial, self.name = self.authentication_serial()
-        self.passkey = self.read_passkey(self.serial)
-        print "Authenticating with", self.name, "(" + str(self.serial) + ")"
-        _logger.debug("serial %s, %r, %r", self.name, self.serial, self.passkey)
+        serial, name = self.authentication_serial()
+        self._device = Device(self.config_dir, serial, name)
         
-        if self.passkey != None:
+        passkey = self._device.read_passkey()
+        print "Authenticating with", name, "(" + str(serial) + ")"
+        _logger.debug("serial %s, %r, %r", name, serial, passkey)
+        
+        if passkey != None:
             try:
                 print " - Passkey:",
-                self.authentication_passkey(self.passkey)
+                self.authentication_passkey(passkey)
                 print "OK"
                 return True
             except AntFSAuthenticationException as e:
@@ -120,19 +184,20 @@ class Garmin(Application):
         else:
             try:
                 print " - Pairing:",
-                self.passkey = self.authentication_pair(self.PRODUCT_NAME)
-                self.write_passkey(self.serial, self.passkey)
+                passkey = self.authentication_pair(self.PRODUCT_NAME)
+                self._device.write_passkey(passkey)
                 print "OK"
                 return True
             except AntFSAuthenticationException as e:
                 print "FAILED"
                 return False
 
-    def get_filepath(self, fil):
-        return os.path.join(self.config_dir, str(self.serial),
-                "activities", self.get_filename(fil))
-
 def main():
+    
+    parser = OptionParser()
+    parser.add_option("--upload", action="store_true", dest="upload", default=False, help="enable uploading")
+    parser.add_option("--debug", action="store_true", dest="debug", default=False, help="enable debug")
+    (options, args) = parser.parse_args()
     
     # Find out what time it is
     # used for logging filename.
@@ -141,21 +206,34 @@ def main():
     # Set up logging
     logger = logging.getLogger("garmin")
     logger.setLevel(logging.DEBUG)
-    handler = logging.FileHandler(currentTime + "-garmin.log", "w")
-    #handler = logging.StreamHandler()
 
     # If you add new module/logger name longer than the 15 characters just increase the value after %(name).
     # The longest module/logger name now is "garmin.ant.base" and "garmin.ant.easy".
-    handler.setFormatter(logging.Formatter(fmt='%(threadName)-10s %(asctime)s  %(name)-15s  %(levelname)-8s  %(message)s (%(filename)s:%(lineno)d)'))
+    formatter = logging.Formatter(fmt='%(threadName)-10s %(asctime)s  %(name)-15s  %(levelname)-8s  %(message)s (%(filename)s:%(lineno)d)')
 
+    handler = logging.FileHandler(currentTime + "-garmin.log", "w")
+    handler.setFormatter(formatter)
     logger.addHandler(handler)
 
+    if options.debug:
+        logger.addHandler(logging.StreamHandler())
+
     try:
-        g = Garmin()
+        g = Garmin(options.upload)
         g.start()
-    except (Exception, KeyboardInterrupt):
+    except Device.ProfileVersionException as e:
+        print "\nError:", str(e), "\n\nThis means that", \
+                Garmin.PRODUCT_NAME, "found that your data directory " \
+                "stucture was too old or too new. The best option is " \
+                "probably to let", Garmin.PRODUCT_NAME, "recreate your " \
+                "folder by deleting your data folder, after backing it up, " \
+                "and let all your files be redownloaded from your sports " \
+                "watch."
+    except (Exception, KeyboardInterrupt) as e:
         traceback.print_exc()
-        print "Interrupted"
+        for line in traceback.format_exc().splitlines():
+            _logger.error("%r", line)
+        print "Interrupted:", str(e)
         g.stop()
         sys.exit(1)
 
