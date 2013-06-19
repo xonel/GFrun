@@ -53,7 +53,7 @@ read Vchoix
 
 	if [ "$Vchoix" = "YES" ]; then
 			zip -ur  $HOME/GFrun_Activities_Backup.zip  $HOME/.config/garmin-extractor/
-			rm -f  $HOME/.local/share/icons/GFrun.svg $HOME/.local/share/applications/GFrun.desktop /usr/share/icons/GFrun.svg
+			rm -f  $HOME/.guploadrc $HOME/.local/share/icons/GFrun.svg $HOME/.local/share/applications/GFrun.desktop /usr/share/icons/GFrun.svg
 			rm -Rf  $HOME/GFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin
 			echo " Backup Activities DONE : $HOME/GFrun_Activities_Backup.zip "
 		else
