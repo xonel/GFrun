@@ -348,8 +348,19 @@ echo ""
           -dg) #D. Diagnostic......................(GFrun.sh -dg) 
 		####################################################################
 				echo " DIAGNOSTIC FONCTION OFF"
+				echo '==================================================================='
+				echo 'rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile'
+				echo '==================================================================='
+				NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts | grep -v gconnect)
 				rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile
-				usb-devices
+				echo '==================================================================='
+				echo 'usb-devices'
+				echo '==================================================================='
+				usb-devices | grep Vendor=0fcf
+				echo '==================================================================='
+				echo 'cat $HOME/GFrun/resources/IDs'
+				echo 'cat /etc/udev/rules.d/ant-usbstick2.rules'
+				echo '==================================================================='
 				cat $HOME/GFrun/resources/IDs
 				cat /etc/udev/rules.d/ant-usbstick2.rules
 				F_extractfit
