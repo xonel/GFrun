@@ -250,6 +250,12 @@ echo `color 32 "============================================="`
 			echo `color 31 "============================================="`
 						echo "Configuration file already exist"
 			echo `color 31 "============================================="`
+
+			read -p 'Do you want create new one (N/y) ?' Vo
+				if $Vo = [yY]; then
+					rm -f $HOME/.guploadrc
+					F_conf_gupload
+				fi
 	fi
 }
 
@@ -353,16 +359,16 @@ echo ""
 				echo '==================================================================='
 				NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts | grep -v gconnect)
 				rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile
-				echo '==================================================================='
-				echo 'usb-devices'
-				echo '==================================================================='
-				usb-devices | grep Vendor=0fcf
-				echo '==================================================================='
-				echo 'cat $HOME/GFrun/resources/IDs'
-				echo 'cat /etc/udev/rules.d/ant-usbstick2.rules'
-				echo '==================================================================='
-				cat $HOME/GFrun/resources/IDs
-				cat /etc/udev/rules.d/ant-usbstick2.rules
+				echo '===================================================================' >> $HOME/GFrun/resources/DIAG
+				echo 'usb-devices'>> $HOME/GFrun/resources/DIAG
+				echo '==================================================================='>> $HOME/GFrun/resources/DIAG
+				usb-devices | grep Vendor=0fcf >> $HOME/GFrun/resources/DIAG
+				echo '==================================================================='>> $HOME/GFrun/resources/DIAG
+				echo 'cat $HOME/GFrun/resources/IDs'>> $HOME/GFrun/resources/DIAG
+				echo 'cat /etc/udev/rules.d/ant-usbstick2.rules'>> $HOME/GFrun/resources/DIAG
+				echo '==================================================================='>> $HOME/GFrun/resources/DIAG
+				cat $HOME/GFrun/resources/IDs >> $HOME/GFrun/resources/DIAG
+				cat /etc/udev/rules.d/ant-usbstick2.rules >> $HOME/GFrun/resources/DIAG
 				F_extractfit
 		####################################################################
              ;;
