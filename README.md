@@ -6,16 +6,17 @@ GFrun :
 -------
 GFrun est capable de :
    + Simplifier l'installation des différents modules.
-   + Configurer les fichiers de config en fonction de la config utilisateur.
-   + Extraitre le .FIT des montres Garmin Forerunner
+   + Configurer les fichiers de config des differents Scripts.
+   + Extraire le .FIT des montres Garmin Forerunner
    + Convertir les .FIT en .TCX
    + Uploader les "activites" sur http://connect.garmin.com
+   + Downloader toutes les "activites" de http://connect.garmin.com
 
 CONFIG :
 ---------------
 Configuration de test pour le developpement du script "GFrun" :
    + Garmin Forerunner 310XT (Allumée)
-   + Clef Usb ANT (connecté à l'ordinateur) 
+   + Clef Usb ANT FS /ANT+  (ID_product 1008 & 1009) (connecté à l'ordinateur) 
    + Ubuntu 13.10 64bit (25/04/2013 UpDate) / Ubuntu 12.04 64bit
 
 INSTALL :
@@ -32,7 +33,7 @@ DEV Version (branch MASTER) :
 VISUEL :
 ---------
 
-<a href='http://pix.toile-libre.org/upload/original/1367627754.png'><img src='http://pix.toile-libre.org/upload/original/1367627754.png' /></a>
+<a href='https://github.com/xonel/GFrun/raw/master/GFrun/resources/Divers/GFrun042.png'><img src='https://github.com/xonel/GFrun/raw/master/GFrun/resources/Divers/GFrun042.png' /></a>
 
 Modules inside GFrun :
 + garminplugin_0.3.16-1 : ( https://github.com/adiesner/GarminPlugin )
@@ -49,7 +50,7 @@ DONE :
 + install gcpuploader (script config OK / Script upload via GFrunMenu OK)
 + install python-fitparse :  Version MASTER via GIT
 + install and config : 40-convert_to_tcx.py
-+ Multi versions DEV/STABLE/OFFLINE
++ Multi versions DEV/STABLE/UPDATE
 + Icons.svg and GFrun.desktop
 
 TODO :
