@@ -41,7 +41,7 @@ F_Chk_SUDO(){
 		echo `color 31 "======================================================"`
 		echo "Installing - GFrun requires administrator rights."
 		echo `color 31 "======================================================"`
-		sudo
+		sudo sh $HOME/GFrunMenu.sh
 	fi
 }
 
@@ -76,7 +76,7 @@ echo `color 32 ">>> F_mkdir"`
 	mkdir -p $HOME/GFrun/resources/FIT-to-TCX-master/
 	mkdir -p $HOME/.config/garmin-extractor/scripts/
 	mkdir -p $HOME/.config/garminplugin
-	mkdir -p $HOME/.config/garmin-extractor/gconnect/
+	mkdir -p $HOME/.config/garmin-extractor/dump_gconnect/
 }
 
 F_garminplugin_UBU(){
@@ -145,7 +145,7 @@ echo `color 32 ">>> F_unzip"`
 	#gupload
 	cd $HOME/GFrun/resources/ && unzip -o pygupload_20120516.zip
 	#script install
-	cd $HOME && unzip -oC GFrunOffline.zip "GFrun/install/*" "GFrun/resources/gconnect.py" ".config/*" ".local/*" -d $HOME/
+	cd $HOME && unzip -oC GFrunOffline.zip "GFrun/install/*" "GFrun/resources/dump_gconnect.py" ".config/*" ".local/*" -d $HOME/
 }
 
 F_cpmv(){
@@ -185,7 +185,7 @@ F_configfiles(){
 echo `color 32 ">>> F_configfiles"`
 
 	#$NUMERO_DE_MA_MONTRE
-	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts | grep -v gconnect)
+	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts | grep -v dump_gconnect)
 
 	#GarminDevice.xml
 	if [ -n "$NUMERO_DE_MA_MONTRE" ]; then
@@ -290,8 +290,8 @@ F_Dump_Gconnect(){
 	echo ""
 	echo " (10 ~ 20) mins - PLEASE WAIT ... "
 	echo ""
-	cd $HOME/.config/garmin-extractor/gconnect/ && python $HOME/GFrun/resources/gconnect.py
-	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor/gconnect
+	cd $HOME/.config/garmin-extractor/dump_gconnect/ && python $HOME/GFrun/resources/dump_gconnect.py
+	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor/dump_gconnect
 }
 
 F_Diag(){
@@ -299,7 +299,7 @@ F_Diag(){
 	echo '==================================================================='
 	echo 'rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile'
 	echo '==================================================================='
-	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts | grep -v gconnect)
+	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts | grep -v dump_gconnect)
 	rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile
 	
 	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
@@ -456,12 +456,13 @@ echo ""
              
           -gl) #7. Garmin.com .>> Local ..........(GFrun.sh -gl ) 
 		####################################################################
-				F_Upload_Gconnect
+				F_Dump_Gconnect
+
              ;;
              
           -lg) # 8. Local.Fit ..>> Garmin.com .....(GFrun.sh -lg ) 
 		####################################################################
-				F_Dump_Gconnect
+				F_Upload_Gconnect
              ;;
 
           -eg) # 9. Extract.Fit >> Garmin.com......(GFrun.sh -eg ) 
