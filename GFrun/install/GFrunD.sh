@@ -150,10 +150,10 @@ echo `color 32 ">>> F_unzip"`
 
 F_cpmv(){
 echo `color 32 ">>> F_cpmv"`
-	
+
 	cp -f $HOME/GFrun/resources/ant-usbstick2.rules /etc/udev/rules.d/
 	udevadm control --reload-rules
-	
+
 	#Garmin-Forerunner-610-Extractor-master
 	cp -Rf $HOME/GFrun/Garmin-Forerunner-610-Extractor-master/* $HOME/GFrun
 	##Convert fit to tcx & auto-Upload ConnectGarmin

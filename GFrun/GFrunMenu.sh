@@ -1,10 +1,10 @@
-#! /bin/bash
+#!/bin/bash
 #
 # GFrun
 #
 #  Auteurs : Le.NoX ;o)
 #  M@il : le.nox @ free.fr
-Version="0.4.3"
+Version="0.4.2"
 #
 #  Licence: GNU GPL
 #
@@ -38,27 +38,9 @@ color()
 printf '\033[%sm%s\033[m\n' "$@"
 }
 
-F_MenRun(){
-echo ""
-echo "                        "$Vscript $Varg
-echo '              \\\\'
-echo '              \c .('
-echo '               \ _/'
-echo '            ___/(  /('
-echo '           /--/ \\//'
-echo '       __ )/ /\/ \/'
-echo '       -.\  //\\'
-echo '         \\//  \\'
-echo '          \/    \\'
-echo '                 \\'
-echo '  jgs             --'
-echo "                 $Version"
-}
-
 GoScript()
 {
 	VWget=$VChemin""$Vscript
-	F_MenRun
 	echo `color 32 "===================================================="`
 	echo "Wget:" $VWget
 	echo `color 32 "===================================================="`
@@ -95,30 +77,38 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 #        echo "============================"
         echo "INSTALL :"
         echo "---------"
-        echo `color 32 "1. STABLE.........................(GFrun.sh -s .)"`
-        echo `color 32 "2. DEV ...........................(GFrun.sh -d .)"`
-        echo `color 32 "3. UPDATE.........................(GFrun.sh -up )"`
-        echo `color 32 "U. UNINSTALL......................(GFrun.sh -un )"`
+        echo `color 32 "1. STABLE.........................(GFrun.sh -s)"`
+        echo `color 32 "2. DEV ...........................(GFrun.sh -d)"`
+        echo `color 32 "3. UPDATE.........................(GFrun.sh -o)"`
         echo ""
         echo "CONFIG :"
         echo "--------"
-        echo `color 36 "4. Conf-Pairing...................(GFrun.sh -cp )"`
-        echo `color 36 "5. Conf-Garmin.com................(GFrun.sh -cg )"`
-        echo `color 36 "D. Conf-Diag .....................(GFrun.sh -cd )"`
+        echo `color 33 "4. Conf-Pairing........................(GFrun.sh -p)"`
+        echo `color 33 "5. Conf-Garmin.com.....................(GFrun.sh -g)"`
         echo ""
         echo "ACTIVITIES :"
         echo "-----------"
-        echo `color 33 "6. Extract.Fit >> Local...........(GFrun.sh -el )"`
-        echo `color 33 "7. Garmin.com .>> Local ..........(GFrun.sh -gl )"`
-        echo `color 33 "8. Local.Fit ..>> Garmin.com .....(GFrun.sh -lg )"`
-        echo `color 33 "9. Extract.Fit >> Garmin.com......(GFrun.sh -eg )"`
+        echo `color 35 "6. Extract.Fit >> Local...........(GFrun.sh -e)"`
+        echo `color 35 "7. Upload.Fit >> garmin.com ......(gupload    )"`
+        echo `color 35 "8. garmin.com >> Local ...........(gconnect   )"`
+        echo `color 35 "9. Extract>>Local>>garmin.com.....(GFrun.sh -a)"`
+        echo ""
+        echo `color 32 "D. Diagnostic......................(GFrun.sh -dg)"`
+        echo ""
+        echo `color 32 "U. UNINSTALL......................(GFrun.sh -u)"`
         echo ""
 		echo `color 31 "EXIT : Select [x] and [enter]"`
+#        echo `color 32 "7. "`
+#        echo `color 32 "8. "`
+#        echo `color 32 "9. "`
+#        echo `color 32 "="`
+#        echo `color 32 "a. "`
+#        echo `color 32 "b. "`
         echo""
-        echo "-------------┐"
-        echo -n "CHOICE : "
+        echo -n "Faite votre choix : "
+
         read Vchoix
-        echo "-------------┘"
+
         case $Vchoix
         in
           1) 
@@ -143,7 +133,7 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 		#############################
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
-		Varg="-up"
+		Varg="-o"
 		GoScript
 		#############################
 		
@@ -152,7 +142,7 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 		#############################
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
-		Varg="-cp"
+		Varg="-p"
 		GoScript
 		############################# 
             ;;
@@ -161,7 +151,7 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 		#############################
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
-		Varg="-cg"
+		Varg="-g"
 		GoScript
 		#############################
             ;;
@@ -170,7 +160,7 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 		#############################
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
-		Varg="-el"
+		Varg="-e"
 		GoScript
 		#############################           
             ;;
@@ -178,8 +168,8 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
           *7*) 
 		#############################
 		VChemin=$VChemin
-		Vscript="GFrun.sh"
-		Varg="-gl"
+		Vscript="gupload.sh"
+		Varg=""
 		GoScript
 		#############################
             ;;
@@ -187,26 +177,25 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
           *8*) 
 		#############################
 		VChemin=$VChemin
-		Vscript="GFrun.sh"
-		Varg="-lg"
+		Vscript="gconnect.sh"
+		Varg=""
 		GoScript
 		#############################
             ;;
-
           *9*) 
 		#############################
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
-		Varg="-eg"
+		Varg="-a"
 		GoScript
 		#############################  
+		
             ;;
-
           [uU])  
 		#############################
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
-		Varg="-un"
+		Varg="-u"
 		GoScript
 		#############################  
             ;;
@@ -215,10 +204,18 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 		#############################
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
-		Varg="-cd"
+		Varg="-dg"
 		GoScript
 		#############################  
+            ;;
 
+          [bB]) 
+		#############################
+		#VChemin=$VChemin
+		#Vscript="Setup_GDivFix.sh"
+		#
+		#GoScript
+		############################# 
             ;;
 
           [xX]) # exit
@@ -228,15 +225,14 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 				echo "    (o o)         (o o)      -  (OXO)  -    - (o o) -       (o o)     "
 				echo "ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-"
 				echo ""
-				echo ".........................        Bye       ..........................."
+				echo ".........................PROCEDURE TERMINEE..........................."
 				sleep 3
             ;;
 
           *) # anything else
 		#################################################################### 
             echo
-            echo "\"$Vchoix\" NO VALID ENTRY - GFrunMenu.sh"
-
+            echo "\"$Vchoix\" NO VALID ENTRY"
 			if [ -f $HOME/GFrunMenu.sh ]; then
 				sleep 3
 				sh $HOME/GFrunMenu.sh
