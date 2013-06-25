@@ -38,9 +38,27 @@ color()
 printf '\033[%sm%s\033[m\n' "$@"
 }
 
+F_MenRun(){
+echo ""
+echo "                        "$Vscript $Varg
+echo '              \\\\'
+echo '              \c .('
+echo '               \ _/'
+echo '            ___/(  /('
+echo '           /--/ \\//'
+echo '       __ )/ /\/ \/'
+echo '       -.\  //\\'
+echo '         \\//  \\'
+echo '          \/    \\'
+echo '                 \\'
+echo '  jgs             --'
+echo "                 $Version"
+}
+
 GoScript()
 {
 	VWget=$VChemin""$Vscript
+	F_MenRun
 	echo `color 32 "===================================================="`
 	echo "Wget:" $VWget
 	echo `color 32 "===================================================="`
@@ -97,10 +115,10 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
         echo ""
 		echo `color 31 "EXIT : Select [x] and [enter]"`
         echo""
-        echo -n "Faite votre choix : "
-
+        echo "-------------┐"
+        echo -n "CHOICE : "
         read Vchoix
-
+        echo "-------------┘"
         case $Vchoix
         in
           1) 
@@ -224,7 +242,8 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
           *) # anything else
 		#################################################################### 
             echo
-            echo "\"$Vchoix\" NO VALID ENTRY"
+            echo "\"$Vchoix\" NO VALID ENTRY - GFrunMenu.sh"
+
 			if [ -f $HOME/GFrunMenu.sh ]; then
 				sleep 3
 				sh $HOME/GFrunMenu.sh

@@ -459,7 +459,7 @@ echo ""
           *) # anything else
 		####################################################################
             echo
-            echo "\"$1\" NO VALID ENTRY "
+            echo "\"$1\" NO VALID ENTRY  - Gfrun.sh"
             sleep 3
             ;;
         esac
