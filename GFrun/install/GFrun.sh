@@ -111,7 +111,7 @@ echo `color 32 ">>> F_apt"`
 	dpkg -l > /tmp/pkg-before.txt
 	
 	sudo apt-get upgrade
-	sudo apt-get install -y uname lsb-release python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial
+	sudo apt-get install -y lsb-release python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial
 	pip install pyusb
 
 		if [ "$(lsb_release -is)" = "ubuntu" ]; then
@@ -274,10 +274,12 @@ echo `color 32 "============================================="`
 			echo `color 31 "============================================="`
 
 			read -p 'Do you want create new one (N/y) ?' Vo
-				if $Vo = [yY]; then
-					rm -f $HOME/.guploadrc
-					F_conf_gupload
-				fi
+			case "$Vo" in
+			 y|Y)	rm -f $HOME/.guploadrc
+					F_conf_gupload;;
+			 n|N) echo "OK";;
+			 *) echo "not an answer";;
+			esac
 	fi
 }
 

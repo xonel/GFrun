@@ -95,25 +95,25 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 #        echo "============================"
         echo "INSTALL :"
         echo "---------"
-        echo `color 32 "1. STABLE.........................(GFrun.sh -s .)"`
-        echo `color 32 "2. DEV ...........................(GFrun.sh -d .)"`
-        echo `color 32 "3. UPDATE.........................(GFrun.sh -up )"`
-        echo `color 32 "U. UNINSTALL......................(GFrun.sh -un )"`
+        echo `color 32 " 1. STABLE.........................(GFrun.sh -s .)"`
+        echo `color 32 " 2. DEV ...........................(GFrun.sh -d .)"`
+        echo `color 32 " 3. UPDATE.........................(GFrun.sh -up )"`
+        echo `color 32 " U. UNINSTALL......................(GFrun.sh -un )"`
         echo ""
         echo "CONFIG :"
         echo "--------"
-        echo `color 36 "4. Conf-Pairing...................(GFrun.sh -cp )"`
-        echo `color 36 "5. Conf-Garmin.com................(GFrun.sh -cg )"`
-        echo `color 36 "D. Conf-Diag .....................(GFrun.sh -cd )"`
+        echo `color 36 " 4. Conf-Pairing...................(GFrun.sh -cp )"`
+        echo `color 36 " 5. Conf-Garmin.com................(GFrun.sh -cg )"`
+        echo `color 36 " D. Conf-Diag .....................(GFrun.sh -cd )"`
         echo ""
         echo "ACTIVITIES :"
         echo "-----------"
-        echo `color 33 "6. Extract.Fit >> Local...........(GFrun.sh -el )"`
-        echo `color 33 "7. Garmin.com .>> Local ..........(GFrun.sh -gl )"`
-        echo `color 33 "8. Local.Fit ..>> Garmin.com .....(GFrun.sh -lg )"`
-        echo `color 33 "9. Extract.Fit >> Garmin.com......(GFrun.sh -eg )"`
+        echo `color 33 " 6. Extract.Fit >> Local...........(GFrun.sh -el )"`
+        echo `color 33 " 7. Garmin.com .>> Local ..........(GFrun.sh -gl )"`
+        echo `color 33 " 8. Local.Fit ..>> Garmin.com .....(GFrun.sh -lg )"`
+        echo `color 33 " 9. Extract.Fit >> Garmin.com......(GFrun.sh -eg )"`
         echo ""
-        echo `color 31 "X. Exit ..........................(GFrun Bye :0 )"`
+        echo `color 31 " X. Exit ..........................(GFrun Bye :0 )"`
         echo""
         echo "-------------┐"
         echo -n "CHOICE : "
