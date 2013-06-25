@@ -33,7 +33,7 @@ DEV Version (branch MASTER) :
 VISUEL :
 ---------
 
-<a href='https://github.com/xonel/GFrun/raw/master/GFrun/resources/Divers/GFrun042.png'><img src='https://github.com/xonel/GFrun/raw/master/GFrun/resources/Divers/GFrun042.png' /></a>
+<a href='https://github.com/xonel/GFrun/raw/master/GFrun/resources/Divers/GFrun.png'><img src='https://github.com/xonel/GFrun/raw/master/GFrun/resources/Divers/GFrun.png' /></a>
 
 Modules inside GFrun :
 + garminplugin_0.3.16-1 : ( https://github.com/adiesner/GarminPlugin )
