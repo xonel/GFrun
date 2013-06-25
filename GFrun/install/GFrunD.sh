@@ -35,11 +35,15 @@ color()
 printf '\033[%sm%s\033[m\n' "$@"
 }
 
-echo `color 32 ">>> SUDO_USER"`
-
-if [ ! "$SUDO_USER" ]; then
-	echo "Installing GFrun requires administrator rights."
-fi
+F_Chk_SUDO(){
+	echo `color 32 ">>> SUDO_USER"`
+	if [ ! "$SUDO_USER" ]; then
+		echo `color 31 "======================================================"`
+		echo "Installing - GFrun requires administrator rights."
+		echo `color 31 "======================================================"`
+		sudo
+	fi
+}
 
 F_uninstall(){
 echo " BACKUP WILL BE DONE INSIDE : " $HOME"/GFrun_Activities_Backup.zip "
@@ -63,7 +67,6 @@ read Vchoix
 
 F_clear(){
 echo `color 32 ">>> F_clear"`
-	#Nettoyage
 	rm -f $HOME/GFrun.sh* $HOME/master.zip* $HOME/GFrun/resources/FIT-to-TCX-master/master.zip* $HOME/GFrun/resources/master.zip* $HOME/GFrun/resources/pygupload_20120516.zip* /tmp/ligneCmd.sh*
 	rm -Rf  $HOME/GFrun/resources/FIT-to-TCX-master/python-fitparse-master $HOME/GFrun/Garmin-Forerunner-610-Extractor-master
 }
@@ -76,32 +79,51 @@ echo `color 32 ">>> F_mkdir"`
 	mkdir -p $HOME/.config/garmin-extractor/gconnect/
 }
 
+F_garminplugin_UBU(){
+	if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list
+	 then
+		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin
+		sudo apt-get update
+		sudo apt-get install -y garminplugin
+	else
+		sudo apt-get update
+		sudo apt-get install -y garminplugin
+	fi
+}
+
+F_garminplugin_DEB(){
+	MACHINE_TYPE=`uname -m`
+	if [ ${MACHINE_TYPE} == 'x86_64' ]; then
+	  Varchi='~raring_amd64.deb'
+	else
+	  Varchi='~raring_i386.deb'
+	fi
+
+	wget http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu/pool/main/g/garminplugin/garminplugin_0.3.17-1$Varchi
+	sudo dpkg -i garminplugin_0.3.17-1$Varchi
+
+	mkdir -p $HOME/.mozilla/plugins
+	ln -s /usr/lib/mozilla/plugins/npGarminPlugin.so $HOME/.mozilla/plugins/npGarminPlugin.so
+}
+
 F_apt(){
 echo `color 32 ">>> F_apt"`
 	dpkg -l > /tmp/pkg-before.txt
 	
-	sudo apt-get install -y lsb-release python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial
-	
-	#[repos]
-	if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list
-	 then
-		if [ "$(lsb_release -is)" = "ubuntu" ]; then
-			sudo apt-add-repository -y ppa:andreas-diesner/garminplugin
-		else
-			echo "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list
-			sudo apt-get update >> /dev/null 2> /tmp/${NAME}_apt_add_key.txt
-			key=`cat /tmp/${NAME}_apt_add_key.txt | cut -d":" -f6 | cut -d" " -f3`
-			apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $key
-			rm -rf /tmp/${NAME}_apt_add_key.txt
-		fi
-	fi
-
-	#[packages]
-	sudo apt-get install -y garminplugin
 	sudo apt-get upgrade
+	sudo apt-get install -y uname lsb-release python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial
 	pip install pyusb
+
+		if [ "$(lsb_release -is)" = "ubuntu" ]; then
+			F_garminplugin_UBU
+		fi
+		
+		if [ "$(lsb_release -is)" = "debian" ]; then
+			F_garminplugin_DEB
+		fi
+
 	dpkg -l > /tmp/pkg-after.txt
-	}
+}
 
 F_wget(){
 echo `color 32 ">>> F_wget"`
@@ -154,7 +176,7 @@ echo `color 32 ">>> F_extractfit"`
 
 F_getkey(){
 echo `color 32 ">>> F_getkey"`
-	#Extractor FIT
+	#Pairing Key
 	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/ && python ./getkey.py'
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
 }
@@ -191,7 +213,7 @@ echo `color 32 ">>> F_configfiles"`
 			F_getkey
 			sleep 3
 			F_configfiles
-			sleep 5 #Delay USB-ANT time out connect 
+			sleep 3 #Delay USB-ANT time out connect 
 		fi
 	fi
 
@@ -368,6 +390,7 @@ echo ""
 
           -s) # 1. STABLE.........................(GFrun.sh -s .)
 		####################################################################
+				F_Chk_SUDO
 				F_clear
 				F_mkdir
 				F_chk_GFrunOffline
@@ -383,6 +406,7 @@ echo ""
             ;;
           -d) #2. DEV ...........................(GFrun.sh -d .)
 		####################################################################
+				F_Chk_SUDO
 				F_clear
 				F_mkdir
 #				F_chk_GFrunOffline
@@ -398,6 +422,7 @@ echo ""
             ;;
           -up) # 3. UPDATE.........................(GFrun.sh -up)
 		####################################################################
+				F_Chk_SUDO
 				F_clear
 				F_mkdir
 				F_chk_GFrunOffline
@@ -459,7 +484,7 @@ echo ""
           *) # anything else
 		####################################################################
             echo
-            echo "\"$1\" NO VALID ENTRY  - Gfrun.sh"
+            echo "\"$1\" NO VALID ENTRY  - GFrun.sh"
             sleep 3
             ;;
         esac
