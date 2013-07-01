@@ -295,23 +295,26 @@ F_Dump_Gconnect(){
 }
 
 F_Diag(){
-	echo " DIAGNOSTIC FONCTION"
+	echo " DIAG FONCTION"
 	echo '==================================================================='
 	echo 'rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile'
 	echo '==================================================================='
 	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts | grep -v dump_gconnect)
 	rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile
 	
+	echo "GFrun - $Vbranche - $Version ">> $HOME/GFrun/resources/DIAG
+	echo '='>> $HOME/GFrun/resources/DIAG
 	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
 	echo 'usb-devices'>> $HOME/GFrun/resources/DIAG
 	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
 	usb-devices | grep Vendor=0fcf >> $HOME/GFrun/resources/DIAG
-	
 	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
 	echo 'cat $HOME/GFrun/resources/IDs'>> $HOME/GFrun/resources/DIAG
+	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
 	echo 'cat /etc/udev/rules.d/ant-usbstick2.rules'>> $HOME/GFrun/resources/DIAG
 	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
 	cat $HOME/GFrun/resources/IDs >> $HOME/GFrun/resources/DIAG
+	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
 	cat /etc/udev/rules.d/ant-usbstick2.rules >> $HOME/GFrun/resources/DIAG
 }
 
