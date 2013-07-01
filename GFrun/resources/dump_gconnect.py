@@ -198,8 +198,8 @@ else:
     username = raw_input("Garmin Connect username: ")
     password = getpass.getpass()
 
-print "Extract FIT >> ~/.config/garmin-extractor/gconnect/"
-directory = "~/.config/garmin-extractor/gconnect/"
+print "Extract FIT >> ~/.config/garmin-extractor/dump_gconnect/"
+directory = "~/.config/garmin-extractor/dump_gconnect/"
 directory = '.' if directory == '' else directory
 directory = os.path.expanduser(directory)
 print "Dump on going ..."
