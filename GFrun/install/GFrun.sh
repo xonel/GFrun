@@ -302,20 +302,28 @@ F_Diag(){
 	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts | grep -v dump_gconnect)
 	rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile
 	
-	echo "GFrun - $Vbranche - $Version ">> $HOME/GFrun/resources/DIAG
-	echo '='>> $HOME/GFrun/resources/DIAG
+	echo "GFrun - $Vbranche - $Version " > $HOME/GFrun/resources/DIAG
+	uname -a >> $HOME/GFrun/resources/DIAG
+	lsb_release -a >> $HOME/GFrun/resources/DIAG
 	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
 	echo 'usb-devices'>> $HOME/GFrun/resources/DIAG
 	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
 	usb-devices | grep Vendor=0fcf >> $HOME/GFrun/resources/DIAG
 	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
 	echo 'cat $HOME/GFrun/resources/IDs'>> $HOME/GFrun/resources/DIAG
+	cat $HOME/GFrun/resources/IDs >> $HOME/GFrun/resources/DIAG
 	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
 	echo 'cat /etc/udev/rules.d/ant-usbstick2.rules'>> $HOME/GFrun/resources/DIAG
 	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
-	cat $HOME/GFrun/resources/IDs >> $HOME/GFrun/resources/DIAG
-	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
 	cat /etc/udev/rules.d/ant-usbstick2.rules >> $HOME/GFrun/resources/DIAG
+	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
+	ls /etc/udev/rules.d/ >> $HOME/GFrun/resources/DIAG
+	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
+	ls -l /dev/ttyUSB* >> $HOME/GFrun/resources/DIAG
+	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
+	lsmod >> $HOME/GFrun/resources/DIAG
+	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
+
 }
 
 F_Upload_Gconnect_GoScript()
