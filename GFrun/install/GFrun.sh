@@ -4,7 +4,7 @@
 #
 #  Auteurs : Le.NoX ;o)
 #  M@il : le.nox @ free.fr
-Version="0.4.3"
+Version="0.4.4"
 #
 #  Licence: GNU GPL
 #
@@ -323,7 +323,7 @@ F_Diag(){
 	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
 	lsmod >> $HOME/GFrun/resources/DIAG
 	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
-
+	dpkg -l | grep libusb >> $HOME/GFrun/resources/DIAG
 }
 
 F_Upload_Gconnect_GoScript()
