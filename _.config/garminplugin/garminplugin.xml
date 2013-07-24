@@ -2,8 +2,8 @@
 <GarminPlugin logfile="MON_HOME/garminplugin.log" level="DEBUG">
     <Devices>
         <Device enabled="true">
-            <Name>Forerunner 310XT</Name>
-            <StoragePath>MON_HOME/.config/garmin-extractor/</StoragePath>
+            <Name>GFrun</Name>
+            <StoragePath>MON_HOME/.config/garminplugin/</StoragePath>
             <StorageCommand></StorageCommand>
             <FitnessDataPath></FitnessDataPath>
             <GpxDataPath></GpxDataPath>
