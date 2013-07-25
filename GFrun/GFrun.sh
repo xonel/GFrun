@@ -23,8 +23,7 @@ Version="0.5.0"
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##########################################################################################################################################################
-#(STABLE - GFrun)  : wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo sh ./GFrun.sh
-#(DEV    - MASTER) : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo sh ./GFrun.sh
+#(STABLE    - MASTER) : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo sh ./GFrun.sh -cli
 ##########################################################################################################################################################
 #
 Vbranche="V05"
@@ -69,12 +68,13 @@ GoScript()
 	echo ""
 	echo ""
 	if [ ! -f $HOME/GFrun/$Vscript ]; then
-			cd $HOME/ && wget -N $VWget && sleep 3 && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
+			cd $HOME/ && wget -N $VWget && sleep 3 && chmod +x ./$Vscript && xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e '/bin/sh ./$Vscript $Varg'
 		else
-			cd $HOME/GFrun/ && chmod +x ./$Vscript && /bin/sh ./$Vscript $Varg
+			cd $HOME/GFrun/ && chmod +x ./$Vscript && xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e '/bin/sh ./$Vscript $Varg'
 	fi
 }
 
+F_GFrunMenu(){
 ####################################################################################
 #                                                  Menu
 ####################################################################################
@@ -226,13 +226,7 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
             ;;
 
           [xX]) # exit
-				echo ""
-				echo "                                 !!!            o           _   _     "
-				echo "    -*~*-          ###           _ _           /_\          \\-//     "
-				echo "    (o o)         (o o)      -  (OXO)  -    - (o o) -       (o o)     "
-				echo "ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-"
-				echo ""
-				echo ".........................        Bye       ..........................."
+				echo "- EXIT GFrunMenu - "          
 				sleep 3
             ;;
 
@@ -243,20 +237,27 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 
 			if [ -f $HOME/GFrun.sh ]; then
 				sleep 3
-				sh $HOME/GFrun.sh
+				/bin/sh $HOME/GFrun.sh -cli
 			fi
             ;;
         esac
 
 ######################################################## Fin_GFrunMenu
+}
 
 F_Chk_SUDO(){
 	echo `color 32 ">>> SUDO_USER"`
 	if [ ! "$SUDO_USER" ]; then
 		echo `color 31 "======================================================"`
-		echo "Installing - GFrun requires administrator rights."
+		echo "....................... Install GFrun - requires ............."
 		echo `color 31 "======================================================"`
-		sudo sh $HOME/GFrun.sh
+		echo '1) SUDO (administrator rights)'
+		echo '2) Debian 7 / ubuntu 12+' 
+		echo '3) Python 2.7+'
+		echo '4) PyUSB 1.0+'
+		echo `color 31 "======================================================"`
+		
+		xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'sudo /bin/sh $HOME/GFrun.sh -cli'
 	fi
 }
 
@@ -283,7 +284,6 @@ read Vchoix
 F_clear(){
 echo `color 32 ">>> F_clear"`
 	rm -f $HOME/GFrun.sh* $HOME/master.zip* $HOME/GFrun/tools/FIT-to-TCX/master.zip* $HOME/GFrun/tools/master.zip* $HOME/GFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh*
-	rm -Rf  $HOME/GFrun/tools/FIT-to-TCX/python-fitparse-master $HOME/GFrun/Garmin-Forerunner-610-Extractor-master
 }
 
 F_mkdir(){
@@ -324,8 +324,8 @@ echo `color 32 ">>> F_apt"`
 	echo $(date +%Y-%m-%d_%H%M)"= BEFORE ==========================" >> $HOME/GFrun_Install.log
 	dpkg -l >> $HOME/GFrun_Install.log
 	
-	sudo apt-get upgrade
-	sudo apt-get install -y lsb-release python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial
+	sudo apt-get update
+	sudo apt-get install -y git lsb-release python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial
 	pip install pyusb
 
 		if [ "$(lsb_release -is)" = "ubuntu" ]; then
@@ -339,13 +339,18 @@ echo `color 32 ">>> F_apt"`
 	dpkg -l >> $HOME/GFrun_Install.log
 }
 
+F_git(){
+cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
+cd $HOME/GFrun && mv -f _.config/ $HOME/.config/ _.local/ $HOME/.local/
+}
+
 F_wget(){
 echo `color 32 ">>> F_wget"`
 	cd $HOME && wget -N https://github.com/Tigge/Garmin-Forerunner-610-Extractor/archive/drivers.zip && mv drivers.zip master.zip
 	cd $HOME/GFrun/tools/ && wget -N https://github.com/Tigge/FIT-to-TCX_master/archive/master.zip
 	cd $HOME/GFrun/tools/FIT-to-TCX/ && wget -N https://github.com/dtcooper/python-fitparse/archive/master.zip
 	cd $HOME/GFrun/tools/ && wget -N http://freefr.dl.sourceforge.net/project/gcpuploader/pygupload_20120516.zip
-	cd $HOME && wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrunOffline.zip
+	cd $HOME && wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrunUpdate.zip
 }
 
 F_unzip(){
@@ -359,7 +364,7 @@ echo `color 32 ">>> F_unzip"`
 	#gupload
 	cd $HOME/GFrun/tools/ && unzip -o pygupload_20120516.zip
 	#script install
-	cd $HOME && unzip -oC GFrunOffline.zip "GFrun/install/*" "GFrun/tools/dump_gconnect.py" ".config/*" ".local/*" -d $HOME/
+	cd $HOME && unzip -oC GFrunUpdate.zip "GFrun/install/*" "GFrun/tools/dump_gconnect.py" ".config/*" ".local/*" -d $HOME/
 }
 
 F_cpmv(){
@@ -374,7 +379,7 @@ echo `color 32 ">>> F_cpmv"`
 	cp -f $HOME/GFrun/scripts/40-convert_to_tcx.py $HOME/.config/garmin-extractor/scripts/
 	cp -f $HOME/GFrun/scripts/01-upload-garmin-connect.py $HOME/.config/garmin-extractor/scripts/
 	cp -Rf $HOME/GFrun/tools/FIT-to-TCX/python-fitparse-master/fitparse $HOME/GFrun/tools/FIT-to-TCX/
-	mv -f $HOME/GFrunOffline.zip $HOME/GFrun/tools/
+	mv -f $HOME/GFrunUpdate.zip $HOME/GFrun/tools/
 	#Icons
 	cp -f $HOME/.local/share/icons/GFrun.svg /usr/share/icons/
 	#getkey.py
@@ -384,14 +389,14 @@ echo `color 32 ">>> F_cpmv"`
 F_extractfit(){
 echo `color 32 ">>> F_extractfit"`
 	#Extractor FIT
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/ && python ./garmin.py'
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/tools/extractor/ && python ./garmin.py'
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
 }
 
 F_getkey(){
 echo `color 32 ">>> F_getkey"`
 	#Pairing Key
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/ && python ./getkey.py'
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/tools/ && python ./extractor_getkey.py'
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
 }
 
@@ -444,23 +449,16 @@ F_chownchmod(){
 echo `color 32 ">>> F_chownchmod"`
 	#Chown Chmod
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-extractor $HOME/GFrun $HOME/.local/share/
-	chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/GFrun/install/ $HOME/GFrun/scripts/ 
+	chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/GFrun/tools/ 
 }
 
-F_chk_GFrunOffline(){
-echo `color 32 ">>> F_chk_GFrunOffline"`
-if [ -f $HOME/GFrunOffline.zip ] ; then
-		unzip -o $HOME/GFrunOffline.zip -d $HOME/
+F_GFrun_Update(){
+echo `color 32 ">>> F_GFrun_Update"`
+if [ -f $HOME/GFrunUpdate.zip ] ; then
+		unzip -o $HOME/GFrunUpdate.zip -d $HOME/
 	else
-		if [ -f $HOME/GFrun/tools/GFrunOffline.zip ] ; then
-			unzip -o $HOME/GFrun/tools/GFrunOffline.zip -d $HOME/
-			else
-				cd $HOME && wget -r https://github.com/xonel/GFrun/raw/$Vbranche/_.config && mv -f _.config/ .config/
-				cd $HOME && wget -r https://github.com/xonel/GFrun/raw/$Vbranche/_.local && mv -f _.local/ .local/
-				cd $HOME && wget -r https://github.com/xonel/GFrun/raw/$Vbranche/GFrun
-
-				#cd $HOME && wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrunOffline.zip && unzip -o GFrunOffline.zip
-				#unzip -o $HOME/GFrunOffline.zip -d $HOME/
+		if [ -f $HOME/GFrun/tools/GFrunUpdate.zip ] ; then
+				unzip -o $HOME/GFrun/tools/GFrunUpdate.zip -d $HOME/
 		fi
 fi
 }
@@ -604,7 +602,6 @@ read Vchoix
             ;;
         esac
 }
-
 ## MAIN ##
 echo `color 32 "========================================================================"`
 echo "#     :......::::..::::::::..:::::..:::.......:::..::::..::"
@@ -617,7 +614,7 @@ echo "#       ##::: ##:: ##::::::: ##::. ##:: ##:::: ##: ##:. ###:"
 echo "#     .  ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:"
 echo "#     :......::::..::::::::..:::::..:::.......:::..::::..::"
 echo `color 32 "======================================================================="`
-echo "Arg :.........>>>>>>>" $1 "<<<<<<................"
+echo "Arg :..............>>>>>>> GFrun -"$1" <<<<<<................"
 echo ""
 echo ""
 	case $1
@@ -627,15 +624,16 @@ echo ""
 		####################################################################
 				F_Chk_SUDO
 				F_clear
-				F_mkdir
-				F_chk_GFrunOffline
+#				F_mkdir
 				F_apt
+				F_git
+				F_GFrun_Update
 #				F_wget
-				F_unzip
-				F_cpmv
+#				F_unzip
+#				F_cpmv
 				F_configfiles
-				F_chownchmod
 				F_conf_gupload
+				F_chownchmod
 #				F_extractfit
 				F_clear
             ;;
@@ -644,8 +642,9 @@ echo ""
 				F_Chk_SUDO
 				F_clear
 				F_mkdir
-#				F_chk_GFrunOffline
+#				F_GFrun_Update
 				F_apt
+#				F_git
 				F_wget
 				F_unzip
 				F_cpmv
@@ -660,7 +659,7 @@ echo ""
 				F_Chk_SUDO
 				F_clear
 				F_mkdir
-				F_chk_GFrunOffline
+				F_GFrun_Update
 #				F_apt
 #				F_wget
 				F_unzip
@@ -716,6 +715,11 @@ echo ""
 				F_uninstall
 				F_clear
              ;;
+             
+          -cli) #. GFrunMenu CLI......................(GFrun.sh -cli )
+		####################################################################
+				F_GFrunMenu
+             ;;
 
           *) # anything else
 		####################################################################
@@ -724,6 +728,7 @@ echo ""
             sleep 3
             ;;
         esac
+
 echo ".........................       GFrun       ..........................."
 echo "                                 !!!            o           _   _     "
 echo "    -*~*-          ###           _ _           /_\          \\-//     "
