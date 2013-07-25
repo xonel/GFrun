@@ -44,7 +44,7 @@ printf '\033[%sm%s\033[m\n' "$@"
 F_MenRun(){
 echo ""
 echo "                        "$Vscript $Varg
-echo '              \\\\'
+echo '              "\\""\\"'
 echo '              |c .'
 echo '               \ _/'
 echo '            ___/(  /('
@@ -64,14 +64,19 @@ GoScript()
 	F_MenRun
 	echo `color 32 "===================================================="`
 	echo "Wget:" $VWget
+	echo "$Vscript $Varg"
 	echo `color 32 "===================================================="`
 	echo ""
 	echo ""
-	if [ ! -f $HOME/GFrun/$Vscript ]; then
-			cd $HOME/ && wget -N $VWget && sleep 3 && chmod +x ./$Vscript && xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e '/bin/sh ./$Vscript $Varg'
-		else
-			cd $HOME/GFrun/ && chmod +x ./$Vscript && xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e '/bin/sh ./$Vscript $Varg'
+if [ -f $HOME/$Vscript ]; then
+	cd $HOME/ && chmod +x ./$Vscript && xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e '/bin/sh ./$Vscript $Varg'
+else
+	if [ -f $HOME/GFrun/$Vscript ]; then
+		cd $HOME/GFrun/ && chmod +x ./$Vscript && xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e '/bin/sh ./$Vscript $Varg'
+	else
+		cd $HOME/ && wget -N $VWget && sleep 3 && chmod +x ./$Vscript && xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e '/bin/sh ./$Vscript $Varg'
 	fi
+fi
 }
 
 F_GFrunMenu(){
