@@ -245,7 +245,6 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 				sleep 3
 				sh $HOME/GFrun.sh
 			fi
-		#################################################################### 
             ;;
         esac
 
@@ -289,10 +288,8 @@ echo `color 32 ">>> F_clear"`
 
 F_mkdir(){
 echo `color 32 ">>> F_mkdir"`
-	mkdir -p $HOME/GFrun/tools/FIT-to-TCX/
 	mkdir -p $HOME/.config/garmin-extractor/scripts/
 	mkdir -p $HOME/.config/garminplugin
-	mkdir -p $HOME/.config/garmin-extractor/dump_gconnect/
 }
 
 F_garminplugin_UBU(){
@@ -324,7 +321,8 @@ F_garminplugin_DEB(){
 
 F_apt(){
 echo `color 32 ">>> F_apt"`
-	dpkg -l > /tmp/pkg-before.txt
+	echo $(date +%Y-%m-%d_%H%M)"= BEFORE ==========================" >> $HOME/GFrun_Install.log
+	dpkg -l >> $HOME/GFrun_Install.log
 	
 	sudo apt-get upgrade
 	sudo apt-get install -y lsb-release python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial
@@ -337,8 +335,8 @@ echo `color 32 ">>> F_apt"`
 		if [ "$(lsb_release -is)" = "debian" ]; then
 			F_garminplugin_DEB
 		fi
-
-	dpkg -l > /tmp/pkg-after.txt
+	echo $(date +%Y-%m-%d_%H%M)"= AFTER ==========================" >> $HOME/GFrun_Install.log
+	dpkg -l >> $HOME/GFrun_Install.log
 }
 
 F_wget(){
@@ -457,9 +455,9 @@ if [ -f $HOME/GFrunOffline.zip ] ; then
 		if [ -f $HOME/GFrun/tools/GFrunOffline.zip ] ; then
 			unzip -o $HOME/GFrun/tools/GFrunOffline.zip -d $HOME/
 			else
-				cd $HOME && wget https://github.com/xonel/GFrun/raw/$Vbranche/_.config && mv -f _.config/ .config/
-				cd $HOME && wget https://github.com/xonel/GFrun/raw/$Vbranche/_.local && mv -f _.local/ .local/
-				cd $HOME && wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrun
+				cd $HOME && wget -r https://github.com/xonel/GFrun/raw/$Vbranche/_.config && mv -f _.config/ .config/
+				cd $HOME && wget -r https://github.com/xonel/GFrun/raw/$Vbranche/_.local && mv -f _.local/ .local/
+				cd $HOME && wget -r https://github.com/xonel/GFrun/raw/$Vbranche/GFrun
 
 				#cd $HOME && wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrunOffline.zip && unzip -o GFrunOffline.zip
 				#unzip -o $HOME/GFrunOffline.zip -d $HOME/
@@ -511,8 +509,8 @@ F_Dump_Gconnect(){
 	echo ""
 	echo " (10 ~ 20) mins - PLEASE WAIT ... "
 	echo ""
-	mkdir $HOME/GFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d)
-	cd $HOME/GFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d) && python $HOME/GFrun/tools/dump_gconnect.py
+	mkdir $HOME/GFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M)
+	cd $HOME/GFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M) && python $HOME/GFrun/tools/dump_gconnect.py
 	chown -R $SUDO_USER:$SUDO_USER $HOME/GFrun/forerunners/dump_gconnect/
 }
 

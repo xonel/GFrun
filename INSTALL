@@ -4,6 +4,7 @@ INSTALL :
 
 #  Auteurs : Le.NoX ;o)
 #  M@il : le.nox @ free.fr
+#  https://github.com/xonel/GFrun
 #
 #  Licence: GNU GPL
 #
@@ -29,12 +30,6 @@ INSTALL :
 
 CHANGE :
 ----------
-
-0.5.0 
-	+ Rewrite GFrun.sh.
-	+ Add. GFrunMenu inside GFrun
-	+ Modif. Tree folders
-	+ Remove GFrunOffline.zip  
 
 0.4.3
 
