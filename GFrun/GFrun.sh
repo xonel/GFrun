@@ -345,8 +345,10 @@ echo `color 32 ">>> F_apt"`
 }
 
 F_git(){
+	echo `color 32 ">>> F_git"`
 cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
-cd $HOME/GFrun && mv -f _.config/ $HOME/.config/ _.local/ $HOME/.local/
+cd $HOME/GFrun && mv -f _.config/ $HOME/.config/
+cd $HOME/GFrun && mv -f _.local/ $HOME/.local/
 }
 
 F_wget(){
@@ -619,7 +621,7 @@ echo "#       ##::: ##:: ##::::::: ##::. ##:: ##:::: ##: ##:. ###:"
 echo "#     .  ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:"
 echo "#     :......::::..::::::::..:::::..:::.......:::..::::..::"
 echo `color 32 "======================================================================="`
-echo "Arg :..............>>>>>>> GFrun -"$1" <<<<<<................"
+echo ".....................>>>>>>> GFrun "$1" <<<<<<................"
 echo ""
 echo ""
 	case $1
