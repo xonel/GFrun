@@ -44,7 +44,7 @@ printf '\033[%sm%s\033[m\n' "$@"
 F_MenRun(){
 echo ""
 echo "                        "$Vscript $Varg
-echo '              "\\""\\"'
+echo '              """""'
 echo '              |c .'
 echo '               \ _/'
 echo '            ___/(  /('
@@ -347,8 +347,9 @@ echo `color 32 ">>> F_apt"`
 F_git(){
 	echo `color 32 ">>> F_git"`
 cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
-cd $HOME/GFrun && mv -f _.config/ $HOME/.config/
-cd $HOME/GFrun && mv -f _.local/ $HOME/.local/
+mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/
+cd $HOME/GFrun/ && mv -f _.config/* $HOME/.config/ && rm _.config
+cd $HOME/GFrun/ && mv -f _.local/* $HOME/.local/ && rm _.local
 }
 
 F_wget(){
@@ -727,12 +728,15 @@ echo ""
 		####################################################################
 				F_GFrunMenu
              ;;
+             
+          -gui) #. GFrunMenu GUI......................(GFrun.sh -gui )
+		####################################################################
+				F_GFrunGui
+             ;;
 
           *) # anything else
 		####################################################################
-            echo
-            echo "\"$1\" NO VALID ENTRY  - GFrun.sh"
-            sleep 3
+				F_GFrunMenu
             ;;
         esac
 
