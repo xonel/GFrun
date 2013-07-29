@@ -106,15 +106,11 @@ F_Script(){
 	echo ""
 	echo ""
 if [ -f $HOME/$Vscript ]; then
-	echo "I1 : cd $HOME/ && chmod +x ./$Vscript && F_Xterm_Geometry"
 	cd $HOME/ && chmod +x ./$Vscript && F_Xterm_Geometry
-	echo "O1 : cd $HOME/ && chmod +x ./$Vscript && F_Xterm_Geometry"
 else
 	if [ -f $HOME/GFrun/$Vscript ]; then
-		echo "11 : cd $HOME/GFrun/ && chmod +x ./$Vscript && F_Xterm_Geometry"
 		cd $HOME/GFrun/ && chmod +x ./$Vscript && F_Xterm_Geometry
 	else
-		echo "111 : cd $HOME/ && wget -N $VWget && sleep 2 && chmod +x ./$Vscript && F_Xterm_Geometry"
 		cd $HOME/ && wget -N $VWget && sleep 2 && chmod +x ./$Vscript && F_Xterm_Geometry
 	fi
 fi
@@ -152,8 +148,9 @@ F_uninstall(){
 			rm -f  $HOME/.guploadrc $HOME/.local/share/icons/GFrun.svg $HOME/.local/share/applications/GFrun.desktop /usr/share/icons/GFrun.svg
 			rm -Rf  $HOME/GFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin
 			echo " Backup Activities DONE : $HOME/GFrun_Activities_Backup.zip "
+			sleep 3
 		else
-			sh $HOME/GFrun/install/GFrun.sh
+			M_GFrunMenu
 	fi
 }
 
@@ -219,8 +216,8 @@ F_git(){
 	echo `color 32 ">>> F_git"`
 	cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
 	mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/
-	cd $HOME/GFrun/ && mv -f _.config/* $HOME/.config/ && rm _.config
-	cd $HOME/GFrun/ && mv -f _.local/* $HOME/.local/ && rm _.local
+	cp -f $HOME/GFrun/_.config/* $HOME/.config/ && rm _.config
+	cp -f $HOME/GFrun/_.local/* $HOME/.local/ && rm _.local
 }
 
 F_wget(){
