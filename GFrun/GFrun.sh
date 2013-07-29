@@ -23,27 +23,25 @@ Version="0.5.0"
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##########################################################################################################################################################
-#(STABLE    - MASTER) : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo sh ./GFrun.sh -cli
+#(STABLE    - MASTER) : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo sh ./GFrun.sh -menu
 ##########################################################################################################################################################
 #
 Vbranche="V05"
 #Vbranche="master"
 Vcpt=0
 
-######################################################## GFrunMenu
 VChemin="https://github.com/xonel/GFrun/raw/"$Vbranche"/GFrun/"
 Vscript=""
-Varg=""
+Voption=""
 VWget=""
 
-color()
-{
-printf '\033[%sm%s\033[m\n' "$@"
+color(){
+	printf '\033[%sm%s\033[m\n' "$@"
 }
 
-F_MenRun(){
+G_MenRun(){
 echo ""
-echo "                        "$Vscript $Varg
+echo "                        "$Vscript $Voption
 echo '              """""'
 echo '              |c .'
 echo '               \ _/'
@@ -58,31 +56,8 @@ echo '  jgs             --'
 echo "                 $Version"
 }
 
-GoScript()
-{
-	VWget=$VChemin""$Vscript
-	F_MenRun
-	echo `color 32 "===================================================="`
-	echo "Wget:" $VWget
-	echo "$Vscript $Varg"
-	echo `color 32 "===================================================="`
-	echo ""
-	echo ""
-if [ -f $HOME/$Vscript ]; then
-	cd $HOME/ && chmod +x ./$Vscript && xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e '/bin/sh ./$Vscript $Varg'
-else
-	if [ -f $HOME/GFrun/$Vscript ]; then
-		cd $HOME/GFrun/ && chmod +x ./$Vscript && xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e '/bin/sh ./$Vscript $Varg'
-	else
-		cd $HOME/ && wget -N $VWget && sleep 3 && chmod +x ./$Vscript && xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e '/bin/sh ./$Vscript $Varg'
-	fi
-fi
-}
-
-F_GFrunMenu(){
-####################################################################################
-#                                                  Menu
-####################################################################################
+G_Title(){
+ 	echo ".....................>>>>>>> GFrun "$1" <<<<<<................"
  clear
 	echo `color 32 " =============================================================="`
  	echo `color 31 "   GFrun - Garmin Forerunner 60 - 405CX - 310XT - 610 - 910XT "`
@@ -99,155 +74,50 @@ echo "   : '######...'########.'########..'##....'##.'##... ##:
 	echo `color 32 " =============================================================="`
  	echo `color 31 "   Garmin-Forerunner-610-Extractor - garminplugin - gcpuploader "`
 	echo `color 32 " =============================================================="`
+}
 
-	echo""
-#        echo "============================"
-        echo "INSTALL :"
-        echo "---------"
-        echo `color 32 " 1. STABLE.........................(GFrun.sh -s .)"`
-        echo `color 32 " 2. DEV ...........................(GFrun.sh -d .)"`
-        echo `color 32 " 3. UPDATE.........................(GFrun.sh -up )"`
-        echo `color 32 " U. UNINSTALL......................(GFrun.sh -un )"`
-        echo ""
-        echo "CONFIG :"
-        echo "--------"
-        echo `color 36 " 4. Conf-Pairing...................(GFrun.sh -cp )"`
-        echo `color 36 " 5. Conf-Garmin.com................(GFrun.sh -cg )"`
-        echo `color 36 " D. Conf-Diag .....................(GFrun.sh -cd )"`
-        echo ""
-        echo "ACTIVITIES :"
-        echo "-----------"
-        echo `color 33 " 6. Extract.Fit >> Local...........(GFrun.sh -el )"`
-        echo `color 33 " 7. Garmin.com .>> Local ..........(GFrun.sh -gl )"`
-        echo `color 33 " 8. Local.Fit ..>> Garmin.com .....(GFrun.sh -lg )"`
-        echo `color 33 " 9. Extract.Fit >> Garmin.com......(GFrun.sh -eg )"`
-        echo ""
-        echo `color 31 " X. Exit ..........................(GFrun Bye :0 )"`
-        echo""
-        echo "-------------┐"
-        echo -n "CHOICE : "
-        read Vchoix
-        echo "-------------┘"
-        case $Vchoix
-        in
-          1) 
-		#############################
-		VChemin="$VChemin"
-		Vscript="GFrun.sh"
-		Varg="-s"
-		GoScript
-		#############################          
-            ;;
+G_Bye(){
+echo ".........................      ~ Bye ~     ..........................."
+echo ""
+echo "                                 !!!            o           _   _     "
+echo "    -*~*-          ###           _ _           /_\          \\-//     "
+echo "    (o o)         (o o)      -  (OXO)  -    - (o o) -       (o o)     "
+echo "ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-"
+echo ""                              $Version
+echo ""
+echo ".........................PROCEDURE TERMINEE..........................."
+}
 
-          *2*) 
-		#############################
-		VChemin="$VChemin"
-		Vscript="GFrun.sh"
-		Varg="-d"
-		GoScript
-		#############################
-            ;;
-            
-          *3*) 
-		#############################
-		VChemin="$VChemin"
-		Vscript="GFrun.sh"
-		Varg="-up"
-		GoScript
-		#############################
-		
-            ;;
-          *4*)     
-		#############################
-		VChemin="$VChemin"
-		Vscript="GFrun.sh"
-		Varg="-cp"
-		GoScript
-		############################# 
-            ;;
+F_Xterm_Geometry(){
+	echo `color 32 ">>> F_Xterm_Geometry"`
+	echo "$Vscript $Voption"
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "/bin/sh ./$Vscript $Voption"
+}
 
-          *5*) 
-		#############################
-		VChemin="$VChemin"
-		Vscript="GFrun.sh"
-		Varg="-cg"
-		GoScript
-		#############################
-            ;;
-
-          *6*) 
-		#############################
-		VChemin="$VChemin"
-		Vscript="GFrun.sh"
-		Varg="-el"
-		GoScript
-		#############################           
-            ;;
-
-          *7*) 
-		#############################
-		VChemin=$VChemin
-		Vscript="GFrun.sh"
-		Varg="-gl"
-		GoScript
-		#############################
-            ;;
-
-          *8*) 
-		#############################
-		VChemin=$VChemin
-		Vscript="GFrun.sh"
-		Varg="-lg"
-		GoScript
-		#############################
-            ;;
-
-          *9*) 
-		#############################
-		VChemin="$VChemin"
-		Vscript="GFrun.sh"
-		Varg="-eg"
-		GoScript
-		#############################  
-            ;;
-
-          [uU])  
-		#############################
-		VChemin="$VChemin"
-		Vscript="GFrun.sh"
-		Varg="-un"
-		GoScript
-		#############################  
-            ;;
-
-          [dD])
-		#############################
-		VChemin="$VChemin"
-		Vscript="GFrun.sh"
-		Varg="-cd"
-		GoScript
-		#############################  
-
-            ;;
-
-          [xX]) # exit
-				echo "- EXIT GFrunMenu - "          
-				sleep 3
-            ;;
-
-          *) # anything else
-		#################################################################### 
-            echo
-            echo "\"$Vchoix\" NO VALID ENTRY - GFrun.sh"
-
-			if [ -f $HOME/GFrun.sh ]; then
-				sleep 3
-				/bin/sh $HOME/GFrun.sh -cli
-			fi
-            ;;
-        esac
-
-######################################################## Fin_GFrunMenu
+F_Script(){
+	echo `color 32 ">>> F_Script"`
+	G_MenRun
+	
+	VWget=$VChemin""$Vscript
+	echo `color 32 "===================================================="`
+	echo "Wget:" $VWget
+	echo "$Vscript $Voption"
+	echo `color 32 "===================================================="`
+	echo ""
+	echo ""
+if [ -f $HOME/$Vscript ]; then
+	echo "I1 : cd $HOME/ && chmod +x ./$Vscript && F_Xterm_Geometry"
+	cd $HOME/ && chmod +x ./$Vscript && F_Xterm_Geometry
+	echo "O1 : cd $HOME/ && chmod +x ./$Vscript && F_Xterm_Geometry"
+else
+	if [ -f $HOME/GFrun/$Vscript ]; then
+		echo "11 : cd $HOME/GFrun/ && chmod +x ./$Vscript && F_Xterm_Geometry"
+		cd $HOME/GFrun/ && chmod +x ./$Vscript && F_Xterm_Geometry
+	else
+		echo "111 : cd $HOME/ && wget -N $VWget && sleep 2 && chmod +x ./$Vscript && F_Xterm_Geometry"
+		cd $HOME/ && wget -N $VWget && sleep 2 && chmod +x ./$Vscript && F_Xterm_Geometry
+	fi
+fi
 }
 
 F_Chk_SUDO(){
@@ -256,25 +126,26 @@ F_Chk_SUDO(){
 		echo `color 31 "======================================================"`
 		echo "....................... Install GFrun - requires ............."
 		echo `color 31 "======================================================"`
-		echo '1) SUDO (administrator rights)'
+		echo '1) Administrator rights (SUDO)'
 		echo '2) Debian 7 / ubuntu 12+' 
 		echo '3) Python 2.7+'
 		echo '4) PyUSB 1.0+'
 		echo `color 31 "======================================================"`
 		
-		xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'sudo /bin/sh $HOME/GFrun.sh -cli'
+		xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'sudo /bin/sh $HOME/GFrun.sh -menu'
+		exit
 	fi
 }
 
 F_uninstall(){
-echo " BACKUP WILL BE DONE INSIDE : " $HOME"/GFrun_Activities_Backup.zip "
-echo""
-echo `color 31 "======================================================"`
-echo " !! UNINSTALL !! WARNING !! UNINSTALL !!"
-echo `color 31 "======================================================"`
-echo -n "UNINSTALL ALL (FGrun + ConfigFiles + Activities) >> YES / [NO] :"
+	echo " BACKUP WILL BE DONE INSIDE : " $HOME"/GFrun_Activities_Backup.zip "
+	echo""
+	echo `color 31 "======================================================"`
+	echo " !! UNINSTALL !! WARNING !! UNINSTALL !!"
+	echo `color 31 "======================================================"`
+	echo -n "UNINSTALL ALL (FGrun + ConfigFiles + Activities) >> YES / [NO] :"
 
-read Vchoix
+	read Vchoix
 
 	if [ "$Vchoix" = "YES" ]; then
 			zip -ur  $HOME/GFrun_Activities_Backup.zip  $HOME/.config/garmin-extractor/
@@ -287,12 +158,12 @@ read Vchoix
 }
 
 F_clear(){
-echo `color 32 ">>> F_clear"`
+	echo `color 32 ">>> F_clear"`
 	rm -f $HOME/GFrun.sh* $HOME/master.zip* $HOME/GFrun/tools/FIT-to-TCX/master.zip* $HOME/GFrun/tools/master.zip* $HOME/GFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh*
 }
 
 F_mkdir(){
-echo `color 32 ">>> F_mkdir"`
+	echo `color 32 ">>> F_mkdir"`
 	mkdir -p $HOME/.config/garmin-extractor/scripts/
 	mkdir -p $HOME/.config/garminplugin
 }
@@ -325,7 +196,7 @@ F_garminplugin_DEB(){
 }
 
 F_apt(){
-echo `color 32 ">>> F_apt"`
+	echo `color 32 ">>> F_apt"`
 	echo $(date +%Y-%m-%d_%H%M)"= BEFORE ==========================" >> $HOME/GFrun_Install.log
 	dpkg -l >> $HOME/GFrun_Install.log
 	
@@ -346,14 +217,14 @@ echo `color 32 ">>> F_apt"`
 
 F_git(){
 	echo `color 32 ">>> F_git"`
-cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
-mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/
-cd $HOME/GFrun/ && mv -f _.config/* $HOME/.config/ && rm _.config
-cd $HOME/GFrun/ && mv -f _.local/* $HOME/.local/ && rm _.local
+	cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
+	mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/
+	cd $HOME/GFrun/ && mv -f _.config/* $HOME/.config/ && rm _.config
+	cd $HOME/GFrun/ && mv -f _.local/* $HOME/.local/ && rm _.local
 }
 
 F_wget(){
-echo `color 32 ">>> F_wget"`
+	echo `color 32 ">>> F_wget"`
 	cd $HOME && wget -N https://github.com/Tigge/Garmin-Forerunner-610-Extractor/archive/drivers.zip && mv drivers.zip master.zip
 	cd $HOME/GFrun/tools/ && wget -N https://github.com/Tigge/FIT-to-TCX_master/archive/master.zip
 	cd $HOME/GFrun/tools/FIT-to-TCX/ && wget -N https://github.com/dtcooper/python-fitparse/archive/master.zip
@@ -362,7 +233,7 @@ echo `color 32 ">>> F_wget"`
 }
 
 F_unzip(){
-echo `color 32 ">>> F_unzip"`
+	echo `color 32 ">>> F_unzip"`
 	#Garmin-Forerunner-610-Extractor-master
 	cd $HOME && unzip -o master.zip -d GFrun
 	#FIT-to-TCX
@@ -376,7 +247,7 @@ echo `color 32 ">>> F_unzip"`
 }
 
 F_cpmv(){
-echo `color 32 ">>> F_cpmv"`
+	echo `color 32 ">>> F_cpmv"`
 
 	cp -f $HOME/GFrun/tools/ant-usbstick2.rules /etc/udev/rules.d/
 	udevadm control --reload-rules
@@ -395,21 +266,21 @@ echo `color 32 ">>> F_cpmv"`
 }
 
 F_extractfit(){
-echo `color 32 ">>> F_extractfit"`
+	echo `color 32 ">>> F_extractfit"`
 	#Extractor FIT
 	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/tools/extractor/ && python ./garmin.py'
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
 }
 
 F_getkey(){
-echo `color 32 ">>> F_getkey"`
+	echo `color 32 ">>> F_getkey"`
 	#Pairing Key
 	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/tools/ && python ./extractor_getkey.py'
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
 }
 
 F_configfiles(){
-echo `color 32 ">>> F_configfiles"`
+	echo `color 32 ">>> F_configfiles"`
 
 	#$NUMERO_DE_MA_MONTRE
 	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v Garmin | grep -v scripts)
@@ -441,7 +312,6 @@ echo `color 32 ">>> F_configfiles"`
 			F_getkey
 			sleep 3
 			F_configfiles
-			sleep 3 #Delay USB-ANT time out connect 
 		fi
 	fi
 
@@ -454,21 +324,21 @@ echo `color 32 ">>> F_configfiles"`
 }
 
 F_chownchmod(){
-echo `color 32 ">>> F_chownchmod"`
+	echo `color 32 ">>> F_chownchmod"`
 	#Chown Chmod
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-extractor $HOME/GFrun $HOME/.local/share/
 	chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/GFrun/tools/ 
 }
 
 F_GFrun_Update(){
-echo `color 32 ">>> F_GFrun_Update"`
-if [ -f $HOME/GFrunUpdate.zip ] ; then
-		unzip -o $HOME/GFrunUpdate.zip -d $HOME/
-	else
-		if [ -f $HOME/GFrun/tools/GFrunUpdate.zip ] ; then
-				unzip -o $HOME/GFrun/tools/GFrunUpdate.zip -d $HOME/
-		fi
-fi
+	echo `color 32 ">>> F_GFrun_Update"`
+	if [ -f $HOME/GFrunUpdate.zip ] ; then
+			unzip -o $HOME/GFrunUpdate.zip -d $HOME/
+		else
+			if [ -f $HOME/GFrun/tools/GFrunUpdate.zip ] ; then
+					unzip -o $HOME/GFrun/tools/GFrunUpdate.zip -d $HOME/
+			fi
+	fi
 }
 
 F_conf_gupload(){
@@ -479,9 +349,9 @@ F_conf_gupload(){
 	# RISK.  Username and password are stored as clear text in a file
 	# format that is consistent with Microsoft (r) INI files."
 	echo ""
-echo `color 32 "============================================="`
+	echo `color 32 "============================================="`
 	echo "Configuration Auto-Upload on connect.garmin.com"
-echo `color 32 "============================================="`
+	echo `color 32 "============================================="`
 
 	if [ ! -f $HOME/.guploadrc ]; then
 			read -p 'USERNAME : on connect.garmin.com >> ' Read_user
@@ -554,7 +424,7 @@ F_Diag(){
 	python --version >> $HOME/GFrun/tools/DIAG
 }
 
-F_Upload_Gconnect_GoScript()
+F_Upload_Gconnect_F_Script()
 {
 	echo `color 31 "============================================="`
 	echo " LOCAL > ...> Upload Activities on going >... > GARMIN.COM" 
@@ -566,26 +436,26 @@ F_Upload_Gconnect_GoScript()
 }
 
 F_Upload_Gconnect(){
-echo ""
-echo ""
-echo `color 32 "=================================="`
-echo "SELECT ACTIVITIES PERIOD"
-echo `color 32 "=================================="`
-echo ""
-echo " (T) - Today"
-echo " (W) - Week" 
-echo " (M) - Month"
-echo " (Y) - Years" 
-echo ""
-echo -n "Choise : (t) . (w) . (m) . (y) "
-read Vchoix
+	echo ""
+	echo ""
+	echo `color 32 "=================================="`
+	echo "SELECT ACTIVITIES PERIOD"
+	echo `color 32 "=================================="`
+	echo ""
+	echo " (T) - Today"
+	echo " (W) - Week" 
+	echo " (M) - Month"
+	echo " (Y) - Years" 
+	echo ""
+	echo -n "Choise : (t) . (w) . (m) . (y) "
+	read Vchoix
 
         case $Vchoix
         in
           [tT]) # 2013-04-14_10-29-04-80-9375.fit
 		################################
 		Vactivities=$(date +%Y-%m-%d_*)
-			F_Upload_Gconnect_GoScript
+			F_Upload_Gconnect_F_Script
             ;;
 
           [wW])  # Lancer le Script pour : 
@@ -593,43 +463,30 @@ read Vchoix
 		for c in 1 2 3 4 5 6 7
 			do 
 			Vactivities=$(date "+%Y-%m-%d_*" -d "$c days ago")
-			F_Upload_Gconnect_GoScript
+			F_Upload_Gconnect_F_Script
 		done
             ;;
 
           [mM]) # Lancer le Script pour :     
 		################################
 		Vactivities=$(date +%Y-%m-*)
-		F_Upload_Gconnect_GoScript
+		F_Upload_Gconnect_F_Script
             ;;
 
           [yY]) # Lancer le Script pour : 
 		################################
 		Vactivities=$(date +%Y-*)
-		F_Upload_Gconnect_GoScript
+		F_Upload_Gconnect_F_Script
             ;;
         esac
 }
-## MAIN ##
-echo `color 32 "========================================================================"`
-echo "#     :......::::..::::::::..:::::..:::.......:::..::::..::"
-echo "#      :'######:::'########:'########::'##::::'##:'##::: ##:"
-echo "#      '##... ##:: ##.....:: ##.... ##: ##:::: ##: ###:: ##:"
-echo "#       ##:::..::: ##::::::: ##:::: ##: ##:::: ##: ####: ##:"
-echo "#       ##::'####: ######::: ########:: ##:::: ##: ## ## ##:"
-echo "#       ##::: ##:: ##...:::: ##.. ##::: ##:::: ##: ##. ####:"
-echo "#       ##::: ##:: ##::::::: ##::. ##:: ##:::: ##: ##:. ###:"
-echo "#     .  ######::: ##::::::: ##:::. ##:. #######:: ##::. ##:"
-echo "#     :......::::..::::::::..:::::..:::.......:::..::::..::"
-echo `color 32 "======================================================================="`
-echo ".....................>>>>>>> GFrun "$1" <<<<<<................"
-echo ""
-echo ""
-	case $1
-		in
 
+M_Main(){
+	echo `color 32 ">>> M_Main"`
+	case $VMain
+		in
           -s) # 1. STABLE.........................(GFrun.sh -s .)
-		####################################################################
+		################################################################
 				F_Chk_SUDO
 				F_clear
 #				F_mkdir
@@ -646,7 +503,7 @@ echo ""
 				F_clear
             ;;
           -d) #2. DEV ...........................(GFrun.sh -d .)
-		####################################################################
+		################################################################
 				F_Chk_SUDO
 				F_clear
 				F_mkdir
@@ -663,7 +520,7 @@ echo ""
 				F_clear
             ;;
           -up) # 3. UPDATE.........................(GFrun.sh -up)
-		####################################################################
+		################################################################
 				F_Chk_SUDO
 				F_clear
 				F_mkdir
@@ -679,84 +536,235 @@ echo ""
              ;;
              
           -cp) # 4. Conf-Pairing...................(GFrun.sh -cp )
-		####################################################################
+		################################################################
 				F_getkey
              ;;
              
           -cg) # 5. Conf-Garmin.com................(GFrun.sh -cg )
-		####################################################################
+		################################################################
 				F_configfiles
 				F_conf_gupload
              ;;
              
           -el) # 6. Extract.Fit >> Local...........(GFrun.sh -el ) 
-		####################################################################
+		################################################################
 				F_extractfit
              ;;
              
           -gl) #7. Garmin.com .>> Local ..........(GFrun.sh -gl ) 
-		####################################################################
+		################################################################
 				F_Dump_Gconnect
-
              ;;
              
           -lg) # 8. Local.Fit ..>> Garmin.com .....(GFrun.sh -lg ) 
-		####################################################################
+		################################################################
 				F_Upload_Gconnect
              ;;
 
           -eg) # 9. Extract.Fit >> Garmin.com......(GFrun.sh -eg ) 
-		####################################################################
+		################################################################
 				F_extractfit
 				Vactivities=$(date +%Y-%m-*)
-				F_Upload_Gconnect_GoScript
+				F_Upload_Gconnect_F_Script
              ;;
              
           -cd) #D. Conf-Diag .....................(GFrun.sh -cd ) 
-		####################################################################
+		################################################################
 				F_Diag
 				F_extractfit
              ;;
 
           -un) #U. UNINSTALL......................(GFrun.sh -un )
-		####################################################################
+		################################################################
 				F_uninstall
 				F_clear
              ;;
              
-          -cli) #. GFrunMenu CLI......................(GFrun.sh -cli )
-		####################################################################
-				F_GFrunMenu
+          -menu) #. GFrunMenu .........................(GFrun.sh -menu )
+		################################################################
+				M_GFrunMenu
              ;;
              
-          -gui) #. GFrunMenu GUI......................(GFrun.sh -gui )
-		####################################################################
+          -gui) #. GFrunGUI .........................(GFrun.sh -gui )
+		################################################################
 				F_GFrunGui
              ;;
 
           *) # anything else
-		####################################################################
-				F_GFrunMenu
+		################################################################
+            echo "\"$VMain\" NO VALID ENTRY - GFrun.sh"
             ;;
         esac
+}
 
-echo ".........................       GFrun       ..........................."
-echo "                                 !!!            o           _   _     "
-echo "    -*~*-          ###           _ _           /_\          \\-//     "
-echo "    (o o)         (o o)      -  (OXO)  -    - (o o) -       (o o)     "
-echo "ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-"
-echo ""                              $Version
-echo ""
-echo ".........................PROCEDURE TERMINEE..........................."
+M_GFrunMenu(){
+	
+		G_Title
+        echo ""		
+        echo "INSTALL :"
+        echo "---------"
+        echo `color 32 " 1. STABLE.........................(GFrun.sh -s .)"`
+        echo `color 32 " 2. DEV ...........................(GFrun.sh -d .)"`
+        echo `color 32 " 3. UPDATE.........................(GFrun.sh -up )"`
+        echo `color 32 " U. UNINSTALL......................(GFrun.sh -un )"`
+        echo ""
+        echo "CONFIG :"
+        echo "--------"
+        echo `color 36 " 4. Conf-Pairing...................(GFrun.sh -cp )"`
+        echo `color 36 " 5. Conf-Garmin.com................(GFrun.sh -cg )"`
+        echo `color 36 " D. Conf-Diag .....................(GFrun.sh -cd )"`
+        echo ""
+        echo "ACTIVITIES :"
+        echo "-----------"
+        echo `color 33 " 6. Extract.Fit >> Local...........(GFrun.sh -el )"`
+        echo `color 33 " 7. Garmin.com .>> Local ..........(GFrun.sh -gl )"`
+        echo `color 33 " 8. Local.Fit ..>> Garmin.com .....(GFrun.sh -lg )"`
+        echo `color 33 " 9. Extract.Fit >> Garmin.com......(GFrun.sh -eg )"`
+        echo ""
+        echo `color 31 " X. Exit ..........................(GFrun Bye :0 )"`
+        echo""
+        echo "-------------┐"
+        echo -n "CHOICE : "
+        read Vchoix
+        echo "-------------┘"
+        case $Vchoix
+        in
+          1) 
+		#############################
+		VChemin="$VChemin"
+		Vscript="GFrun.sh"
+		Voption="-s"
+		F_Script
+		#############################          
+            ;;
 
-	if [ -f $HOME/GFrun.sh ]; then
-		sleep 3
-		sh $HOME/GFrun.sh
-	else
-		if [ -f $HOME/GFrun/GFrun.sh ]; then
-			sleep 3
-			sh $HOME/GFrun/GFrun.sh
-		fi
-	fi
-exit
+          *2*) 
+		#############################
+		VChemin="$VChemin"
+		Vscript="GFrun.sh"
+		Voption="-d"
+		F_Script
+		#############################
+            ;;
+            
+          *3*) 
+		#############################
+		VChemin="$VChemin"
+		Vscript="GFrun.sh"
+		Voption="-up"
+		F_Script
+		#############################
+		
+            ;;
+          *4*)     
+		#############################
+		VChemin="$VChemin"
+		Vscript="GFrun.sh"
+		Voption="-cp"
+		F_Script
+		############################# 
+            ;;
 
+          *5*) 
+		#############################
+		VChemin="$VChemin"
+		Vscript="GFrun.sh"
+		Voption="-cg"
+		F_Script
+		#############################
+            ;;
+
+          *6*) 
+		#############################
+		VChemin="$VChemin"
+		Vscript="GFrun.sh"
+		Voption="-el"
+		F_Script
+		#############################           
+            ;;
+
+          *7*) 
+		#############################
+		VChemin=$VChemin
+		Vscript="GFrun.sh"
+		Voption="-gl"
+		F_Script
+		#############################
+            ;;
+
+          *8*) 
+		#############################
+		VChemin=$VChemin
+		Vscript="GFrun.sh"
+		Voption="-lg"
+		F_Script
+		#############################
+            ;;
+
+          *9*) 
+		#############################
+		VChemin="$VChemin"
+		Vscript="GFrun.sh"
+		Voption="-eg"
+		F_Script
+		#############################  
+            ;;
+
+          [uU])  
+		#############################
+		VChemin="$VChemin"
+		Vscript="GFrun.sh"
+		Voption="-un"
+		F_Script
+		#############################  
+            ;;
+
+          [dD])
+		#############################
+		VChemin="$VChemin"
+		Vscript="GFrun.sh"
+		Voption="-cd"
+		F_Script
+		#############################  
+
+            ;;
+
+          [xX]) # exit
+				G_Bye        
+				sleep 2
+				exit
+            ;;
+
+          *) # anything else
+		################################################################
+            echo "\"$Vchoix\" NO VALID ENTRY - GFrun.sh"
+			M_GFrunMenu
+            ;;
+        esac
+}
+
+if [ -z "$1" ]; then #the -z operator checks whether the string is null // -n operator checks whether the string is not null
+	G_Title
+	read -p 'Do you want run GFrunMenu (n/Y) ?' Vo
+		case "$Vo" in
+			n|N)	G_Bye
+					sleep 2
+					exit;;
+	
+			y|Y|*)	M_GFrunMenu;;
+		esac
+else
+	VMain=$1
+	M_Main
+fi
+
+#if [ -f $HOME/GFrun.sh ]; then
+#	sleep 1
+#	sh $HOME/GFrun.sh
+#else
+#	if [ -f $HOME/GFrun/GFrun.sh ]; then
+#		sleep 1
+#		sh $HOME/GFrun/GFrun.sh
+#	fi
+#fi
+#exit
