@@ -251,25 +251,6 @@ F_install(){
 	mv -f $HOME/GFrunUpdate.zip $HOME/GFrun/tools/
 }
 
-F_cpmv(){
-	echo `color 32 ">>> F_cpmv"`
-
-	cp -f $HOME/GFrun/tools/ant-usbstick2.rules /etc/udev/rules.d/
-	udevadm control --reload-rules
-
-	#Garmin-Forerunner-610-Extractor-master
-	cp -Rf $HOME/GFrun/Garmin-Forerunner-610-Extractor-master/* $HOME/GFrun
-	##Convert fit to tcx & auto-Upload ConnectGarmin
-	cp -f $HOME/GFrun/scripts/40-convert_to_tcx.py $HOME/.config/garmin-extractor/scripts/
-	cp -f $HOME/GFrun/scripts/01-upload-garmin-connect.py $HOME/.config/garmin-extractor/scripts/
-	cp -Rf $HOME/GFrun/tools/FIT-to-TCX/python-fitparse-master/fitparse $HOME/GFrun/tools/FIT-to-TCX/
-	mv -f $HOME/GFrunUpdate.zip $HOME/GFrun/tools/
-	#Icons
-	cp -f $HOME/.local/share/icons/GFrun.svg /usr/share/icons/
-	#getkey.py
-	cp -f $HOME/GFrun/tools/getkey.py $HOME/GFrun/
-}
-
 F_extractfit(){
 	echo `color 32 ">>> F_extractfit"`
 	#Extractor FIT
@@ -498,10 +479,8 @@ M_Main(){
 #				F_mkdir
 				F_apt
 				F_git
+				F_install
 				F_GFrun_Update
-#				F_wget
-#				F_unzip
-#				F_cpmv
 				F_configfiles
 				F_conf_gupload
 				F_chownchmod
@@ -516,10 +495,8 @@ M_Main(){
 #				F_mkdir
 				F_apt
 				F_git
+				F_install
 				F_GFrun_Update
-#				F_wget
-#				F_unzip
-#				F_cpmv
 				F_configfiles
 				F_conf_gupload
 				F_chownchmod
