@@ -23,17 +23,13 @@ Version="0.5.0"
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##########################################################################################################################################################
-#(STABLE    - MASTER) : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo sh ./GFrun.sh -menu
+#(STABLE) : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo sh ./GFrun.sh
 ##########################################################################################################################################################
 #
-Vbranche="V05"
-#Vbranche="master"
+
 Vcpt=0
 
-VChemin="https://github.com/xonel/GFrun/raw/"$Vbranche"/GFrun/"
-Vscript=""
-Voption=""
-VWget=""
+
 
 color(){
 	printf '\033[%sm%s\033[m\n' "$@"
@@ -96,8 +92,9 @@ F_Xterm_Geometry(){
 
 F_Script(){
 	echo `color 32 ">>> F_Script"`
+
 	G_MenRun
-	
+	VChemin="https://github.com/xonel/GFrun/raw/"$Vbranche"/GFrun/"	
 	VWget=$VChemin""$Vscript
 	echo `color 32 "===================================================="`
 	echo "Wget:" $VWget
@@ -216,8 +213,8 @@ F_git(){
 	echo `color 32 ">>> F_git"`
 	cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
 	mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/
-	cp -f $HOME/GFrun/_.config/* $HOME/.config/ && rm _.config
-	cp -f $HOME/GFrun/_.local/* $HOME/.local/ && rm _.local
+	cp -rf $HOME/GFrun/_.config/* $HOME/.config/ && rm -r $HOME/GFrun/_.config
+	cp -rf $HOME/GFrun/_.local/* $HOME/.local/ && rm -r $HOME/GFrun/_.local
 }
 
 F_wget(){
@@ -241,6 +238,17 @@ F_unzip(){
 	cd $HOME/GFrun/tools/ && unzip -o pygupload_20120516.zip
 	#script install
 	cd $HOME && unzip -oC GFrunUpdate.zip "GFrun/install/*" "GFrun/tools/dump_gconnect.py" ".config/*" ".local/*" -d $HOME/
+}
+
+F_install(){
+	echo `color 32 ">>> F_install"`
+
+	cp -f $HOME/GFrun/tools/ant-usbstick2.rules /etc/udev/rules.d/
+	udevadm control --reload-rules
+
+	cp -f $HOME/GFrun/scripts/* $HOME/.config/garmin-extractor/scripts/
+	cp -Rf $HOME/GFrun/tools/FIT-to-TCX/python-fitparse-master/fitparse $HOME/GFrun/tools/FIT-to-TCX/
+	mv -f $HOME/GFrunUpdate.zip $HOME/GFrun/tools/
 }
 
 F_cpmv(){
@@ -421,7 +429,7 @@ F_Diag(){
 	python --version >> $HOME/GFrun/tools/DIAG
 }
 
-F_Upload_Gconnect_F_Script()
+F_Upload_Gconnect_Go()
 {
 	echo `color 31 "============================================="`
 	echo " LOCAL > ...> Upload Activities on going >... > GARMIN.COM" 
@@ -452,7 +460,7 @@ F_Upload_Gconnect(){
           [tT]) # 2013-04-14_10-29-04-80-9375.fit
 		################################
 		Vactivities=$(date +%Y-%m-%d_*)
-			F_Upload_Gconnect_F_Script
+			F_Upload_Gconnect_Go
             ;;
 
           [wW])  # Lancer le Script pour : 
@@ -460,20 +468,20 @@ F_Upload_Gconnect(){
 		for c in 1 2 3 4 5 6 7
 			do 
 			Vactivities=$(date "+%Y-%m-%d_*" -d "$c days ago")
-			F_Upload_Gconnect_F_Script
+			F_Upload_Gconnect_Go
 		done
             ;;
 
           [mM]) # Lancer le Script pour :     
 		################################
 		Vactivities=$(date +%Y-%m-*)
-		F_Upload_Gconnect_F_Script
+		F_Upload_Gconnect_Go
             ;;
 
           [yY]) # Lancer le Script pour : 
 		################################
 		Vactivities=$(date +%Y-*)
-		F_Upload_Gconnect_F_Script
+		F_Upload_Gconnect_Go
             ;;
         esac
 }
@@ -484,6 +492,7 @@ M_Main(){
 		in
           -s) # 1. STABLE.........................(GFrun.sh -s .)
 		################################################################
+				Vbranche="master" 
 				F_Chk_SUDO
 				F_clear
 #				F_mkdir
@@ -501,18 +510,19 @@ M_Main(){
             ;;
           -d) #2. DEV ...........................(GFrun.sh -d .)
 		################################################################
+				Vbranche="GFrun" 
 				F_Chk_SUDO
 				F_clear
-				F_mkdir
-#				F_GFrun_Update
+#				F_mkdir
 				F_apt
-#				F_git
-				F_wget
-				F_unzip
-				F_cpmv
+				F_git
+				F_GFrun_Update
+#				F_wget
+#				F_unzip
+#				F_cpmv
 				F_configfiles
-				F_chownchmod
 				F_conf_gupload
+				F_chownchmod
 #				F_extractfit
 				F_clear
             ;;
@@ -562,7 +572,7 @@ M_Main(){
 		################################################################
 				F_extractfit
 				Vactivities=$(date +%Y-%m-*)
-				F_Upload_Gconnect_F_Script
+				F_Upload_Gconnect_Go
              ;;
              
           -cd) #D. Conf-Diag .....................(GFrun.sh -cd ) 
@@ -631,6 +641,7 @@ M_GFrunMenu(){
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
 		Voption="-s"
+		Vbranche="master" 
 		F_Script
 		#############################          
             ;;
@@ -640,6 +651,7 @@ M_GFrunMenu(){
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
 		Voption="-d"
+		Vbranche="GFrun" 
 		F_Script
 		#############################
             ;;
