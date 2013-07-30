@@ -79,7 +79,21 @@ echo "                                 !!!            o           _   _     "
 echo "    -*~*-          ###           _ _           /_\          \\-//     "
 echo "    (o o)         (o o)      -  (OXO)  -    - (o o) -       (o o)     "
 echo "ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-"
-echo ""                              $Version
+echo $Version
+}
+
+F_extractor(){
+	echo `color 32 ">>> F_extractor"`
+	#Extractor FIT
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/tools/extractor/ && python ./garmin.py'
+	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
+}
+
+F_extractor_getkey(){
+	echo `color 32 ">>> F_extractor_getkey"`
+	#Pairing Key
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/tools/ && python ./extractor_getkey.py'
+	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
 }
 
 F_Xterm_Geometry(){
@@ -111,24 +125,16 @@ else
 fi
 }
 
-F_Chk_SUDO(){
-	echo `color 32 ">>> SUDO_USER"`
-	if [ ! "$SUDO_USER" ]; then
-		echo `color 31 "======================================================"`
-		echo "....................... Install GFrun - requires ............."
-		echo `color 31 "======================================================"`
-		echo '1) Administrator rights (SUDO)'
-		echo '2) Debian 7 / ubuntu 12+' 
-		echo '3) Python 2.7+'
-		echo '4) PyUSB 1.0+'
-		echo `color 31 "======================================================"`
-		echo ""
-		echo "! YOU ARE NOT IN  SESSION S ADMINISTROTOR !"		
-		echo 'Please : tape your password administrator (SUDO)'
-		read -p 'Press [Enter] key to continue...'
-		xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'sudo /bin/sh $HOME/GFrun.sh -menu' &
-		exit
-	fi
+F_Dump_Gconnect(){
+	G_Title
+	echo `color 32 "======================================================================="`
+	echo ">>>>>  DUMP ALL ACTIVITIES FROM CONNECT GARMIN <<<<<< " 
+	echo `color 32 "======================================================================="`
+	echo ""
+	echo " (10 ~ 20) mins - PLEASE WAIT ... "
+	echo ""
+	mkdir $HOME/GFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M)
+	cd $HOME/GFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M) && xterm -e 'python $HOME/GFrun/tools/dump_gconnect.py && chown -R $SUDO_USER:$SUDO_USER $HOME/GFrun/forerunners/dump_gconnect/' &
 }
 
 F_uninstall(){
@@ -150,11 +156,6 @@ F_uninstall(){
 		else
 			M_GFrunMenu
 	fi
-}
-
-F_clean_up(){
-	echo `color 32 ">>> F_clean_up"`
-	rm -f $HOME/GFrun.sh* $HOME/master.zip* $HOME/GFrun/tools/FIT-to-TCX/master.zip* $HOME/GFrun/tools/master.zip* $HOME/GFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh*
 }
 
 F_garminplugin_UBU(){
@@ -182,6 +183,31 @@ F_garminplugin_DEB(){
 
 	mkdir -p $HOME/.mozilla/plugins
 	ln -s /usr/lib/mozilla/plugins/npGarminPlugin.so $HOME/.mozilla/plugins/npGarminPlugin.so
+}
+
+F_Sudo(){
+	echo `color 32 ">>> SUDO_USER"`
+	if [ ! "$SUDO_USER" ]; then
+		echo `color 31 "======================================================"`
+		echo "....................... Install GFrun - requires ............."
+		echo `color 31 "======================================================"`
+		echo '1) Administrator rights (SUDO)'
+		echo '2) Debian 7 / ubuntu 12+' 
+		echo '3) Python 2.7+'
+		echo '4) PyUSB 1.0+'
+		echo `color 31 "======================================================"`
+		echo ""
+		echo "! YOU ARE NOT IN  SESSION S ADMINISTROTOR !"		
+		echo 'Please : tape your password administrator (SUDO)'
+		read -p 'Press [Enter] key to continue...'
+		xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'sudo /bin/sh $HOME/GFrun.sh -menu' &
+		exit
+	fi
+}
+
+F_clean_up(){
+	echo `color 32 ">>> F_clean_up"`
+	rm -f $HOME/GFrun.sh* $HOME/master.zip* $HOME/GFrun/tools/FIT-to-TCX/master.zip* $HOME/GFrun/tools/master.zip* $HOME/GFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh*
 }
 
 F_apt(){
@@ -225,18 +251,17 @@ F_install(){
 	fi
 }
 
-F_extractor(){
-	echo `color 32 ">>> F_extractor"`
-	#Extractor FIT
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/tools/extractor/ && python ./garmin.py'
-	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
-}
-
-F_extractor_getkey(){
-	echo `color 32 ">>> F_extractor_getkey"`
-	#Pairing Key
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/tools/ && python ./extractor_getkey.py'
-	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
+F_Update(){
+	echo `color 32 ">>> F_Update"`
+	if [ -f $HOME/GFrunUpdate.zip ] ; then
+		unzip -o $HOME/GFrunUpdate.zip -d $HOME/
+	else
+			if [ -f $HOME/GFrun/tools/GFrunUpdate.zip ] ; then
+				unzip -o $HOME/GFrun/tools/GFrunUpdate.zip -d $HOME/
+			else
+				echo "= NO UPDATE AVAILABLE ="
+			fi
+	fi
 }
 
 F_config_Gconnect(){
@@ -313,24 +338,6 @@ F_config_Gconnect(){
 	chmod u+x /tmp/ligneCmd.sh && sh /tmp/ligneCmd.sh
 }
 
-F_chownchmod(){
-	echo `color 32 ">>> F_chownchmod"`
-	#Chown Chmod
-	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-extractor $HOME/GFrun $HOME/.local/share/
-	chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/GFrun/tools/ 
-}
-
-F_GFrun_Update(){
-	echo `color 32 ">>> F_GFrun_Update"`
-	if [ -f $HOME/GFrunUpdate.zip ] ; then
-		unzip -o $HOME/GFrunUpdate.zip -d $HOME/
-	else
-			if [ -f $HOME/GFrun/tools/GFrunUpdate.zip ] ; then
-				unzip -o $HOME/GFrun/tools/GFrunUpdate.zip -d $HOME/
-			fi
-	fi
-}
-
 F_config_gupload(){
 	echo "
 	# Username and password credentials may be placed in a configuration file
@@ -368,16 +375,11 @@ F_config_gupload(){
 	fi 
 }
 
-F_Dump_Gconnect(){
-	G_Title
-	echo `color 32 "======================================================================="`
-	echo ">>>>>  DUMP ALL ACTIVITIES FROM CONNECT GARMIN <<<<<< " 
-	echo `color 32 "======================================================================="`
-	echo ""
-	echo " (10 ~ 20) mins - PLEASE WAIT ... "
-	echo ""
-	mkdir $HOME/GFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M)
-	cd $HOME/GFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M) && xterm -e 'python $HOME/GFrun/tools/dump_gconnect.py && chown -R $SUDO_USER:$SUDO_USER $HOME/GFrun/forerunners/dump_gconnect/' &
+F_chownchmod(){
+	echo `color 32 ">>> F_chownchmod"`
+	#Chown Chmod
+	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-extractor $HOME/GFrun $HOME/.local/share/
+	chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/GFrun/tools/ 
 }
 
 F_Diag(){
@@ -476,12 +478,12 @@ M_Main(){
            -s) # 1. STABLE.........................(GFrun.sh -s .)
 		       #########################################################
 				Vbranche="V05"
-				F_Chk_SUDO
+				F_Sudo
 				F_clean_up
 				F_apt
 				F_git
 				F_install
-				F_GFrun_Update
+				F_Update
 				F_config_Gconnect
 				F_config_gupload
 				F_chownchmod
@@ -491,12 +493,12 @@ M_Main(){
           -d) #2. DEV ...........................(GFrun.sh -d .)
 		       #########################################################
 				Vbranche="master"
-				F_Chk_SUDO
+				F_Sudo
 				F_clean_up
 				F_apt
 				F_git
 				F_install
-				F_GFrun_Update
+				F_Update
 				F_config_Gconnect
 				F_config_gupload
 				F_chownchmod
@@ -505,13 +507,11 @@ M_Main(){
             ;;
           -up) # 3. UPDATE.........................(GFrun.sh -up)
 		       #########################################################
-				F_Chk_SUDO
+				F_Sudo
 				F_clean_up
-				F_mkdir
-				F_GFrun_Update
+				F_Update
 #				F_apt
 #				F_wget
-				F_unzip
 				F_cpmv
 				F_config_Gconnect
 				F_chownchmod
