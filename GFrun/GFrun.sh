@@ -80,8 +80,6 @@ echo "    -*~*-          ###           _ _           /_\          \\-//     "
 echo "    (o o)         (o o)      -  (OXO)  -    - (o o) -       (o o)     "
 echo "ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-"
 echo ""                              $Version
-echo ""
-echo ".........................PROCEDURE TERMINEE..........................."
 }
 
 F_Xterm_Geometry(){
@@ -307,6 +305,7 @@ F_config_Gconnect(){
 			echo '==================================================================='>> $HOME/GFrun/tools/DIAG
 			read -p 'Press [Enter] key to continue...'
 			F_Diag
+			M_GFrunMenu
 		fi
 	fi
 
@@ -324,10 +323,10 @@ F_chownchmod(){
 F_GFrun_Update(){
 	echo `color 32 ">>> F_GFrun_Update"`
 	if [ -f $HOME/GFrunUpdate.zip ] ; then
-			unzip -o $HOME/GFrunUpdate.zip -d $HOME/
-		else
+		unzip -o $HOME/GFrunUpdate.zip -d $HOME/
+	else
 			if [ -f $HOME/GFrun/tools/GFrunUpdate.zip ] ; then
-					unzip -o $HOME/GFrun/tools/GFrunUpdate.zip -d $HOME/
+				unzip -o $HOME/GFrun/tools/GFrunUpdate.zip -d $HOME/
 			fi
 	fi
 }
@@ -361,15 +360,16 @@ F_config_gupload(){
 
 			read -p 'Do you want create new one (N/y) ?' Vo
 			case "$Vo" in
-			 y|Y)	rm -f $HOME/.guploadrc
-					F_config_gupload;;
-			 n|N) echo "OK";;
-			 *) echo "not an answer";;
+				 y|Y)	rm -f $HOME/.guploadrc
+						F_config_gupload;;
+				 n|N) echo "OK";;
+				 *) echo "not an answer";;
 			esac
 	fi 
 }
 
 F_Dump_Gconnect(){
+	G_Title
 	echo `color 32 "======================================================================="`
 	echo ">>>>>  DUMP ALL ACTIVITIES FROM CONNECT GARMIN <<<<<< " 
 	echo `color 32 "======================================================================="`
@@ -385,12 +385,13 @@ F_Diag(){
 	echo '==================================================================='
 	echo 'rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile'
 	echo '==================================================================='
+	
 	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v scripts | grep -v dump_gconnect)
 	rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile
-	
 	echo "GFrun - $Vbranche - $Version " > $HOME/GFrun/tools/DIAG
 	uname -a >> $HOME/GFrun/tools/DIAG
 	lsb_release -a >> $HOME/GFrun/tools/DIAG
+	
 	echo '==================================================================='>> $HOME/GFrun/tools/DIAG
 	echo 'usb-devices'>> $HOME/GFrun/tools/DIAG
 	echo '==================================================================='>> $HOME/GFrun/tools/DIAG
@@ -429,7 +430,6 @@ F_Upload_Gconnect_Go()
 
 F_Upload_Gconnect(){
 	echo ""
-	echo ""
 	echo `color 32 "=================================="`
 	echo "SELECT ACTIVITIES PERIOD"
 	echo `color 32 "=================================="`
@@ -444,31 +444,27 @@ F_Upload_Gconnect(){
 
         case $Vchoix
         in
-          [tT]) # 2013-04-14_10-29-04-80-9375.fit
-		################################
-		Vactivities=$(date +%Y-%m-%d_*)
+          [tT]) # (T) - Today
+			Vactivities=$(date +%Y-%m-%d_*)
 			F_Upload_Gconnect_Go
             ;;
 
-          [wW])  # Lancer le Script pour : 
-		################################	
-		for c in 1 2 3 4 5 6 7
-			do 
-			Vactivities=$(date "+%Y-%m-%d_*" -d "$c days ago")
+          [wW]) # (W) - Week	
+			for c in 1 2 3 4 5 6 7
+				do 
+				Vactivities=$(date "+%Y-%m-%d_*" -d "$c days ago")
+				F_Upload_Gconnect_Go
+			done
+            ;;
+
+          [mM]) # (M) - Month
+			Vactivities=$(date +%Y-%m-*)
 			F_Upload_Gconnect_Go
-		done
             ;;
 
-          [mM]) # Lancer le Script pour :     
-		################################
-		Vactivities=$(date +%Y-%m-*)
-		F_Upload_Gconnect_Go
-            ;;
-
-          [yY]) # Lancer le Script pour : 
-		################################
-		Vactivities=$(date +%Y-*)
-		F_Upload_Gconnect_Go
+          [yY]) # (Y) - Years
+			Vactivities=$(date +%Y-*)
+			F_Upload_Gconnect_Go
             ;;
         esac
 }
@@ -477,8 +473,9 @@ M_Main(){
 	echo `color 32 ">>> M_Main"`
 	case $VMain
 		in
-          -s) # 1. STABLE.........................(GFrun.sh -s .)
-		################################################################
+           -s) # 1. STABLE.........................(GFrun.sh -s .)
+		       #########################################################
+				Vbranche="V05"
 				F_Chk_SUDO
 				F_clean_up
 				F_apt
@@ -492,7 +489,8 @@ M_Main(){
 				F_clean_up
             ;;
           -d) #2. DEV ...........................(GFrun.sh -d .)
-		################################################################
+		       #########################################################
+				Vbranche="master"
 				F_Chk_SUDO
 				F_clean_up
 				F_apt
@@ -506,7 +504,7 @@ M_Main(){
 				F_clean_up
             ;;
           -up) # 3. UPDATE.........................(GFrun.sh -up)
-		################################################################
+		       #########################################################
 				F_Chk_SUDO
 				F_clean_up
 				F_mkdir
@@ -522,62 +520,62 @@ M_Main(){
              ;;
              
           -cp) # 4. Conf-Pairing...................(GFrun.sh -cp )
-		################################################################
+		       #########################################################
 				F_extractor_getkey
              ;;
              
           -cg) # 5. Conf-Garmin.com................(GFrun.sh -cg )
-		################################################################
+		       #########################################################
 				F_config_Gconnect
 				F_config_gupload
              ;;
              
           -el) # 6. Extract.Fit >> Local...........(GFrun.sh -el ) 
-		################################################################
+		       #########################################################
 				F_extractor
              ;;
              
           -gl) #7. Garmin.com .>> Local ..........(GFrun.sh -gl ) 
-		################################################################
+		       #########################################################
 				F_Dump_Gconnect
              ;;
              
           -lg) # 8. Local.Fit ..>> Garmin.com .....(GFrun.sh -lg ) 
-		################################################################
+		       #########################################################
 				F_Upload_Gconnect
              ;;
 
           -eg) # 9. Extract.Fit >> Garmin.com......(GFrun.sh -eg ) 
-		################################################################
+		       #########################################################
 				F_extractor
 				Vactivities=$(date +%Y-%m-*)
 				F_Upload_Gconnect_Go
              ;;
              
           -cd) #D. Conf-Diag .....................(GFrun.sh -cd ) 
-		################################################################
+		       #########################################################
 				F_Diag
 				F_extractor
              ;;
 
           -un) #U. UNINSTALL......................(GFrun.sh -un )
-		################################################################
+		       #########################################################
 				F_uninstall
 				F_clean_up
              ;;
              
           -menu) #. GFrunMenu .........................(GFrun.sh -menu )
-		################################################################
+		       #########################################################
 				M_GFrunMenu
              ;;
              
           -gui) #. GFrunGUI .........................(GFrun.sh -gui )
-		################################################################
+		       #########################################################
 				F_GFrunGui
              ;;
 
-          *) # anything else
-		################################################################
+          *)   # anything else
+		       #########################################################
             echo "\"$VMain\" NO VALID ENTRY - GFrun.sh"
             ;;
         esac
@@ -745,14 +743,3 @@ else
 	VMain=$1
 	M_Main
 fi
-
-#if [ -f $HOME/GFrun.sh ]; then
-#	sleep 1
-#	sh $HOME/GFrun.sh
-#else
-#	if [ -f $HOME/GFrun/GFrun.sh ]; then
-#		sleep 1
-#		sh $HOME/GFrun/GFrun.sh
-#	fi
-#fi
-#exit
