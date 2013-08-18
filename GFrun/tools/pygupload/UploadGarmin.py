@@ -68,10 +68,11 @@ class UploadGarmin:
         json = self.opener.open('http://connect.garmin.com/user/username').read().strip()
 
         # Uncomment for debugging
+        #print '\tLogin_Username: ' + username
         #print '\tJSON: ' + json
-        #print '\tUsername: ' + simplejson.loads(json)['username']
+        #print '\tJSON_Username: ' + simplejson.loads(json)['username']
 
-        if simplejson.loads(json)['username'] == username:
+        if simplejson.loads(json)['username'] != '':
             return(True)
         else:
             return(False)

@@ -1,0 +1,3 @@
+#! /bin/bash
+#launcher GFrun by terminal with "GFrun" >> /usr/bin/GFrun
+/usr/bin/sh $HOME/GFrun/GFrun.sh

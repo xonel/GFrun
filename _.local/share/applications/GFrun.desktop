@@ -5,7 +5,7 @@ Terminal=false
 Categories=GNOME;GTK;
 
 # commande à exécuter lorsque le lanceur est pressé
-Exec=xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x40 -e 'cd $HOME/GFrun/install && sh ./GFrunMenu.sh'
+Exec=xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x40 -e 'cd $HOME/GFrun && /bin/bash ./GFrun.sh'
 # nom du lanceur
 Name=GFrun
 

@@ -1,4 +1,34 @@
+
+RELEASE:
 Garmin Connect Python Uploader Release Notes:
+
+Release 2013.05.05:
+  Comments:
+  Fixed issue where script failed if user's Garmin Connect display name was 
+  not the same as their login name.  Garmin Connect returns the user's 
+  display name as the 'username' instead of the login name.  Most people using
+  the script apparently never change their display name, which defaults to the
+  user's login name.
+  
+  Changes:
+  1) UploadGarmin.py now just verifies that the username JSON response to the 
+     login transaction is not empty instead of comparing it to the login name.
+     It was first verified that the user cannot change their display name to 
+     an empty string in Garmin Connect, which would indicate a failed login 
+     with the new scheme.
+
+Release 2012.11.11:
+  Comments:
+  There have been no changes to the functionality of GcpUploader. It was
+  merely converted to a python package that can be installed using pip
+  package manager.  Pip is the replacement for Python easy_install.  The
+  new package 'GcpUploader' is hosted at http://pypi.python.org/pypi. See 
+  README.txt for installation details.
+
+  Changes:
+  1) Converted project to a pip installable project (no functional changes)
+  2) Changed versioning schema for compatability with pypi version system.  
+     Versioning schema is now year.month.day[.subrelease].
 
 Release 20120516:
   Comments:

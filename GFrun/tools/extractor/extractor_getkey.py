@@ -25,11 +25,11 @@
 #from ant.base import Message
 #from ant.easy.node import Node, Message
 #from ant.easy.channel import Channel
-from extractor.ant.fs.manager import Application, AntFSAuthenticationException
-from extractor.ant.fs.file import File
+from ant.fs.manager import Application, AntFSAuthenticationException
+from ant.fs.file import File
 
-from extractor import utilities
-from extractor import scripting
+import utilities
+import scripting
 
 import array
 import logging

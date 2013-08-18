@@ -23,7 +23,7 @@ Version="0.5.0"
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##########################################################################################################################################################
-#(STABLE) : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo sh ./GFrun.sh
+#(STABLE) : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo bash ./GFrun.sh
 ##########################################################################################################################################################
 #
 
@@ -48,7 +48,7 @@ echo '       -.\  //\\'
 echo '         \\//  \\'
 echo '          \/    \\'
 echo '                 \\'
-echo '  jgs             --'
+echo '                  --'
 echo "                 $Version"
 }
 
@@ -82,29 +82,48 @@ echo "ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-"
 echo $Version
 }
 
+F_Path(){
+	echo `color 32 ">>> F_Path"`
+	if [ -f $HOME/GFrunLocal/GFrun/GFrun/GFrun.sh ]; then
+		Vpath="$HOME/GFrunLocal/GFrun/GFrun"
+	else
+		if [ -f $HOME/GFrun/GFrun.sh ]; then
+			Vpath="$HOME/GFrun"
+		fi
+	fi
+	echo "=> "$Vpath
+}
+
 F_extractor(){
+	F_Path
 	echo `color 32 ">>> F_extractor"`
 	#Extractor FIT
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/tools/extractor/ && python ./garmin.py'
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HOME/GFrun/tools/extractor/garmin.py > $Vpath/logs/extractorLogs | tail && read -p 'Press [Enter] key to continue...' null" 
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
+	mv $Vpath/*-garmin.log $Vpath/logs/extractor/
+	#read -p 'Press [Enter] key to continue...' null
 }
 
 F_extractor_getkey(){
+	F_Path
 	echo `color 32 ">>> F_extractor_getkey"`
 	#Pairing Key
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'cd $HOME/GFrun/tools/ && python ./extractor_getkey.py'
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HOME/GFrun/tools/extractor/extractor_getkey.py > $Vpath/logs/extractor_getkeyLogs | tail && read -p 'Press [Enter] key to continue...' null" 
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
+	mv $Vpath/*-garmin.log $Vpath/logs/extractor_getkey/
+	read -p 'Press [Enter] key to continue...' null
 }
 
 F_Xterm_Geometry(){
+	F_Path
 	echo `color 32 ">>> F_Xterm_Geometry"`
-	echo "$Vscript $Voption"
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "/bin/sh ./$Vscript $Voption" &
+	echo "/bin/bash $Vpath/$Vscript $Voption"
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "/bin/bash $Vpath'/'$Vscript $Voption" &
 }
 
 F_Script(){
 	echo `color 32 ">>> F_Script"`
-
+	G_Title
 	G_MenRun
 	VChemin="https://github.com/xonel/GFrun/raw/"$Vbranche"/GFrun/"	
 	VWget=$VChemin""$Vscript
@@ -114,8 +133,8 @@ F_Script(){
 	echo `color 32 "===================================================="`
 	echo ""
 	echo ""
-if [ -f $HOME/$Vscript ]; then
-	cd $HOME/ && chmod +x ./$Vscript && F_Xterm_Geometry
+if [ -f $HOME/GFrunLocal/GFrun/GFrun/$Vscript ]; then
+	cd $HOME/GFrunLocal/GFrun/GFrun/ && chmod +x ./$Vscript && F_Xterm_Geometry
 else
 	if [ -f $HOME/GFrun/$Vscript ]; then
 		cd $HOME/GFrun/ && chmod +x ./$Vscript && F_Xterm_Geometry
@@ -137,7 +156,7 @@ F_Dump_Gconnect(){
 	cd $HOME/GFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M) && xterm -e 'python $HOME/GFrun/tools/dump_gconnect.py && chown -R $SUDO_USER:$SUDO_USER $HOME/GFrun/forerunners/dump_gconnect/' &
 }
 
-F_uninstall(){
+F_Uninstall(){
 	echo " BACKUP WILL BE DONE INSIDE : " $HOME"/GFrun_Activities_Backup.zip "
 	echo""
 	echo `color 31 "======================================================"`
@@ -149,10 +168,11 @@ F_uninstall(){
 
 	if [ "$Vchoix" = "YES" ]; then
 			zip -ur  $HOME/GFrun_Activities_Backup.zip  $HOME/.config/garmin-extractor/
-			rm -f  $HOME/.guploadrc $HOME/.local/share/icons/GFrun.svg $HOME/.local/share/applications/GFrun.desktop /usr/share/icons/GFrun.svg
+			rm -f  $HOME/.local/GFrun/.guploadrc $HOME/.local/share/icons/GFrun.svg $HOME/.local/share/applications/GFrun.desktop /usr/share/icons/GFrun.svg
 			rm -Rf  $HOME/GFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin
+			rm -Rf  $HOME/GFrun $HOME/.local/GFrun
 			echo " Backup Activities DONE : $HOME/GFrun_Activities_Backup.zip "
-			read -p 'Press [Enter] key to continue...'
+			read -p 'Press [Enter] key to continue...' null
 		else
 			M_GFrunMenu
 	fi
@@ -197,11 +217,11 @@ F_Sudo(){
 		echo '4) PyUSB 1.0+'
 		echo `color 31 "======================================================"`
 		echo ""
-		echo "! YOU ARE NOT IN  SESSION S ADMINISTROTOR !"		
+		echo "! YOU ARE NOT ADMINISTRATOR !"		
 		echo 'Please : tape your password administrator (SUDO)'
-		read -p 'Press [Enter] key to continue...'
-		xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e 'sudo /bin/sh $HOME/GFrun.sh -menu' &
-		exit
+		echo ""
+		#read -p "Press [Enter] key to continue..." null
+		#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "sudo "$0"" &
 	fi
 }
 
@@ -210,14 +230,33 @@ F_clean_up(){
 	rm -f $HOME/GFrun.sh* $HOME/master.zip* $HOME/GFrun/tools/FIT-to-TCX/master.zip* $HOME/GFrun/tools/master.zip* $HOME/GFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh*
 }
 
-F_apt(){
-	echo `color 32 ">>> F_apt"`
+F_Apt(){
+	F_Path
+	echo `color 32 ">>> F_Apt"`
 	echo $(date +%Y-%m-%d_%H%M)"= BEFORE ==========================" >> $HOME/GFrun_Install.log
-	dpkg -l >> $HOME/GFrun_Install.log
+
+	Vlisterror=()
+	VlistApt="lsb-release xterm git python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial garminplugin"
 	
-	sudo apt-get update
-	sudo apt-get install -y git lsb-release python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial
-	pip install pyusb
+	for i in ${VlistApt} 
+		do
+			if [ ! "$(dpkg -l | grep $i)" ]; then
+				Vlisterror=(${Vlisterror[@]} $i)
+				echo `color 31 "NOK = "`$i 
+			else
+				echo `color 32 "OK = "`$i 
+			fi
+		done
+	
+	#Stop si
+	if [ "$(echo "${Vlisterror[@]}")" ]; then
+		VlisterrorForm="${Vlisterror[@]}"
+		echo "DEPENDANCES/APPS NOT FOUND : ${VlisterrorForm}" 2>/dev/null
+		read -p "Press [Enter] key to continue..." null
+		sudo apt-get update
+		dpkg -l >> $HOME/GFrun_Install.log
+		sudo apt-get install -y $VlisterrorForm
+		pip install pyusb
 
 		if [ "$(lsb_release -is)" = "ubuntu" ]; then
 			F_garminplugin_UBU
@@ -226,28 +265,48 @@ F_apt(){
 		if [ "$(lsb_release -is)" = "debian" ]; then
 			F_garminplugin_DEB
 		fi
+	else
+		echo "OK = ALL DEPENDANCES" 2>/dev/null
+	fi
 	echo $(date +%Y-%m-%d_%H%M)"= AFTER ==========================" >> $HOME/GFrun_Install.log
-	dpkg -l >> $HOME/GFrun_Install.log
+	dpkg -l >> $HOME/GFrun_Install.log	
+
 }
 
-F_git(){
-	echo `color 32 ">>> F_git"`
-	cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
+F_Git(){
+	echo `color 32 ">>> F_Git"`
+	if [ -f $HOME/GFrunLocal/GFrun/GFrun/GFrun.sh ]; then
+		mkdir $HOME/GFrun
+		cp -rf $HOME/GFrunLocal/GFrun/* $HOME/GFrun
+	else
+		cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
+	fi
 	mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/
 	cp -rf $HOME/GFrun/_.config/* $HOME/.config/ && rm -r $HOME/GFrun/_.config
 	cp -rf $HOME/GFrun/_.local/* $HOME/.local/ && rm -r $HOME/GFrun/_.local
+	#TODO : ln -s $HOME/.local/GFrun/GFrun /usr/bin/GFrun
 }
 
-F_install(){
-	echo `color 32 ">>> F_install"`
+F_Install(){
+	echo `color 32 ">>> F_Install"`
 
-	cp -f $HOME/GFrun/tools/ant-usbstick2.rules /etc/udev/rules.d/
+	sudo cp -f $HOME/GFrun/tools/extractor/resources/ant-usbstick2.rules /etc/udev/rules.d/
 	udevadm control --reload-rules
 
-	cp -f $HOME/GFrun/scripts/* $HOME/.config/garmin-extractor/scripts/
+	cp -f $HOME/GFrun/tools/extractor/scripts/* $HOME/.config/garmin-extractor/scripts/
+	mv $HOME/GFrun_Install.log $HOME/GFrun/logs/GFrun_Install.log
 	
 	if [ -f $HOME/GFrunUpdate.zip ]; then
 		mv -f $HOME/GFrunUpdate.zip $HOME/GFrun/tools/
+	fi
+}
+
+F_Restore(){
+	echo `color 32 ">>> F_Restore"`
+	if [ -f $HOME/GFrun_Activities_Backup.zip ] ; then
+		echo "#TODO : unzip -o $HOME/GFrun_Activities_Backup.zip -d $HOME/ seulement les Activitées"
+	else
+		echo "= NO (GFrun_Activities_Backup.zip) AVAILABLE ="
 	fi
 }
 
@@ -265,13 +324,14 @@ F_Update(){
 }
 
 F_config_Gconnect(){
+	F_Path
 	echo `color 32 ">>> F_config_Gconnect"`
 
 	#$NUMERO_DE_MA_MONTRE
 	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v scripts)
 
 	if [ -n "$NUMERO_DE_MA_MONTRE" ]; then
-		echo $NUMERO_DE_MA_MONTRE >> $HOME/GFrun/tools/IDs
+		echo $NUMERO_DE_MA_MONTRE >> $Vpath/logs/IDs
 		
 		if [ -d $HOME/.config/garmin-extractor ]; then
 			mkdir -p $HOME/GFrun/forerunners/$NUMERO_DE_MA_MONTRE/dump_gconnect
@@ -295,10 +355,10 @@ F_config_Gconnect(){
 			echo "PLease check your setting HARDWARE / SOFTWARE & Reinstall GFrun."
 			echo `color 31 "============================================="`	
 			
-			echo '==================================================================='>> $HOME/GFrun/tools/DIAG
-			echo 'ERROR : $HOME/.config/garmin-extractor - NOT FOUND -' >> $HOME/GFrun/tools/DIAG
-			echo '==================================================================='>> $HOME/GFrun/tools/DIAG
-			read -p 'Press [Enter] key to continue...'
+			echo '==================================================================='>> $Vpath/logs/DIAG
+			echo 'ERROR : $HOME/.config/garmin-extractor - NOT FOUND -' >> $Vpath/logs/DIAG
+			echo '==================================================================='>> $Vpath/logs/DIAG
+			read -p 'Press [Enter] key to continue...' null
 			M_GFrunMenu			
 		fi
 		
@@ -315,7 +375,6 @@ F_config_Gconnect(){
 			echo ""
 			echo `color 31 "============================================="`
 			F_extractor_getkey
-			sleep 2
 			F_config_Gconnect
 		else
 			clear
@@ -325,17 +384,17 @@ F_config_Gconnect(){
 			echo "PLease check your setting HARDWARE / SOFTWARE."
 			echo `color 31 "============================================="`	
 			
-			echo '==================================================================='>> $HOME/GFrun/tools/DIAG
-			echo 'ERROR : Key GARMIN Forerunner - NOT FOUND -' >> $HOME/GFrun/tools/DIAG
-			echo '==================================================================='>> $HOME/GFrun/tools/DIAG
-			read -p 'Press [Enter] key to continue...'
+			echo '==================================================================='>> $Vpath/logs/DIAG
+			echo 'ERROR : Key GARMIN Forerunner - NOT FOUND -' >> $Vpath/logs/DIAG
+			echo '==================================================================='>> $Vpath/logs/DIAG
+			read -p 'Press [Enter] key to continue...' null
 			F_Diag
 			M_GFrunMenu
 		fi
 	fi
 
 	#ligneCmd.sh
-	chmod u+x /tmp/ligneCmd.sh && sh /tmp/ligneCmd.sh
+	chmod u+x /tmp/ligneCmd.sh && /bin/bash /tmp/ligneCmd.sh
 }
 
 F_config_gupload(){
@@ -350,16 +409,17 @@ F_config_gupload(){
 	echo "Configuration Auto-Upload on connect.garmin.com"
 	echo `color 32 "============================================="`
 
-	if [ ! -f $HOME/.guploadrc ]; then
+	if [ ! -f $HOME/.local/share/GFrun/.guploadrc ]; then
 			read -p 'USERNAME : on connect.garmin.com >> ' Read_user
 			read -p 'PASSWORD : on connect.garmin.com >> ' Read_password
 
-			echo "[Credentials]" >> $HOME/.guploadrc
-			echo "enabled = True" >> $HOME/.guploadrc
-			echo "username="$Read_user"" >> $HOME/.guploadrc
-			echo "password="$Read_password"" >> $HOME/.guploadrc
+			echo "[Credentials]" >> $HOME/.local/share/GFrun/.guploadrc
+			echo "enabled = True" >> $HOME/.local/share/GFrun/.guploadrc
+			echo "username="$Read_user"" >> $HOME/.local/share/GFrun/.guploadrc
+			echo "password="$Read_password"" >> $HOME/.local/share/GFrun/.guploadrc
+			ln -s $HOME/.local/share/GFrun/.guploadrc $HOME/.guploadrc
 		else
-			echo  "CHECK >> $HOME/.guploadrc"
+			echo  "CHECK >> $HOME/.local/share/GFrun/.guploadrc"
 			echo ""
 			echo `color 31 "============================================="`
 			echo "Configuration file already exist"
@@ -367,7 +427,7 @@ F_config_gupload(){
 
 			read -p 'Do you want create new one (N/y) ?' Vo
 			case "$Vo" in
-				 y|Y)	rm -f $HOME/.guploadrc
+				 y|Y)	rm -f $HOME/.local/share/GFrun/.guploadrc
 						F_config_gupload;;
 				 n|N) echo "OK";;
 				 *) echo "not an answer";;
@@ -383,6 +443,7 @@ F_chownchmod(){
 }
 
 F_Diag(){
+	F_Path
 	echo " DIAG FONCTION"
 	echo '==================================================================='
 	echo 'rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile'
@@ -390,35 +451,34 @@ F_Diag(){
 	
 	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v scripts | grep -v dump_gconnect)
 	rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile
-	echo "GFrun - $Vbranche - $Version " > $HOME/GFrun/tools/DIAG
-	uname -a >> $HOME/GFrun/tools/DIAG
-	lsb_release -a >> $HOME/GFrun/tools/DIAG
+	echo "GFrun - $Vbranche - $Version " > $Vpath/logs/DIAG
+	uname -a >> $Vpath/logs/DIAG
+	lsb_release -a >> $Vpath/logs/DIAG
 	
-	echo '==================================================================='>> $HOME/GFrun/tools/DIAG
-	echo 'usb-devices'>> $HOME/GFrun/tools/DIAG
-	echo '==================================================================='>> $HOME/GFrun/tools/DIAG
-	usb-devices | grep Vendor=0fcf >> $HOME/GFrun/tools/DIAG
-	echo '==================================================================='>> $HOME/GFrun/tools/DIAG
-	echo 'cat $HOME/GFrun/tools/IDs'>> $HOME/GFrun/tools/DIAG
-	cat $HOME/GFrun/tools/IDs >> $HOME/GFrun/tools/DIAG
-	echo '==================================================================='>> $HOME/GFrun/tools/DIAG
-	echo 'cat /etc/udev/rules.d/ant-usbstick2.rules'>> $HOME/GFrun/tools/DIAG
-	echo '==================================================================='>> $HOME/GFrun/tools/DIAG
-	cat /etc/udev/rules.d/ant-usbstick2.rules >> $HOME/GFrun/tools/DIAG
-	echo '==================================================================='>> $HOME/GFrun/tools/DIAG
-	ls /etc/udev/rules.d/ >> $HOME/GFrun/tools/DIAG
-	echo '==================================================================='>> $HOME/GFrun/tools/DIAG
-	ls -l /dev/ttyUSB* >> $HOME/GFrun/tools/DIAG
-	echo '==================================================================='>> $HOME/GFrun/tools/DIAG
-	lsmod >> $HOME/GFrun/tools/DIAG
-	echo '==================================================================='>> $HOME/GFrun/tools/DIAG
-	dpkg -l | grep libusb >> $HOME/GFrun/tools/DIAG
-	echo '==================================================================='>> $HOME/GFrun/tools/DIAG
-	python --version >> $HOME/GFrun/tools/DIAG
-	echo '==================================================================='>> $HOME/GFrun/tools/DIAG
-	ls -al /usr/lib/mozilla/plugins/ >> $HOME/GFrun/tools/DIAG
-	echo '==================================================================='>> $HOME/GFrun/tools/DIAG
-	ls -al $HOME/.mozilla/plugins/ >> $HOME/GFrun/tools/DIAG
+	echo '1 ==================================================================='>> $Vpath/logs/DIAG
+	echo $(date +%Y-%m-%d_%H%M) >> $Vpath/logs/DIAG
+	echo '2 ==================================================================='>> $Vpath/logs/DIAG
+	usb-devices | grep Vendor=0fcf >> $Vpath/logs/DIAG
+	echo '3 ==================================================================='>> $Vpath/logs/DIAG
+	cat $HOME/GFrun/logs/IDs >> $Vpath/logs/DIAG
+	echo '4 ==================================================================='>> $Vpath/logs/DIAG
+	cat /etc/udev/rules.d/ant-usbstick2.rules >> $Vpath/logs/DIAG
+	echo '5 ==================================================================='>> $Vpath/logs/DIAG
+	ls /etc/udev/rules.d/ >> $Vpath/logs/DIAG
+	echo '6 ==================================================================='>> $Vpath/logs/DIAG
+	ls -l /dev/ttyUSB* >> $Vpath/logs/DIAG
+	echo '7 ==================================================================='>> $Vpath/logs/DIAG
+	lsmod >> $Vpath/logs/DIAG
+	echo '8 ==================================================================='>> $Vpath/logs/DIAG
+	dpkg -l | grep libusb >> $Vpath/logs/DIAG
+	echo '9 ==================================================================='>> $Vpath/logs/DIAG
+	python --version >> $Vpath/logs/DIAG #BUG <<<<<
+	echo '10 ==================================================================='>> $Vpath/logs/DIAG
+	ls -al /usr/lib/mozilla/plugins/ >> $Vpath/logs/DIAG
+	echo '11 ==================================================================='>> $Vpath/logs/DIAG
+	ls -al $HOME/.mozilla/plugins/ >> $Vpath/logs/DIAG
+	
+	read -p 'Press [Enter] key to continue...' null
 }
 
 F_Upload_Gconnect_Go()
@@ -480,10 +540,11 @@ M_Main(){
 				Vbranche="V05"
 				F_Sudo
 				F_clean_up
-				F_apt
-				F_git
-				F_install
+				F_Apt
+				F_Git
+				F_Install
 				F_Update
+				F_Restore
 				F_config_Gconnect
 				F_config_gupload
 				F_chownchmod
@@ -495,10 +556,11 @@ M_Main(){
 				Vbranche="master"
 				F_Sudo
 				F_clean_up
-				F_apt
-				F_git
-				F_install
+				F_Apt
+				F_Git
+				F_Install
 				F_Update
+				F_Restore
 				F_config_Gconnect
 				F_config_gupload
 				F_chownchmod
@@ -509,10 +571,9 @@ M_Main(){
 		       #########################################################
 				F_Sudo
 				F_clean_up
+				F_Uninstall
 				F_Update
-#				F_apt
-#				F_wget
-				F_cpmv
+				F_Restore
 				F_config_Gconnect
 				F_chownchmod
 				F_extractor
@@ -560,7 +621,7 @@ M_Main(){
 
           -un) #U. UNINSTALL......................(GFrun.sh -un )
 		       #########################################################
-				F_uninstall
+				F_Uninstall
 				F_clean_up
              ;;
              
