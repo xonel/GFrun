@@ -143,7 +143,7 @@ echo `color 32 ">>> F_unzip"`
 	#python-fitparse-master
 	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && unzip -o master.zip
 	#gupload
-	cd $HOME/GFrun/resources/ && unzip -o pygupload_20120516.zip
+	cd $HOME/GFrun/resources/ && unzip -o pygupload_20130505.zip
 	#script install
 	cd $HOME && unzip -oC GFrunOffline.zip "GFrun/install/*" "GFrun/resources/dump_gconnect.py" ".config/*" ".local/*" -d $HOME/
 }

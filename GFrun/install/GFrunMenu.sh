@@ -4,7 +4,7 @@
 #
 #  Auteurs : Le.NoX ;o)
 #  M@il : le.nox @ free.fr
-Version="0.4.3"
+Version="0.4.4"
 #
 #  Licence: GNU GPL
 #
