@@ -4,7 +4,7 @@
 #
 #  Auteurs : Le.NoX ;o)
 #  M@il : le.nox @ free.fr
-Version="0.4.3"
+Version="0.4.4"
 #
 #  Licence: GNU GPL
 #
@@ -26,8 +26,8 @@ Version="0.4.3"
 #(DEV    - MASTER) : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
 ##########################################################################################################################################################
 #
-Vbranche="GFrun"
-#Vbranche="master"
+#Vbranche="GFrun"
+Vbranche="master"
 Vcpt=0
 
 color()
@@ -143,7 +143,7 @@ echo `color 32 ">>> F_unzip"`
 	#python-fitparse-master
 	cd $HOME/GFrun/resources/FIT-to-TCX-master/ && unzip -o master.zip
 	#gupload
-	cd $HOME/GFrun/resources/ && unzip -o pygupload_20120516.zip
+	cd $HOME/GFrun/resources/ && unzip -o pygupload_20130505.zip
 	#script install
 	cd $HOME && unzip -oC GFrunOffline.zip "GFrun/install/*" "GFrun/resources/dump_gconnect.py" ".config/*" ".local/*" -d $HOME/
 }
@@ -323,7 +323,7 @@ F_Diag(){
 	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
 	lsmod >> $HOME/GFrun/resources/DIAG
 	echo '==================================================================='>> $HOME/GFrun/resources/DIAG
-
+	dpkg -l | grep libusb >> $HOME/GFrun/resources/DIAG
 }
 
 F_Upload_Gconnect_GoScript()
