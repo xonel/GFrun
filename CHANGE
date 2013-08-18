@@ -1,5 +1,8 @@
 DONE :
 -----
+0.4.4
+	+ Garmin Connect Python Uploader Release 2013.05.05: Fixed issue where script failed if user's Garmin Connect display name  - Thks Premy (Ubuntu-fr)
+
 0.4.3
 
 0.4.2
