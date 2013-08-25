@@ -292,7 +292,8 @@ F_Install(){
 
 	sudo cp -f $HOME/GFrun/tools/extractor/resources/ant-usbstick2.rules /etc/udev/rules.d/
 	udevadm control --reload-rules
-
+	
+	mkdir -p $HOME/.config/garmin-extractor/scripts
 	cp -f $HOME/GFrun/tools/extractor/scripts/* $HOME/.config/garmin-extractor/scripts/
 	cp -f $HOME/.local/share/icons/GFrun.svg /usr/share/icons/
 	mv $HOME/GFrun_Install.log $HOME/GFrun/logs/GFrun_Install.log
