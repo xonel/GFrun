@@ -98,20 +98,20 @@ F_extractor(){
 	F_Path
 	echo `color 32 ">>> F_extractor"`
 	#Extractor FIT
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HOME/GFrun/tools/extractor/garmin.py > $Vpath/logs/extractorLogs | tail && read -p 'Press [Enter] key to continue...' null" 
+	echo "$Vpath/logs/extractorLogs"
+	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HOME/GFrun/tools/extractor/garmin.py > $Vpath/logs/extractorLogs | tail && read -p 'Press [Enter] key to continue...' null" 
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HOME/GFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null" 
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
 	mv $Vpath/*-garmin.log $Vpath/logs/extractor/
-	#read -p 'Press [Enter] key to continue...' null
 }
 
 F_extractor_getkey(){
 	F_Path
 	echo `color 32 ">>> F_extractor_getkey"`
 	#Pairing Key
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HOME/GFrun/tools/extractor/extractor_getkey.py > $Vpath/logs/extractor_getkeyLogs | tail && read -p 'Press [Enter] key to continue...' null" 
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HOME/GFrun/tools/extractor/extractor_getkey.py && read -p 'Press [Enter] key to continue...' null" 
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
 	mv $Vpath/*-garmin.log $Vpath/logs/extractor_getkey/
-	read -p 'Press [Enter] key to continue...' null
 }
 
 F_Xterm_Geometry(){
