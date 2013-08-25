@@ -294,6 +294,7 @@ F_Install(){
 	udevadm control --reload-rules
 
 	cp -f $HOME/GFrun/tools/extractor/scripts/* $HOME/.config/garmin-extractor/scripts/
+	cp -f $HOME/.local/share/icons/GFrun.svg /usr/share/icons/
 	mv $HOME/GFrun_Install.log $HOME/GFrun/logs/GFrun_Install.log
 	
 	if [ -f $HOME/GFrunUpdate.zip ]; then
@@ -621,6 +622,7 @@ M_Main(){
 
           -un) #U. UNINSTALL......................(GFrun.sh -un )
 		       #########################################################
+		       	F_Sudo
 				F_Uninstall
 				F_clean_up
              ;;
