@@ -118,7 +118,7 @@ F_Xterm_Geometry(){
 	F_Path
 	echo `color 32 ">>> F_Xterm_Geometry"`
 	echo "/bin/bash $Vpath/$Vscript $Voption"
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "/bin/bash $Vpath'/'$Vscript $Voption" &
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
 }
 
 F_Script(){
@@ -336,13 +336,13 @@ F_config_Gconnect(){
 		echo $NUMERO_DE_MA_MONTRE >> $Vpath/logs/IDs
 		
 		if [ -d $HOME/.config/garmin-extractor ]; then
-			mkdir -p $HOME/GFrun/forerunners/$NUMERO_DE_MA_MONTRE/dump_gconnect
+			mkdir -p $HOME/GFrun/forerunners/dump_gconnect
 			ln -sf $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities -T $HOME/.config/garminplugin/Garmin/Activities
 			ln -sf $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities -T $HOME/GFrun/forerunners/$NUMERO_DE_MA_MONTRE/activities
 
 			#Garminplugin GarminDevice.xml
 			src=ID_MA_MONTRE && cibl=$NUMERO_DE_MA_MONTRE && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garminplugin/Garmin/GarminDevice.xml" >> /tmp/ligneCmd.sh
-			#40-convert_to_tcx.py
+			#02_convert_to_tcx.py
 			src=/path/to/FIT-to-TCX/fittotcx.py && cibl=$HOME/GFrun/tools/FIT-to-TCX/fittotcx.py && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garmin-extractor/scripts/02_convert_to_tcx.py" >> /tmp/ligneCmd.sh
 			src=MON_HOME && cibl=$HOME && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garminplugin/garminplugin.xml" >> /tmp/ligneCmd.sh
 			
