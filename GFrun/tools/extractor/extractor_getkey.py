@@ -124,8 +124,12 @@ class Device:
         with open(os.path.join(self._path, "authfile"), 'wb') as f:
             passkey.tofile(f)
             _logger.debug("wrote authfile: %r, %r", self._serial, passkey)
-
-
+            
+            # write output file ID_MA_MONTRE
+            MON_HOME = os.environ['HOME']
+            ID_MA_MONTRE = open(os.path.join (MON_HOME, ID_MA_MONTRE), "w")
+            ID_MA_MONTRE.write(self._serial)
+            ID_MA_MONTRE.close()
 
 
 class Garmin(Application):

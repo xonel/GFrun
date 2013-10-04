@@ -331,6 +331,7 @@ F_config_Gconnect(){
 
 	#$NUMERO_DE_MA_MONTRE
 	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v scripts)
+	#TODO : Test if NUMERO_DE_MA_MONTRE est Valide
 
 	if [ -n "$NUMERO_DE_MA_MONTRE" ]; then
 		echo $NUMERO_DE_MA_MONTRE >> $Vpath/logs/IDs
@@ -410,7 +411,8 @@ F_config_gupload(){
 	echo `color 32 "============================================="`
 	echo "Configuration Auto-Upload on connect.garmin.com"
 	echo `color 32 "============================================="`
-
+	
+	#TODO : Encrypt Login / Password
 	if [ ! -f $HOME/.local/share/GFrun/.guploadrc ]; then
 			read -p 'USERNAME : on connect.garmin.com >> ' Read_user
 			read -p 'PASSWORD : on connect.garmin.com >> ' Read_password
@@ -474,7 +476,7 @@ F_Diag(){
 	echo '8 ==================================================================='>> $Vpath/logs/DIAG
 	dpkg -l | grep libusb >> $Vpath/logs/DIAG
 	echo '9 ==================================================================='>> $Vpath/logs/DIAG
-	python --version >> $Vpath/logs/DIAG #BUG <<<<<
+	python --version >> $Vpath/logs/DIAG # TODO : Fixer ce BUG pas de print de la version
 	echo '10 ==================================================================='>> $Vpath/logs/DIAG
 	ls -al /usr/lib/mozilla/plugins/ >> $Vpath/logs/DIAG
 	echo '11 ==================================================================='>> $Vpath/logs/DIAG
