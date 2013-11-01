@@ -90,6 +90,8 @@ F_Path(){
 	else
 		if [ -f $HOME/GFrun/GFrun.sh ]; then
 			Vpath="$HOME/GFrun"
+			else
+			Vpath="$HOME"
 		fi
 	fi
 	echo "=> "$Vpath
