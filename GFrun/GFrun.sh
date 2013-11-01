@@ -174,7 +174,7 @@ F_Uninstall(){
 		read Vchoix
 
 		if [ "$Vchoix" = "YES" ]; then
-				zip -ur  $HOME/GFrun_Activities_Backup.zip  $HOME/.config/garmin-extractor/
+				cd $HOME && zip -ur  $HOME/GFrun_Activities_Backup.zip  .config/garmin-extractor/ .config/garminplugin/ .local/GFrun
 				rm -f  $HOME/.guploadrc $HOME/.local/share/icons/GFrun.svg $HOME/.local/share/applications/GFrun.desktop /usr/share/icons/GFrun.svg
 				rm -Rf  $HOME/GFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin
 				rm -Rf  $HOME/GFrun $HOME/.local/GFrun
@@ -317,7 +317,8 @@ F_Git(){
 	else
 
 		if [ -d $HOME/GFrun ]; then
-			mv $HOME/GFrun $HOME/GFrun_$(date %m-%d_%H%M)
+			#TODO : $HOME/GFrunOld_$(date %m-%d_%H%M)
+			mv -f $HOME/GFrun $HOME/GFrunOld
 			cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
 		fi
 		
@@ -365,9 +366,9 @@ F_Restore(){
 	echo `color 32 ">>> F_Restore"`
 	if [ -f $HOME/GFrun_Activities_Backup.zip ] ; then
 
-		unzip GFrun_Activities_Backup.zip -d /tmp/GFrun_Activities_Backup/
+		unzip GFrun_Activities_Backup.zip -d /tmp/GFrun_A_B/
 
-		PATH_TRAVAIL=/tmp/GFrun_Activities_Backup/.config/garmin-extractor/
+		PATH_TRAVAIL=/tmp/GFrun_A_B/.config/garmin-extractor/
 		NUMERO_DE_MA_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789])
 		NBRS_DE_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789] -c)
 		
@@ -375,7 +376,10 @@ F_Restore(){
 			mkdir $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
 			cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
 			cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities_tcx $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
+			#TODO : rename GFrun_Activities_Backup.zip with $(date HHMM)
+			mv -f $HOME/GFrun_Activities_Backup.zip $HOME/GFrun_Activities_BackupOld.zip
 		fi
+		
 	else
 		echo "= NO (GFrun_Activities_Backup.zip) AVAILABLE ="
 	fi
@@ -406,10 +410,11 @@ F_config_Gconnect(){
 	if [ -n "$NUMERO_DE_MA_MONTRE" ] && [ "$NBRS_DE_MONTRE" == "1" ]; then
 		echo $NUMERO_DE_MA_MONTRE >> $Vpath/logs/IDs
 		
-		if [ -d $HOME/.config/garmin-extractor ]; then
+		PATH_ACTIVITES= "$HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities"
+		if [ -d $HOME/.config/garmin-extractor ] && [ -d $PATH_ACTIVITES ] ; then
 			mkdir -p $HOME/GFrun/forerunners/dump_gconnect
-			ln -sf $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities -T $HOME/.config/garminplugin/Garmin/Activities
-			ln -sf $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities -T $HOME/GFrun/forerunners/$NUMERO_DE_MA_MONTRE/activities
+			ln -sf $PATH_ACTIVITES -T $HOME/.config/garminplugin/Garmin/Activities
+			ln -sf $PATH_ACTIVITES -T $HOME/GFrun/forerunners/$NUMERO_DE_MA_MONTRE/activities
 
 			#Garminplugin GarminDevice.xml
 			src=ID_MA_MONTRE && cibl=$NUMERO_DE_MA_MONTRE && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garminplugin/Garmin/GarminDevice.xml" >> /tmp/ligneCmd.sh
