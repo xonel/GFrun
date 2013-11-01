@@ -276,9 +276,11 @@ F_Apt(){
 	#Stop si
 	if [ "$(echo "${Vlisterror[@]}")" ]; then
 		VlisterrorForm="${Vlisterror[@]}"
-
+		
+		echo "=============================="
 		echo "DEPENDANCES/APPS NOT FOUND : "
 		echo `color 31 "${VlisterrorForm}"`
+		echo "=============================="
 		read -p "Press [Enter] key to continue..." null
 
 		if [ "$(lsb_release -is)" = "Ubuntu" ]; then
