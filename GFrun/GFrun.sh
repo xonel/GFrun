@@ -157,25 +157,30 @@ F_Dump_Gconnect(){
 }
 
 F_Uninstall(){
-	echo " BACKUP WILL BE DONE INSIDE : " $HOME"/GFrun_Activities_Backup.zip "
-	echo""
-	echo `color 31 "======================================================"`
-	echo " !! UNINSTALL !! WARNING !! UNINSTALL !!"
-	echo `color 31 "======================================================"`
-	echo -n 'UNINSTALL ALL (FGrun + ConfigFiles + Activities) >> YES / [NO] :'
 
-	read Vchoix
+	if [ -d $HOME/GFrun/ ]; then
 
-	if [ "$Vchoix" = "YES" ]; then
-			zip -ur  $HOME/GFrun_Activities_Backup.zip  $HOME/.config/garmin-extractor/
-			rm -f  $HOME/.local/GFrun/.guploadrc $HOME/.local/share/icons/GFrun.svg $HOME/.local/share/applications/GFrun.desktop /usr/share/icons/GFrun.svg
-			rm -Rf  $HOME/GFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin
-			rm -Rf  $HOME/GFrun $HOME/.local/GFrun
-			echo " Backup Activities DONE : $HOME/GFrun_Activities_Backup.zip "
-			read -p 'Press [Enter] key to continue...' null
-		else
-			M_GFrunMenu
-	fi
+		echo " BACKUP WILL BE DONE INSIDE : " $HOME"/GFrun_Activities_Backup.zip "
+		echo""
+		echo `color 31 "======================================================"`
+		echo " !! UNINSTALL !! WARNING !! UNINSTALL !!"
+		echo `color 31 "======================================================"`
+		echo -n 'UNINSTALL ALL (FGrun + ConfigFiles + Activities) >> YES / [NO] :'
+
+		read Vchoix
+
+		if [ "$Vchoix" = "YES" ]; then
+				zip -ur  $HOME/GFrun_Activities_Backup.zip  $HOME/.config/garmin-extractor/
+				rm -f  $HOME/.guploadrc $HOME/.local/share/icons/GFrun.svg $HOME/.local/share/applications/GFrun.desktop /usr/share/icons/GFrun.svg
+				rm -Rf  $HOME/GFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin
+				rm -Rf  $HOME/GFrun $HOME/.local/GFrun
+				echo " Backup Activities DONE : $HOME/GFrun_Activities_Backup.zip "
+				read -p 'Press [Enter] key to continue...' null
+			else
+				M_GFrunMenu
+		fi
+	else
+		echo `color 31 "INSTALL ON GOING ..."`
 }
 
 F_garminplugin_UBU(){
@@ -183,11 +188,19 @@ F_garminplugin_UBU(){
 	if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list
 	 then
 		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin
-		sudo apt-get update
-		sudo apt-get install -y garminplugin
+		sudo apt-get update 1>/dev/nul
+		sudo apt-get install -y garminplugin 1>/dev/nul
 	else
-		sudo apt-get update
-		sudo apt-get install -y garminplugin
+		sudo apt-get update 1>/dev/nul
+		sudo apt-get install -y garminplugin 1>/dev/nul
+	fi
+	
+	if [ -z "$2" ]
+		then
+		echo `color 31 "ERROR : sudo apt-get install -y garminplugin"`
+		echo $2
+		read -p 'Press [Enter] key to continue...' null
+		M_GFrunMenu
 	fi
 }
 
@@ -220,16 +233,17 @@ F_Sudo(){
 		echo `color 31 "======================================================"`
 		echo ""
 		echo "! YOU ARE NOT ADMINISTRATOR !"		
-		echo 'Please : tape your password administrator (SUDO)'
+		#echo 'Please : tape your password administrator (SUDO)'
 		echo ""
-		#read -p "Press [Enter] key to continue..." null
+		read -p "Press [Enter] key to continue..." null
 		#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "sudo "$0"" &
+		M_GFrunMenu
 	fi
 }
 
 F_clean_up(){
 	echo `color 32 ">>> F_clean_up"`
-	rm -f $HOME/GFrun.sh* $HOME/master.zip* $HOME/GFrun/tools/FIT-to-TCX/master.zip* $HOME/GFrun/tools/master.zip* $HOME/GFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh*
+	rm -f $HOME/GFrun.sh* $HOME/master.zip* $HOME/GFrun/tools/FIT-to-TCX/master.zip* $HOME/GFrun/tools/master.zip* $HOME/GFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
 }
 
 F_Apt(){
@@ -242,7 +256,7 @@ F_Apt(){
 	
 	for i in ${VlistApt} 
 		do
-			if [ ! "$(dpkg -l | grep $i)" ]; then
+			if [ ! "$(dpkg -l | grep -w "$i ")" ]; then
 				Vlisterror=(${Vlisterror[@]} $i)
 				echo `color 31 "NOK = "`$i 
 			else
@@ -253,9 +267,12 @@ F_Apt(){
 	#Stop si
 	if [ "$(echo "${Vlisterror[@]}")" ]; then
 		VlisterrorForm="${Vlisterror[@]}"
-		echo "DEPENDANCES/APPS NOT FOUND : ${VlisterrorForm}" 2>/dev/null
+
+		echo "DEPENDANCES/APPS NOT FOUND : "
+		echo `color 31 "${VlisterrorForm}"`
+
 		read -p "Press [Enter] key to continue..." null
-		sudo apt-get update
+		#sudo apt-get update
 
 		if [ "$(lsb_release -is)" = "Ubuntu" ]; then
 			F_garminplugin_UBU
@@ -266,11 +283,20 @@ F_Apt(){
 		fi
 
 		dpkg -l >> $HOME/GFrun_Install.log
-		sudo apt-get install -y $VlisterrorForm
+		sudo apt-get install -y $VlisterrorForm  2>Verror
+		
+		if [ -z "$2" ]
+			then
+			echo -e "ERROR: \n sudo apt-get install -y $VlisterrorForm \n $Verror"
+			echo `color 31 "Check APT CONFIG and try again GFrun Install procedure"`
+			read -p 'Press [Enter] key to continue...' null
+			M_GFrunMenu	
+		fi
+
 		pip install pyusb
 
 	else
-		echo "OK = ALL DEPENDANCES" 2>/dev/null
+		echo "OK = ALL DEPENDANCES"
 	fi
 	echo $(date +%Y-%m-%d_%H%M)"= AFTER ==========================" >> $HOME/GFrun_Install.log
 	dpkg -l >> $HOME/GFrun_Install.log	
@@ -283,12 +309,24 @@ F_Git(){
 		mkdir $HOME/GFrun
 		cp -rf $HOME/GFrunLocal/GFrun/* $HOME/GFrun
 	else
+
+	if [ -d $HOME/GFrun ]; then
+		mv $HOME/GFrun $HOME/GFrun_$(date %m-%d_%H%M)
 		cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
 	fi
+
 	mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/
 	cp -rf $HOME/GFrun/_.config/* $HOME/.config/ && rm -r $HOME/GFrun/_.config
 	cp -rf $HOME/GFrun/_.local/* $HOME/.local/ && rm -r $HOME/GFrun/_.local
 	#TODO : ln -s $HOME/.local/GFrun/GFrun /usr/bin/GFrun
+
+	if [ -d $HOME/.config/garmin-extractor/ ] || [ -d $HOME/.config/garminplugin/ ] || [ -d $HOME/GFrun/ ] ; then
+		echo `color 32 "F_Git : OK"`
+	else
+		echo `color 31 "F_Git : ERROR (Check your CONFIG and try again GFrun Install procedure)"`
+		read -p 'Press [Enter] key to continue...' null
+		M_GFrunMenu
+	fi
 }
 
 F_Install(){
@@ -305,12 +343,31 @@ F_Install(){
 	if [ -f $HOME/GFrunUpdate.zip ]; then
 		mv -f $HOME/GFrunUpdate.zip $HOME/GFrun/tools/
 	fi
+
+	if [ -f /etc/udev/rules.d/ant-usbstick2.rules ] || [ "$(ls -A $HOME/.config/garmin-extractor/scripts/)" ] || [ -f /usr/share/icons/GFrun.svg ] ; then
+		echo `color 32 "F_Install : OK"`
+	else
+		echo `color 31 "F_Install : ERROR (Check your CONFIG and try again GFrun Install procedure)"`
+		read -p 'Press [Enter] key to continue...' null
+		M_GFrunMenu
+	fi
 }
 
 F_Restore(){
 	echo `color 32 ">>> F_Restore"`
 	if [ -f $HOME/GFrun_Activities_Backup.zip ] ; then
-		echo "#TODO : unzip -o $HOME/GFrun_Activities_Backup.zip -d $HOME/ seulement les Activitées"
+
+		unzip GFrun_Activities_Backup.zip -d /tmp/GFrun_Activities_Backup/
+
+		PATH_TRAVAIL=/tmp/GFrun_Activities_Backup/.config/garmin-extractor/
+		NUMERO_DE_MA_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789])
+		NBRS_DE_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789] -c)
+		
+		if [ -n "$NUMERO_DE_MA_MONTRE" ] && [ "$NBRS_DE_MONTRE" == "1" ]; then
+			mkdir $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
+			cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
+			cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities_tcx $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
+		fi
 	else
 		echo "= NO (GFrun_Activities_Backup.zip) AVAILABLE ="
 	fi
@@ -331,13 +388,14 @@ F_Update(){
 
 F_config_Gconnect(){
 	F_Path
+
 	echo `color 32 ">>> F_config_Gconnect"`
 
 	#$NUMERO_DE_MA_MONTRE
-	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v scripts)
-	#TODO : Test if NUMERO_DE_MA_MONTRE est Valide
+	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep [0123456789])
+	NBRS_DE_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep [0123456789] -c)
 
-	if [ -n "$NUMERO_DE_MA_MONTRE" ]; then
+	if [ -n "$NUMERO_DE_MA_MONTRE" ] && [ "$NBRS_DE_MONTRE" == "1" ]; then
 		echo $NUMERO_DE_MA_MONTRE >> $Vpath/logs/IDs
 		
 		if [ -d $HOME/.config/garmin-extractor ]; then
@@ -350,7 +408,11 @@ F_config_Gconnect(){
 			#02_convert_to_tcx.py
 			src=/path/to/FIT-to-TCX/fittotcx.py && cibl=$HOME/GFrun/tools/FIT-to-TCX/fittotcx.py && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garmin-extractor/scripts/02_convert_to_tcx.py" >> /tmp/ligneCmd.sh
 			src=MON_HOME && cibl=$HOME && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garminplugin/garminplugin.xml" >> /tmp/ligneCmd.sh
-			
+			#start ligneCmd.sh & check config garminplugin
+			chmod u+x /tmp/ligneCmd.sh && /bin/bash /tmp/ligneCmd.sh
+			$HOME/.config/garminplugin/garminplugin.xml | grep $NUMERO_DE_MA_MONTRE 1>/dev/null
+			$HOME/.config/garminplugin/Garmin/GarminDevice.xml | grep $HOME 1>/dev/null
+
 			echo `color 32 "============================================="`
 			echo "...> CONFIG : KEY Forerunner & Garminplugin - OK - : " $Vcpt 
 			echo `color 32 "============================================="`
@@ -399,24 +461,20 @@ F_config_Gconnect(){
 			M_GFrunMenu
 		fi
 	fi
-
-	#ligneCmd.sh
-	chmod u+x /tmp/ligneCmd.sh && /bin/bash /tmp/ligneCmd.sh
 }
 
 F_config_gupload(){
 	echo "
-	# Username and password credentials may be placed in a configuration file
-	# located either in the current working directory, or in the user's home
-	# directory.  WARNING, THIS IS NOT SECURE. USE THIS OPTION AT YOUR OWN
-	# RISK.  Username and password are stored as clear text in a file
-	# format that is consistent with Microsoft (r) INI files."
+	# WARNING, THIS IS NOT SECURE. USE THIS OPTION AT YOUR OWN RISK.  
+	# Username and password are stored as CLEAR text in a file :
+	# $HOME/.local/share/GFrun/.guploadrc
 	echo ""
 	echo `color 32 "============================================="`
 	echo "Configuration Auto-Upload on connect.garmin.com"
-	echo `color 32 "============================================="`
+	echo `color 32 "============================================="`"
 	
 	#TODO : Encrypt Login / Password
+
 	if [ ! -f $HOME/.local/share/GFrun/.guploadrc ]; then
 			read -p 'USERNAME : on connect.garmin.com >> ' Read_user
 			read -p 'PASSWORD : on connect.garmin.com >> ' Read_password
@@ -425,7 +483,6 @@ F_config_gupload(){
 			echo "enabled = True" >> $HOME/.local/share/GFrun/.guploadrc
 			echo "username="$Read_user"" >> $HOME/.local/share/GFrun/.guploadrc
 			echo "password="$Read_password"" >> $HOME/.local/share/GFrun/.guploadrc
-			ln -s $HOME/.local/share/GFrun/.guploadrc $HOME/.guploadrc
 		else
 			echo  "CHECK >> $HOME/.local/share/GFrun/.guploadrc"
 			echo ""
@@ -440,13 +497,16 @@ F_config_gupload(){
 				 n|N) echo "OK";;
 				 *) echo "not an answer";;
 			esac
-	fi 
+
+	fi
+
+	ln -s -f $HOME/.local/share/GFrun/.guploadrc $HOME/.guploadrc 
 }
 
 F_chownchmod(){
 	echo `color 32 ">>> F_chownchmod"`
 	#Chown Chmod
-	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-extractor $HOME/GFrun $HOME/.local/share/
+	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-extractor $HOME/GFrun $HOME/.local/share/GFrun
 	chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/GFrun/tools/ 
 }
 
@@ -457,8 +517,9 @@ F_Diag(){
 	echo 'rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile'
 	echo '==================================================================='
 	
-	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep -v scripts | grep -v dump_gconnect)
+	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep [0123456789])
 	rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile
+
 	echo "GFrun - $Vbranche - $Version " > $Vpath/logs/DIAG
 	uname -a >> $Vpath/logs/DIAG
 	lsb_release -a >> $Vpath/logs/DIAG
@@ -547,6 +608,7 @@ M_Main(){
 		       #########################################################
 				Vbranche="V05"
 				F_Sudo
+				#F_Uninstall
 				F_clean_up
 				F_Apt
 				F_Git

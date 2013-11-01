@@ -125,7 +125,7 @@ class Device:
             passkey.tofile(f)
             _logger.debug("wrote authfile: %r, %r", self._serial, passkey)
             
-            # write output file ID_MA_MONTRE
+            # write output file ID_MA_MONTRE (Modif By Le.NoX)
             MON_HOME = os.environ['HOME']
             ID_MA_MONTRE = open(os.path.join (MON_HOME, ID_MA_MONTRE), "w")
             ID_MA_MONTRE.write(self._serial)
