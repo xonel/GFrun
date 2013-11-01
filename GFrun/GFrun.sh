@@ -287,12 +287,12 @@ F_Apt(){
 		fi
 
 		dpkg -l >> $HOME/GFrun_Install.log
-		sudo apt-get install -y $VlisterrorForm  2>Verror
+		sudo apt-get install -y $VlisterrorForm  1>Verror
 		
-		if [ -z "$2" ]
+		if [ -n "$Verror" ]
 			then
-			echo -e "ERROR: \n sudo apt-get install -y $VlisterrorForm \n $Verror"
 			echo `color 31 "Check APT CONFIG and try again GFrun Install procedure"`
+			echo -e "ERROR: \n sudo apt-get install -y $VlisterrorForm \n Info(Verror): $Verror \n"
 			read -p 'Press [Enter] key to continue...' null
 			M_GFrunMenu	
 		fi
