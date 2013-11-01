@@ -199,10 +199,10 @@ F_garminplugin_UBU(){
 		sudo apt-get install -y garminplugin 1>Verror
 	fi
 	
-	if [ -z "$Verror" ]
+	if [ -n "$Verror" ]
 		then
 		echo `color 31 "ERROR : sudo apt-get install -y garminplugin"`
-		echo $2
+		echo $Verror
 		read -p 'Press [Enter] key to continue...' null
 		M_GFrunMenu
 	fi
