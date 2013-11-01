@@ -148,6 +148,7 @@ fi
 }
 
 F_Dump_Gconnect(){
+	echo `color 32 ">>> F_Dump_Gconnect"`
 	G_Title
 	echo `color 32 "======================================================================="`
 	echo ">>>>>  DUMP ALL ACTIVITIES FROM CONNECT GARMIN <<<<<< " 
@@ -160,7 +161,7 @@ F_Dump_Gconnect(){
 }
 
 F_Uninstall(){
-
+	echo `color 32 ">>> F_Uninstall"`
 	if [ -d $HOME/GFrun/ ]; then
 
 		echo " BACKUP WILL BE DONE INSIDE : " $HOME"/GFrun_Activities_Backup.zip "
@@ -225,7 +226,7 @@ F_garminplugin_DEB(){
 }
 
 F_Sudo(){
-	echo `color 32 ">>> SUDO_USER"`
+	echo `color 32 ">>> F_Sudo"`
 	if [ ! "$SUDO_USER" ]; then
 		echo `color 31 "======================================================"`
 		echo "....................... Install GFrun - requires ............."
@@ -318,7 +319,8 @@ F_Git(){
 			mv $HOME/GFrun $HOME/GFrun_$(date %m-%d_%H%M)
 			cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
 		fi
-
+		
+		cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
 		mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/
 		cp -rf $HOME/GFrun/_.config/* $HOME/.config/ && rm -r $HOME/GFrun/_.config
 		cp -rf $HOME/GFrun/_.local/* $HOME/.local/ && rm -r $HOME/GFrun/_.local
@@ -469,6 +471,7 @@ F_config_Gconnect(){
 }
 
 F_config_gupload(){
+	echo `color 32 ">>> F_config_gupload"`
 	echo "
 	# WARNING, THIS IS NOT SECURE. USE THIS OPTION AT YOUR OWN RISK.  
 	# Username and password are stored as CLEAR text in a file :
@@ -517,6 +520,7 @@ F_chownchmod(){
 
 F_Diag(){
 	F_Path
+	echo `color 32 ">>> F_Diag"`
 	echo " DIAG FONCTION"
 	echo '==================================================================='
 	echo 'rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile'
@@ -555,8 +559,8 @@ F_Diag(){
 	read -p 'Press [Enter] key to continue...' null
 }
 
-F_Upload_Gconnect_Go()
-{
+F_Upload_Gconnect_Go(){
+	echo `color 32 ">>> F_Upload_Gconnect_Go"`
 	echo `color 31 "============================================="`
 	echo " LOCAL > ...> Upload Activities on going >... > GARMIN.COM" 
 	echo `color 31 "============================================="`	
@@ -565,6 +569,7 @@ F_Upload_Gconnect_Go()
 }
 
 F_Upload_Gconnect(){
+	echo `color 32 ">>> F_Upload_Gconnect"`
 	echo ""
 	echo `color 32 "=================================="`
 	echo "SELECT ACTIVITIES PERIOD"
