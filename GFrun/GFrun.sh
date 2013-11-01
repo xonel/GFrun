@@ -121,7 +121,7 @@ F_Xterm_Geometry(){
 	F_Path
 	echo `color 32 ">>> F_Xterm_Geometry"`
 	echo "/bin/bash $Vpath/$Vscript $Voption"
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 35x15 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 45x25 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
 }
 
 F_Script(){
@@ -191,15 +191,15 @@ F_garminplugin_UBU(){
 	echo `color 32 ">>> F_garminplugin_UBU"`
 	if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list
 	 then
-		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin
-		sudo apt-get update 1>/dev/nul
-		sudo apt-get install -y garminplugin 1>/dev/nul
+		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin 1>/dev/null
+		sudo apt-get update 1>/dev/null
+		sudo apt-get install -y garminplugin 1>Verror
 	else
-		sudo apt-get update 1>/dev/nul
-		sudo apt-get install -y garminplugin 1>/dev/nul
+		sudo apt-get update 1>/dev/null
+		sudo apt-get install -y garminplugin 1>Verror
 	fi
 	
-	if [ -z "$2" ]
+	if [ -z "$Verror" ]
 		then
 		echo `color 31 "ERROR : sudo apt-get install -y garminplugin"`
 		echo $2
@@ -613,7 +613,7 @@ M_Main(){
 		       #########################################################
 				Vbranche="V05"
 				F_Sudo
-				#F_Uninstall
+				F_Uninstall
 				F_clean_up
 				F_Apt
 				F_Git
