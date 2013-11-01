@@ -24,6 +24,7 @@ Version="0.5.0"
 #
 ##########################################################################################################################################################
 #(STABLE) : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo bash ./GFrun.sh
+#(V05)    : wget -N https://github.com/xonel/GFrun/raw/V05/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo bash ./GFrun.sh
 ##########################################################################################################################################################
 #
 
@@ -181,6 +182,7 @@ F_Uninstall(){
 		fi
 	else
 		echo `color 31 "INSTALL ON GOING ..."`
+	fi
 }
 
 F_garminplugin_UBU(){
