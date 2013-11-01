@@ -121,7 +121,7 @@ F_Xterm_Geometry(){
 	F_Path
 	echo `color 32 ">>> F_Xterm_Geometry"`
 	echo "/bin/bash $Vpath/$Vscript $Voption"
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 45x25 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 55x35 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
 }
 
 F_Script(){
@@ -164,17 +164,18 @@ F_Uninstall(){
 	echo `color 32 ">>> F_Uninstall"`
 	if [ -d $HOME/GFrun/ ]; then
 
-		echo " BACKUP WILL BE DONE INSIDE : " $HOME"/GFrun_Activities_Backup.zip "
+
 		echo""
 		echo `color 31 "======================================================"`
 		echo " !! UNINSTALL !! WARNING !! UNINSTALL !!"
+		echo -e " ONE BACKUP WILL BE DONE : \n" $HOME"/GFrun_Activities_Backup.zip "
 		echo `color 31 "======================================================"`
 		echo -n 'UNINSTALL ALL (FGrun + ConfigFiles + Activities) >> YES / [NO] :'
 
 		read Vchoix
 
 		if [ "$Vchoix" = "YES" ]; then
-				cd $HOME && zip -ur  $HOME/GFrun_Activities_Backup.zip  .config/garmin-extractor/ .config/garminplugin/ .local/GFrun
+				cd $HOME && zip -ur  $HOME/GFrun_Activities_Backup.zip  .config/garmin-extractor/ .config/garminplugin/ .local/GFrun 1>/dev/null
 				rm -f  $HOME/.guploadrc $HOME/.local/share/icons/GFrun.svg $HOME/.local/share/applications/GFrun.desktop /usr/share/icons/GFrun.svg
 				rm -Rf  $HOME/GFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin
 				rm -Rf  $HOME/GFrun $HOME/.local/GFrun
@@ -193,10 +194,14 @@ F_garminplugin_UBU(){
 	if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list
 	 then
 		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin 1>/dev/null
+		echo `color 30 "<<< apt-get update : on going ... "`
 		sudo apt-get update 1>/dev/null
+		echo `color 30 "<<< apt-get install -y garminplugin : on going ... "`
 		sudo apt-get install -y garminplugin 1>Verror
 	else
+		echo `color 30 "<<< apt-get update : on going ... "`
 		sudo apt-get update 1>/dev/null
+		echo `color 30 "<<< apt-get install -y garminplugin : on going ... "`
 		sudo apt-get install -y garminplugin 1>Verror
 	fi
 	
@@ -277,7 +282,6 @@ F_Apt(){
 		echo `color 31 "${VlisterrorForm}"`
 
 		read -p "Press [Enter] key to continue..." null
-		#sudo apt-get update
 
 		if [ "$(lsb_release -is)" = "Ubuntu" ]; then
 			F_garminplugin_UBU
@@ -288,7 +292,11 @@ F_Apt(){
 		fi
 
 		dpkg -l >> $HOME/GFrun_Install.log
+		
+		sudo apt-get update 1>/dev/null
+		echo `color 30 "<<< apt-get update : on going ... "`
 		sudo apt-get install -y $VlisterrorForm  1>Verror
+		echo `color 30 "<<< apt-get install -y $VlisterrorForm : on going ... "`
 		
 		if [ -n "$Verror" ]
 			then
