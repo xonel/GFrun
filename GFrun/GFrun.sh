@@ -257,7 +257,7 @@ F_Apt(){
 	echo $(date +%Y-%m-%d_%H%M)"= BEFORE ==========================" >> $HOME/GFrun_Install.log
 
 	Vlisterror=()
-	VlistApt="lsb-release xterm git python python-pip libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial garminplugin"
+	VlistApt="lsb-release xterm git python python-pip python-usb libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial garminplugin"
 	
 	for i in ${VlistApt} 
 		do
@@ -299,6 +299,7 @@ F_Apt(){
 		fi
 
 		pip install pyusb
+		pip install --upgrade pyusb
 
 	else
 		echo "OK = ALL DEPENDANCES"
@@ -352,7 +353,7 @@ F_Install(){
 	fi
 
 	if [ -f /etc/udev/rules.d/ant-usbstick2.rules ] || [ "$(ls -A $HOME/.config/garmin-extractor/scripts/)" ] || [ -f /usr/share/icons/GFrun.svg ] ; then
-		echo `color 32 "F_Install : OK"`
+		echo `color 32 "<<< F_Install : OK"`
 	else
 		echo `color 31 "F_Install : ERROR (Check your CONFIG and try again GFrun Install procedure)"`
 		read -p 'Press [Enter] key to continue...' null
