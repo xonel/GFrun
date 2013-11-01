@@ -118,7 +118,7 @@ F_Xterm_Geometry(){
 	F_Path
 	echo `color 32 ">>> F_Xterm_Geometry"`
 	echo "/bin/bash $Vpath/$Vscript $Voption"
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 35x15 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
 }
 
 F_Script(){
@@ -179,6 +179,7 @@ F_Uninstall(){
 }
 
 F_garminplugin_UBU(){
+	echo `color 32 ">>> F_garminplugin_UBU"`
 	if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list
 	 then
 		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin
@@ -191,6 +192,7 @@ F_garminplugin_UBU(){
 }
 
 F_garminplugin_DEB(){
+	echo `color 32 ">>> F_garminplugin_DEB"`
 	MACHINE_TYPE=`uname -m`
 	if [ ${MACHINE_TYPE} == 'x86_64' ]; then
 	  Varchi='~raring_amd64.deb'
@@ -254,17 +256,19 @@ F_Apt(){
 		echo "DEPENDANCES/APPS NOT FOUND : ${VlisterrorForm}" 2>/dev/null
 		read -p "Press [Enter] key to continue..." null
 		sudo apt-get update
+
+		if [ "$(lsb_release -is)" = "Ubuntu" ]; then
+			F_garminplugin_UBU
+		fi
+		
+		if [ "$(lsb_release -is)" = "Debian" ]; then
+			F_garminplugin_DEB
+		fi
+
 		dpkg -l >> $HOME/GFrun_Install.log
 		sudo apt-get install -y $VlisterrorForm
 		pip install pyusb
 
-		if [ "$(lsb_release -is)" = "ubuntu" ]; then
-			F_garminplugin_UBU
-		fi
-		
-		if [ "$(lsb_release -is)" = "debian" ]; then
-			F_garminplugin_DEB
-		fi
 	else
 		echo "OK = ALL DEPENDANCES" 2>/dev/null
 	fi
