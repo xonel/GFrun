@@ -94,7 +94,7 @@ F_Path(){
 			Vpath="$HOME"
 		fi
 	fi
-	echo "=> "$Vpath
+	echo "<<< "$Vpath
 }
 
 F_extractor(){
@@ -121,7 +121,7 @@ F_Xterm_Geometry(){
 	F_Path
 	echo `color 32 ">>> F_Xterm_Geometry"`
 	echo "/bin/bash $Vpath/$Vscript $Voption"
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 55x35 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 45x35 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
 }
 
 F_Script(){
@@ -163,7 +163,6 @@ F_Dump_Gconnect(){
 F_Uninstall(){
 	echo `color 32 ">>> F_Uninstall"`
 	if [ -d $HOME/GFrun/ ]; then
-
 
 		echo""
 		echo `color 31 "======================================================"`
@@ -280,7 +279,6 @@ F_Apt(){
 
 		echo "DEPENDANCES/APPS NOT FOUND : "
 		echo `color 31 "${VlisterrorForm}"`
-
 		read -p "Press [Enter] key to continue..." null
 
 		if [ "$(lsb_release -is)" = "Ubuntu" ]; then
@@ -298,6 +296,9 @@ F_Apt(){
 		sudo apt-get install -y $VlisterrorForm  1>Verror
 		echo `color 30 "<<< apt-get install -y $VlisterrorForm : on going ... "`
 		
+		sudo pip install pyusb
+		sudo pip install --upgrade pyusb
+		
 		if [ -n "$Verror" ]
 			then
 			echo `color 31 "Check APT CONFIG and try again GFrun Install procedure"`
@@ -305,9 +306,6 @@ F_Apt(){
 			read -p 'Press [Enter] key to continue...' null
 			M_GFrunMenu	
 		fi
-
-		pip install pyusb
-		pip install --upgrade pyusb
 
 	else
 		echo "OK = ALL DEPENDANCES"
@@ -327,17 +325,17 @@ F_Git(){
 		if [ -d $HOME/GFrun ]; then
 			#TODO : $HOME/GFrunOld_$(date %m-%d_%H%M)
 			mv -f $HOME/GFrun $HOME/GFrunOld
-			cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
+			cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git 1>/dev/null
 		fi
 		
-		cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
+		cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git 1>/dev/null
 		mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/
 		cp -rf $HOME/GFrun/_.config/* $HOME/.config/ && rm -r $HOME/GFrun/_.config
 		cp -rf $HOME/GFrun/_.local/* $HOME/.local/ && rm -r $HOME/GFrun/_.local
 		#TODO : ln -s $HOME/.local/GFrun/GFrun /usr/bin/GFrun
 
 		if [ -d $HOME/.config/garmin-extractor/ ] || [ -d $HOME/.config/garminplugin/ ] || [ -d $HOME/GFrun/ ] ; then
-			echo `color 32 "F_Git : OK"`
+			echo `color 30 "<<< F_Git : OK"`
 		else
 			echo `color 31 "F_Git : ERROR (Check your CONFIG and try again GFrun Install procedure)"`
 			read -p 'Press [Enter] key to continue...' null
@@ -374,7 +372,7 @@ F_Restore(){
 	echo `color 32 ">>> F_Restore"`
 	if [ -f $HOME/GFrun_Activities_Backup.zip ] ; then
 
-		unzip GFrun_Activities_Backup.zip -d /tmp/GFrun_A_B/
+		unzip GFrun_Activities_Backup.zip -d /tmp/GFrun_A_B/ 1>/dev/null
 
 		PATH_TRAVAIL=/tmp/GFrun_A_B/.config/garmin-extractor/
 		NUMERO_DE_MA_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789])
@@ -389,7 +387,7 @@ F_Restore(){
 		fi
 		
 	else
-		echo "= NO (GFrun_Activities_Backup.zip) AVAILABLE ="
+		echo "<<< NO (GFrun_Activities_Backup.zip) AVAILABLE"
 	fi
 }
 
@@ -401,14 +399,13 @@ F_Update(){
 			if [ -f $HOME/GFrun/tools/GFrunUpdate.zip ] ; then
 				unzip -o $HOME/GFrun/tools/GFrunUpdate.zip -d $HOME/
 			else
-				echo "= NO UPDATE AVAILABLE ="
+				echo "<<< NO UPDATE AVAILABLE"
 			fi
 	fi
 }
 
 F_config_Gconnect(){
 	F_Path
-
 	echo `color 32 ">>> F_config_Gconnect"`
 
 	#$NUMERO_DE_MA_MONTRE
