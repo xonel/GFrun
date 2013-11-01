@@ -312,22 +312,23 @@ F_Git(){
 		cp -rf $HOME/GFrunLocal/GFrun/* $HOME/GFrun
 	else
 
-	if [ -d $HOME/GFrun ]; then
-		mv $HOME/GFrun $HOME/GFrun_$(date %m-%d_%H%M)
-		cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
-	fi
+		if [ -d $HOME/GFrun ]; then
+			mv $HOME/GFrun $HOME/GFrun_$(date %m-%d_%H%M)
+			cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git
+		fi
 
-	mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/
-	cp -rf $HOME/GFrun/_.config/* $HOME/.config/ && rm -r $HOME/GFrun/_.config
-	cp -rf $HOME/GFrun/_.local/* $HOME/.local/ && rm -r $HOME/GFrun/_.local
-	#TODO : ln -s $HOME/.local/GFrun/GFrun /usr/bin/GFrun
+		mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/
+		cp -rf $HOME/GFrun/_.config/* $HOME/.config/ && rm -r $HOME/GFrun/_.config
+		cp -rf $HOME/GFrun/_.local/* $HOME/.local/ && rm -r $HOME/GFrun/_.local
+		#TODO : ln -s $HOME/.local/GFrun/GFrun /usr/bin/GFrun
 
-	if [ -d $HOME/.config/garmin-extractor/ ] || [ -d $HOME/.config/garminplugin/ ] || [ -d $HOME/GFrun/ ] ; then
-		echo `color 32 "F_Git : OK"`
-	else
-		echo `color 31 "F_Git : ERROR (Check your CONFIG and try again GFrun Install procedure)"`
-		read -p 'Press [Enter] key to continue...' null
-		M_GFrunMenu
+		if [ -d $HOME/.config/garmin-extractor/ ] || [ -d $HOME/.config/garminplugin/ ] || [ -d $HOME/GFrun/ ] ; then
+			echo `color 32 "F_Git : OK"`
+		else
+			echo `color 31 "F_Git : ERROR (Check your CONFIG and try again GFrun Install procedure)"`
+			read -p 'Press [Enter] key to continue...' null
+			M_GFrunMenu
+		fi
 	fi
 }
 
