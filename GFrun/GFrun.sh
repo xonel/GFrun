@@ -192,8 +192,8 @@ F_Uninstall(){
 		if [ "$Vchoix" = "YES" ]; then
 				cd $HOME && zip -ur  $HOME/GFrun_Backup.zip  .config/garmin-extractor/ .config/garminplugin/ .local/GFrun 1>/dev/null
 				rm -f  $HOME/.guploadrc $HOME/.local/share/icons/GFrun.svg $HOME/.local/share/applications/GFrun.desktop /usr/share/icons/GFrun.svg
-				rm -Rf  $HGFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin $HOME/logs
-				rm -Rf  $HGFrun $HOME/.local/GFrun
+				rm -Rf  $HGFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin $HOME/logs 
+				rm -Rf  $HGFrun $HOME/.local/share/GFrun
 				echo -e " Backup Activities DONE :\n $HOME/GFrun_Backup.zip "
 				read -p 'Press [Enter] key to continue...' null
 			else
