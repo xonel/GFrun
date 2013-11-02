@@ -98,6 +98,7 @@ F_Path(){
 
 		else
 			Vpath="$HOME"
+			mkdir $HOME/logs/extractor/
 		fi
 	fi
 	echo "=== "$Vpath
@@ -198,7 +199,7 @@ F_Uninstall(){
 F_garminplugin_UBU(){
 	echo `color 32 ">>> F_garminplugin_UBU"`
 
-	if [ $(ls /etc/apt/sources.list.d/ | grep "andreas-diesner-garminplugin-$(lsb_release -cs).list ") ] || [ grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list ];
+	if [ $(ls /etc/apt/sources.list.d/ | grep "andreas-diesner-garminplugin-$(lsb_release -cs).list ") ] || grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list ;
 	 then
 		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin 1>/dev/null
 		echo `color 36 "<<< apt-get update : ... "`
@@ -260,7 +261,7 @@ F_Sudo(){
 
 F_clean_up(){
 	echo `color 32 ">>> F_clean_up"`
-	rm -f $HOME/GFrun.sh* $HOME/master.zip* $HOME/GFrun/tools/FIT-to-TCX/master.zip* $HOME/GFrun/tools/master.zip* $HOME/GFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
+	rm -f $HOME/Verror* $HOME/GFrun.sh* $HOME/master.zip* $HOME/GFrun/tools/FIT-to-TCX/master.zip* $HOME/GFrun/tools/master.zip* $HOME/GFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
 	rm -fr $HOME/pyusb/ 1>/dev/null
 }
 
@@ -343,7 +344,7 @@ F_Git(){
 		fi
 		
 		#cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git 1>/dev/null
-		cd $HOME && wget -N https://github.com/xonel/GFrun/archive/$Vbranche.zip && unzip -o $Vbranche.zip && mv $HOME/GFrun-$Vbranche $HOME/GFrun 1>/dev/null
+		cd $HOME && wget -N https://github.com/xonel/GFrun/archive/$Vbranche.zip 1>/dev/null && unzip -o $Vbranche.zip 1>/dev/null && mv $HOME/GFrun-$Vbranche $HOME/GFrun 1>/dev/null
 
 		cp -rf $HOME/GFrun/_.config/* $HOME/.config/ && rm -r $HOME/GFrun/_.config
 		cp -rf $HOME/GFrun/_.local/* $HOME/.local/ && rm -r $HOME/GFrun/_.local
@@ -419,10 +420,10 @@ F_Restore(){
 F_Update(){
 	echo `color 32 ">>> F_Update"`
 	if [ -f $HOME/GFrunUpdate.zip ] ; then
-		unzip -o $HOME/GFrunUpdate.zip -d $HOME/
+		unzip -o $HOME/GFrunUpdate.zip -d $HOME/ 1>/dev/null
 	else
 			if [ -f $HOME/GFrun/tools/GFrunUpdate.zip ] ; then
-				unzip -o $HOME/GFrun/tools/GFrunUpdate.zip -d $HOME/
+				unzip -o $HOME/GFrun/tools/GFrunUpdate.zip -d $HOME/ 1>/dev/null
 			else
 				echo `color 36 "<<< NO UPDATE AVAILABLE"`
 			fi
