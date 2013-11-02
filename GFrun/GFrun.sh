@@ -92,12 +92,17 @@ F_Path(){
 		Vpath="$HOME/GFrunLocal/GFrun/GFrun"
 	else
 		if [ -f $HGFrun/GFrun.sh ] && [ $Vcpt_patch == 0 ]; then
-			read -p 'Choise Script GFrun.sh VERSION : (L)ocal or (O)n Line ?' Vo
-				case "$Vo" in
-					 L|l) Vpath="$HGFrun";;
-					 o|O) Vpath="$HOME";;
-					 *) echo "not an answer";;
-				esac
+			echo `color 32 "========================"`
+			echo "Choise : VERSION - GFrun.sh "
+			echo "On Line (option)   - tape (ON/on) "
+			echo "Local   (Default)  - tape [ENTER] "
+			echo `color 32 "========================"`
+			read -p '(Default) [ENTER]' Vo
+			if [ "$Vo" = "ON" ] || [ "$Vo" = "on" ]; then
+				Vpath="$HGFrun"
+			else
+				Vpath="$HOME"
+			fi
 
 		else
 			Vpath="$HOME"
