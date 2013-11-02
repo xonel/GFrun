@@ -118,6 +118,8 @@ F_Path(){
 F_extractor(){
 	echo `color 32 ">>> F_extractor"`
 	echo "Vcpt_patch = " $Vcpt_patch
+	Vcpt_patch=1
+	echo "Vcpt_patch = " $Vcpt_patch
 	F_Path
 	#Extractor FIT
 	echo "$Vpath/logs/extractorLogs"
