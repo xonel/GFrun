@@ -101,7 +101,7 @@ F_Path(){
 
 		else
 			Vpath="$HOME"
-			mkdir $HOME/logs/extractor/
+			mkdir -p $HOME/logs/extractor/
 		fi
 	fi
 	echo "=== "$Vpath
