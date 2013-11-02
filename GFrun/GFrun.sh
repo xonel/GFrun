@@ -102,7 +102,6 @@ F_Path(){
 		else
 			Vpath="$HOME"
 			mkdir -p $HOME/logs/
-			mv $HOME/logs/IDs $HGFrun/logs/IDs 2>/dev/null
 		fi
 	fi
 	echo "=== "$Vpath
@@ -267,6 +266,7 @@ F_clean_up(){
 	echo `color 32 ">>> F_clean_up"`
 	rm -f $HOME/Verror* $HOME/GFrun.sh* $HOME/master.zip* $HGFrun/tools/FIT-to-TCX/master.zip* $HGFrun/tools/master.zip* $HGFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
 	rm -fr $HOME/pyusb/ 1>/dev/null
+	mv $HOME/logs/IDs $HGFrun/logs/IDs 1>/dev/null
 }
 
 F_Apt(){
@@ -515,10 +515,10 @@ F_config_Gconnect(){
 F_config_gupload(){
 	echo `color 32 ">>> F_config_gupload"`
 	clear
-	echo "
-	# WARNING, THIS IS NOT SECURE. USE THIS OPTION AT YOUR OWN RISK.  
-	# Username and password are stored as CLEAR text in a file :
-	# $HOME/.local/share/GFrun/.guploadrc"
+	echo "# WARNING, THIS IS NOT SECURE. USE THIS OPTION AT YOUR OWN RISK."  
+	echo "# Username and password are stored as CLEAR text in a file :"
+	echo "# $HOME/.local/share/GFrun/.guploadrc"
+	
 	echo `color 32 "============================================="`
 	echo "Configuration Auto-Upload on connect.garmin.com"
 	echo `color 32 "============================================="`
@@ -547,9 +547,7 @@ F_config_gupload(){
 				 n|N) echo "OK";;
 				 *) echo "not an answer";;
 			esac
-
 	fi
-	
 	ln -s -f $HOME/.local/share/GFrun/.guploadrc $HOME/.guploadrc 
 }
 
