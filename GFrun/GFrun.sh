@@ -101,7 +101,8 @@ F_Path(){
 
 		else
 			Vpath="$HOME"
-			mkdir -p $HOME/logs/extractor/
+			mkdir -p $HOME/logs/
+			mv $HOME/logs/IDs $HGFrun/logs/IDs 2>/dev/null
 		fi
 	fi
 	echo "=== "$Vpath
@@ -548,7 +549,7 @@ F_config_gupload(){
 			esac
 
 	fi
-
+	
 	ln -s -f $HOME/.local/share/GFrun/.guploadrc $HOME/.guploadrc 
 }
 
