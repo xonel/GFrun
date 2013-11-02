@@ -98,7 +98,7 @@ F_Path(){
 				esac
 
 		else
-			Vpath="$HOME";;
+			Vpath="$HOME"
 		fi
 	fi
 	echo "=== "$Vpath
