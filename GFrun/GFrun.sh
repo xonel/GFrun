@@ -91,17 +91,18 @@ F_Path(){
 	if [ -f $HOME/GFrunLocal/GFrun/GFrun/GFrun.sh ]; then
 		Vpath="$HOME/GFrunLocal/GFrun/GFrun"
 	else
+	echo "Vcpt_patch = " $Vcpt_patch
 		if [ -f $HGFrun/GFrun.sh ] && [ $Vcpt_patch == 0 ]; then
 			echo `color 32 "========================"`
 			echo "Choise : VERSION - GFrun.sh "
 			echo "On Line (option)   - tape (ON/on) "
 			echo "Local   (Default)  - tape [ENTER] "
 			echo `color 32 "========================"`
-			read -p '(Default) [ENTER]' Vo
+			read -p '(Default) [ENTER] : ' Vo
 			if [ "$Vo" = "ON" ] || [ "$Vo" = "on" ]; then
-				Vpath="$HGFrun"
-			else
 				Vpath="$HOME"
+			else
+				Vpath="$HGFrun"
 			fi
 
 		else
@@ -111,9 +112,11 @@ F_Path(){
 	fi
 	echo "=== "$Vpath
 	Vcpt_patch=$(($Vcpt_patch+1))
+	echo "Vcpt_patch=(($Vcpt_patch+1)) = " $Vcpt_patch
 }
 
 F_extractor(){
+	echo "Vcpt_patch = " $Vcpt_patch
 	F_Path
 	echo `color 32 ">>> F_extractor"`
 	#Extractor FIT
