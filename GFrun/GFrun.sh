@@ -31,6 +31,9 @@ Version="0.5.0"
 Vcpt=0
 Vcpt_patch=0
 
+HGFrun="$HOME/GFrun"
+Hconf_Gplugin="$HOME/.config/garminplugin"
+Hconf_Gextractor="$HOME/.config/garmin-extractor"
 
 color(){
 	printf '\033[%sm%s\033[m\n' "$@"
@@ -88,10 +91,10 @@ F_Path(){
 	if [ -f $HOME/GFrunLocal/GFrun/GFrun/GFrun.sh ]; then
 		Vpath="$HOME/GFrunLocal/GFrun/GFrun"
 	else
-		if [ -f $HOME/GFrun/GFrun.sh ] && [ $Vcpt_patch == 0 ]; then
+		if [ -f $HGFrun/GFrun.sh ] && [ $Vcpt_patch == 0 ]; then
 			read -p 'Choise Script GFrun.sh VERSION : (L)ocal or (O)n Line ?' Vo
 				case "$Vo" in
-					 L|l) Vpath="$HOME/GFrun";;
+					 L|l) Vpath="$HGFrun";;
 					 o|O) Vpath="$HOME";;
 					 *) echo "not an answer";;
 				esac
@@ -110,8 +113,8 @@ F_extractor(){
 	echo `color 32 ">>> F_extractor"`
 	#Extractor FIT
 	echo "$Vpath/logs/extractorLogs"
-	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HOME/GFrun/tools/extractor/garmin.py > $Vpath/logs/extractorLogs | tail && read -p 'Press [Enter] key to continue...' null" 
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HOME/GFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null" 
+	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HGFrun/tools/extractor/garmin.py > $Vpath/logs/extractorLogs | tail && read -p 'Press [Enter] key to continue...' null" 
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HGFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null" 
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
 	mv $Vpath/*-garmin.log $Vpath/logs/extractor/
 }
@@ -120,7 +123,7 @@ F_extractor_getkey(){
 	F_Path
 	echo `color 32 ">>> F_extractor_getkey"`
 	#Pairing Key
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HOME/GFrun/tools/extractor/extractor_getkey.py && read -p 'Press [Enter] key to continue...' null" 
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HGFrun/tools/extractor/extractor_getkey.py && read -p 'Press [Enter] key to continue...' null" 
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
 	mv $Vpath/*-garmin.log $Vpath/logs/extractor_getkey/
 }
@@ -147,8 +150,8 @@ F_Script(){
 if [ -f $HOME/GFrunLocal/GFrun/GFrun/$Vscript ]; then
 	cd $HOME/GFrunLocal/GFrun/GFrun/ && chmod +x ./$Vscript && F_Xterm_Geometry
 else
-	if [ -f $HOME/GFrun/$Vscript ]; then
-		cd $HOME/GFrun/ && chmod +x ./$Vscript && F_Xterm_Geometry
+	if [ -f $HGFrun/$Vscript ]; then
+		cd $HGFrun/ && chmod +x ./$Vscript && F_Xterm_Geometry
 	else
 		cd $HOME/ && wget -N $VWget && sleep 2 && chmod +x ./$Vscript && F_Xterm_Geometry
 	fi
@@ -164,29 +167,29 @@ F_Dump_Gconnect(){
 	echo ""
 	echo " (10 ~ 20) mins - PLEASE WAIT ... "
 	echo ""
-	mkdir $HOME/GFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M)
-	cd $HOME/GFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M) && xterm -e 'python $HOME/GFrun/tools/dump_gconnect.py && chown -R $SUDO_USER:$SUDO_USER $HOME/GFrun/forerunners/dump_gconnect/' &
+	mkdir $HGFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M)
+	cd $HGFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M) && xterm -e 'python $HGFrun/tools/dump_gconnect.py && chown -R $SUDO_USER:$SUDO_USER $HGFrun/forerunners/dump_gconnect/' &
 }
 
 F_Uninstall(){
 	echo `color 32 ">>> F_Uninstall"`
-	if [ -d $HOME/GFrun/ ]; then
+	if [ -d $HGFrun/ ]; then
 
 		echo""
 		echo `color 31 "======================================================"`
 		echo " !! UNINSTALL !! WARNING !! UNINSTALL !!"
-		echo -e " ONE BACKUP WILL BE DONE : \n" $HOME"/GFrun_Activities_Backup.zip "
+		echo -e " ONE BACKUP WILL BE DONE : \n" $HOME"/GFrun_Backup.zip "
 		echo `color 31 "======================================================"`
 		echo -n 'UNINSTALL ALL (FGrun + ConfigFiles + Activities) >> YES / [NO] :'
 
 		read Vchoix
 
 		if [ "$Vchoix" = "YES" ]; then
-				cd $HOME && zip -ur  $HOME/GFrun_Activities_Backup.zip  .config/garmin-extractor/ .config/garminplugin/ .local/GFrun 1>/dev/null
+				cd $HOME && zip -ur  $HOME/GFrun_Backup.zip  .config/garmin-extractor/ .config/garminplugin/ .local/GFrun 1>/dev/null
 				rm -f  $HOME/.guploadrc $HOME/.local/share/icons/GFrun.svg $HOME/.local/share/applications/GFrun.desktop /usr/share/icons/GFrun.svg
-				rm -Rf  $HOME/GFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin
-				rm -Rf  $HOME/GFrun $HOME/.local/GFrun
-				echo " Backup Activities DONE : $HOME/GFrun_Activities_Backup.zip "
+				rm -Rf  $HGFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin
+				rm -Rf  $HGFrun $HOME/.local/GFrun
+				echo " Backup Activities DONE : $HOME/GFrun_Backup.zip "
 				read -p 'Press [Enter] key to continue...' null
 			else
 				M_GFrunMenu
@@ -261,7 +264,7 @@ F_Sudo(){
 
 F_clean_up(){
 	echo `color 32 ">>> F_clean_up"`
-	rm -f $HOME/Verror* $HOME/GFrun.sh* $HOME/master.zip* $HOME/GFrun/tools/FIT-to-TCX/master.zip* $HOME/GFrun/tools/master.zip* $HOME/GFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
+	rm -f $HOME/Verror* $HOME/GFrun.sh* $HOME/master.zip* $HGFrun/tools/FIT-to-TCX/master.zip* $HGFrun/tools/master.zip* $HGFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
 	rm -fr $HOME/pyusb/ 1>/dev/null
 }
 
@@ -334,26 +337,26 @@ F_Apt(){
 F_Git(){
 	echo `color 32 ">>> F_Git"`
 	if [ -f $HOME/GFrunLocal/GFrun/GFrun/GFrun.sh ]; then
-		mkdir $HOME/GFrun
-		cp -rf $HOME/GFrunLocal/GFrun/* $HOME/GFrun
+		mkdir $HGFrun
+		cp -rf $HOME/GFrunLocal/GFrun/* $HGFrun
 	else
 
-		if [ -d $HOME/GFrun ]; then
+		if [ -d $HGFrun ]; then
 			#TODO : $HOME/GFrunOld_$(date %m-%d_%H%M)
-			mv -f $HOME/GFrun $HOME/GFrunOld
+			mv -f $HGFrun $HOME/GFrunOld
 		fi
 		
 		#cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git 1>/dev/null
-		cd $HOME && wget -N https://github.com/xonel/GFrun/archive/$Vbranche.zip 1>/dev/null && unzip -o $Vbranche.zip 1>/dev/null && mv $HOME/GFrun-$Vbranche $HOME/GFrun 1>/dev/null
+		cd $HOME && wget -N https://github.com/xonel/GFrun/archive/$Vbranche.zip 1>/dev/null && unzip -o $Vbranche.zip 1>/dev/null && mv $HGFrun-$Vbranche $HGFrun 1>/dev/null
 
-		cp -rf $HOME/GFrun/_.config/* $HOME/.config/ && rm -r $HOME/GFrun/_.config
-		cp -rf $HOME/GFrun/_.local/* $HOME/.local/ && rm -r $HOME/GFrun/_.local
-		mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/ 
+		cp -rf $HGFrun/_.config/* $HOME/.config/ && rm -r $HGFrun/_.config
+		cp -rf $HGFrun/_.local/* $HOME/.local/ && rm -r $HGFrun/_.local
+		mv $HGFrun/GFrun/* $HGFrun && rm -r $HGFrun/GFrun/ 
 		
 		# install pyusb via sources from GFrun /= github and pip
-		cd $HOME/GFrun/tools/pyusb/ && sudo python setup.py install
+		cd $HGFrun/tools/pyusb/ && sudo python setup.py install
 		
-		if [ -d $HOME/.config/garmin-extractor/ ] || [ -d $HOME/.config/garminplugin/ ] || [ -d $HOME/GFrun/ ] ; then
+		if [ -d $Hconf_Gextractor/ ] || [ -d $Hconf_Gplugin/ ] || [ -d $HGFrun/ ] ; then
 			echo `color 36 "<<< F_Git : OK"`
 		else
 			echo `color 31 "F_Git : ERROR (Check your CONFIG and try again GFrun Install procedure)"`
@@ -367,20 +370,20 @@ F_Git(){
 F_Install(){
 	echo `color 32 ">>> F_Install"`
 
-	sudo cp -f $HOME/GFrun/tools/extractor/resources/ant-usbstick2.rules /etc/udev/rules.d/
-	sudo cp -f $HOME/GFrun/tools/10-ant-usbstick2.rules /lib/udev/rules.d/
+	sudo cp -f $HGFrun/tools/extractor/resources/ant-usbstick2.rules /etc/udev/rules.d/
+	sudo cp -f $HGFrun/tools/10-ant-usbstick2.rules /lib/udev/rules.d/
 	sudo udevadm control --reload-rules
 	
-	mkdir -p $HOME/.config/garmin-extractor/scripts
-	cp -f $HOME/GFrun/tools/extractor/scripts/* $HOME/.config/garmin-extractor/scripts/
+	mkdir -p $Hconf_Gextractor/scripts
+	cp -f $HGFrun/tools/extractor/scripts/* $Hconf_Gextractor/scripts/
 	cp -f $HOME/.local/share/icons/GFrun.svg /usr/share/icons/
-	mv $HOME/GFrun_Install.log $HOME/GFrun/logs/GFrun_Install.log
+	mv $HOME/GFrun_Install.log $HGFrun/logs/GFrun_Install.log
 	
 	if [ -f $HOME/GFrunUpdate.zip ]; then
-		mv -f $HOME/GFrunUpdate.zip $HOME/GFrun/tools/
+		mv -f $HOME/GFrunUpdate.zip $HGFrun/tools/
 	fi
 
-	if [ -f /etc/udev/rules.d/ant-usbstick2.rules ] || [ "$(ls -A $HOME/.config/garmin-extractor/scripts/)" ] || [ -f /usr/share/icons/GFrun.svg ] ; then
+	if [ -f /etc/udev/rules.d/ant-usbstick2.rules ] || [ "$(ls -A $Hconf_Gextractor/scripts/)" ] || [ -f /usr/share/icons/GFrun.svg ] ; then
 		echo `color 36 "<<< F_Install : OK"`
 	else
 		echo `color 31 "F_Install : ERROR (Check your CONFIG and try again GFrun Install procedure)"`
@@ -391,22 +394,22 @@ F_Install(){
 
 F_Restore(){
 	echo `color 32 ">>> F_Restore"`
-	if [ -f $HOME/GFrun_Activities_Backup.zip ] ; then
+	if [ -f $HOME/GFrun_Backup.zip ] ; then
 			read -p 'RESTORE BACKUP (Y/N) ?' Vo
 			case "$Vo" in
-				 y|Y)	unzip GFrun_Activities_Backup.zip -d /tmp/GFrun_A_B/ 1>/dev/null
+				 y|Y)	unzip GFrun_Backup.zip -d /tmp/GFrun_A_B/ 1>/dev/null
 
 						PATH_TRAVAIL="/tmp/GFrun_A_B/.config/garmin-extractor"
 						NUMERO_DE_MA_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789])
 						NBRS_DE_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789] -c)
 						
 						if [ -n "$NUMERO_DE_MA_MONTRE" ] && [ "$NBRS_DE_MONTRE" == "1" ]; then
-							mkdir $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
-							cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
-							cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities_tcx $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
+							mkdir $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
+							cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
+							cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities_tcx $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
 							
-							#TODO : rename GFrun_Activities_Backup.zip with $(date HHMM)
-							mv -f $HOME/GFrun_Activities_Backup.zip $HOME/GFrun_Activities_BackupOld.zip
+							mkdir $HOME/GFrun_Backup/
+							mv -f $HOME/GFrun_Backup.zip $HOME/GFrun_Backup/$(date +%Y_%m_%d_%H%M)
 						fi;;
 						
 				 n|N) echo `color 36 "<<< CANCEL - RESTORE BACKUP"`;;
@@ -422,8 +425,8 @@ F_Update(){
 	if [ -f $HOME/GFrunUpdate.zip ] ; then
 		unzip -o $HOME/GFrunUpdate.zip -d $HOME/ 1>/dev/null
 	else
-			if [ -f $HOME/GFrun/tools/GFrunUpdate.zip ] ; then
-				unzip -o $HOME/GFrun/tools/GFrunUpdate.zip -d $HOME/ 1>/dev/null
+			if [ -f $HGFrun/tools/GFrunUpdate.zip ] ; then
+				unzip -o $HGFrun/tools/GFrunUpdate.zip -d $HOME/ 1>/dev/null
 			else
 				echo `color 36 "<<< NO UPDATE AVAILABLE"`
 			fi
@@ -435,28 +438,28 @@ F_config_Gconnect(){
 	echo `color 32 ">>> F_config_Gconnect"`
 
 	#$NUMERO_DE_MA_MONTRE
-	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep [0123456789])
-	NBRS_DE_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep [0123456789] -c)
+	NUMERO_DE_MA_MONTRE=$(ls $Hconf_Gextractor/ | grep [0123456789])
+	NBRS_DE_MONTRE=$(ls $Hconf_Gextractor/ | grep [0123456789] -c)
 
 	if [ -n "$NUMERO_DE_MA_MONTRE" ] && [ "$NBRS_DE_MONTRE" == "1" ]; then
 		echo $NUMERO_DE_MA_MONTRE >> $Vpath/logs/IDs
 		
-		PATH_ACTIVITES="$HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities/"
+		PATH_ACTIVITES="$Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/activities/"
 		if [ -d $HOME/.config/garmin-extractor ] && [ -d $PATH_ACTIVITES ] ; then
-			mkdir -p $HOME/GFrun/forerunners/dump_gconnect
-			mkdir -p $HOME/GFrun/forerunners/$NUMERO_DE_MA_MONTRE
-			ln -sf $PATH_ACTIVITES -T $HOME/.config/garminplugin/Garmin/Activities
-			ln -sf $PATH_ACTIVITES -T $HOME/GFrun/forerunners/$NUMERO_DE_MA_MONTRE/activities
+			mkdir -p $HGFrun/forerunners/dump_gconnect
+			mkdir -p $HGFrun/forerunners/$NUMERO_DE_MA_MONTRE
+			ln -sf $PATH_ACTIVITES -T $Hconf_Gplugin/Garmin/Activities
+			ln -sf $PATH_ACTIVITES -T $HGFrun/forerunners/$NUMERO_DE_MA_MONTRE/activities
 
 			#Garminplugin GarminDevice.xml
-			src=ID_MA_MONTRE && cibl=$NUMERO_DE_MA_MONTRE && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garminplugin/Garmin/GarminDevice.xml" >> /tmp/ligneCmd.sh
+			src=ID_MA_MONTRE && cibl=$NUMERO_DE_MA_MONTRE && echo "sed -i 's|$src|$cibl|g' $Hconf_Gplugin/Garmin/GarminDevice.xml" >> /tmp/ligneCmd.sh
 			#02_convert_to_tcx.py
-			src=/path/to/FIT-to-TCX/fittotcx.py && cibl=$HOME/GFrun/tools/FIT-to-TCX/fittotcx.py && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garmin-extractor/scripts/02_convert_to_tcx.py" >> /tmp/ligneCmd.sh
-			src=MON_HOME && cibl=$HOME && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garminplugin/garminplugin.xml" >> /tmp/ligneCmd.sh
+			src=/path/to/FIT-to-TCX/fittotcx.py && cibl=$HGFrun/tools/FIT-to-TCX/fittotcx.py && echo "sed -i 's|$src|$cibl|g' $Hconf_Gextractor/scripts/02_convert_to_tcx.py" >> /tmp/ligneCmd.sh
+			src=MON_HOME && cibl=$HOME && echo "sed -i 's|$src|$cibl|g' $Hconf_Gplugin/garminplugin.xml" >> /tmp/ligneCmd.sh
 			#start ligneCmd.sh & check config garminplugin
 			chmod u+x /tmp/ligneCmd.sh && /bin/bash /tmp/ligneCmd.sh
-			cat $HOME/.config/garminplugin/garminplugin.xml | grep $NUMERO_DE_MA_MONTRE 1>/dev/null
-			cat $HOME/.config/garminplugin/Garmin/GarminDevice.xml | grep $HOME 1>/dev/null
+			cat $Hconf_Gplugin/garminplugin.xml | grep $NUMERO_DE_MA_MONTRE 1>/dev/null
+			cat $Hconf_Gplugin/Garmin/GarminDevice.xml | grep $HOME 1>/dev/null
 
 			echo `color 32 "============================================="`
 			echo "...> CONFIG : KEY Forerunner & Garminplugin - OK - : " $Vcpt 
@@ -552,8 +555,8 @@ F_config_gupload(){
 F_chownchmod(){
 	echo `color 32 ">>> F_chownchmod"`
 	#Chown Chmod
-	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-extractor $HOME/GFrun $HOME/.local/share/GFrun
-	chmod -R a+x $HOME/.config/garmin-extractor/scripts/ $HOME/GFrun/tools/ 
+	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-extractor $HGFrun $HOME/.local/share/GFrun
+	chmod -R a+x $Hconf_Gextractor/scripts/ $HGFrun/tools/ 
 }
 
 F_Diag(){
@@ -561,11 +564,11 @@ F_Diag(){
 	echo `color 32 ">>> F_Diag"`
 	echo " DIAG FONCTION"
 	echo '==================================================================='
-	echo 'rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile'
+	echo 'rm -f $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/authfile'
 	echo '==================================================================='
 	
-	NUMERO_DE_MA_MONTRE=$(ls $HOME/.config/garmin-extractor/ | grep [0123456789])
-	rm -f $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/authfile
+	NUMERO_DE_MA_MONTRE=$(ls $Hconf_Gextractor/ | grep [0123456789])
+	rm -f $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/authfile
 
 	echo "GFrun - $Vbranche - $Version " > $Vpath/logs/DIAG
 	uname -a >> $Vpath/logs/DIAG
@@ -576,7 +579,7 @@ F_Diag(){
 	echo '2 ==================================================================='>> $Vpath/logs/DIAG
 	usb-devices | grep Vendor=0fcf >> $Vpath/logs/DIAG
 	echo '3 ==================================================================='>> $Vpath/logs/DIAG
-	cat $HOME/GFrun/logs/IDs >> $Vpath/logs/DIAG
+	cat $HGFrun/logs/IDs >> $Vpath/logs/DIAG
 	echo '4 ==================================================================='>> $Vpath/logs/DIAG
 	cat /etc/udev/rules.d/ant-usbstick2.rules >> $Vpath/logs/DIAG
 	echo '5 ==================================================================='>> $Vpath/logs/DIAG
@@ -602,8 +605,8 @@ F_Upload_Gconnect_Go(){
 	echo `color 31 "============================================="`
 	echo " LOCAL > ...> Upload Activities on going >... > GARMIN.COM" 
 	echo `color 31 "============================================="`	
-	echo " Script >>> python $HOME/GFrun/tools/pygupload/gupload.py -v 1 $Vactivities"
-	cd $HOME/.config/garmin-extractor/Garmin/Activities && python $HOME/GFrun/tools/pygupload/gupload.py -v 1 $Vactivities
+	echo " Script >>> python $HGFrun/tools/pygupload/gupload.py -v 1 $Vactivities"
+	cd $Hconf_Gextractor/Garmin/Activities && python $HGFrun/tools/pygupload/gupload.py -v 1 $Vactivities
 }
 
 F_Upload_Gconnect(){
