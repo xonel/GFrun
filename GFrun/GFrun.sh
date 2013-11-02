@@ -193,14 +193,14 @@ F_garminplugin_UBU(){
 	if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list
 	 then
 		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin 1>/dev/null
-		echo `color 30 "<<< apt-get update : on going ... "`
+		echo `color 36 "<<< apt-get update : on going ... "`
 		sudo apt-get update 1>/dev/null
-		echo `color 30 "<<< apt-get install -y garminplugin : on going ... "`
+		echo `color 36 "<<< apt-get install -y garminplugin : on going ... "`
 		sudo apt-get install -y garminplugin 1>Verror
 	else
-		echo `color 30 "<<< apt-get update : on going ... "`
+		echo `color 36 "<<< apt-get update : on going ... "`
 		sudo apt-get update 1>/dev/null
-		echo `color 30 "<<< apt-get install -y garminplugin : on going ... "`
+		echo `color 36 "<<< apt-get install -y garminplugin : on going ... "`
 		sudo apt-get install -y garminplugin 1>Verror
 	fi
 	
@@ -294,9 +294,9 @@ F_Apt(){
 		dpkg -l >> $HOME/GFrun_Install.log
 		
 		sudo apt-get update 1>/dev/null
-		echo `color 30 "<<< apt-get update : on going ... "`
+		echo `color 36 "<<< apt-get update : on going ... "`
 		sudo apt-get install -y $VlisterrorForm  1>Verror
-		echo `color 30 "<<< apt-get install -y $VlisterrorForm : on going ... "`
+		echo `color 36 "<<< apt-get install -y $VlisterrorForm : on going ... "`
 		
 		sudo pip install pyusb
 		sudo pip install --upgrade pyusb
@@ -340,7 +340,7 @@ F_Git(){
 		#TODO : ln -s $HOME/.local/GFrun/GFrun /usr/bin/GFrun
 
 		if [ -d $HOME/.config/garmin-extractor/ ] || [ -d $HOME/.config/garminplugin/ ] || [ -d $HOME/GFrun/ ] ; then
-			echo `color 30 "<<< F_Git : OK"`
+			echo `color 36 "<<< F_Git : OK"`
 		else
 			echo `color 31 "F_Git : ERROR (Check your CONFIG and try again GFrun Install procedure)"`
 			read -p 'Press [Enter] key to continue...' null
