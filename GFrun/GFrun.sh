@@ -198,8 +198,7 @@ F_Uninstall(){
 F_garminplugin_UBU(){
 	echo `color 32 ">>> F_garminplugin_UBU"`
 
-	if [ $(ls /etc/apt/sources.list.d/ | grep "andreas-diesner-garminplugin-$(lsb_release -cs).list ") ];
-	#if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list
+	if [ $(ls /etc/apt/sources.list.d/ | grep "andreas-diesner-garminplugin-$(lsb_release -cs).list ") ] || [ grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list ];
 	 then
 		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin 1>/dev/null
 		echo `color 36 "<<< apt-get update : ... "`
@@ -293,15 +292,15 @@ F_Apt(){
 		echo "=============================="
 		read -p "Press [Enter] key to continue..." null
 		
-		#TODO : Install garminplugin only if not present
-		if [ "$(lsb_release -is)" = "Ubuntu" ]; then
-			F_garminplugin_UBU
+		if [ "$(dpkg -l | grep -w "garminplugin ")" ]; then
+				case "$(lsb_release -is)" in
+					 Ubuntu) F_garminplugin_UBU;;
+					 Debian) F_garminplugin_DEB;;
+					 *mga*) echo "Mageia - not supported for the moment ..." 
+					 *) echo "not an answer";;
+				esac
 		fi
 		
-		if [ "$(lsb_release -is)" = "Debian" ]; then
-			F_garminplugin_DEB
-		fi
-
 		dpkg -l >> $HOME/GFrun_Install.log
 		
 		sudo apt-get update 1>/dev/null
