@@ -359,7 +359,8 @@ F_Install(){
 	echo `color 32 ">>> F_Install"`
 
 	sudo cp -f $HOME/GFrun/tools/extractor/resources/ant-usbstick2.rules /etc/udev/rules.d/
-	udevadm control --reload-rules
+	sudo cp -f $HOME/GFrun/tools/10-ant-usbstick2.rules /lib/udev/rules.d/
+	sudo udevadm control --reload-rules
 	
 	mkdir -p $HOME/.config/garmin-extractor/scripts
 	cp -f $HOME/GFrun/tools/extractor/scripts/* $HOME/.config/garmin-extractor/scripts/
