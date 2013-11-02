@@ -332,9 +332,6 @@ F_Git(){
 		if [ -d $HOME/GFrun ]; then
 			#TODO : $HOME/GFrunOld_$(date %m-%d_%H%M)
 			mv -f $HOME/GFrun $HOME/GFrunOld
-			#cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git && mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/ 1>/dev/null
-			cd $HOME && wget -N https://github.com/xonel/GFrun/archive/$Vbranche.zip && unzip -o $Vbranche.zip && mv $HOME/GFrun-$Vbranche $HOME/GFrun 1>/dev/null
-
 		fi
 		
 		#cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git && mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/ 1>/dev/null
@@ -343,11 +340,9 @@ F_Git(){
 		cp -rf $HOME/GFrun/_.config/* $HOME/.config/ && rm -r $HOME/GFrun/_.config
 		cp -rf $HOME/GFrun/_.local/* $HOME/.local/ && rm -r $HOME/GFrun/_.local
 		
-		# install pyusb via sources 
+		# install pyusb via sources from GFrun /= github and pip
 		cd $HOME/GFrun/tools/pyusb/ && sudo python setup.py install
 		
-		#TODO : ln -s $HOME/.local/GFrun/GFrun /usr/bin/GFrun
-
 		if [ -d $HOME/.config/garmin-extractor/ ] || [ -d $HOME/.config/garminplugin/ ] || [ -d $HOME/GFrun/ ] ; then
 			echo `color 36 "<<< F_Git : OK"`
 		else
@@ -355,6 +350,7 @@ F_Git(){
 			read -p 'Press [Enter] key to continue...' null
 			M_GFrunMenu
 		fi
+	#TODO : ln -s $HOME/.local/GFrun/GFrun /usr/bin/GFrun
 	fi
 }
 
@@ -397,6 +393,7 @@ F_Restore(){
 			mkdir $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
 			cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
 			cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities_tcx $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
+			
 			#TODO : rename GFrun_Activities_Backup.zip with $(date HHMM)
 			mv -f $HOME/GFrun_Activities_Backup.zip $HOME/GFrun_Activities_BackupOld.zip
 		fi
