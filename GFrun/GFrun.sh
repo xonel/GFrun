@@ -478,6 +478,9 @@ F_config_Gconnect(){
 			echo 'ERROR : $HOME/.config/garmin-extractor - NOT FOUND -' >> $Vpath/logs/DIAG
 			echo '==================================================================='>> $Vpath/logs/DIAG
 			read -p 'Press [Enter] key to continue...' null
+			
+			F_chownchmod
+			F_clean_up
 			M_GFrunMenu			
 		fi
 		
