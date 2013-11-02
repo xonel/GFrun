@@ -89,12 +89,19 @@ F_Path(){
 		Vpath="$HOME/GFrunLocal/GFrun/GFrun"
 	else
 		if [ -f $HOME/GFrun/GFrun.sh ]; then
-			Vpath="$HOME/GFrun"
-			else
-			Vpath="$HOME"
+		
+			read -p 'Choise Script GFrun.sh VERSION : (L)ocal or (O)n Line ?' Vo
+				case "$Vo" in
+					 L|l) Vpath="$HOME/GFrun";;
+					 o|O) Vpath="$HOME";;
+					 *) echo "not an answer";;
+				esac
+
+		else
+			Vpath="$HOME";;
 		fi
 	fi
-	echo "<<< "$Vpath
+	echo "=== "$Vpath
 }
 
 F_extractor(){
@@ -121,7 +128,7 @@ F_Xterm_Geometry(){
 	F_Path
 	echo `color 32 ">>> F_Xterm_Geometry"`
 	echo "/bin/bash $Vpath/$Vscript $Voption"
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 45x35 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
 }
 
 F_Script(){
@@ -184,25 +191,25 @@ F_Uninstall(){
 				M_GFrunMenu
 		fi
 	else
-		echo `color 31 "INSTALL ON GOING ..."`
+		echo `color 31 "INSTALL ..."`
 	fi
 }
 
 F_garminplugin_UBU(){
 	echo `color 32 ">>> F_garminplugin_UBU"`
 
-	if [ ls /etc/apt/sources.list.d/ | grep "andreas-diesner-garminplugin-$(lsb_release -cs).list " ]
+	if [ $(ls /etc/apt/sources.list.d/ | grep "andreas-diesner-garminplugin-$(lsb_release -cs).list ") ];
 	#if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list
 	 then
 		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin 1>/dev/null
-		echo `color 36 "<<< apt-get update : on going ... "`
+		echo `color 36 "<<< apt-get update : ... "`
 		sudo apt-get update 1>/dev/null
-		echo `color 36 "<<< apt-get install -y garminplugin : on going ... "`
+		echo `color 36 "<<< apt-get install -y garminplugin : ... "`
 		sudo apt-get install -y garminplugin 1>Verror
 	else
-		echo `color 36 "<<< apt-get update : on going ... "`
+		echo `color 36 "<<< apt-get update : ... "`
 		sudo apt-get update 1>/dev/null
-		echo `color 36 "<<< apt-get install -y garminplugin : on going ... "`
+		echo `color 36 "<<< apt-get install -y garminplugin : ... "`
 		sudo apt-get install -y garminplugin 1>Verror
 	fi
 	
@@ -298,9 +305,9 @@ F_Apt(){
 		dpkg -l >> $HOME/GFrun_Install.log
 		
 		sudo apt-get update 1>/dev/null
-		echo `color 36 "<<< apt-get update : on going ... "`
+		echo `color 36 "<<< apt-get update : ... "`
 		sudo apt-get install -y $VlisterrorForm  1>Verror
-		echo `color 36 "<<< apt-get install -y $VlisterrorForm : on going ... "`
+		echo `color 36 "<<< apt-get install -y $VlisterrorForm : ... "`
 		
 		#Import pyusb from Github
 		#cd $HOME && git clone https://github.com/walac/pyusb && cd $HOME/pyusb/ && sudo python setup.py install
@@ -402,7 +409,7 @@ F_Restore(){
 		fi
 		
 	else
-		echo "<<< NO (GFrun_Activities_Backup.zip) AVAILABLE"
+		echo `color 36 "<<< NO BACKUP"`
 	fi
 }
 
@@ -414,7 +421,7 @@ F_Update(){
 			if [ -f $HOME/GFrun/tools/GFrunUpdate.zip ] ; then
 				unzip -o $HOME/GFrun/tools/GFrunUpdate.zip -d $HOME/
 			else
-				echo "<<< NO UPDATE AVAILABLE"
+				echo `color 36 "<<< NO UPDATE AVAILABLE"`
 			fi
 	fi
 }
