@@ -327,14 +327,13 @@ F_Git(){
 		if [ -d $HOME/GFrun ]; then
 			#TODO : $HOME/GFrunOld_$(date %m-%d_%H%M)
 			mv -f $HOME/GFrun $HOME/GFrunOld
-			#cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git 1>/dev/null
-			#cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git 1>/dev/null
+			cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git 1>/dev/null
 			#cd $HOME && wget -N https://github.com/xonel/GFrun/archive/$Vbranche.zip && unzip -o $Vbranche.zip -d GFrun 1>/dev/null
 
 		fi
 		
-		#cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git 1>/dev/null
-		cd $HOME && wget -N https://github.com/xonel/GFrun/archive/$Vbranche.zip && unzip -o $Vbranche.zip -d GFrun 1>/dev/null
+		cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git 1>/dev/null
+		#cd $HOME && wget -N https://github.com/xonel/GFrun/archive/$Vbranche.zip && unzip -o $Vbranche.zip -d GFrun 1>/dev/null
 		mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/
 		cp -rf $HOME/GFrun/_.config/* $HOME/.config/ && rm -r $HOME/GFrun/_.config
 		cp -rf $HOME/GFrun/_.local/* $HOME/.local/ && rm -r $HOME/GFrun/_.local
