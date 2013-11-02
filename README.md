@@ -16,8 +16,11 @@ CONFIG :
 ---------------
 Configuration de test pour le developpement du script "GFrun" :
    + Garmin Forerunner 310XT (Allumée)
-   + Clef Usb ANT FS /ANT+  (ID_product 1008 & 1009) (connecté à l'ordinateur) 
+   + Clef Usb ANT FS /ANT+ (ID_product 1008 & 1009) (connecté à l'ordinateur)
    + Ubuntu 13.10 64bit (25/04/2013 UpDate) / Ubuntu 12.04 64bit
+   + Python 2.7+
+   + PyUSB 1.0 (seems to be a bug which makes it segfaults on version before Alpha 2):https://github.com/walac/pyusb
+
 
 INSTALL :
 ---------
@@ -27,7 +30,7 @@ STABLE Version (branch GFrun) :
 </code></pre>
 
 DEV Version (branch MASTER) :
-<pre><code>wget -N https://github.com/xonel/GFrun/raw/master/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+<pre><code>wget -N https://github.com/xonel/GFrun/raw/master/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo bash ./GFrun.sh
 </code></pre>
 
 VISUEL :
