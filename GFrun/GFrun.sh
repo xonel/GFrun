@@ -29,7 +29,7 @@ Version="0.5.0"
 #
 
 Vcpt=0
-
+Vcpt_patch=0
 
 
 color(){
@@ -88,8 +88,7 @@ F_Path(){
 	if [ -f $HOME/GFrunLocal/GFrun/GFrun/GFrun.sh ]; then
 		Vpath="$HOME/GFrunLocal/GFrun/GFrun"
 	else
-		if [ -f $HOME/GFrun/GFrun.sh ]; then
-		
+		if [ -f $HOME/GFrun/GFrun.sh ] && [ $Vcpt_patch == 0 ]; then
 			read -p 'Choise Script GFrun.sh VERSION : (L)ocal or (O)n Line ?' Vo
 				case "$Vo" in
 					 L|l) Vpath="$HOME/GFrun";;
@@ -102,6 +101,7 @@ F_Path(){
 		fi
 	fi
 	echo "=== "$Vpath
+	Vcpt_patch=$(($Vcpt_patch+1))
 }
 
 F_extractor(){
