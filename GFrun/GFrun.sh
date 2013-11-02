@@ -190,7 +190,9 @@ F_Uninstall(){
 
 F_garminplugin_UBU(){
 	echo `color 32 ">>> F_garminplugin_UBU"`
-	if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list
+
+	if [ ls /etc/apt/sources.list.d/ | grep "andreas-diesner-garminplugin-$(lsb_release -cs).list " ]
+	#if ! grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list
 	 then
 		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin 1>/dev/null
 		echo `color 36 "<<< apt-get update : on going ... "`
@@ -334,11 +336,12 @@ F_Git(){
 			mv -f $HOME/GFrun $HOME/GFrunOld
 		fi
 		
-		#cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git && mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/ 1>/dev/null
+		#cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git 1>/dev/null
 		cd $HOME && wget -N https://github.com/xonel/GFrun/archive/$Vbranche.zip && unzip -o $Vbranche.zip && mv $HOME/GFrun-$Vbranche $HOME/GFrun 1>/dev/null
 
 		cp -rf $HOME/GFrun/_.config/* $HOME/.config/ && rm -r $HOME/GFrun/_.config
 		cp -rf $HOME/GFrun/_.local/* $HOME/.local/ && rm -r $HOME/GFrun/_.local
+		mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/ 
 		
 		# install pyusb via sources from GFrun /= github and pip
 		cd $HOME/GFrun/tools/pyusb/ && sudo python setup.py install
@@ -371,7 +374,7 @@ F_Install(){
 	fi
 
 	if [ -f /etc/udev/rules.d/ant-usbstick2.rules ] || [ "$(ls -A $HOME/.config/garmin-extractor/scripts/)" ] || [ -f /usr/share/icons/GFrun.svg ] ; then
-		echo `color 32 "<<< F_Install : OK"`
+		echo `color 36 "<<< F_Install : OK"`
 	else
 		echo `color 31 "F_Install : ERROR (Check your CONFIG and try again GFrun Install procedure)"`
 		read -p 'Press [Enter] key to continue...' null
@@ -385,7 +388,7 @@ F_Restore(){
 
 		unzip GFrun_Activities_Backup.zip -d /tmp/GFrun_A_B/ 1>/dev/null
 
-		PATH_TRAVAIL=/tmp/GFrun_A_B/.config/garmin-extractor/
+		PATH_TRAVAIL=/tmp/GFrun_A_B/.config/garmin-extractor
 		NUMERO_DE_MA_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789])
 		NBRS_DE_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789] -c)
 		
@@ -440,8 +443,8 @@ F_config_Gconnect(){
 			src=MON_HOME && cibl=$HOME && echo "sed -i 's|$src|$cibl|g' $HOME/.config/garminplugin/garminplugin.xml" >> /tmp/ligneCmd.sh
 			#start ligneCmd.sh & check config garminplugin
 			chmod u+x /tmp/ligneCmd.sh && /bin/bash /tmp/ligneCmd.sh
-			$HOME/.config/garminplugin/garminplugin.xml | grep $NUMERO_DE_MA_MONTRE 1>/dev/null
-			$HOME/.config/garminplugin/Garmin/GarminDevice.xml | grep $HOME 1>/dev/null
+			cat $HOME/.config/garminplugin/garminplugin.xml | grep $NUMERO_DE_MA_MONTRE 1>/dev/null
+			cat $HOME/.config/garminplugin/Garmin/GarminDevice.xml | grep $HOME 1>/dev/null
 
 			echo `color 32 "============================================="`
 			echo "...> CONFIG : KEY Forerunner & Garminplugin - OK - : " $Vcpt 
