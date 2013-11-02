@@ -23,8 +23,8 @@ Version="0.5.0"
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##########################################################################################################################################################
-#(STABLE) : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo bash ./GFrun.sh
-#(V05)    : wget -N https://github.com/xonel/GFrun/raw/V05/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo bash ./GFrun.sh
+#(STABLE) : wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+#(DEV)    : wget -N https://github.com/xonel/GFrun/raw/master/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo bash ./GFrun.sh
 ##########################################################################################################################################################
 #
 
@@ -633,7 +633,7 @@ M_Main(){
 		in
            -s) # 1. STABLE.........................(GFrun.sh -s .)
 		       #########################################################
-				Vbranche="V05"
+				Vbranche="GFrun"
 				F_Sudo
 				F_Uninstall
 				F_clean_up
@@ -652,6 +652,7 @@ M_Main(){
 		       #########################################################
 				Vbranche="master"
 				F_Sudo
+				F_Uninstall
 				F_clean_up
 				F_Apt
 				F_Git
