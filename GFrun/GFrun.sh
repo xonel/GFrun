@@ -91,7 +91,7 @@ F_Path(){
 	if [ -f $HOME/GFrunLocal/GFrun/GFrun/GFrun.sh ]; then
 		Vpath="$HOME/GFrunLocal/GFrun/GFrun"
 	else
-	echo "Vcpt_patch = " $Vcpt_patch
+		echo "Vcpt_patch = " $Vcpt_patch
 		if [ -f $HGFrun/GFrun.sh ] && [ $Vcpt_patch == 0 ]; then
 			echo `color 32 "========================"`
 			echo "Choise : VERSION - GFrun.sh "
@@ -112,15 +112,11 @@ F_Path(){
 	fi
 	echo "=== "$Vpath
 	Vcpt_patch=$(($Vcpt_patch+1))
-	echo "Vcpt_patch=(($Vcpt_patch+1)) = " $Vcpt_patch
 }
 
 F_extractor(){
 	echo `color 32 ">>> F_extractor"`
-	echo "Vcpt_patch = " $Vcpt_patch
-	Vcpt_patch=1
-	echo "Vcpt_patch = " $Vcpt_patch
-	F_Path
+	Vcpt_patch=1 &&	F_Path
 	#Extractor FIT
 	echo "$Vpath/logs/extractorLogs"
 	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HGFrun/tools/extractor/garmin.py > $Vpath/logs/extractorLogs | tail && read -p 'Press [Enter] key to continue...' null" 
@@ -131,7 +127,7 @@ F_extractor(){
 
 F_extractor_getkey(){
 	echo `color 32 ">>> F_extractor_getkey"`
-	F_Path
+	Vcpt_patch=1 &&	F_Path
 	#Pairing Key
 	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HGFrun/tools/extractor/extractor_getkey.py && read -p 'Press [Enter] key to continue...' null" 
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
@@ -140,7 +136,7 @@ F_extractor_getkey(){
 
 F_Xterm_Geometry(){
 	echo `color 32 ">>> F_Xterm_Geometry"`
-	F_Path
+	Vcpt_patch=1 &&	F_Path
 	echo "/bin/bash $Vpath/$Vscript $Voption"
 	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
 }
