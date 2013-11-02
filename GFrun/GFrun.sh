@@ -296,7 +296,7 @@ F_Apt(){
 				case "$(lsb_release -is)" in
 					 Ubuntu) F_garminplugin_UBU;;
 					 Debian) F_garminplugin_DEB;;
-					 *mga*) echo "Mageia - not supported for the moment ..." 
+					 *mga*) echo "Mageia - not supported for the moment ...";;
 					 *) echo "not an answer";;
 				esac
 		fi
@@ -391,22 +391,26 @@ F_Install(){
 F_Restore(){
 	echo `color 32 ">>> F_Restore"`
 	if [ -f $HOME/GFrun_Activities_Backup.zip ] ; then
+			read -p 'RESTORE BACKUP (Y/N) ?' Vo
+			case "$Vo" in
+				 y|Y)	unzip GFrun_Activities_Backup.zip -d /tmp/GFrun_A_B/ 1>/dev/null
 
-		unzip GFrun_Activities_Backup.zip -d /tmp/GFrun_A_B/ 1>/dev/null
-
-		PATH_TRAVAIL=/tmp/GFrun_A_B/.config/garmin-extractor
-		NUMERO_DE_MA_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789])
-		NBRS_DE_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789] -c)
-		
-		if [ -n "$NUMERO_DE_MA_MONTRE" ] && [ "$NBRS_DE_MONTRE" == "1" ]; then
-			mkdir $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
-			cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
-			cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities_tcx $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
-			
-			#TODO : rename GFrun_Activities_Backup.zip with $(date HHMM)
-			mv -f $HOME/GFrun_Activities_Backup.zip $HOME/GFrun_Activities_BackupOld.zip
-		fi
-		
+						PATH_TRAVAIL="/tmp/GFrun_A_B/.config/garmin-extractor"
+						NUMERO_DE_MA_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789])
+						NBRS_DE_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789] -c)
+						
+						if [ -n "$NUMERO_DE_MA_MONTRE" ] && [ "$NBRS_DE_MONTRE" == "1" ]; then
+							mkdir $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
+							cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
+							cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities_tcx $HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/
+							
+							#TODO : rename GFrun_Activities_Backup.zip with $(date HHMM)
+							mv -f $HOME/GFrun_Activities_Backup.zip $HOME/GFrun_Activities_BackupOld.zip
+						fi;;
+						
+				 n|N) echo `color 36 "<<< CANCEL - RESTORE BACKUP"`;;
+				 *) echo "not an answer";;
+			esac	
 	else
 		echo `color 36 "<<< NO BACKUP"`
 	fi
