@@ -430,9 +430,10 @@ F_config_Gconnect(){
 	if [ -n "$NUMERO_DE_MA_MONTRE" ] && [ "$NBRS_DE_MONTRE" == "1" ]; then
 		echo $NUMERO_DE_MA_MONTRE >> $Vpath/logs/IDs
 		
-		PATH_ACTIVITES= "$HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities"
+		PATH_ACTIVITES="$HOME/.config/garmin-extractor/$NUMERO_DE_MA_MONTRE/activities/"
 		if [ -d $HOME/.config/garmin-extractor ] && [ -d $PATH_ACTIVITES ] ; then
 			mkdir -p $HOME/GFrun/forerunners/dump_gconnect
+			mkdir -p $HOME/GFrun/forerunners/$NUMERO_DE_MA_MONTRE
 			ln -sf $PATH_ACTIVITES -T $HOME/.config/garminplugin/Garmin/Activities
 			ln -sf $PATH_ACTIVITES -T $HOME/GFrun/forerunners/$NUMERO_DE_MA_MONTRE/activities
 
