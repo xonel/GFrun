@@ -354,7 +354,7 @@ F_Git(){
 		mv $HGFrun/GFrun/* $HGFrun && rm -r $HGFrun/GFrun/ 
 		
 		# install pyusb via sources from GFrun /= github and pip
-		cd $HGFrun/tools/pyusb/ && sudo python setup.py install
+		cd $HGFrun/tools/pyusb/ && sudo python setup.py install 1>/dev/null
 		
 		if [ -d $Hconf_Gextractor/ ] || [ -d $Hconf_Gplugin/ ] || [ -d $HGFrun/ ] ; then
 			echo `color 36 "<<< F_Git : OK"`
@@ -513,14 +513,14 @@ F_config_Gconnect(){
 
 F_config_gupload(){
 	echo `color 32 ">>> F_config_gupload"`
+	clear
 	echo "
 	# WARNING, THIS IS NOT SECURE. USE THIS OPTION AT YOUR OWN RISK.  
 	# Username and password are stored as CLEAR text in a file :
-	# $HOME/.local/share/GFrun/.guploadrc
-	echo ""
+	# $HOME/.local/share/GFrun/.guploadrc"
 	echo `color 32 "============================================="`
 	echo "Configuration Auto-Upload on connect.garmin.com"
-	echo `color 32 "============================================="`"
+	echo `color 32 "============================================="`
 	
 	#TODO : Encrypt Login / Password
 
@@ -533,10 +533,10 @@ F_config_gupload(){
 			echo "username="$Read_user"" >> $HOME/.local/share/GFrun/.guploadrc
 			echo "password="$Read_password"" >> $HOME/.local/share/GFrun/.guploadrc
 		else
-			echo  "CHECK >> $HOME/.local/share/GFrun/.guploadrc"
 			echo ""
 			echo `color 31 "============================================="`
 			echo "Configuration file already exist"
+			echo "$HOME/.local/share/GFrun/.guploadrc"
 			echo `color 31 "============================================="`
 
 			read -p 'Do you want create new one (N/y) ?' Vo
