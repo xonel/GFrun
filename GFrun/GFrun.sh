@@ -286,7 +286,7 @@ F_Apt(){
 	
 	for i in ${VlistApt} 
 		do
-			if [ ! "$(dpkg -l | grep -w "$i ")" ]; then
+			if [ ! "$(dpkg -l | grep -w "$i")" ]; then
 				Vlisterror=(${Vlisterror[@]} $i)
 				echo `color 31 "NOK = "`$i 
 			else
@@ -305,6 +305,8 @@ F_Apt(){
 		read -p "Press [Enter] key to continue..." null
 		
 		if [ "$(dpkg -l | grep -w "garminplugin ")" ]; then
+				echo `color 36 "<<< garminplugin already installed"`
+		else
 				case "$(lsb_release -is)" in
 					 Ubuntu) F_garminplugin_UBU;;
 					 Debian) F_garminplugin_DEB;;
