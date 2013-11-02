@@ -262,8 +262,7 @@ F_Apt(){
 	echo $(date +%Y-%m-%d_%H%M)"= BEFORE ==========================" >> $HOME/GFrun_Install.log
 
 	Vlisterror=()
-	#VlistApt="lsb-release xterm git python python-pip python-usb libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial garminplugin"
-	VlistApt="lsb-release xterm git garminplugin libusb-1.0-0 python python-pip python-lxml python-pkg-resources python-poster python-serial"
+	VlistApt="lsb-release xterm git garminplugin libusb-1.0-0 python python-pip python-usb python-lxml python-pkg-resources python-poster python-serial"
 	
 	for i in ${VlistApt} 
 		do
@@ -301,11 +300,11 @@ F_Apt(){
 		sudo apt-get install -y $VlisterrorForm  1>Verror
 		echo `color 36 "<<< apt-get install -y $VlisterrorForm : on going ... "`
 		
-		#TODO : import pyusb in GFrun
-		cd $HOME && git clone https://github.com/walac/pyusb && cd $HOME/pyusb/ && sudo python setup.py install
-		
-		#sudo pip install pyusb
-		#sudo pip install --upgrade pyusb
+		#Import pyusb from Github
+		#cd $HOME && git clone https://github.com/walac/pyusb && cd $HOME/pyusb/ && sudo python setup.py install
+
+		sudo pip install pyusb
+		sudo pip install --upgrade pyusb
 		
 		if [ -n "$Verror" ]
 			then
@@ -343,6 +342,10 @@ F_Git(){
 		mv $HOME/GFrun/GFrun/* $HOME/GFrun && rm -r $HOME/GFrun/GFrun/
 		cp -rf $HOME/GFrun/_.config/* $HOME/.config/ && rm -r $HOME/GFrun/_.config
 		cp -rf $HOME/GFrun/_.local/* $HOME/.local/ && rm -r $HOME/GFrun/_.local
+		
+		# install pyusb via sources 
+		cd $HOME/GFrun/tools/pyusb/ && sudo python setup.py install
+		
 		#TODO : ln -s $HOME/.local/GFrun/GFrun /usr/bin/GFrun
 
 		if [ -d $HOME/.config/garmin-extractor/ ] || [ -d $HOME/.config/garminplugin/ ] || [ -d $HOME/GFrun/ ] ; then
