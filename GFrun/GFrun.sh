@@ -253,6 +253,7 @@ F_Sudo(){
 F_clean_up(){
 	echo `color 32 ">>> F_clean_up"`
 	rm -f $HOME/GFrun.sh* $HOME/master.zip* $HOME/GFrun/tools/FIT-to-TCX/master.zip* $HOME/GFrun/tools/master.zip* $HOME/GFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
+	rm -fr $HOME/pyusb/ 1>/dev/null
 }
 
 F_Apt(){
@@ -261,7 +262,8 @@ F_Apt(){
 	echo $(date +%Y-%m-%d_%H%M)"= BEFORE ==========================" >> $HOME/GFrun_Install.log
 
 	Vlisterror=()
-	VlistApt="lsb-release xterm git python python-pip python-usb libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial garminplugin"
+	#VlistApt="lsb-release xterm git python python-pip python-usb libusb-1.0-0 python-lxml python-pkg-resources python-poster python-serial garminplugin"
+	VlistApt="lsb-release xterm git garminplugin libusb-1.0-0 python python-pip python-lxml python-pkg-resources python-poster python-serial"
 	
 	for i in ${VlistApt} 
 		do
@@ -282,7 +284,8 @@ F_Apt(){
 		echo `color 31 "${VlisterrorForm}"`
 		echo "=============================="
 		read -p "Press [Enter] key to continue..." null
-
+		
+		#TODO : Install garminplugin only if not present
 		if [ "$(lsb_release -is)" = "Ubuntu" ]; then
 			F_garminplugin_UBU
 		fi
@@ -298,8 +301,11 @@ F_Apt(){
 		sudo apt-get install -y $VlisterrorForm  1>Verror
 		echo `color 36 "<<< apt-get install -y $VlisterrorForm : on going ... "`
 		
-		sudo pip install pyusb
-		sudo pip install --upgrade pyusb
+		#TODO : import pyusb in GFrun
+		cd $HOME && git clone https://github.com/walac/pyusb && cd $HOME/pyusb/ && sudo python setup.py install
+		
+		#sudo pip install pyusb
+		#sudo pip install --upgrade pyusb
 		
 		if [ -n "$Verror" ]
 			then
