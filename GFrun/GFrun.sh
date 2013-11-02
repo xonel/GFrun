@@ -180,7 +180,7 @@ F_Uninstall(){
 		echo " !! UNINSTALL !! WARNING !! UNINSTALL !!"
 		echo -e " ONE BACKUP WILL BE DONE : \n" $HOME"/GFrun_Backup.zip "
 		echo `color 31 "======================================================"`
-		echo -n 'UNINSTALL ALL (FGrun + ConfigFiles + Activities) >> YES / [NO] :'
+		echo -n 'UNINSTALL ALL (FGrun + ConfigFiles + Activities) >> YES / [NO] : '
 
 		read Vchoix
 
@@ -345,7 +345,7 @@ F_Git(){
 
 		if [ -d $HGFrun ]; then
 			#TODO : $HOME/GFrunOld_$(date %m-%d_%H%M)
-			mv -f $HGFrun $HOME/GFrunOld
+			mv -f $HGFrun $HOME/GFrun_Old 
 		fi
 		
 		#cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git 1>/dev/null
@@ -555,7 +555,7 @@ F_config_gupload(){
 F_chownchmod(){
 	echo `color 32 ">>> F_chownchmod"`
 	#Chown Chmod
-	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garminplugin $HOME/.config/garmin-extractor $HGFrun $HOME/.local/share/GFrun
+	chown -R $SUDO_USER:$SUDO_USER $HOME/logs  $HOME/GFrun_Old $HOME/GFrun_Backup $HGFrun $Hconf_Gextractor $Hconf_Gplugin $HOME/.local/share/GFrun
 	chmod -R a+x $Hconf_Gextractor/scripts/ $HGFrun/tools/ 
 }
 
