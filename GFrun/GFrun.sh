@@ -677,7 +677,7 @@ M_Main(){
 		in
            -s) # 1. STABLE.........................(GFrun.sh -s .)
 		       #########################################################
-				#Vbranche="GFrun"
+				Vbranche="GFrun"
 				F_Sudo
 				F_Uninstall
 				F_clean_up
@@ -694,7 +694,7 @@ M_Main(){
             ;;
           -d) #2. DEV ...........................(GFrun.sh -d .)
 		       #########################################################
-				#Vbranche="master"
+				Vbranche="master"
 				F_Sudo
 				F_Uninstall
 				F_clean_up
@@ -711,7 +711,7 @@ M_Main(){
             ;;
           -up) # 3. UPDATE.........................(GFrun.sh -up)
 		       #########################################################
-				#Vbranche="master"
+				Vbranche="master"
 				F_Update
 				F_chownchmod
 				F_clean_up
