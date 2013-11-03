@@ -651,7 +651,9 @@ F_Upload_Gconnect_Go(){
 	echo " LOCAL > ...> Upload Activities on going >... > GARMIN.COM" 
 	echo `color 31 "============================================="`	
 	echo " Script >>> python $HGFrun/tools/pygupload/gupload.py -v 1 $Vactivities"
-	cd $Hconf_Gextractor/Garmin/Activities && python $HGFrun/tools/pygupload/gupload.py -v 1 $Vactivities
+	
+	NUMERO_DE_MA_MONTRE=$(ls $Hconf_Gextractor/ | grep [0123456789])
+	cd $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/activities && python $HGFrun/tools/pygupload/gupload.py -v 1 $Vactivities
 }
 
 F_Upload_Gconnect(){
