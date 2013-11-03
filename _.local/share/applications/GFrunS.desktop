@@ -7,10 +7,10 @@ Categories=GNOME;GTK;
 # commande à exécuter lorsque le lanceur est pressé
 Exec=xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x40 -e 'cd $HOME/GFrun && sudo /bin/bash ./GFrun.sh'
 # nom du lanceur
-Name=GFrun
+Name=GFrunS
 
 # description plus élaborée du lanceur
-Comment= GFrun - Garmin ForeRunner
+Comment= GFrunS - Garmin ForeRunner (ROOT)
 
 # icône à appliquer au lanceur
-Icon=/usr/share/icons/GFrun.svg
+Icon=/usr/share/icons/GFrunS.svg
