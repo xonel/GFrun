@@ -279,7 +279,7 @@ F_clean_up(){
 	echo `color 32 ">>> F_clean_up"`
 	rm -f $HOME/Verror* $HOME/GFrun.sh* $HOME/master.zip* $HGFrun/tools/FIT-to-TCX/master.zip* $HGFrun/tools/master.zip* $HGFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
 	rm -fr $HOME/pyusb/ 1>/dev/null
-	mv -f $HOME/GFrun_Backup $HGFrun/ 1>/dev/null
+	mv -f $HOME/GFrun_Backup $HGFrun/GFrun_Backup 1>/dev/null
 	mv -f $HOME/logs/* $HGFrun/logs/ 1>/dev/null && rm -f $HOME/logs 1>/dev/null
 }
 
