@@ -97,11 +97,11 @@ F_Path(){
 		if [ -f $HGFrun/GFrun.sh ]; then
 			echo `color 32 "========================"`
 			echo "Choise : VERSION - GFrun.sh "
-			echo "On Line (Option)   - tape (ON/on) "
+			echo "On Line (Option)   - tape (O/o) "
 			echo "Local   (Default)  - tape [ENTER] "
 			echo `color 32 "========================"`
 			read -p '(Default) [ENTER] : ' Vo
-			if [ "$Vo" = "ON" ] || [ "$Vo" = "on" ]; then
+			if [ "$Vo" = "O" ] || [ "$Vo" = "o" ]; then
 				Vpath="$HOME"
 			else
 				Vpath="$HGFrun"
@@ -412,7 +412,10 @@ F_Install(){
 F_Restore(){
 	echo `color 32 ">>> F_Restore"`
 	if [ -f $HOME/GFrun_Backup.zip ] ; then
+			echo "=============================="
 			read -p 'RESTORE BACKUP (Y/N) ? ' Vo
+			echo "=============================="
+			echo ""
 			case "$Vo" in
 				 y|Y)	sudo unzip -o GFrun_Backup.zip -d /tmp/GFrun_A_B/ 1>/dev/null 
 
@@ -460,7 +463,7 @@ F_Update(){
 			if [ -f $HGFrun/tools/GFrunUpdate.zip ] ; then
 				unzip -o $HGFrun/tools/GFrunUpdate.zip -d $HOME/ 1>/dev/null
 			else
-				echo `color 36 "<<< NO UPDATE AVAILABLE"`
+				echo `color 36 "<<< NO UPDATE DETECTED"`
 			fi
 	fi
 }
@@ -726,6 +729,7 @@ M_Main(){
           -up) # 3. UPDATE.........................(GFrun.sh -up)
 		       #########################################################
 				Vbranche="master"
+				F_Sudo
 				F_Update
 				F_Restore
 				F_chownchmod
