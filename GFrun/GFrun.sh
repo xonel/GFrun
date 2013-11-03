@@ -438,13 +438,15 @@ F_Restore(){
 							
 							sudo chown -R $SUDO_USER:$SUDO_USER $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
 							sudo rm -R /tmp/GFrun_A_B/ 1>/dev/null
+							echo `color 36 "<<< F_Restore : OK"`
+							read -p 'Press [Enter] key to continue...' null
 						fi;;
 						
 				 n|N) echo `color 36 "<<< CANCEL - RESTORE BACKUP"`;;
 				 *) echo "not an answer";;
 			esac	
 	else
-		echo `color 36 "<<< NO BACKUP"`
+		echo `color 36 "<<< NO BACKUP DETECTED"`
 	fi
 }
 
@@ -586,7 +588,8 @@ F_config_gupload(){
 F_chownchmod(){
 	echo `color 32 ">>> F_chownchmod"`
 	#Chown Chmod
-	chown -R $SUDO_USER:$SUDO_USER $HOME/logs $HOME/GFrun_Old $HOME/GFrun_Backup $HGFrun $Hconf_Gextractor $Hconf_Gplugin $HOME/.local/share/GFrun
+	chown -R $SUDO_USER:$SUDO_USER $HOME/GFrun_Backup $HGFrun $Hconf_Gextractor $Hconf_Gplugin $HOME/.local/share/GFrun
+	chown -R $SUDO_USER:$SUDO_USER $HOME/logs $HOME/GFrun_Old 2>/dev/null
 	chmod -R a+x $Hconf_Gextractor/scripts/ $HGFrun/tools/ 
 }
 
