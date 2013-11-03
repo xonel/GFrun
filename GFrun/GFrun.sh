@@ -414,27 +414,30 @@ F_Restore(){
 	if [ -f $HOME/GFrun_Backup.zip ] ; then
 			read -p 'RESTORE BACKUP (Y/N) ? ' Vo
 			case "$Vo" in
-				 y|Y)	sudo unzip -o GFrun_Backup.zip -d /tmp/GFrun_A_B/ 1>/dev/null
+				 y|Y)	sudo unzip -o GFrun_Backup.zip -d /tmp/GFrun_A_B/ 1>/dev/null 
 
 						PATH_TRAVAIL="/tmp/GFrun_A_B/.config/garmin-extractor"
 						NUMERO_DE_MA_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789])
 						NBRS_DE_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789] -c)
 						
-						echo "PATH_TRAVAIL= " $PATH_TRAVAIL
-						echo "NUMERO_DE_MA_MONTRE= " $NUMERO_DE_MA_MONTRE
-						echo "NBRS_DE_MONTRE= " $NBRS_DE_MONTRE
+						echo "=== PATH_TRAVAIL= " $PATH_TRAVAIL
+						echo "=== NUMERO_DE_MA_MONTRE= " $NUMERO_DE_MA_MONTRE
+						echo "=== NBRS_DE_MONTRE= " $NBRS_DE_MONTRE
 						
 						if [ -n "$NUMERO_DE_MA_MONTRE" ] && [ "$NBRS_DE_MONTRE" == "1" ]; then
 							
-							mkdir $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
-							mkdir $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/activities/
-							mkdir $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/activities_tcx/
+							mkdir $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/ 2>/dev/null
+							mkdir $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/activities/ 2>/dev/null
+							mkdir $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/activities_tcx/ 2>/dev/null
 							
 							sudo cp -rf $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities/ $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
 							sudo cp -rf $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities_tcx/ $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
 							
 							mkdir $HOME/GFrun_Backup/
 							mv -f $HOME/GFrun_Backup.zip $HOME/GFrun_Backup/$(date +%Y_%m_%d_%H%M) 1>/dev/null
+							
+							sudo chown -R $SUDO_USER:$SUDO_USER $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
+							sudo rm -R /tmp/GFrun_A_B/ 1>/dev/null
 						fi;;
 						
 				 n|N) echo `color 36 "<<< CANCEL - RESTORE BACKUP"`;;
