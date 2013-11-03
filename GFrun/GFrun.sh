@@ -713,6 +713,7 @@ M_Main(){
 		       #########################################################
 				Vbranche="master"
 				F_Update
+				F_Restore
 				F_chownchmod
 				F_clean_up
              ;;
