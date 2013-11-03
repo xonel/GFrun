@@ -279,8 +279,8 @@ F_clean_up(){
 	echo `color 32 ">>> F_clean_up"`
 	rm -f $HOME/Verror* $HOME/GFrun.sh* $HOME/master.zip* $HGFrun/tools/FIT-to-TCX/master.zip* $HGFrun/tools/master.zip* $HGFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
 	rm -fr $HOME/pyusb/ 1>/dev/null
-	mv -f $HOME/GFrun_Backup/* $HGFrun/GFrun_Backup/ 1>/dev/null && rm -fr $HOME/GFrun_Backup 1>/dev/null
-	mv -f $HOME/logs $HGFrun/logs 1>/dev/null && rm -fr $HOME/logs 1>/dev/null
+	cp -fr $HOME/GFrun_Backup/* $HGFrun/GFrun_Backup/ 1>/dev/null && rm -fr $HOME/GFrun_Backup 1>/dev/null
+	cp -f $HOME/logs/* $HGFrun/logs/ 1>/dev/null && rm -fr $HOME/logs 1>/dev/null
 }
 
 F_Apt(){
@@ -588,8 +588,8 @@ F_config_gupload(){
 F_chownchmod(){
 	echo `color 32 ">>> F_chownchmod"`
 	#Chown Chmod
-	chown -R $SUDO_USER:$SUDO_USER $HOME/GFrun_Backup $HGFrun $Hconf_Gextractor $Hconf_Gplugin $HOME/.local/share/GFrun
-	chown -R $SUDO_USER:$SUDO_USER $HOME/logs $HOME/GFrun_Old 2>/dev/null
+	chown -R $SUDO_USER:$SUDO_USER  $HGFrun $Hconf_Gextractor $Hconf_Gplugin $HOME/.local/share/GFrun 1>/dev/null
+	chown -R $SUDO_USER:$SUDO_USER $HOME/logs $HOME/GFrun_Old $HOME/GFrun_Backup 2>/dev/null
 	chmod -R a+x $Hconf_Gextractor/scripts/ $HGFrun/tools/ 
 }
 
