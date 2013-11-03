@@ -279,7 +279,7 @@ F_clean_up(){
 	echo `color 32 ">>> F_clean_up"`
 	rm -f $HOME/Verror* $HOME/GFrun.sh* $HOME/master.zip* $HGFrun/tools/FIT-to-TCX/master.zip* $HGFrun/tools/master.zip* $HGFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
 	rm -fr $HOME/pyusb/ 1>/dev/null
-	mv -f $HOME/GFrun_Backup $HGFrun/GFrun_Backup 1>/dev/null
+	mv -f $HOME/GFrun_Backup/* $HGFrun/GFrun_Backup/ 1>/dev/null && rm -fr $HOME/GFrun_Backup 1>/dev/null
 	mv -f $HOME/logs $HGFrun/logs 1>/dev/null && rm -fr $HOME/logs 1>/dev/null
 }
 
@@ -414,13 +414,18 @@ F_Restore(){
 	if [ -f $HOME/GFrun_Backup.zip ] ; then
 			read -p 'RESTORE BACKUP (Y/N) ? ' Vo
 			case "$Vo" in
-				 y|Y)	unzip GFrun_Backup.zip -d /tmp/GFrun_A_B/ 1>/dev/null
+				 y|Y)	sudo unzip GFrun_Backup.zip -d /tmp/GFrun_A_B/ 1>/dev/null
 
 						PATH_TRAVAIL="/tmp/GFrun_A_B/.config/garmin-extractor"
 						NUMERO_DE_MA_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789])
 						NBRS_DE_MONTRE=$(ls $PATH_TRAVAIL | grep [0123456789] -c)
 						
+						echo "PATH_TRAVAIL= " $PATH_TRAVAIL
+						echo "NUMERO_DE_MA_MONTRE= " $NUMERO_DE_MA_MONTRE
+						echo "NBRS_DE_MONTRE= " $NBRS_DE_MONTRE
+						
 						if [ -n "$NUMERO_DE_MA_MONTRE" ] && [ "$NBRS_DE_MONTRE" == "1" ]; then
+							
 							mkdir $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
 							sudo cp -f $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
 							sudo cp -f $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities_tcx $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
