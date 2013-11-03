@@ -120,7 +120,7 @@ F_extractor(){
 	#Extractor FIT
 	echo "=== $Vpath/logs/extractorLogs"
 	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HGFrun/tools/extractor/garmin.py > $Vpath/logs/extractorLogs | tail && read -p 'Press [Enter] key to continue...' null" 
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HGFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null" 
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "python $HGFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null" 
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
 	mv $Vpath/*-garmin.log $Vpath/logs/extractor/
 }
