@@ -439,7 +439,6 @@ F_Restore(){
 							sudo chown -R $SUDO_USER:$SUDO_USER $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
 							sudo rm -R /tmp/GFrun_A_B/ 1>/dev/null
 							echo `color 36 "<<< F_Restore : OK"`
-							read -p 'Press [Enter] key to continue...' null
 						fi;;
 						
 				 n|N) echo `color 36 "<<< CANCEL - RESTORE BACKUP"`;;
@@ -447,6 +446,7 @@ F_Restore(){
 			esac	
 	else
 		echo `color 36 "<<< NO BACKUP DETECTED"`
+		read -p 'Press [Enter] key to continue...' null
 	fi
 }
 
