@@ -180,8 +180,11 @@ F_Dump_Gconnect(){
 	echo ""
 	echo " (10 ~ 20) mins - PLEASE WAIT ... "
 	echo ""
-	mkdir $HGFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M)
-	cd $HGFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M) && xterm -e 'python $HGFrun/tools/dump_gconnect.py && chown -R $SUDO_USER:$SUDO_USER $HGFrun/forerunners/dump_gconnect/' &
+	#mkdir $HGFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M)
+	#cd $HGFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M) && xterm -e 'python $HGFrun/tools/dump_gconnect.py && chown -R $SUDO_USER:$SUDO_USER $HGFrun/forerunners/dump_gconnect/' &
+	cd $Hconf_Gextractor/dump_gconnect/$(date +%Y-%m-%d_%H%M) && xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "python $HGFrun/tools/dump_gconnect.py && read -p 'Press [Enter] key to continue...' null" 
+	ln -s $Hconf_Gextractor/dump_gconnect $HGFrun/forerunners/dump_gconnect
+	sudo chown -R $SUDO_USER:$SUDO_USER $Hconf_Gextractor/dump_gconnect/
 }
 
 F_Uninstall(){
