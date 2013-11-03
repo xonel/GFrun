@@ -151,6 +151,7 @@ F_Script(){
 	echo `color 32 "===================================================="`
 	echo "Wget:" $VWget
 	echo "$Vscript $Voption"
+	echo "Vbranche = " $Vbranche 
 	echo `color 32 "===================================================="`
 	echo ""
 	echo ""
