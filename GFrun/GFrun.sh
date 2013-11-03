@@ -92,10 +92,11 @@ F_Path(){
 		Vpath="$HOME/GFrunLocal/GFrun/GFrun"
 	else
 		echo "=== Vcpt_patch = " $Vcpt_patch
-		if [ -f $HGFrun/GFrun.sh ] && [ $Vcpt_patch == 0 ]; then
+		#if [ -f $HGFrun/GFrun.sh ] && [ $Vcpt_patch == 0 ]; then
+		if [ -f $HGFrun/GFrun.sh ]; then
 			echo `color 32 "========================"`
 			echo "Choise : VERSION - GFrun.sh "
-			echo "On Line (option)   - tape (ON/on) "
+			echo "On Line (Option)   - tape (ON/on) "
 			echo "Local   (Default)  - tape [ENTER] "
 			echo `color 32 "========================"`
 			read -p '(Default) [ENTER] : ' Vo
@@ -104,14 +105,14 @@ F_Path(){
 			else
 				Vpath="$HGFrun"
 			fi
-
+			
 		else
 			Vpath="$HOME"
 			mkdir -p $HOME/logs/
 		fi
 	fi
 	echo "=== "$Vpath
-	Vcpt_patch=$(($Vcpt_patch+1))
+	#Vcpt_patch=$(($Vcpt_patch+1))
 }
 
 F_extractor(){
@@ -122,7 +123,7 @@ F_extractor(){
 	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HGFrun/tools/extractor/garmin.py > $Vpath/logs/extractorLogs | tail && read -p 'Press [Enter] key to continue...' null" 
 	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "python $HGFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null" 
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
-	mv $Vpath/*-garmin.log $Vpath/logs/extractor/
+	mv $Vpath/*-garmin.log $Vpath/logs/extractor/ 1>/dev/null
 }
 
 F_extractor_getkey(){
@@ -153,12 +154,16 @@ F_Script(){
 	echo `color 32 "===================================================="`
 	echo ""
 	echo ""
+	
 if [ -f $HOME/GFrunLocal/GFrun/GFrun/$Vscript ]; then
+	Vpath="$HOME/GFrunLocal/GFrun/GFrun"
 	cd $HOME/GFrunLocal/GFrun/GFrun/ && chmod +x ./$Vscript && F_Xterm_Geometry
 else
 	if [ -f $HGFrun/$Vscript ]; then
+		Vpath="$HGFrun"
 		cd $HGFrun/ && chmod +x ./$Vscript && F_Xterm_Geometry
 	else
+		Vpath="$HOME"
 		cd $HOME/ && wget -N $VWget && sleep 2 && chmod +x ./$Vscript && F_Xterm_Geometry
 	fi
 fi
