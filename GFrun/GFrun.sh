@@ -412,7 +412,7 @@ F_Install(){
 F_Restore(){
 	echo `color 32 ">>> F_Restore"`
 	if [ -f $HOME/GFrun_Backup.zip ] ; then
-			read -p 'RESTORE BACKUP (Y/N) ?' Vo
+			read -p 'RESTORE BACKUP (Y/N) ? ' Vo
 			case "$Vo" in
 				 y|Y)	unzip GFrun_Backup.zip -d /tmp/GFrun_A_B/ 1>/dev/null
 
@@ -422,8 +422,8 @@ F_Restore(){
 						
 						if [ -n "$NUMERO_DE_MA_MONTRE" ] && [ "$NBRS_DE_MONTRE" == "1" ]; then
 							mkdir $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
-							cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
-							cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities_tcx $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
+							sudo cp -f $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
+							sudo cp -f $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities_tcx $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
 							
 							mkdir $HOME/GFrun_Backup/
 							mv -f $HOME/GFrun_Backup.zip $HOME/GFrun_Backup/$(date +%Y_%m_%d_%H%M) 1>/dev/null
