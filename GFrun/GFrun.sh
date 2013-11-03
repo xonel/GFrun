@@ -152,7 +152,7 @@ F_Script(){
 	echo `color 32 "===================================================="`
 	echo "Wget:" $VWget
 	echo "$Vscript $Voption"
-	echo "Vbranche = " $Vbranche 
+	echo "Vbranche = "$Vbranche 
 	echo `color 32 "===================================================="`
 	echo ""
 	echo ""
@@ -575,7 +575,7 @@ F_config_gupload(){
 F_chownchmod(){
 	echo `color 32 ">>> F_chownchmod"`
 	#Chown Chmod
-	chown -R $SUDO_USER:$SUDO_USER $HOME/logs  $HOME/GFrun_Old $HOME/GFrun_Backup $HGFrun $Hconf_Gextractor $Hconf_Gplugin $HOME/.local/share/GFrun
+	chown -R $SUDO_USER:$SUDO_USER $HOME/logs $HOME/GFrun_Old $HOME/GFrun_Backup $HGFrun $Hconf_Gextractor $Hconf_Gplugin $HOME/.local/share/GFrun
 	chmod -R a+x $Hconf_Gextractor/scripts/ $HGFrun/tools/ 
 }
 
