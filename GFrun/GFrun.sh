@@ -92,6 +92,7 @@ F_Path(){
 		Vpath="$HOME/GFrunLocal/GFrun/GFrun"
 	else
 		echo "=== Vcpt_patch = " $Vcpt_patch
+		echo "=== Vpatch = " $Vpatch
 		#if [ -f $HGFrun/GFrun.sh ] && [ $Vcpt_patch == 0 ]; then
 		if [ -f $HGFrun/GFrun.sh ]; then
 			echo `color 32 "========================"`
