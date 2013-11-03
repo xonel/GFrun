@@ -91,7 +91,7 @@ F_Path(){
 	if [ -f $HOME/GFrunLocal/GFrun/GFrun/GFrun.sh ]; then
 		Vpath="$HOME/GFrunLocal/GFrun/GFrun"
 	else
-		echo "Vcpt_patch = " $Vcpt_patch
+		echo "=== Vcpt_patch = " $Vcpt_patch
 		if [ -f $HGFrun/GFrun.sh ] && [ $Vcpt_patch == 0 ]; then
 			echo `color 32 "========================"`
 			echo "Choise : VERSION - GFrun.sh "
@@ -118,7 +118,7 @@ F_extractor(){
 	echo `color 32 ">>> F_extractor"`
 	Vcpt_patch=1 &&	F_Path
 	#Extractor FIT
-	echo "$Vpath/logs/extractorLogs"
+	echo "=== $Vpath/logs/extractorLogs"
 	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HGFrun/tools/extractor/garmin.py > $Vpath/logs/extractorLogs | tail && read -p 'Press [Enter] key to continue...' null" 
 	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HGFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null" 
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
@@ -137,8 +137,8 @@ F_extractor_getkey(){
 F_Xterm_Geometry(){
 	echo `color 32 ">>> F_Xterm_Geometry"`
 	Vcpt_patch=1 &&	F_Path
-	echo "/bin/bash $Vpath/$Vscript $Voption"
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
+	echo "=== /bin/bash $Vpath/$Vscript $Voption"
+	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 45x25 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
 }
 
 F_Script(){
@@ -201,7 +201,7 @@ F_Uninstall(){
 				M_GFrunMenu
 		fi
 	else
-		echo `color 31 "INSTALL ..."`
+		echo `color 36 "<<< UNINSTALL NOT NEEDED ..."`
 	fi
 }
 
@@ -214,12 +214,12 @@ F_garminplugin_UBU(){
 		echo `color 36 "<<< apt-get update : ... "`
 		sudo apt-get update 1>/dev/null
 		echo `color 36 "<<< apt-get install -y garminplugin : ... "`
-		sudo apt-get install -y garminplugin 1>Verror
+		sudo apt-get install -y garminplugin 1>$Verror
 	else
 		echo `color 36 "<<< apt-get update : ... "`
 		sudo apt-get update 1>/dev/null
 		echo `color 36 "<<< apt-get install -y garminplugin : ... "`
-		sudo apt-get install -y garminplugin 1>Verror
+		sudo apt-get install -y garminplugin 1>$Verror
 	fi
 	
 	if [ -n "$Verror" ]
@@ -419,7 +419,7 @@ F_Restore(){
 							cp $PATH_TRAVAIL/$NUMERO_DE_MA_MONTRE/activities_tcx $Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/
 							
 							mkdir $HOME/GFrun_Backup/
-							mv -f $HOME/GFrun_Backup.zip $HOME/GFrun_Backup/$(date +%Y_%m_%d_%H%M)
+							mv -f $HOME/GFrun_Backup.zip $HOME/GFrun_Backup/$(date +%Y_%m_%d_%H%M) 1>/dev/null
 						fi;;
 						
 				 n|N) echo `color 36 "<<< CANCEL - RESTORE BACKUP"`;;
@@ -432,6 +432,8 @@ F_Restore(){
 
 F_Update(){
 	echo `color 32 ">>> F_Update"`
+	cp -f $HOME/GFrun.sh $HGFrun/
+	 
 	if [ -f $HOME/GFrunUpdate.zip ] ; then
 		unzip -o $HOME/GFrunUpdate.zip -d $HOME/ 1>/dev/null
 	else
@@ -702,14 +704,9 @@ M_Main(){
             ;;
           -up) # 3. UPDATE.........................(GFrun.sh -up)
 		       #########################################################
-				F_Sudo
-				F_clean_up
-				F_Uninstall
+				Vbranche="master"
 				F_Update
-				F_Restore
-				F_config_Gconnect
 				F_chownchmod
-				F_extractor
 				F_clean_up
              ;;
              
