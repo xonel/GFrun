@@ -837,7 +837,8 @@ M_GFrunMenu(){
 		VChemin="$VChemin"
 		Vscript="GFrun.sh"
 		Voption="-up"
-		Vbranche="master" 
+		Vbranche="master"
+		Vpath="$HGFrun" 
 		F_Script
 		#############################
 		
