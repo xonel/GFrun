@@ -461,7 +461,7 @@ F_Update(){
 	echo `color 32 ">>> F_Update"`
 	Vbranche="master"
 	Vscript="GFrun.sh"	
-	cd $HOME/ && wget "https://github.com/xonel/GFrun/raw/$Vbranche/GFrun/$Vscript"
+	cd $HOME/ && wget "https://github.com/xonel/GFrun/raw/$Vbranche/GFrun/$Vscript" 1>/dev/null
 	echo `color 36 "<<< wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrun/$Vscript"`
 	cp -f $HOME/GFrun.sh $HGFrun/
 	
