@@ -91,34 +91,32 @@ F_Path(){
 	if [ -f $HOME/GFrunLocal/GFrun/GFrun/GFrun.sh ]; then
 		Vpath="$HOME/GFrunLocal/GFrun/GFrun"
 	else
-		echo "=== Vcpt_patch = " $Vcpt_patch
-		echo "=== Vpatch = " $Vpatch
-		#if [ -f $HGFrun/GFrun.sh ] && [ $Vcpt_patch == 0 ]; then
+
 		if [ -f $HGFrun/GFrun.sh ]; then
-			echo `color 32 "========================"`
-			echo "Choise : VERSION - GFrun.sh "
-			echo "On Line (Option)   - tape (O/o) "
-			echo "Local   (Default)  - tape [ENTER] "
-			echo `color 32 "========================"`
-			read -p '(Default) [ENTER] : ' Vo
-			if [ "$Vo" = "O" ] || [ "$Vo" = "o" ]; then
-				Vpath="$HOME"
+			if [ -f $HOME/GFrunDev ]; then
+				echo `color 32 "========================"`
+				echo "Choise : VERSION - GFrun.sh "
+				echo "On Line (Option)   - tape (O/o) "
+				echo "Local   (Default)  - tape [ENTER] "
+				echo `color 32 "========================"`
+				read -p '(Default) [ENTER] : ' Vo
+					if [ "$Vo" = "O" ] || [ "$Vo" = "o" ]; then
+						Vpath="$HOME"
+					else
+						Vpath="$HGFrun"
+					fi
 			else
 				Vpath="$HGFrun"
 			fi
-			
 		else
 			Vpath="$HOME"
 			mkdir -p $HOME/logs/
 		fi
 	fi
-	echo "=== "$Vpath
-	#Vcpt_patch=$(($Vcpt_patch+1))
 }
 
 F_extractor(){
 	echo `color 32 ">>> F_extractor"`
-	Vcpt_patch=1 &&	F_Path
 	#Extractor FIT
 	echo "=== $Vpath/logs/extractorLogs"
 	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HGFrun/tools/extractor/garmin.py > $Vpath/logs/extractorLogs | tail && read -p 'Press [Enter] key to continue...' null" 
@@ -129,7 +127,6 @@ F_extractor(){
 
 F_extractor_getkey(){
 	echo `color 32 ">>> F_extractor_getkey"`
-	Vcpt_patch=1 &&	F_Path
 	#Pairing Key
 	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "python $HGFrun/tools/extractor/extractor_getkey.py && read -p 'Press [Enter] key to continue...' null" 
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
@@ -138,7 +135,6 @@ F_extractor_getkey(){
 
 F_Xterm_Geometry(){
 	echo `color 32 ">>> F_Xterm_Geometry"`
-	Vcpt_patch=1 &&	F_Path
 	echo "=== /bin/bash $Vpath/$Vscript $Voption"
 	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
 }
