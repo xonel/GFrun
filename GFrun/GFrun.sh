@@ -459,6 +459,9 @@ F_Restore(){
 
 F_Update(){
 	echo `color 32 ">>> F_Update"`
+	Vbranche="master"
+	Vscript="GFrun.sh"	
+	cd $HOME/ && wget "https://github.com/xonel/GFrun/raw/$Vbranche/GFrun/$Vscript"
 	cp -f $HOME/GFrun.sh $HGFrun/
 	 
 	if [ -f $HOME/GFrunUpdate.zip ] ; then
