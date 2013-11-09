@@ -462,8 +462,9 @@ F_Update(){
 	Vbranche="master"
 	Vscript="GFrun.sh"	
 	cd $HOME/ && wget "https://github.com/xonel/GFrun/raw/$Vbranche/GFrun/$Vscript"
+	echo `color 36 "<<< wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrun/$Vscript"`
 	cp -f $HOME/GFrun.sh $HGFrun/
-	 
+	
 	if [ -f $HOME/GFrunUpdate.zip ] ; then
 		unzip -o $HOME/GFrunUpdate.zip -d $HOME/ 1>/dev/null
 	else
