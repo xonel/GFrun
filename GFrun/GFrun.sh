@@ -143,6 +143,11 @@ F_Script(){
 	echo `color 32 ">>> F_Script"`
 	G_Title
 	G_MenRun
+	
+	if $Vbranche == ''; then
+		Vbranche="master"
+	fi
+	
 	VChemin="https://github.com/xonel/GFrun/raw/"$Vbranche"/GFrun/"	
 	VWget=$VChemin""$Vscript
 	echo `color 32 "===================================================="`
