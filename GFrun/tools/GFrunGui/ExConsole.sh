@@ -56,6 +56,22 @@ btn_ok(){ # Exemples d'utilisations
 		echo 'TERM@@SEND@@bash ../../GFrun.sh\n'
 }
 
+btn_button1(){ # stable
+		#echo 'TERM@@SEND@@bash ../../GFrun.sh -s\n'
+		echo 'TERM@@SEND@@echo "toto"\n'
+}
+
+btn_button2(){ # unstable
+		echo 'TERM@@SEND@@bash ../../GFrun.sh -d\n'
+}
+
+btn_button3(){ # upload
+		echo 'TERM@@SEND@@bash ../../GFrun.sh -up\n'
+}
+
+btn_button4(){ # uninstall
+		echo 'TERM@@SEND@@bash ../../GFrun.sh -un\n'
+}
 
 ## Début du script
 

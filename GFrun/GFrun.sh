@@ -202,7 +202,7 @@ F_Uninstall(){
 
 		if [ "$Vchoix" = "YES" ]; then
 				cd $HOME && zip -ur  $HOME/GFrun_Backup.zip  .config/garmin-extractor/ .config/garminplugin/ .local/GFrun 1>/dev/null
-				rm -f  $HOME/.guploadrc $HOME/.local/share/icons/GFrun.svg $HOME/.local/share/applications/GFrun.desktop /usr/share/icons/GFrun.svg
+				rm -f  /usr/bin/GFrun $HOME/.guploadrc $HOME/.local/share/icons/GFrun.svg $HOME/.local/share/applications/GFrun.desktop /usr/share/icons/GFrun.svg
 				rm -Rf  $HGFrun $HOME/.config/garmin-extractor $HOME/.config/garminplugin $HOME/logs 
 				rm -Rf  $HGFrun $HOME/.local/share/GFrun
 				echo -e " Backup Activities DONE :\n $HOME/GFrun_Backup.zip "
@@ -399,6 +399,8 @@ F_Install(){
 	cp -f $HOME/.local/share/icons/GFrun.svg /usr/share/icons/
 	cp -f $HOME/.local/share/icons/GFrunS.svg /usr/share/icons/
 	mv $HOME/GFrun_Install.log $HGFrun/logs/GFrun_Install.log
+	
+	ln -sf $HOME/.local/share/GFrun/GFrun -T /usr/bin/GFrun
 	
 	if [ -f $HOME/GFrunUpdate.zip ]; then
 		mv -f $HOME/GFrunUpdate.zip $HGFrun/tools/
