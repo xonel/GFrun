@@ -29,9 +29,13 @@ mkfifo $FIFO
 ## Définitions des fonctions
 
 btn_exit(){ # Envoie le pid du terminal et quitte glade2script
-        echo "TERM@@WRITE@@Le pid: $terminal_PID"
+        echo "TERM@@WRITE@@Bye ;O): $terminal_PID"
         sleep 1
         echo "EXIT@@"
+}
+
+btn_sudo(){
+		echo 'TERM@@SEND@@sudo su\n'
 }
 
 #btn_kill()#
@@ -42,23 +46,13 @@ btn_exit(){ # Envoie le pid du terminal et quitte glade2script
 # Permet de killer les processus enfants.
 #}
 
-loop(){ # Envoie de commande dans le terminal
-        echo "SET@terminal.set_scrollback_lines(20)"
-        #echo 'SET@terminal.get_child_exit_status()'
-        echo 'TERM@@SEND@@for ((i=0;i<10;i++));do echo $i && sleep 2;done; touch /tmp/glade\n'
-        while [[ ! -e /tmp/glade ]]; do sleep 1; done
-        rm /tmp/glade
-        echo "TERM@@WRITE@@oki
-        GET@terminal_PID"
-}
-
-btn_ok(){ # Exemples d'utilisations
+btn_ok(){ # GFrun Menu
 		echo 'TERM@@SEND@@bash ../../GFrun.sh\n'
 }
 
+## Install
 btn_button1(){ # stable
-		#echo 'TERM@@SEND@@bash ../../GFrun.sh -s\n'
-		echo 'TERM@@SEND@@echo "toto"\n'
+		echo 'TERM@@SEND@@bash ../../GFrun.sh -s\n'
 }
 
 btn_button2(){ # unstable
@@ -73,10 +67,37 @@ btn_button4(){ # uninstall
 		echo 'TERM@@SEND@@bash ../../GFrun.sh -un\n'
 }
 
-## Début du script
+## Config
+btn_button5(){ # pairing
+		echo 'TERM@@SEND@@bash ../../GFrun.sh -cp\n'
+}
 
-# Lance la fonction en arrière plan
-#loop &
+btn_button6(){ # garmin.com
+		echo 'TERM@@SEND@@bash ../../GFrun.sh -cg\n'
+}
+
+btn_button7(){ #  Repare / Diag.
+		echo 'TERM@@SEND@@bash ../../GFrun.sh -cd\n'
+}
+
+## Activities
+btn_button8(){ # Extract.Fit >> Local
+		echo 'TERM@@SEND@@bash ../../GFrun.sh -el\n'
+}
+
+btn_button9(){ # Garmin.com .>> Local
+		echo 'TERM@@SEND@@bash ../../GFrun.sh -gl\n'
+}
+
+btn_button10(){ # Local.Fit ..>> Garmin.com
+		echo 'TERM@@SEND@@bash ../../GFrun.sh -lg\n'
+}
+
+btn_button11(){ # Extract.Fit >> Garmin.com
+		echo 'TERM@@SEND@@bash ../../GFrun.sh -eg\n'
+}
+
+## Début du script
 
 # Récupère le pid du terminal
 echo 'GET@terminal_PID'

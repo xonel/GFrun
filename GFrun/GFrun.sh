@@ -179,7 +179,7 @@ F_Dump_Gconnect(){
 	#mkdir $HGFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M)
 	#cd $HGFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M) && xterm -e 'python $HGFrun/tools/dump_gconnect.py && chown -R $SUDO_USER:$SUDO_USER $HGFrun/forerunners/dump_gconnect/' &
 	mkdir -p $Hconf_Gextractor/dump_gconnect/$(date +%Y-%m-%d_%H)
-	cd $Hconf_Gextractor/dump_gconnect/$(date +%Y-%m-%d_%H) && xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 25x35 -e "python $HGFrun/tools/dump_gconnect.py && read -p ' - DUMP TERMINED - Press [Enter] key to continue...' null" 
+	cd $Hconf_Gextractor/dump_gconnect/$(date +%Y-%m-%d_%H) && xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x15 -e "python $HGFrun/tools/dump_gconnect.py && read -p ' - DUMP TERMINED - Press [Enter] key to continue...' null" 
 	
 	sudo chown -R $SUDO_USER:$SUDO_USER $Hconf_Gextractor/dump_gconnect/
 	cd $Hconf_Gextractor/dump_gconnect/ && mv gpx tcx kml -t $(date +%Y-%m-%d_%H)
