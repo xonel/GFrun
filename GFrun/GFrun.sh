@@ -401,8 +401,11 @@ F_Install(){
 	
 	mkdir -p $Hconf_Gextractor/scripts
 	cp -f $HGFrun/tools/extractor/scripts/* $Hconf_Gextractor/scripts/
+	
 	cp -f $HOME/.local/share/icons/GFrun.svg /usr/share/icons/
 	cp -f $HOME/.local/share/icons/GFrunS.svg /usr/share/icons/
+	cp -f $HOME/.local/share/icons/GFrunG.svg /usr/share/icons/
+	
 	mv $HOME/GFrun_Install.log $HGFrun/logs/GFrun_Install.log
 	
 	ln -sf $HOME/.local/share/GFrun/GFrun -T /usr/bin/GFrun
