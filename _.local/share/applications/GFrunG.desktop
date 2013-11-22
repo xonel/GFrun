@@ -14,4 +14,4 @@ Comment=GFrunG - Garmin ForeRunner (Gui)
 
 # icône à appliquer au lanceur
 Icon=/usr/share/icons/GFrun.svg
-Name[fr_FR]=GFrunG.desktop
+Name[fr_FR]=GFrunG
