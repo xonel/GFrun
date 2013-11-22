@@ -297,7 +297,7 @@ F_Apt(){
 	echo $(date +%Y-%m-%d_%H%M)"= BEFORE ==========================" >> $HOME/GFrun_Install.log
 
 	Vlisterror=()
-	VlistApt="lsb-release xterm git garminplugin libusb-1.0-0 python python-pip python-usb python-lxml python-pkg-resources python-poster python-serial"
+	VlistApt="lsb-release xterm git garminplugin libusb-1.0-0 python python-pip python-usb python-vte python-lxml python-pkg-resources python-poster python-serial"
 	
 	for i in ${VlistApt} 
 		do
