@@ -5,7 +5,7 @@
 #  Auteurs : Le.NoX ;o)
 #  M@il : le . nox @ free . fr
 #  https://github.com/xonel/GFrun
-Version="0.5.0"
+Version="0.5.1"
 #
 #  Licence: GNU GPL
 #
