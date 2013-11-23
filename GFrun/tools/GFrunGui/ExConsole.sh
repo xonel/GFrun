@@ -28,14 +28,20 @@ mkfifo $FIFO
 
 ## Définitions des fonctions
 
+#Vroot="user"
+
 btn_exit(){ # Envoie le pid du terminal et quitte glade2script
-        echo "TERM@@WRITE@@Bye ;O): $terminal_PID"
-        sleep 1
+        echo "TERM@@WRITE@@ Bye ;O): $terminal_PID"
         echo "EXIT@@"
 }
 
-btn_sudo(){
-		echo 'TERM@@SEND@@sudo su\n'
+_root(){
+		if [[ $1 == True ]]; then
+			Vroot="sudo "
+		else
+			Vroot=""
+		fi
+		echo "Right :" $Vroot 	
 }
 
 #btn_kill()#
@@ -47,54 +53,54 @@ btn_sudo(){
 #}
 
 btn_ok(){ # GFrun Menu
-		echo 'TERM@@SEND@@bash ../../GFrun.sh\n'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh\n'
 }
 
 ## Install
 btn_button1(){ # stable
-		echo 'TERM@@SEND@@bash ../../GFrun.sh -s\n'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -s\n'
 }
 
 btn_button2(){ # unstable
-		echo 'TERM@@SEND@@bash ../../GFrun.sh -d\n'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -d\n'
 }
 
 btn_button3(){ # upload
-		echo 'TERM@@SEND@@bash ../../GFrun.sh -up\n'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -up\n'
 }
 
 btn_button4(){ # uninstall
-		echo 'TERM@@SEND@@bash ../../GFrun.sh -un\n'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -un\n'
 }
 
 ## Config
 btn_button5(){ # pairing
-		echo 'TERM@@SEND@@bash ../../GFrun.sh -cp\n'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -cp\n'
 }
 
 btn_button6(){ # garmin.com
-		echo 'TERM@@SEND@@bash ../../GFrun.sh -cg\n'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -cg\n'
 }
 
 btn_button7(){ #  Repare / Diag.
-		echo 'TERM@@SEND@@bash ../../GFrun.sh -cd\n'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -cd\n'
 }
 
 ## Activities
 btn_button8(){ # Extract.Fit >> Local
-		echo 'TERM@@SEND@@bash ../../GFrun.sh -el\n'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -el\n'
 }
 
 btn_button9(){ # Garmin.com .>> Local
-		echo 'TERM@@SEND@@bash ../../GFrun.sh -gl\n'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -gl\n'
 }
 
 btn_button10(){ # Local.Fit ..>> Garmin.com
-		echo 'TERM@@SEND@@bash ../../GFrun.sh -lg\n'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -lg\n'
 }
 
 btn_button11(){ # Extract.Fit >> Garmin.com
-		echo 'TERM@@SEND@@bash ../../GFrun.sh -eg\n'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -eg\n'
 }
 
 ## Début du script

@@ -30,21 +30,9 @@ Garmin Forerunner :
    + Garmin FR70
    + Garmin Swim
 
-
 Dongle usb : ANT FS /ANT+ 
    + ID_product 1008
    + ID_product 1009
-
-
-CONFIG :
----------------
-Configuration de test pour le developpement du script "GFrun" :
-   + Garmin Forerunner 310XT (Allumée)
-   + Clef Usb ANT FS /ANT+ (ID_product 1008 & 1009) (connecté à l'ordinateur)
-   + Ubuntu 13.10 64bit (25/04/2013 UpDate) / Ubuntu 12.04 64bit
-   + Python 2.7+
-   + PyUSB 1.0 (seems to be a bug which makes it segfaults on version before Alpha 2):https://github.com/walac/pyusb
-
 
 INSTALL :
 ---------
