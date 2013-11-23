@@ -181,15 +181,14 @@ F_Dump_Gconnect(){
 	echo ""
 	echo " (10 ~ 20) mins - PLEASE WAIT ... "
 	echo ""
-	#mkdir $HGFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M)
-	#cd $HGFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H%M) && xterm -e 'python $HGFrun/tools/dump_gconnect.py && chown -R $SUDO_USER:$SUDO_USER $HGFrun/forerunners/dump_gconnect/' &
 	mkdir -p $Hconf_Gextractor/dump_gconnect/$(date +%Y-%m-%d_%H)
-	cd $Hconf_Gextractor/dump_gconnect/$(date +%Y-%m-%d_%H) && xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x15 -e "python $HGFrun/tools/dump_gconnect.py && read -p ' - DUMP TERMINED - Press [Enter] key to continue...' null" 
+	cd $Hconf_Gextractor/dump_gconnect/$(date +%Y-%m-%d_%H) && python $HGFrun/tools/dump_gconnect.py && read -p ' - DUMP TERMINED - Press [Enter] key to continue...' null
+	#cd $Hconf_Gextractor/dump_gconnect/$(date +%Y-%m-%d_%H) && xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x15 -e "python $HGFrun/tools/dump_gconnect.py && read -p ' - DUMP TERMINED - Press [Enter] key to continue...' null" 
 	
 	sudo chown -R $SUDO_USER:$SUDO_USER $Hconf_Gextractor/dump_gconnect/
 	cd $Hconf_Gextractor/dump_gconnect/ && mv gpx tcx kml -t $(date +%Y-%m-%d_%H)
-	ln -sf $Hconf_Gextractor/dump_gconnect -T $HGFrun/forerunners/dump_gconnect
-
+	zip -ur dump_gconnect_$(date +%Y-%m-%d_%H) $Hconf_Gextractor/dump_gconnect/$(date +%Y-%m-%d_%H)
+	ln -sf $Hconf_Gextractor/dump_gconnect/$(date +%Y-%m-%d_%H) -T $HGFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H)
 }
 
 F_Uninstall(){
@@ -201,7 +200,7 @@ F_Uninstall(){
 		echo " !! UNINSTALL !! WARNING !! UNINSTALL !!"
 		echo -e " ONE BACKUP WILL BE DONE : \n" $HOME"/GFrun_Backup.zip "
 		echo `color 31 "======================================================"`
-		echo -n 'UNINSTALL ALL (FGrun + ConfigFiles + Activities) >> YES / [NO] : '
+		echo -n 'UNINSTALL ALL (GFrun + ConfigFiles + Activities) >> YES / [NO] : '
 
 		read Vchoix
 
@@ -242,7 +241,7 @@ F_garminplugin_UBU(){
 		echo `color 31 "ERROR : sudo apt-get install -y garminplugin"`
 		echo $Verror
 		read -p 'Press [Enter] key to continue...' null
-		M_GFrunMenu
+		#M_GFrunMenu
 	fi
 }
 
@@ -386,7 +385,7 @@ F_Git(){
 		else
 			echo `color 31 "F_Git : ERROR (Check your CONFIG and try again GFrun Install procedure)"`
 			read -p 'Press [Enter] key to continue...' null
-			M_GFrunMenu
+			#M_GFrunMenu
 		fi
 		
 		ln -s $HOME/.local/GFrun/GFrun /usr/bin/GFrun
@@ -420,7 +419,7 @@ F_Install(){
 	else
 		echo `color 31 "F_Install : ERROR (Check your CONFIG and try again GFrun Install procedure)"`
 		read -p 'Press [Enter] key to continue...' null
-		M_GFrunMenu
+		#M_GFrunMenu
 	fi
 }
 
@@ -533,7 +532,7 @@ F_config_Gconnect(){
 			
 			F_chownchmod
 			F_clean_up
-			M_GFrunMenu			
+			#M_GFrunMenu			
 		fi
 		
 	else
@@ -563,7 +562,7 @@ F_config_Gconnect(){
 			echo '==================================================================='>> $Vpath/logs/DIAG
 			read -p 'Press [Enter] key to continue...' null
 			F_Diag
-			M_GFrunMenu
+			#M_GFrunMenu
 		fi
 	fi
 }
@@ -707,6 +706,10 @@ F_Upload_Gconnect(){
 			F_Upload_Gconnect_Go
             ;;
         esac
+}
+
+F_GFrunGui(){
+xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 5x1 -e 'cd $HOME/GFrun && /bin/bash ./tools/GFrunGui/go_ExConsole.sh'
 }
 
 M_Main(){
@@ -972,13 +975,15 @@ M_GFrunMenu(){
 
 if [ -z "$1" ]; then #the -z operator checks whether the string is null // -n operator checks whether the string is not null
 	G_Title
-	read -p 'Do you want run GFrunMenu (n/Y) ?' Vo
+	read -p 'Do you want run GFrunMenu / GFrunGui / Exit : (M) / g / e ?' Vo
 		case "$Vo" in
-			n|N)	G_Bye
+			E|e)	G_Bye
 					sleep 2
 					exit;;
-	
-			y|Y|*)	M_GFrunMenu;;
+					
+			G|g)	F_GFrunGui;;
+					
+			M|m|*)	M_GFrunMenu;;
 		esac
 else
 	VMain=$1
