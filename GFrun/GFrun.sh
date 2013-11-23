@@ -388,7 +388,8 @@ F_Git(){
 			read -p 'Press [Enter] key to continue...' null
 			M_GFrunMenu
 		fi
-	#TODO : ln -s $HOME/.local/GFrun/GFrun /usr/bin/GFrun
+		
+		ln -s $HOME/.local/GFrun/GFrun /usr/bin/GFrun
 	fi
 }
 

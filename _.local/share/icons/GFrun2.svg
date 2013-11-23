@@ -16,7 +16,7 @@
    sodipodi:version="0.32"
    inkscape:version="0.48.4 r9939"
    version="1.0"
-   sodipodi:docname="GFrunG.svg"
+   sodipodi:docname="GFrun.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="/home/nox/Documents/GFrun/_.local/share/icons/Gfrun.png"
    inkscape:export-xdpi="90"
@@ -251,7 +251,7 @@
        inkscape:collect="always" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient3305"
+       xlink:href="#linearGradient3282"
        id="linearGradient3902"
        gradientUnits="userSpaceOnUse"
        x1="80"
@@ -281,16 +281,6 @@
          id="stop3286-3" />
     </linearGradient>
     <linearGradient
-       y2="41.257374"
-       x2="58.045376"
-       y1="41.257374"
-       x1="29.460657"
-       gradientUnits="userSpaceOnUse"
-       id="linearGradient5549"
-       xlink:href="#linearGradient3282-7"
-       inkscape:collect="always"
-       gradientTransform="matrix(1.6945932,0,0,1.6945932,-20.89195,-22.189644)" />
-    <linearGradient
        id="linearGradient3282-7-1">
       <stop
          style="stop-color:#ffffff;stop-opacity:1;"
@@ -302,15 +292,14 @@
          id="stop3286-3-9" />
     </linearGradient>
     <linearGradient
-       y2="41.257374"
-       x2="58.045376"
-       y1="41.257374"
-       x1="29.460657"
-       gradientUnits="userSpaceOnUse"
-       id="linearGradient5732"
-       xlink:href="#linearGradient3282-7-1"
        inkscape:collect="always"
-       gradientTransform="matrix(0.92083015,0,0,0.92083015,23.227939,8.0615853)" />
+       xlink:href="#linearGradient3282-7-1"
+       id="linearGradient3825"
+       x1="5.8387852"
+       y1="30.539568"
+       x2="123.91153"
+       y2="30.539568"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -319,9 +308,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.56668"
-     inkscape:cx="66.759284"
-     inkscape:cy="61.803005"
+     inkscape:zoom="3.9362372"
+     inkscape:cx="65.938871"
+     inkscape:cy="59.297186"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -350,7 +339,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -428,7 +417,7 @@
      style="display:inline"
      transform="translate(0,32)">
     <rect
-       style="fill:url(#linearGradient3617);fill-opacity:1.0;fill-rule:nonzero;stroke:none"
+       style="fill:url(#linearGradient3825);fill-opacity:1;fill-rule:nonzero;stroke:none;opacity:1"
        id="rect2419"
        width="118.07275"
        height="118.07275"
@@ -452,11 +441,6 @@
        style="opacity:0.5;fill:url(#radialGradient3619);fill-opacity:1;fill-rule:nonzero;stroke:none"
        inkscape:connector-curvature="0" />
     <path
-       style="opacity:0.6;fill:url(#radialGradient2888);fill-opacity:1;stroke:none;display:inline"
-       d="m 15.00068,-28.496807 c -5.0750916,0 -9.161895,4.086803 -9.161895,9.161895 l 0,99.748961 c 0,5.07509 4.0868034,9.161897 9.161895,9.161897 l 3.689774,0 C 45.72368,75.593981 42.970174,21.035095 63.999622,12.622278 c 24.259532,-9.7050089 55.975858,-2.7996463 54.971368,-40.0872 -1.26316,-0.654931 -2.69496,-1.031885 -4.22135,-1.031885 l -99.74896,0 z"
-       id="path2491"
-       inkscape:connector-curvature="0" />
-    <path
        style="opacity:1;color:#000000;fill:url(#linearGradient3104);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.50000000000000000;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        d="m 82.59994,-14.251782 3.809123,21.8287276 4.70045,-5.3267652 C 104.6625,15.770715 105.54795,38.178668 93.087217,52.29975 87.103367,59.08094 78.779003,63.001349 69.945658,63.20528 L 70.41176,75.000819 C 82.189548,74.72892 93.2887,69.501691 101.26718,60.46012 117.88149,41.63201 116.70089,11.754732 98.630228,-6.272651 l 4.700462,-5.326767 -20.73075,-2.652364 z"
        id="path3884"
@@ -464,13 +448,13 @@
     <path
        id="path3900"
        d="M 45.832389,74.552512 42.635404,52.625771 37.787782,57.818966 C 24.618323,43.924574 24.360072,21.500623 37.210961,7.7336482 43.382173,1.1225116 51.812949,-2.5634962 60.648541,-2.5202324 L 60.512597,-14.324193 C 48.731811,-14.381881 37.490775,-9.4672001 29.262489,-0.65235372 12.127974,17.703611 12.472306,47.602221 30.031585,66.128072 l -4.847623,5.19318 20.648427,3.23126 z"
-       style="color:#000000;fill:url(#linearGradient3902);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:url(#linearGradient3902);fill-opacity:1.0;fill-rule:nonzero;stroke:none;stroke-width:1.50000000000000000;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        inkscape:connector-curvature="0"
        inkscape:transform-center-x="22.415342"
        inkscape:transform-center-y="-2.7777392" />
     <text
        xml:space="preserve"
-       style="font-size:65.43106079000000364px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;opacity:0.90322583000000001;fill:#008000;fill-opacity:1;stroke:none;font-family:Webdings;-inkscape-font-specification:Webdings Italic"
+       style="font-size:65.43106079px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;opacity:0.90322583;fill:#0101f7;fill-opacity:1;stroke:none;font-family:Webdings;-inkscape-font-specification:Webdings Italic"
        x="35.589493"
        y="54.811188"
        id="text3116"
@@ -480,10 +464,10 @@
          id="tspan3118"
          x="35.589493"
          y="54.811188"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#008000;fill-opacity:1;font-family:Webdings;-inkscape-font-specification:Webdings Italic">G</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#0101f7;fill-opacity:1;font-family:Webdings;-inkscape-font-specification:Webdings Italic">G</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:47.58297348px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;opacity:0.93023257;fill:url(#linearGradient5549);fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       style="font-size:47.58297347999999971px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;opacity:0.93023257000000004;fill:#4d4d4d;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
        x="25.225239"
        y="60.215343"
        id="text3116-0"
@@ -493,10 +477,10 @@
          id="tspan3118-5"
          x="25.225239"
          y="60.215343"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;fill:url(#linearGradient5549);fill-opacity:1;font-family:Ubuntu Mono;-inkscape-font-specification:Ubuntu Mono Italic">f</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#4d4d4d;fill-opacity:1;font-family:Ubuntu Mono;-inkscape-font-specification:Ubuntu Mono Italic">f</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:25.85625839px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient5732);fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       style="font-size:25.85625839000000070px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
        x="48.287701"
        y="52.839886"
        id="text3116-0-9"
@@ -506,7 +490,7 @@
          id="tspan3118-5-1"
          x="48.287701"
          y="52.839886"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;fill:url(#linearGradient5732);fill-opacity:1;font-family:Ubuntu Mono;-inkscape-font-specification:Ubuntu Mono Italic">run</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#808080;fill-opacity:1;font-family:Ubuntu Mono;-inkscape-font-specification:Ubuntu Mono Italic">run</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
