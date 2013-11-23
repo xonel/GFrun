@@ -4,13 +4,36 @@
 
 GFrun :
 -------
-GFrun est capable de :
-   + Simplifier l'installation des différents modules.
-   + Configurer les fichiers de config des differents Scripts.
-   + Extraire le .FIT des montres Garmin Forerunner
-   + Convertir les .FIT en .TCX
-   + Uploader les "activites" sur http://connect.garmin.com
-   + Downloader toutes les "activites" de http://connect.garmin.com
+   + Simplify the installation of the various modules.
+   + Extract the FIT. Garmin Forerunner watches
+   + Convert FIT. In. TCX
+   + Upload the "activities" of http://connect.garmin.com
+   + Download all "activites" of http://connect.garmin.com
+
+REQUIREMENTS:
+-------
+Software :
+
+   + Linux : Debian (7.x) 
+   + Linux : Ubuntu (13.04 64bit  / 12.04 64bit )
+   + Python : 2.7+
+   + PyUSB : 1.0
+
+Hardware :
+   
+    Garmin Forerunner :
+   + Garmin Forerunner 60
+   + Garmin Forerunner 405CX
+   + Garmin Forerunner 310XT
+   + Garmin Forerunner 610
+   + Garmin Forerunner 910XT
+   + Garmin FR70
+   + Garmin Swim
+
+    Dongle usb : ANT FS /ANT+ 
+   + ID_product 1008
+   + ID_product 1009
+
 
 CONFIG :
 ---------------
@@ -46,20 +69,13 @@ Modules inside GFrun :
 + gcpuploader : ( http://sourceforge.net/projects/gcpuploader/ )
   - Auto upload "FIT/TCX" on http:// connect.garmin.com
 
-DONE :
------
-+ install and config de Garmin-Forerunner-610-Extractor : Version MASTER via GIT
-+ install and config : garminplugin_0.3.16-1 
-+ install gcpuploader (script config OK / Script upload via GFrunMenu OK)
-+ install python-fitparse :  Version MASTER via GIT
-+ install and config : 40-convert_to_tcx.py
-+ Multi versions DEV/STABLE/UPDATE
-+ Icons.svg and GFrun.desktop
-
 TODO :
 --------
 - GUI (Qt/GTK or ??)
 - Manual
 - Learn 'Bash' ;O)
 
+GitHub : https://github.com/xonel/GFrun
+Web : http://gfrun.fr.nf
 Forum (FR) : http://forum.ubuntu-fr.org/viewtopic.php?id=1267521
+

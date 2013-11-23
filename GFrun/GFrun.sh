@@ -5,7 +5,7 @@
 #  Auteurs : Le.NoX ;o)
 #  M@il : le . nox @ free . fr
 #  https://github.com/xonel/GFrun
-Version="0.5.0"
+Version="0.5.1"
 #
 #  Licence: GNU GPL
 #
@@ -297,7 +297,7 @@ F_Apt(){
 	echo $(date +%Y-%m-%d_%H%M)"= BEFORE ==========================" >> $HOME/GFrun_Install.log
 
 	Vlisterror=()
-	VlistApt="lsb-release xterm git garminplugin libusb-1.0-0 python python-pip python-usb python-lxml python-pkg-resources python-poster python-serial"
+	VlistApt="lsb-release xterm git garminplugin libusb-1.0-0 python python-pip python-usb python-vte python-lxml python-pkg-resources python-poster python-serial"
 	
 	for i in ${VlistApt} 
 		do
@@ -388,7 +388,8 @@ F_Git(){
 			read -p 'Press [Enter] key to continue...' null
 			M_GFrunMenu
 		fi
-	#TODO : ln -s $HOME/.local/GFrun/GFrun /usr/bin/GFrun
+		
+		ln -s $HOME/.local/GFrun/GFrun /usr/bin/GFrun
 	fi
 }
 
@@ -401,8 +402,11 @@ F_Install(){
 	
 	mkdir -p $Hconf_Gextractor/scripts
 	cp -f $HGFrun/tools/extractor/scripts/* $Hconf_Gextractor/scripts/
+	
 	cp -f $HOME/.local/share/icons/GFrun.svg /usr/share/icons/
 	cp -f $HOME/.local/share/icons/GFrunS.svg /usr/share/icons/
+	cp -f $HOME/.local/share/icons/GFrunG.svg /usr/share/icons/
+	
 	mv $HOME/GFrun_Install.log $HGFrun/logs/GFrun_Install.log
 	
 	ln -sf $HOME/.local/share/GFrun/GFrun -T /usr/bin/GFrun
