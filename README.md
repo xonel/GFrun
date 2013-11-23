@@ -21,7 +21,7 @@ Software :
 
 Hardware :
    
-    Garmin Forerunner :
+Garmin Forerunner :
    + Garmin Forerunner 60
    + Garmin Forerunner 405CX
    + Garmin Forerunner 310XT
@@ -30,7 +30,8 @@ Hardware :
    + Garmin FR70
    + Garmin Swim
 
-    Dongle usb : ANT FS /ANT+ 
+
+Dongle usb : ANT FS /ANT+ 
    + ID_product 1008
    + ID_product 1009
 
@@ -75,7 +76,9 @@ TODO :
 - Manual
 - Learn 'Bash' ;O)
 
-GitHub : https://github.com/xonel/GFrun
-Web : http://gfrun.fr.nf
-Forum (FR) : http://forum.ubuntu-fr.org/viewtopic.php?id=1267521
+
+--------
+- GitHub : https://github.com/xonel/GFrun 
+- Web : http://gfrun.fr.nf 
+- Forum (FR) : http://forum.ubuntu-fr.org/viewtopic.php?id=1267521
 
