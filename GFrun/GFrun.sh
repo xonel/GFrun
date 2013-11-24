@@ -143,7 +143,9 @@ F_extractor_getkey(){
 F_Xterm_Geometry(){
 	echo `color 32 ">>> F_Xterm_Geometry"`
 	echo "=== /bin/bash $Vpath/$Vscript $Voption"
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
+	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null"
+	/bin/bash $Vpath'/'$Vscript $Voption && read -p 'Press [Enter] key to continue...' null
+	clear
 }
 
 F_Script(){
@@ -294,7 +296,7 @@ F_Sudo(){
 
 F_clean_up(){
 	echo `color 32 ">>> F_clean_up"`
-	rm -f $HOME/Verror* $HOME/GFrun.sh* $HOME/master.zip* $HGFrun/tools/FIT-to-TCX/master.zip* $HGFrun/tools/master.zip* $HGFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
+	rm -f $HOME/Verror* $HOME/GFrun.sh* $HOME/master $HOME/master.zip* $HGFrun/tools/FIT-to-TCX/master.zip* $HGFrun/tools/master.zip* $HGFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
 	rm -fr $HOME/pyusb/ 1>/dev/null
 	cp -fr $HOME/GFrun_Backup $HGFrun/GFrun_Backup 1>/dev/null && rm -fr $HOME/GFrun_Backup 1>/dev/null
 	cp -f $HOME/logs $HGFrun/logs 1>/dev/null && rm -fr $HOME/logs 1>/dev/null
@@ -366,6 +368,13 @@ F_Apt(){
 	echo $(date +%Y-%m-%d_%H%M)"= AFTER ==========================" >> $HOME/GFrun_Install.log
 	dpkg -l >> $HOME/GFrun_Install.log	
 
+}
+
+F_GitHubic(){
+	sudo apt-get install python-setuptools git
+	cd $HGFrun/tools/python-cloudfiles-hubic && python setup.py install
+	
+	
 }
 
 F_Git(){
@@ -1009,7 +1018,7 @@ M_GFrunMenu(){
 
 if [ -z "$1" ]; then #the -z operator checks whether the string is null // -n operator checks whether the string is not null
 	G_Title
-	read -p 'Do you want run GFrunMenu / GFrunGui / Exit : (M) / g / e ?' Vo
+	read -p 'Do you want run : (M)enu / (g)ui / (e)xit ?' Vo
 		case "$Vo" in
 			E|e)	G_Bye
 					sleep 2
