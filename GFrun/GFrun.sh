@@ -187,8 +187,8 @@ F_Dump_Gconnect(){
 	
 	sudo chown -R $SUDO_USER:$SUDO_USER $Hconf_Gextractor/dump_gconnect/
 	cd $Hconf_Gextractor/dump_gconnect/ && mv gpx tcx kml -t $(date +%Y-%m-%d_%H)
-	zip -ur dump_gconnect_$(date +%Y-%m-%d_%H) $Hconf_Gextractor/dump_gconnect/$(date +%Y-%m-%d_%H)
-	ln -sf $Hconf_Gextractor/dump_gconnect/$(date +%Y-%m-%d_%H) -T $HGFrun/forerunners/dump_gconnect/$(date +%Y-%m-%d_%H)
+	cd $Hconf_Gextractor/dump_gconnect/ && zip -ur dump_gconnect_$(date +%Y-%m-%d_%H) $(date +%Y-%m-%d_%H)
+	ln -sf $Hconf_Gextractor/dump_gconnect/dump_gconnect_$(date +%Y-%m-%d_%H).zip -T $HGFrun/forerunners/dump_gconnect/dump_gconnect_$(date +%Y-%m-%d_%H).zip
 }
 
 F_Uninstall(){
@@ -474,6 +474,8 @@ F_Update(){
 	cd $HOME/ && wget "https://github.com/xonel/GFrun/raw/$Vbranche/GFrun/$Vscript" 1>/dev/null
 	echo `color 36 "<<< wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrun/$Vscript"`
 	cp -f $HOME/GFrun.sh $HGFrun/
+	echo `color 36 "<<< UPDATE SCRIPT DONE : $Vbranche - $Vscript"`
+	
 	
 	if [ -f $HOME/GFrunUpdate.zip ] ; then
 		unzip -o $HOME/GFrunUpdate.zip -d $HOME/ 1>/dev/null
@@ -562,6 +564,8 @@ F_config_Gconnect(){
 			echo '==================================================================='>> $Vpath/logs/DIAG
 			read -p 'Press [Enter] key to continue...' null
 			F_Diag
+			F_chownchmod
+			F_clean_up
 			#M_GFrunMenu
 		fi
 	fi
@@ -611,7 +615,7 @@ F_chownchmod(){
 	#Chown Chmod
 	chown -R $SUDO_USER:$SUDO_USER  $HGFrun $Hconf_Gextractor $Hconf_Gplugin $HOME/.local/share/GFrun 1>/dev/null
 	chown -R $SUDO_USER:$SUDO_USER $HOME/logs $HOME/GFrun_Old $HOME/GFrun_Backup 2>/dev/null
-	chmod -R a+x $Hconf_Gextractor/scripts/ $HGFrun/tools/ 
+	chmod -R a+x $Hconf_Gextractor/scripts/ $HGFrun/tools/ $HOME/.local/share/GFrun/GFrun
 }
 
 F_Diag(){
@@ -631,23 +635,23 @@ F_Diag(){
 	
 	echo '1 ==================================================================='>> $Vpath/logs/DIAG
 	echo $(date +%Y-%m-%d_%H%M) >> $Vpath/logs/DIAG
-	echo '2 ==================================================================='>> $Vpath/logs/DIAG
+	echo '2 =usb-devices=================================================================='>> $Vpath/logs/DIAG
 	usb-devices | grep Vendor=0fcf >> $Vpath/logs/DIAG
 	echo '3 ==================================================================='>> $Vpath/logs/DIAG
 	cat $HGFrun/logs/IDs >> $Vpath/logs/DIAG
-	echo '4 ==================================================================='>> $Vpath/logs/DIAG
+	echo '4 cat /etc/udev/rules.d/ant-usbstick2.rules==================================================================='>> $Vpath/logs/DIAG
 	cat /etc/udev/rules.d/ant-usbstick2.rules >> $Vpath/logs/DIAG
-	echo '5 ==================================================================='>> $Vpath/logs/DIAG
+	echo '5 ls /etc/udev/rules.d/==================================================================='>> $Vpath/logs/DIAG
 	ls /etc/udev/rules.d/ >> $Vpath/logs/DIAG
-	echo '6 ==================================================================='>> $Vpath/logs/DIAG
+	echo '6 ls -l /dev/ttyUSB==================================================================='>> $Vpath/logs/DIAG
 	ls -l /dev/ttyUSB* >> $Vpath/logs/DIAG
 	echo '7 ==================================================================='>> $Vpath/logs/DIAG
 	lsmod >> $Vpath/logs/DIAG
-	echo '8 ==================================================================='>> $Vpath/logs/DIAG
+	echo '8 lsmod ==================================================================='>> $Vpath/logs/DIAG
 	dpkg -l | grep libusb >> $Vpath/logs/DIAG
-	echo '9 ==================================================================='>> $Vpath/logs/DIAG
-	python --version >> $Vpath/logs/DIAG # TODO : Fixer ce BUG pas de print de la version
-	echo '10 ==================================================================='>> $Vpath/logs/DIAG
+	echo '9 python --version==================================================================='>> $Vpath/logs/DIAG
+	python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))'>> $Vpath/logs/DIAG # TODO : Fixer ce BUG pas de print de la version
+	echo '10 ls -al /usr/lib/mozilla/plugins/==================================================================='>> $Vpath/logs/DIAG
 	ls -al /usr/lib/mozilla/plugins/ >> $Vpath/logs/DIAG
 	echo '11 ==================================================================='>> $Vpath/logs/DIAG
 	ls -al $HOME/.mozilla/plugins/ >> $Vpath/logs/DIAG
