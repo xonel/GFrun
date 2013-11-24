@@ -377,7 +377,7 @@ F_Git(){
 		fi
 		
 		#cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git 1>/dev/null
-		cd $HOME && wget -N https://github.com/xonel/GFrun/archive/$Vbranche.zip 1>/dev/null && unzip -o $Vbranche.zip 1>/dev/null && mv $HGFrun-$Vbranche $HGFrun 1>/dev/null
+		cd $HOME && wget -N https://github.com/xonel/GFrun/zip/$Vbranche.zip 1>/dev/null && unzip -o $Vbranche.zip 1>/dev/null && mv $HGFrun-$Vbranche $HGFrun 1>/dev/null
 
 		cp -rf $HGFrun/_.config/* $HOME/.config/ && rm -r $HGFrun/_.config
 		cp -rf $HGFrun/_.local/* $HOME/.local/ && rm -r $HGFrun/_.local
@@ -481,12 +481,21 @@ F_Update(){
 	echo `color 36 "<<< wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrun/$Vscript"`
 	cp -f $HOME/GFrun.sh $HGFrun/
 	echo `color 36 "<<< UPDATE SCRIPT DONE : $Vbranche - $Vscript"`
-	cd $HOME && wget -N https://github.com/xonel/GFrun/archive/$Vbranche.zip 1>/dev/null && unzip -o $Vbranche.zip 1>/dev/null && mv $HGFrun-$Vbranche $HGFrun 1>/dev/null
-	echo `color 36 "<<< wget https://github.com/xonel/GFrun/archive/$Vbranche.zip"`
-	rm -r $HGFrun/_.config
-	rm -r $HGFrun/_.local
-	cp -f $HGFrun/GFrun/* $HGFrun && rm -r $HGFrun/GFrun/
-	echo `color 36 "<<< UPDATE CORE DONE : $Vbranche.zip"`
+	https://codeload.github.com/xonel/GFrun/zip/master
+	read -p 'Do you want update CORE $Vbranche (N/y) ?' Vo
+			case "$Vo" in
+				 y|Y)		
+					cd $HOME && wget -N https://github.com/xonel/GFrun/zip/$Vbranche.zip 1>/dev/null && unzip -o $Vbranche.zip 1>/dev/null && mv $HGFrun-$Vbranche $HGFrun 1>/dev/null
+					echo `color 36 "<<< wget https://github.com/xonel/GFrun/zip/$Vbranche.zip"`
+					rm -r $HGFrun/_.config
+					rm -r $HGFrun/_.local
+					cp -f $HGFrun/GFrun/* $HGFrun && rm -r $HGFrun/GFrun/
+					echo `color 36 "<<< UPDATE CORE DONE : $Vbranche.zip"`;;
+					
+				 n|N|*) echo "NO UPDATE CORE";;
+
+			esac
+
 	
 	if [ -f $HOME/GFrunUpdate.zip ] ; then
 		unzip -o $HOME/GFrunUpdate.zip -d $HOME/ 1>/dev/null
