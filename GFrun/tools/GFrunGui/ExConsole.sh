@@ -53,7 +53,7 @@ _root(){
 #}
 
 btn_ok(){ # GFrun Menu
-		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh\n'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -menu\n'
 }
 
 ## Install
@@ -95,12 +95,12 @@ btn_button9(){ # Garmin.com .>> Local
 		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -gl\n'
 }
 
-btn_button10(){ # Local.Fit ..>> Garmin.com
-		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -lg\n'
+btn_button10(){ # Extract.Fit >> Garmin.com
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -eg\n'
 }
 
-btn_button11(){ # Extract.Fit >> Garmin.com
-		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -eg\n'
+btn_button11(){ # Local.Fit ..>> Garmin.com
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -lg\n'
 }
 
 ## Début du script
