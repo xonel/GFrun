@@ -116,19 +116,23 @@ F_Path(){
 }
 
 F_extractor(){
+	clear
 	echo `color 32 ">>> F_extractor"`
 	#Extractor FIT
 	echo "=== $Vpath/logs/extractorLogs"
 	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $HGFrun/tools/extractor/garmin.py > $Vpath/logs/extractorLogs | tail && read -p 'Press [Enter] key to continue...' null" 
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "python $HGFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null" 
+	python $HGFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null
+	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "python $HGFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null" 
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
 	mv $Vpath/*-garmin.log $Vpath/logs/extractor/ 1>/dev/null
 }
 
 F_extractor_getkey(){
+	clear
 	echo `color 32 ">>> F_extractor_getkey"`
 	#Pairing Key
-	xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "python $HGFrun/tools/extractor/extractor_getkey.py && read -p 'Press [Enter] key to continue...' null" 
+	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "python $HGFrun/tools/extractor/extractor_getkey.py && read -p 'Press [Enter] key to continue...' null" 
+	python $HGFrun/tools/extractor/extractor_getkey.py && read -p 'Press [Enter] key to continue...' null
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
 	mv $Vpath/*-garmin.log $Vpath/logs/extractor_getkey/
 }
@@ -173,6 +177,7 @@ fi
 }
 
 F_Dump_Gconnect(){
+	clear
 	echo `color 32 ">>> F_Dump_Gconnect"`
 	G_Title
 	echo `color 32 "======================================================================="`
@@ -287,8 +292,8 @@ F_clean_up(){
 	echo `color 32 ">>> F_clean_up"`
 	rm -f $HOME/Verror* $HOME/GFrun.sh* $HOME/master.zip* $HGFrun/tools/FIT-to-TCX/master.zip* $HGFrun/tools/master.zip* $HGFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
 	rm -fr $HOME/pyusb/ 1>/dev/null
-	cp -fr $HOME/GFrun_Backup/* $HGFrun/GFrun_Backup/ 1>/dev/null && rm -fr $HOME/GFrun_Backup 1>/dev/null
-	cp -f $HOME/logs/* $HGFrun/logs/ 1>/dev/null && rm -fr $HOME/logs 1>/dev/null
+	cp -fr $HOME/GFrun_Backup/* 1>/dev/null $HGFrun/GFrun_Backup/ 1>/dev/null && rm -fr $HOME/GFrun_Backup 1>/dev/null
+	cp -f $HOME/logs/* 1>/dev/null $HGFrun/logs/ 1>/dev/null && rm -fr $HOME/logs 1>/dev/null
 }
 
 F_Apt(){
@@ -476,7 +481,12 @@ F_Update(){
 	echo `color 36 "<<< wget https://github.com/xonel/GFrun/raw/$Vbranche/GFrun/$Vscript"`
 	cp -f $HOME/GFrun.sh $HGFrun/
 	echo `color 36 "<<< UPDATE SCRIPT DONE : $Vbranche - $Vscript"`
-	
+	cd $HOME && wget -N https://github.com/xonel/GFrun/archive/$Vbranche.zip 1>/dev/null && unzip -o $Vbranche.zip 1>/dev/null && mv $HGFrun-$Vbranche $HGFrun 1>/dev/null
+	echo `color 36 "<<< wget https://github.com/xonel/GFrun/archive/$Vbranche.zip"`
+	rm -r $HGFrun/_.config
+	rm -r $HGFrun/_.local
+	cp -f $HGFrun/GFrun/* $HGFrun && rm -r $HGFrun/GFrun/
+	echo `color 36 "<<< UPDATE CORE DONE : $Vbranche.zip"`
 	
 	if [ -f $HOME/GFrunUpdate.zip ] ; then
 		unzip -o $HOME/GFrunUpdate.zip -d $HOME/ 1>/dev/null
@@ -634,27 +644,27 @@ F_Diag(){
 	uname -a >> $Vpath/logs/DIAG
 	lsb_release -a >> $Vpath/logs/DIAG
 	
-	echo '1 ==================================================================='>> $Vpath/logs/DIAG
+	echo '1 ======================================= date '>> $Vpath/logs/DIAG
 	echo $(date +%Y-%m-%d_%H%M) >> $Vpath/logs/DIAG
-	echo '2 =usb-devices=================================================================='>> $Vpath/logs/DIAG
+	echo '2 ======================================= usb-devices'>> $Vpath/logs/DIAG
 	usb-devices | grep Vendor=0fcf >> $Vpath/logs/DIAG
-	echo '3 ==================================================================='>> $Vpath/logs/DIAG
+	echo '3 ======================================= cat $HGFrun/logs/IDs'>> $Vpath/logs/DIAG
 	cat $HGFrun/logs/IDs >> $Vpath/logs/DIAG
-	echo '4 cat /etc/udev/rules.d/ant-usbstick2.rules==================================================================='>> $Vpath/logs/DIAG
+	echo '4 ======================================= cat /etc/udev/rules.d/ant-usbstick2.rules'>> $Vpath/logs/DIAG
 	cat /etc/udev/rules.d/ant-usbstick2.rules >> $Vpath/logs/DIAG
-	echo '5 ls /etc/udev/rules.d/==================================================================='>> $Vpath/logs/DIAG
+	echo '5 ======================================= ls /etc/udev/rules.d/'>> $Vpath/logs/DIAG
 	ls /etc/udev/rules.d/ >> $Vpath/logs/DIAG
-	echo '6 ls -l /dev/ttyUSB==================================================================='>> $Vpath/logs/DIAG
+	echo '6 ======================================= ls -l /dev/ttyUSB'>> $Vpath/logs/DIAG
 	ls -l /dev/ttyUSB* >> $Vpath/logs/DIAG
-	echo '7 ==================================================================='>> $Vpath/logs/DIAG
+	echo '7 ======================================= lsmod'>> $Vpath/logs/DIAG
 	lsmod >> $Vpath/logs/DIAG
-	echo '8 lsmod ==================================================================='>> $Vpath/logs/DIAG
+	echo '8 ======================================= dpkg -l | grep libusb'>> $Vpath/logs/DIAG
 	dpkg -l | grep libusb >> $Vpath/logs/DIAG
-	echo '9 python --version==================================================================='>> $Vpath/logs/DIAG
-	python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))'>> $Vpath/logs/DIAG # TODO : Fixer ce BUG pas de print de la version
-	echo '10 ls -al /usr/lib/mozilla/plugins/==================================================================='>> $Vpath/logs/DIAG
+	echo '9 ======================================= python --version'>> $Vpath/logs/DIAG
+	python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))'>> $Vpath/logs/DIAG 
+	echo '10 ======================================= ls -al /usr/lib/mozilla/plugins/'>> $Vpath/logs/DIAG
 	ls -al /usr/lib/mozilla/plugins/ >> $Vpath/logs/DIAG
-	echo '11 ==================================================================='>> $Vpath/logs/DIAG
+	echo '11 ======================================= ls -al $HOME/.mozilla/plugins/'>> $Vpath/logs/DIAG
 	ls -al $HOME/.mozilla/plugins/ >> $Vpath/logs/DIAG
 	
 	read -p 'Press [Enter] key to continue...' null
@@ -672,6 +682,7 @@ F_Upload_Gconnect_Go(){
 }
 
 F_Upload_Gconnect(){
+	clear
 	echo `color 32 ">>> F_Upload_Gconnect"`
 	echo ""
 	echo `color 32 "=================================="`
