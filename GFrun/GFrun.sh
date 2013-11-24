@@ -188,7 +188,8 @@ F_Dump_Gconnect(){
 	sudo chown -R $SUDO_USER:$SUDO_USER $Hconf_Gextractor/dump_gconnect/
 	cd $Hconf_Gextractor/dump_gconnect/ && mv gpx tcx kml -t $(date +%Y-%m-%d_%H)
 	cd $Hconf_Gextractor/dump_gconnect/ && zip -ur dump_gconnect_$(date +%Y-%m-%d_%H) $(date +%Y-%m-%d_%H)
-	ln -sf $Hconf_Gextractor/dump_gconnect/dump_gconnect_$(date +%Y-%m-%d_%H).zip -T $HGFrun/forerunners/dump_gconnect/dump_gconnect_$(date +%Y-%m-%d_%H).zip
+	ln -sf $Hconf_Gextractor/dump_gconnect -T $HOME/GFrun/forerunners/dump_gconnect
+	#ln -sf $Hconf_Gextractor/dump_gconnect/dump_gconnect_$(date +%Y-%m-%d_%H).zip -T $HGFrun/forerunners/dump_gconnect/dump_gconnect_$(date +%Y-%m-%d_%H).zip
 }
 
 F_Uninstall(){
@@ -501,7 +502,7 @@ F_config_Gconnect(){
 		
 		PATH_ACTIVITES="$Hconf_Gextractor/$NUMERO_DE_MA_MONTRE/activities/"
 		if [ -d $HOME/.config/garmin-extractor ] && [ -d $PATH_ACTIVITES ] ; then
-			mkdir -p $HGFrun/forerunners/dump_gconnect
+			#mkdir -p $HGFrun/forerunners/dump_gconnect
 			mkdir -p $HGFrun/forerunners/$NUMERO_DE_MA_MONTRE
 			ln -sf $PATH_ACTIVITES -T $Hconf_Gplugin/Garmin/Activities
 			ln -sf $PATH_ACTIVITES -T $HGFrun/forerunners/$NUMERO_DE_MA_MONTRE/activities
