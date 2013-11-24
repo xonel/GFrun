@@ -377,7 +377,7 @@ F_Git(){
 		fi
 		
 		#cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git 1>/dev/null
-		cd $HOME && wget -N https://codeload.github.com/xonel/GFrun/zip/$Vbranche 1>/dev/null && unzip -o $Vbranche.zip 1>/dev/null && mv $HGFrun-$Vbranche $HGFrun 1>/dev/null
+		cd $HOME && wget -N https://codeload.github.com/xonel/GFrun/zip/$Vbranche 1>/dev/null && unzip -o $Vbranche 1>/dev/null && mv $HGFrun-$Vbranche $HGFrun 1>/dev/null
 
 		cp -rf $HGFrun/_.config/* $HOME/.config/ && rm -r $HGFrun/_.config
 		cp -rf $HGFrun/_.local/* $HOME/.local/ && rm -r $HGFrun/_.local
@@ -485,7 +485,7 @@ F_Update(){
 	read -p 'Do you want update CORE $Vbranche (N/y) ?' Vo
 			case "$Vo" in
 				 y|Y)		
-					cd $HOME && wget -N https://codeload.github.com/xonel/GFrun/zip/$Vbranche 1>/dev/null && unzip -o $Vbranche.zip 1>/dev/null && mv $HGFrun-$Vbranche $HGFrun 1>/dev/null
+					cd $HOME && wget -N https://codeload.github.com/xonel/GFrun/zip/$Vbranche 1>/dev/null && unzip -o $Vbranche 1>/dev/null && mv $HGFrun-$Vbranche $HGFrun 1>/dev/null
 					echo `color 36 "<<< wget https://codeload.github.com/xonel/GFrun/zip/$Vbranche"`
 					rm -r $HGFrun/_.config
 					rm -r $HGFrun/_.local
