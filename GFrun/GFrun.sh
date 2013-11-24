@@ -477,21 +477,24 @@ F_Restore(){
 F_Update(){
 	echo `color 32 ">>> F_Update"`
 	Vbranche="master"
-	Vscript="GFrun.sh"	
+	Vscript="GFrun.sh"
+	
+	echo `color 36 "<<< wget https://codeload.github.com/xonel/GFrun/zip/$Vbranche/GFrun/$Vscript"`	
 	cd $HOME/ && wget "https://codeload.github.com/xonel/GFrun/zip/$Vbranche/GFrun/$Vscript" 1>/dev/null
-	echo `color 36 "<<< wget https://codeload.github.com/xonel/GFrun/zip/$Vbranche/GFrun/$Vscript"`
+
 	cp -f $HOME/GFrun.sh $HGFrun/
-	echo `color 36 "<<< UPDATE SCRIPT DONE : $Vbranche - $Vscript"`
-	https://codeload.github.com/xonel/GFrun/zip/master
+	echo `color 36 "<<< UPDATE SCRIPT : $Vbranche - $Vscript"`
+
 	read -p 'Do you want update CORE $Vbranche (N/y) ?' Vo
 			case "$Vo" in
-				 y|Y)		
+				 y|Y)
+					echo `color 36 "<<< wget https://codeload.github.com/xonel/GFrun/zip/$Vbranche"`				 		
 					cd $HOME && wget -N https://codeload.github.com/xonel/GFrun/zip/$Vbranche 1>/dev/null && unzip -o $Vbranche 1>/dev/null && mv $HGFrun-$Vbranche $HGFrun 1>/dev/null
-					echo `color 36 "<<< wget https://codeload.github.com/xonel/GFrun/zip/$Vbranche"`
+
 					rm -r $HGFrun/_.config
 					rm -r $HGFrun/_.local
 					cp -f $HGFrun/GFrun/* $HGFrun && rm -r $HGFrun/GFrun/
-					echo `color 36 "<<< UPDATE CORE DONE : $Vbranche.zip"`;;
+					echo `color 36 "<<< UPDATE CORE : $Vbranche.zip"`;;
 					
 				 n|N|*) echo "NO UPDATE CORE";;
 
@@ -751,7 +754,7 @@ M_Main(){
 				F_Apt
 				F_Git
 				F_Install
-				F_Update
+				#F_Update
 				F_Restore
 				F_config_Gconnect
 				F_config_gupload
@@ -768,7 +771,7 @@ M_Main(){
 				F_Apt
 				F_Git
 				F_Install
-				F_Update
+				#F_Update
 				F_Restore
 				F_config_Gconnect
 				F_config_gupload
