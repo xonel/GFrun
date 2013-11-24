@@ -113,6 +113,8 @@ F_Path(){
 			mkdir -p $HOME/logs/
 		fi
 	fi
+
+	echo "Vpath :" $Vpath
 }
 
 F_extractor(){
@@ -124,7 +126,8 @@ F_extractor(){
 	python $HGFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null
 	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "python $HGFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null" 
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
-	mv $Vpath/*-garmin.log $Vpath/logs/extractor/ 1>/dev/null
+	echo "Vpath :" $Vpath
+	mv $Vpath/*-garmin.log $HGFrun/logs/extractor/ 1>/dev/null
 }
 
 F_extractor_getkey(){
@@ -134,7 +137,7 @@ F_extractor_getkey(){
 	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "python $HGFrun/tools/extractor/extractor_getkey.py && read -p 'Press [Enter] key to continue...' null" 
 	python $HGFrun/tools/extractor/extractor_getkey.py && read -p 'Press [Enter] key to continue...' null
 	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
-	mv $Vpath/*-garmin.log $Vpath/logs/extractor_getkey/
+	mv $Vpath/*-garmin.log $HGFrun/logs/extractor_getkey/
 }
 
 F_Xterm_Geometry(){
@@ -791,6 +794,7 @@ M_Main(){
              
           -cp) # 4. Conf-Pairing...................(GFrun.sh -cp )
 		       #########################################################
+		       	Vpath=$PWD
 				F_extractor_getkey
              ;;
              
@@ -802,6 +806,7 @@ M_Main(){
              
           -el) # 6. Extract.Fit >> Local...........(GFrun.sh -el ) 
 		       #########################################################
+		       	Vpath=$PWD
 				F_extractor
              ;;
              
