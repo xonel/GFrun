@@ -370,11 +370,11 @@ F_Apt(){
 
 }
 
-F_GitHubic(){
-	sudo apt-get install python-setuptools git
-	cd $HGFrun/tools/python-cloudfiles-hubic && python setup.py install
-	
-	
+F_Backup_Online(){
+	BKonline="$(<$HOME/.local/share/GFrun/.BKonline)"
+	echo "BKonline : " $BKonline
+	mkdir -p $HOME/$BKonline/GFrunBK
+	cd $HOME && zip -ur  $BKonline/GFrunBK/GFrunBK_$(date +%Y-%m-%d_%H%M).zip  .config/garmin-extractor/ .config/garminplugin/ .local/share/GFrun 1>/dev/null
 }
 
 F_Git(){
@@ -610,24 +610,29 @@ F_config_Gconnect(){
 F_config_gupload(){
 	echo `color 32 ">>> F_config_gupload"`
 	clear
+	echo ""
 	echo "# WARNING, THIS IS NOT SECURE. USE THIS OPTION AT YOUR OWN RISK."  
 	echo "# Username and password are stored as CLEAR text in a file :"
 	echo "# $HOME/.local/share/GFrun/.guploadrc"
-	
+	echo ""	
 	echo `color 32 "============================================="`
 	echo "Configuration Auto-Upload on connect.garmin.com"
 	echo `color 32 "============================================="`
-	
+	echo ""	
 	#TODO : Encrypt Login / Password
 
 	if [ ! -f $HOME/.local/share/GFrun/.guploadrc ]; then
 			read -p 'USERNAME : on connect.garmin.com >> ' Read_user
 			read -p 'PASSWORD : on connect.garmin.com >> ' Read_password
-
+			
 			echo "[Credentials]" >> $HOME/.local/share/GFrun/.guploadrc
 			echo "enabled = True" >> $HOME/.local/share/GFrun/.guploadrc
 			echo "username="$Read_user"" >> $HOME/.local/share/GFrun/.guploadrc
 			echo "password="$Read_password"" >> $HOME/.local/share/GFrun/.guploadrc
+					
+			read -p 'BACKUP ONLINE : owncloud / Ubuntu One / hubic >> ' Read_BKonline
+			echo $Read_BKonline >> $HOME/.local/share/GFrun/.BKonline
+
 		else
 			echo ""
 			echo `color 31 "============================================="`
@@ -795,6 +800,7 @@ M_Main(){
 		       #########################################################
 				Vbranche="master"
 				F_Sudo
+				F_Backup_Online
 				F_Update
 				F_Restore
 				F_chownchmod
