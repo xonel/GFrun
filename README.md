@@ -18,6 +18,18 @@ Software :
    + Linux : Ubuntu (13.04 64bit  / 12.04 64bit )
    + Python : 2.7+
    + PyUSB : 1.0
+   
+Dependances :
+	+ lsb-release 
+	+ xterm 
+	+ git 
+	+ garminplugin
+	+ libusb-1.0-0
+	+ python-pip 
+	+ python-usb 
+	+ python-vte 
+	+ python-lxml 
+	+ python-pkg-res
 
 Hardware :
    

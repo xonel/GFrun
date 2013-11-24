@@ -31,9 +31,25 @@ INSTALL :
 CHANGE :
 ----------
 
+0.5.1
+	+ GFrunGui Bash+GTK (glade2script)
+	+ icons GFrunG.svg 
+	+ GFrunG.desktop
+	+ usr/bin/GFrun
+	+ Fix bugs
+
+0.5.0
+	+ clean code
+	+ compatible Pyusb (Ubuntu 13.10)
+	+ icons GFrunS.svg = version root/sudo 
+	+ GFrunS.desktop
+	+ Fix minors bugs
+
 0.4.3
+	+ preapare code for GUI
 
 0.4.2
+	+ clean code
 
 0.4.1
 	+ getkey.py extract only the keypass form Forerunner use procedure AutoConfig.
