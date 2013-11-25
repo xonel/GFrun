@@ -485,7 +485,7 @@ F_Restore(){
 			esac	
 	else
 		echo `color 36 "<<< NO BACKUP DETECTED"`
-		read -p 'Press [Enter] key to continue...' null
+		#read -p 'Press [Enter] key to continue...' null
 	fi
 }
 
@@ -522,7 +522,7 @@ F_Update(){
 			if [ -f $HGFrun/tools/GFrunUpdate.zip ] ; then
 				unzip -o $HGFrun/tools/GFrunUpdate.zip -d $HOME/ 1>/dev/null
 			else
-				echo `color 36 "<<< NO UPDATE DETECTED"`
+				#echo `color 36 "<<< NO UPDATE DETECTED"`
 			fi
 	fi
 }
