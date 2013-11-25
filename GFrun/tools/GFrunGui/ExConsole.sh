@@ -44,65 +44,83 @@ _root(){
 		echo "Right :" $Vroot 	
 }
 
-#btn_kill()#
+#btn_kill(){
 # WIDGET => btn_kill
 # SIGNAL => clicked
-# CALLBACK => kill_term_child
+# CALLBACK => kill_term_child	
+#	}
+
 
 # Permet de killer les processus enfants.
 #}
 
-btn_ok(){ # GFrun Menu
+btn_gfrunmenu(){ # GFrun Menu
+		echo 'SET@_label1.set_text("0. MENU..........................(GFrun.sh -menu .)")'
 		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -menu\n'
 }
 
 ## Install
 btn_button1(){ # stable
+		echo 'SET@_label1.set_text("1. STABLE.........................(GFrun.sh -s .)")'
 		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -s\n'
 }
 
 btn_button2(){ # unstable
+		echo 'SET@_label1.set_text("2. UNSTABLE ......................(GFrun.sh -d .)")'
 		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -d\n'
 }
 
-btn_button3(){ # upload
+btn_button3(){ # update
+		echo 'SET@_label1.set_text("3. UPDATE.........................(GFrun.sh -up )")'
 		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -up\n'
 }
 
 btn_button4(){ # uninstall
+		echo 'SET@_label1.set_text("U. UNINSTALL......................(GFrun.sh -un )")'
 		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -un\n'
 }
 
 ## Config
-btn_button5(){ # pairing
+btn_pairing(){ # pairing
+		echo 'SET@_label1.set_text("4. Conf-Pairing...................(GFrun.sh -cp )")'
 		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -cp\n'
 }
 
-btn_button6(){ # garmin.com
+btn_gconnect(){ # garmin.com
+		echo 'SET@_label1.set_text("5. Conf-Garmin.com................(GFrun.sh -cg )")'
 		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -cg\n'
 }
 
-btn_button7(){ #  Repare / Diag.
+btn_reparediag(){ #  Repare / Diag.
+		echo 'SET@_label1.set_text("D. Conf-Diag .....................(GFrun.sh -cd )")'
 		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -cd\n'
 }
 
 ## Activities
 btn_button8(){ # Extract.Fit >> Local
+		echo 'SET@_label1.set_text("6. Extract.Fit >> Local...........(GFrun.sh -el )")'
 		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -el\n'
 }
 
 btn_button9(){ # Garmin.com .>> Local
+		echo 'SET@_label1.set_text("7. Garmin.com .>> Local ..........(GFrun.sh -gl )")'
 		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -gl\n'
 }
 
 btn_button10(){ # Extract.Fit >> Garmin.com
+		echo 'SET@_label1.set_text("9. Extract.Fit >> Garmin.com......(GFrun.sh -eg )")'
 		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -eg\n'
 }
 
 btn_button11(){ # Local.Fit ..>> Garmin.com
+		echo 'SET@_label1.set_text("8. Local.Fit ..>> Garmin.com .....(GFrun.sh -lg )")'
 		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -lg\n'
 }
 
+btn_backup(){ # GFrun Menu
+		echo 'SET@_label1.set_text("STABLE")'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -bk\n'
+}
 ## Début du script
 
 # Récupère le pid du terminal

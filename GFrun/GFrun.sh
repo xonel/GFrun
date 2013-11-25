@@ -373,11 +373,14 @@ F_Apt(){
 }
 
 F_Backup_Online(){
+	echo `color 32 ">>> F_Backup_Online"`
 	BKonline="$(<$HOME/.local/share/GFrun/.BKonline)"
 	mkdir -p $HOME/$BKonline/GFrunBK
 	echo "Folder BKonline : " $HOME/$BKonline/GFrunBK
 	cd $HOME && zip -ur  $BKonline/GFrunBK/GFrunBK_$(date +%Y-%m-%d_%H%M).zip  .config/garmin-extractor/ .config/garminplugin/ .local/share/GFrun 1>/dev/null
 	chown -R $SUDO_USER:$SUDO_USER $BKonline/GFrunBK/
+	echo `color 36 "<<< Backup OK : $HOME/$BKonline/GFrunBK/GFrunBK_$(date +%Y-%m-%d_%H%M).zip"`
+	
 }
 
 F_Git(){
@@ -867,6 +870,11 @@ M_Main(){
 		       #########################################################
 				F_GFrunGui
              ;;
+             
+          -bk) #. Backup .........................(GFrun.sh -bk )
+		       #########################################################
+				F_Backup_Online
+             ;;
 
           *)   # anything else
 		       #########################################################
@@ -882,7 +890,7 @@ M_GFrunMenu(){
         echo "INSTALL :"
         echo "---------"
         echo `color 32 " 1. STABLE.........................(GFrun.sh -s .)"`
-        echo `color 32 " 2. DEV ...........................(GFrun.sh -d .)"`
+        echo `color 32 " 2. UNSTABLE ......................(GFrun.sh -d .)"`
         echo `color 32 " 3. UPDATE.........................(GFrun.sh -up )"`
         echo `color 32 " U. UNINSTALL......................(GFrun.sh -un )"`
         echo ""
