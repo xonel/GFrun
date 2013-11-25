@@ -298,8 +298,10 @@ F_clean_up(){
 	echo `color 32 ">>> F_clean_up"`
 	rm -f $HOME/Verror* $HOME/GFrun.sh* $HOME/master $HOME/master.zip* $HGFrun/tools/FIT-to-TCX/master.zip* $HGFrun/tools/master.zip* $HGFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
 	rm -fr $HOME/pyusb/ 1>/dev/null
-	cp -fr $HOME/GFrun_Backup $HGFrun/GFrun_Backup 1>/dev/null && rm -fr $HOME/GFrun_Backup 1>/dev/null
-	cp -f $HOME/logs $HGFrun/logs 1>/dev/null && rm -fr $HOME/logs 1>/dev/null
+	cp -fr $HOME/GFrun_Backup $HGFrun/GFrun_Backup 2>/dev/null
+	rm -fr $HOME/GFrun_Backup 1>/dev/null
+	cp -f $HOME/logs $HGFrun/logs 2>/dev/null
+	rm -fr $HOME/logs 1>/dev/null
 }
 
 F_Apt(){
@@ -372,9 +374,10 @@ F_Apt(){
 
 F_Backup_Online(){
 	BKonline="$(<$HOME/.local/share/GFrun/.BKonline)"
-	echo "BKonline : " $BKonline
 	mkdir -p $HOME/$BKonline/GFrunBK
+	echo "Folder BKonline : " $HOME/$BKonline/GFrunBK
 	cd $HOME && zip -ur  $BKonline/GFrunBK/GFrunBK_$(date +%Y-%m-%d_%H%M).zip  .config/garmin-extractor/ .config/garminplugin/ .local/share/GFrun 1>/dev/null
+	chown -R $SUDO_USER:$SUDO_USER $BKonline/GFrunBK/
 }
 
 F_Git(){
@@ -491,8 +494,8 @@ F_Update(){
 	Vbranche="master"
 	Vscript="GFrun.sh"
 	
-	echo `color 36 "<<< https://raw.github.com/xonel/GFrun/master/$Vbranche/GFrun/$Vscript"`	
-	cd $HOME/ && wget "https://raw.github.com/xonel/GFrun/master/$Vbranche/GFrun/$Vscript" 1>/dev/null
+	echo `color 36 "<<< https://raw.github.com/xonel/GFrun/$Vbranche/GFrun/$Vscript"`	
+	cd $HOME/ && wget "https://raw.github.com/xonel/GFrun/$Vbranche/GFrun/$Vscript" 1>/dev/null
 
 	cp -f $HOME/GFrun.sh $HGFrun/
 	echo `color 36 "<<< UPDATE SCRIPT : $Vbranche - $Vscript"`
@@ -501,11 +504,11 @@ F_Update(){
 			case "$Vo" in
 				 y|Y)
 					echo `color 36 "<<< wget https://codeload.github.com/xonel/GFrun/zip/$Vbranche"`				 		
-					cd $HOME && wget -N https://codeload.github.com/xonel/GFrun/zip/$Vbranche 1>/dev/null && unzip -o $Vbranche 1>/dev/null && mv $HGFrun-$Vbranche $HGFrun 1>/dev/null
-
-					rm -r $HGFrun/_.config
-					rm -r $HGFrun/_.local
-					cp -f $HGFrun/GFrun/* $HGFrun && rm -r $HGFrun/GFrun/
+					cd $HOME && wget -N https://codeload.github.com/xonel/GFrun/zip/$Vbranche 1>/dev/null
+					unzip -o $Vbranche 1>/dev/null
+					cp -fr $HGFrun-$Vbranche/GFrun/* $HGFrun 1>/dev/null
+					rm -r $HGFrun-$Vbranche 1>/dev/null
+					rm $Vbranche 1>/dev/null
 					echo `color 36 "<<< UPDATE CORE : $Vbranche.zip"`;;
 					
 				 n|N|*) echo "NO UPDATE CORE";;
