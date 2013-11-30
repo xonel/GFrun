@@ -447,6 +447,16 @@ F_Install(){
 		#M_GFrunMenu
 	fi
 }
+F_Restaure_bkonline(){
+			echo `color 32 ">>> F_Restaure_bkonline"`
+			echo `color 32 "============================================="`
+			echo "Restaure the last BACKUP ONLINE"
+			echo `color 32 "============================================="`
+			echo ""
+			Host_BKonline=$(sed -n "2 p" $HOME/.local/share/GFrun/.BKonline)
+			wget $Host_BKonline/index.php/apps/files/download/GFrunBK/GFrunBK_last.zip
+			unzip -o GFrunBK_last.zip -d $HOME 1>/dev/null
+}
 
 F_Restore(){
 	echo `color 32 ">>> F_Restore"`
@@ -529,6 +539,39 @@ F_Update(){
 			fi
 	fi
 }
+
+F_config_plugins(){
+	echo `color 32 ">>> F_config_plugins"`
+	clear
+	echo ""
+	echo `color 32 "=================================="`
+	echo "SELECT Plugins"
+	echo `color 32 "=================================="`
+	echo ""
+	echo " (1) - Fit to TCX"
+	echo " (2) - Auto-Upload to connect.garmin.com" 
+	echo " (A) - All Select"
+	echo ""
+	echo -n "Choise : (1) . (2) . (A) "
+	read Vchoix
+
+        case $Vchoix
+        in
+          [1])
+			#mv $Hconf_Gextractor/scripts/02_convert_to_tcx.py
+            ;;
+
+          [2])
+			#mv $Hconf_Gextractor/scripts/01_upload_gconnect.py
+            ;;
+
+          [aA])
+			#mv $Hconf_Gextractor/scripts/02_convert_to_tcx.py
+			#mv $Hconf_Gextractor/scripts/01_upload_gconnect.py
+            ;;
+
+        esac
+}	
 
 F_config_Gconnect(){
 	F_Path
@@ -613,6 +656,17 @@ F_config_Gconnect(){
 	fi
 }
 
+F_config_bkonline(){
+			echo `color 32 "============================================="`
+			echo "Config BACKUP ONLINE folder"
+			echo `color 32 "============================================="`
+			echo ""	
+			read -p 'Folder local : ownCloud / Ubuntu One / hubic >> ' Read_BKonline
+			read -p 'Adress : http://cloud.owncloud.fr >> ' Read_HostBKonline
+			echo $Read_BKonline >> $HOME/.local/share/GFrun/.BKonline
+			echo $Read_HostBKonline >> $HOME/.local/share/GFrun/.BKonline
+}
+
 F_config_gupload(){
 	echo `color 32 ">>> F_config_gupload"`
 	clear
@@ -635,9 +689,6 @@ F_config_gupload(){
 			echo "enabled = True" >> $HOME/.local/share/GFrun/.guploadrc
 			echo "username="$Read_user"" >> $HOME/.local/share/GFrun/.guploadrc
 			echo "password="$Read_password"" >> $HOME/.local/share/GFrun/.guploadrc
-					
-			read -p 'BACKUP ONLINE : owncloud / Ubuntu One / hubic >> ' Read_BKonline
-			echo $Read_BKonline >> $HOME/.local/share/GFrun/.BKonline
 
 		else
 			echo ""
@@ -875,6 +926,12 @@ M_Main(){
 		       #########################################################
 				F_Backup_Online
              ;;
+             
+          -F) #. F_fonction .........................(GFrun.sh -F_*)
+		       #########################################################
+		       echo "fonction : "$Fscript
+				$Fscript
+             ;;
 
           *)   # anything else
 		       #########################################################
@@ -1047,5 +1104,6 @@ if [ -z "$1" ]; then #the -z operator checks whether the string is null // -n op
 		esac
 else
 	VMain=$1
+	Fscript=$2
 	M_Main
 fi

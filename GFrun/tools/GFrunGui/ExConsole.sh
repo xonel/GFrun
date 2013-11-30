@@ -121,6 +121,21 @@ btn_backup(){ # GFrun Menu
 		echo 'SET@_label1.set_text("STABLE")'
 		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -bk\n'
 }
+
+btn_restaure(){ # 
+		echo 'SET@_label1.set_text("F_Restaure_bkonline")'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -F F_Restaure_bkonline\n'
+}
+
+btn_cbackup(){ # 
+		echo 'SET@_label1.set_text("F_Restaure_bkonline")'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -F F_config_bkonline\n'
+}
+
+btn_plugins(){ # 
+		echo 'SET@_label1.set_text("plugins")'
+		echo 'TERM@@SEND@@'$Vroot'bash ../../GFrun.sh -F F_config_plugins\n'
+}
 ## Début du script
 
 # Récupère le pid du terminal
