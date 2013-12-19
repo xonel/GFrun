@@ -932,6 +932,11 @@ M_Main(){
 		       echo "fonction : "$Fscript
 				$Fscript
              ;;
+             
+          -version) #. Version .........................(GFrun.sh -version)
+		       #########################################################
+		       echo "GFrun Version : "$Version
+             ;;
 
           *)   # anything else
 		       #########################################################
