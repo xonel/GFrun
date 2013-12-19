@@ -45,7 +45,7 @@ STABLE Version (branch GFrun) :
 <pre><code>wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo bash ./GFrun.sh
 </code></pre>
 
-DEV Version (branch MASTER) :
+UNSTABLE Version (branch MASTER) :
 <pre><code>wget -N https://github.com/xonel/GFrun/raw/master/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo bash ./GFrun.sh
 </code></pre>
 
@@ -62,13 +62,17 @@ Modules inside GFrun :
 + garminplugin_0.3.16-1 : ( https://github.com/adiesner/GarminPlugin )
   - plugin firefox <> http:// connect.garmin.com
 + Garmin-Forerunner-610-Extractor : ( https://github.com/Tigge/Garmin-Forerunner-610-Extractor) 
-  - Extract .FIT from (ANT-FS), convert .FIT to .TCX with (40-convert_to_tcx.py)
+  - Extract .FIT from (ANT-FS),
+  - convert .FIT to .TCX with (40-convert_to_tcx.py)
+  - upload "FIT/TCX" on http:// connect.garmin.com (01_upload_gconnect.py)
 + gcpuploader : ( http://sourceforge.net/projects/gcpuploader/ )
   - Auto upload "FIT/TCX" on http:// connect.garmin.com
-
++ glade2script ( http://code.google.com/p/glade2script/ )
+ - It allows for a script (bash, python or other) to interact with a GUI created with glade. 
+ 
 TODO :
 --------
-- GUI (Qt/GTK or ??)
+- crypt password login
 - Manual
 - Learn 'Bash' ;O)
 
