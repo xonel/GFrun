@@ -394,7 +394,7 @@ F_Git(){
 			#TODO : $HOME/GFrunOld_$(date %m-%d_%H%M)
 			mv -f $HGFrun $HOME/GFrun_Old 
 		fi
-		
+		echo "$Vbranche : "$Vbranche
 		#cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git 1>/dev/null
 		cd $HOME && wget -N https://codeload.github.com/xonel/GFrun/zip/$Vbranche 1>/dev/null && unzip -o $Vbranche 1>/dev/null && mv $HGFrun-$Vbranche $HGFrun 1>/dev/null
 
