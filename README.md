@@ -42,7 +42,7 @@ INSTALL :
 ---------
 
 STABLE Version (branch GFrun) :
-<pre><code>wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+<pre><code>wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo bash ./GFrun.sh
 </code></pre>
 
 DEV Version (branch MASTER) :
@@ -52,7 +52,11 @@ DEV Version (branch MASTER) :
 VISUEL :
 ---------
 
+CLI :
 <a href='https://github.com/xonel/GFrun/raw/master/_.local/share/GFrun/GFrun.png'><img src='https://github.com/xonel/GFrun/raw/master/_.local/share/GFrun/GFrun.png' /></a>
+
+GUI :
+<a href='https://github.com/xonel/GFrun/raw/master/_.local/share/GFrun/GFrunGui.png'><img src='https://github.com/xonel/GFrun/raw/master/_.local/share/GFrun/GFrunGui.png' /></a>
 
 Modules inside GFrun :
 + garminplugin_0.3.16-1 : ( https://github.com/adiesner/GarminPlugin )
