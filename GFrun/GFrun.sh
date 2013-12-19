@@ -296,8 +296,8 @@ F_Sudo(){
 
 F_clean_up(){
 	echo `color 32 ">>> F_clean_up"`
-	rm -f $HOME/Verror* $HOME/GFrun.sh* $HOME/master $HOME/master.zip* $HGFrun/tools/FIT-to-TCX/master.zip* $HGFrun/tools/master.zip* $HGFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
-	rm -fr $HOME/pyusb/ 1>/dev/null
+	rm -f $HOME/Verror* $HOME/GFrun.sh* $HOME/master $HOME/GFrun.sh $HOME/master.zip* $HGFrun/tools/FIT-to-TCX/master.zip* $HGFrun/tools/master.zip* $HGFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
+	rm -fr $HOME/pyusb/ $HOME/GFrun-GFrun $HOME/GFrun-master 1>/dev/null
 	cp -fr $HOME/GFrun_Backup $HGFrun/GFrun_Backup 2>/dev/null
 	rm -fr $HOME/GFrun_Backup 1>/dev/null
 	cp -f $HOME/logs $HGFrun/logs 2>/dev/null
@@ -508,12 +508,12 @@ F_Update(){
 	Vscript="GFrun.sh"
 	
 	echo `color 36 "<<< https://raw.github.com/xonel/GFrun/$Vbranche/GFrun/$Vscript"`	
-	cd $HOME/ && wget "https://raw.github.com/xonel/GFrun/$Vbranche/GFrun/$Vscript" 1>/dev/null
+	cd $HOME/ && wget -N "https://raw.github.com/xonel/GFrun/$Vbranche/GFrun/$Vscript" 1>/dev/null
 
 	cp -f $HOME/GFrun.sh $HGFrun/
 	echo `color 36 "<<< UPDATE SCRIPT : $Vbranche - $Vscript"`
 
-	read -p 'Do you want update CORE $Vbranche (N/y) ?' Vo
+	read -p "Do you want update CORE $Vbranche (N/y) ?" Vo
 			case "$Vo" in
 				 y|Y)
 					echo `color 36 "<<< wget https://codeload.github.com/xonel/GFrun/zip/$Vbranche"`				 		
