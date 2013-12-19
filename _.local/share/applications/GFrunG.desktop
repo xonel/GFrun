@@ -1,0 +1,17 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Categories=GNOME;GTK;
+
+# commande à exécuter lorsque le lanceur est pressé
+Exec=xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 5x1 -e 'cd $HOME/GFrun && /bin/bash ./tools/GFrunGui/go_ExConsole.sh'
+# nom du lanceur
+Name=GFrunG
+
+# description plus élaborée du lanceur
+Comment=GFrunG - Garmin ForeRunner (Gui)
+
+# icône à appliquer au lanceur
+Icon=/usr/share/icons/GFrunG.svg
+Name[fr_FR]=GFrunG

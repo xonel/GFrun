@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<GarminPlugin logfile="MON_HOME/GFrun/logs/garminplugin.log" level="DEBUG">
+    <Devices>
+        <Device enabled="true">
+            <Name>GFrun</Name>
+            <StoragePath>MON_HOME/.config/garminplugin/</StoragePath>
+            <StorageCommand></StorageCommand>
+            <FitnessDataPath></FitnessDataPath>
+            <GpxDataPath></GpxDataPath>
+        </Device>
+    </Devices>
+    <Settings>
+        <ForerunnerTools enabled="false" />
+    </Settings>
+</GarminPlugin>
