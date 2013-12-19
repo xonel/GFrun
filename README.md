@@ -42,7 +42,7 @@ INSTALL :
 ---------
 
 STABLE Version (branch GFrun) :
-<pre><code>wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/install/GFrunMenu.sh && chmod a+x GFrunMenu.sh && sudo sh ./GFrunMenu.sh
+<pre><code>wget -N https://github.com/xonel/GFrun/raw/GFrun/GFrun/GFrun.sh && chmod a+x GFrun.sh && sudo bash ./GFrun.sh
 </code></pre>
 
 DEV Version (branch MASTER) :
