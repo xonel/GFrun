@@ -153,7 +153,7 @@ F_Script(){
 	G_Title
 	G_MenRun
 	
-	if $Vbranche == ''; then
+	if [ $Vbranche == '' ]; then
 		Vbranche="master"
 	fi
 	
