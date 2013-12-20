@@ -120,14 +120,20 @@ F_Path(){
 F_extractor(){
 	clear
 	echo `color 32 ">>> F_extractor"`
-	#Extractor FIT
-	echo "=== $Vpath/logs/extractorLogs"
-	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $H_GFrun/tools/extractor/garmin.py > $Vpath/logs/extractorLogs | tail && read -p 'Press [Enter] key to continue...' null" 
-	python $H_GFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null
-	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "python $H_GFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null" 
-	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
-	echo "Vpath :" $Vpath
-	mv $Vpath/*-garmin.log $H_GFrun/logs/extractor/ 1>/dev/null
+	
+	ant_result=$(lsusb | grep -e '0fcf:1008\|0fcf:1009')
+	if [ $? -ne 0 ]; then
+		printf "Dongle ANT+ is unplugged\n"
+	else
+		#Extractor FIT
+		echo "=== $Vpath/logs/extractorLogs"
+		#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $H_GFrun/tools/extractor/garmin.py > $Vpath/logs/extractorLogs | tail && read -p 'Press [Enter] key to continue...' null" 
+		python $H_GFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null
+		#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "python $H_GFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null" 
+		chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
+		echo "Vpath :" $Vpath
+		mv $Vpath/*-garmin.log $H_GFrun/logs/extractor/ 1>/dev/null
+	fi
 }
 
 F_extractor_getkey(){
@@ -135,9 +141,16 @@ F_extractor_getkey(){
 	echo `color 32 ">>> F_extractor_getkey"`
 	#Pairing Key
 	#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "python $H_GFrun/tools/extractor/extractor_getkey.py && read -p 'Press [Enter] key to continue...' null" 
-	python $H_GFrun/tools/extractor/extractor_getkey.py && read -p 'Press [Enter] key to continue...' null
-	chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
-	mv $Vpath/*-garmin.log $H_GFrun/logs/extractor_getkey/
+	
+	ant_result=$(lsusb | grep -e '0fcf:1008\|0fcf:1009')
+	if [ $? -ne 0 ]; then
+		printf "Dongle ANT+ is unplugged\n"
+	else
+		python $H_GFrun/tools/extractor/extractor_getkey.py && read -p 'Press [Enter] key to continue...' null
+		chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
+		mv $Vpath/*-garmin.log $H_GFrun/logs/extractor_getkey/
+	fi
+	
 }
 
 F_Xterm_Geometry(){
@@ -237,6 +250,7 @@ F_garminplugin_UBU(){
 	
 	if [ $(ls /etc/apt/sources.list.d/ | grep "andreas-diesner-garminplugin-$(lsb_release -cs).list ") ] || grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list ;
 	 then
+		echo `color 36 "<<< apt-add-repository -y ppa:andreas-diesner/garminplugin : ... "`
 		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin 1>/dev/null
 		echo `color 36 "<<< apt-get update : ... "`
 		sudo apt-get update 1>/dev/null
@@ -251,8 +265,7 @@ F_garminplugin_UBU(){
 	
 	if [ -s /tmp/Verror ] #Si pas vide fait ...
 		then
-			echo `color 31 "ERROR : sudo apt-get install -y garminplugin"`
-			echo "ERROR MSG : " cat /tmp/Verror
+			echo `color 31 "<<< apt-get install -y garminplugin : NOK "`
 			read -p 'Press [Enter] key to continue...' null
 		else
 			echo `color 36 "<<< apt-get install -y garminplugin : OK "`
@@ -346,11 +359,12 @@ F_Apt(){
 				esac
 		fi
 		
+		echo `color 32 ">>> F_Apt"`
 		dpkg -l >> $HOME/GFrun_Install.log
 		
 		sudo apt-get update 1>/dev/null
 		echo `color 36 "<<< apt-get update : ... "`
-		sudo apt-get install -y $VlisterrorForm  1>Verror
+		sudo apt-get install -y $VlisterrorForm  1>/tmp/Verror
 		echo `color 36 "<<< apt-get install -y $VlisterrorForm : ... "`
 		
 		#Import pyusb from Github
@@ -359,12 +373,12 @@ F_Apt(){
 		sudo pip install pyusb 1>/dev/null
 		sudo pip install --upgrade pyusb 1>/dev/null
 		
-		if [ -n "$Verror" ]
+		if [ -s /tmp/Verror ]
 			then
 			echo `color 31 "Check APT CONFIG and try again GFrun Install procedure"`
 			echo -e "ERROR: \n sudo apt-get install -y $VlisterrorForm \n Info(Verror): $Verror \n"
 			read -p 'Press [Enter] key to continue...' null
-			M_GFrunMenu	
+			#M_GFrunMenu	
 		fi
 
 	else
@@ -416,7 +430,7 @@ F_Git(){
 			#M_GFrunMenu
 		fi
 		
-		ln -s $HOME/.local/GFrun/GFrun /usr/bin/GFrun
+		ln -f -s $HOME/.local/GFrun/GFrun /usr/bin/GFrun
 	fi
 }
 
