@@ -123,11 +123,12 @@ F_extractor(){
 	
 	ant_result=$(lsusb | grep -e '0fcf:1008\|0fcf:1009')
 	if [ $? -ne 0 ]; then
-		printf "Dongle ANT+ is unplugged\n"
+		echo `color 31 "<<< Dongle ANT+ is unplugged : NOK "`
 	else
 		#Extractor FIT
 		echo "=== $Vpath/logs/extractorLogs"
 		#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 75x35 -e "python $H_GFrun/tools/extractor/garmin.py > $Vpath/logs/extractorLogs | tail && read -p 'Press [Enter] key to continue...' null" 
+		echo `color 36 "<<< Dongle ANT+ is plugged : OK "`
 		python $H_GFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null
 		#xterm -font -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-* -geometry 65x35 -e "python $H_GFrun/tools/extractor/garmin.py && read -p 'Press [Enter] key to continue...' null" 
 		chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
@@ -144,8 +145,9 @@ F_extractor_getkey(){
 	
 	ant_result=$(lsusb | grep -e '0fcf:1008\|0fcf:1009')
 	if [ $? -ne 0 ]; then
-		printf "Dongle ANT+ is unplugged\n"
+		echo `color 31 "<<< Dongle ANT+ is unplugged : NOK "`
 	else
+		echo `color 36 "<<< Dongle ANT+ is plugged : OK "`
 		python $H_GFrun/tools/extractor/extractor_getkey.py && read -p 'Press [Enter] key to continue...' null
 		chown -R $SUDO_USER:$SUDO_USER $HOME/.config/garmin-extractor
 		mv $Vpath/*-garmin.log $H_GFrun/logs/extractor_getkey/
@@ -250,13 +252,13 @@ F_garminplugin_UBU(){
 	
 	if [ $(ls /etc/apt/sources.list.d/ | grep "andreas-diesner-garminplugin-$(lsb_release -cs).list ") ] || grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list ;
 	 then
-		echo `color 36 "<<< apt-add-repository -y ppa:andreas-diesner/garminplugin : ... "`
-		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin 1>/dev/null
 		echo `color 36 "<<< apt-get update : ... "`
 		sudo apt-get update 1>/dev/null
 		echo `color 36 "<<< apt-get install -y garminplugin : ... "`
 		sudo apt-get install -y garminplugin 2>/tmp/Verror
 	else
+		echo `color 36 "<<< apt-add-repository -y ppa:andreas-diesner/garminplugin : ... "`
+		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin 1>/dev/null
 		echo `color 36 "<<< apt-get update : ... "`
 		sudo apt-get update 1>/dev/null
 		echo `color 36 "<<< apt-get install -y garminplugin : ... "`
