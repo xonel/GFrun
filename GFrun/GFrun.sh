@@ -258,7 +258,7 @@ F_garminplugin_UBU(){
 		sudo apt-get install -y garminplugin 2>/tmp/Verror
 	else
 		echo `color 36 "<<< apt-add-repository -y ppa:andreas-diesner/garminplugin : ... "`
-		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin 1>/dev/null
+		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin 2>/dev/null
 		echo `color 36 "<<< apt-get update : ... "`
 		sudo apt-get update 1>/dev/null
 		echo `color 36 "<<< apt-get install -y garminplugin : ... "`
@@ -376,11 +376,21 @@ F_Apt(){
 		sudo pip install pyusb 1>/dev/null
 		sudo pip install --upgrade pyusb 1>/dev/null
 		
-		if [ -s /tmp/Verror ]
-			then
+		if [ -s /tmp/Verror ]; then
 			echo `color 31 "Check APT CONFIG and try again GFrun Install procedure"`
-			echo -e "ERROR: \n sudo apt-get install -y $VlisterrorForm \n Info(Verror):\n"
+			echo -e "ERROR: \n sudo apt-get install -y $VlisterrorForm \n"
 			cat /tmp/Verror
+			
+			for i in ${VlistApt} 
+			do
+				if [ ! "$(dpkg -l | grep -w "$i")" ]; then
+					Vlisterror=(${Vlisterror[@]} $i)
+					echo `color 31 "NOK = "`$i 
+				else
+					echo `color 32 "OK = "`$i 
+				fi
+			done
+		
 			read -p 'Press [Enter] key to continue...' null
 			#M_GFrunMenu	
 		fi
