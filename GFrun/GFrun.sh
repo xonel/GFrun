@@ -233,26 +233,29 @@ F_Uninstall(){
 
 F_garminplugin_UBU(){
 	echo `color 32 ">>> F_garminplugin_UBU"`
-
+	rm -f /tmp/Verror
+	
 	if [ $(ls /etc/apt/sources.list.d/ | grep "andreas-diesner-garminplugin-$(lsb_release -cs).list ") ] || grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list ;
 	 then
 		sudo apt-add-repository -y ppa:andreas-diesner/garminplugin 1>/dev/null
 		echo `color 36 "<<< apt-get update : ... "`
 		sudo apt-get update 1>/dev/null
 		echo `color 36 "<<< apt-get install -y garminplugin : ... "`
-		sudo apt-get install -y garminplugin 1>$Verror
+		sudo apt-get install -y garminplugin 2>/tmp/Verror
 	else
 		echo `color 36 "<<< apt-get update : ... "`
 		sudo apt-get update 1>/dev/null
 		echo `color 36 "<<< apt-get install -y garminplugin : ... "`
-		sudo apt-get install -y garminplugin 1>$Verror
+		sudo apt-get install -y garminplugin 2>/tmp/Verror
 	fi
 	
-	if [ -n "$Verror" ]
+	if [ -s /tmp/Verror ] #Si pas vide fait ...
 		then
-		echo `color 31 "ERROR : sudo apt-get install -y garminplugin"`
-		echo $Verror
-		read -p 'Press [Enter] key to continue...' null
+			echo `color 31 "ERROR : sudo apt-get install -y garminplugin"`
+			echo "ERROR MSG : " cat /tmp/Verror
+			read -p 'Press [Enter] key to continue...' null
+		else
+			echo `color 36 "<<< apt-get install -y garminplugin : OK "`
 		#M_GFrunMenu
 	fi
 }
@@ -296,7 +299,7 @@ F_Sudo(){
 
 F_clean_up(){
 	echo `color 32 ">>> F_clean_up"`
-	rm -f $HOME/Verror* $HOME/GFrun.sh* $HOME/master $HOME/GFrun.sh $HOME/master.zip* $H_GFrun/tools/FIT-to-TCX/master.zip* $H_GFrun/tools/master.zip* $H_GFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
+	rm -f $HOME/Verror* $HOME/GFrunzip $HOME/GFrun.sh* $HOME/master $HOME/GFrun.sh $HOME/master.zip* $H_GFrun/tools/FIT-to-TCX/master.zip* $H_GFrun/tools/master.zip* $H_GFrun/tools/pygupload_20120516.zip* /tmp/ligneCmd.sh* 1>/dev/null
 	rm -fr $HOME/pyusb/ $HOME/GFrun-GFrun $HOME/GFrun-master 1>/dev/null
 	cp -fr $HOME/GFrun_Backup $H_GFrun/GFrun_Backup 2>/dev/null
 	rm -fr $HOME/GFrun_Backup 1>/dev/null
