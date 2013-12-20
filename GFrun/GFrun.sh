@@ -396,8 +396,7 @@ F_Git(){
 		fi
 		echo "$Vbranche : "$Vbranche
 		#cd $HOME && git clone -b $Vbranche https://github.com/xonel/GFrun.git 1>/dev/null
-		cd $HOME && wget -N https://codeload.github.com/xonel/GFrun/zip/$Vbranche 1>/dev/null && unzip -o $Vbranche 1>/dev/null
-		mkdir $HGFrun && cp $HGFrun-$Vbranche $HGFrun 1>/dev/null
+		cd $HOME && wget -N https://codeload.github.com/xonel/GFrun/zip/$Vbranche 1>/dev/null && mv $Vbranche GFrunzip && unzip -o GFrunzip 1>/dev/null && rm -f GFrunzip && mv $HGFrun-$Vbranche $HGFrun 1>/dev/null
 
 		cp -rf $HGFrun/_.config/* $HOME/.config/ && rm -r $HGFrun/_.config
 		cp -rf $HGFrun/_.local/* $HOME/.local/ && rm -r $HGFrun/_.local
