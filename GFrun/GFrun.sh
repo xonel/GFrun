@@ -657,20 +657,26 @@ F_config_Gconnect(){
 		if [ $Vcpt -lt 3 ]; then
 			Vcpt=$(($Vcpt+1))
 					
-			echo `color 31 "============================================="`
+			echo `color 32 "============================================="`
 			echo "...> Grab Key from Forerunner - Testing" $Vcpt "/3" 
 			echo `color 31 "============================================="`	
 			echo "You need :"	
 			echo '...1) Garmin ForeRunner [ ON ] + [PARING MODE ]'
 			echo '...2) Dongle USB-ANT plugged'
 			echo ""
-			echo `color 31 "============================================="`
+			echo `color 32 "============================================="`
 			F_extractor_getkey
+			sleep 1
+			echo " * - - : 1/3"
+			sleep 1
+			echo " * * - : 2/3"
+			sleep 1
+			echo " * * * : 3/3"
 			F_config_Gconnect
 		else
 			clear
 			echo `color 31 "============================================="`
-			echo "ERROR : Key GARMIN Forerunner - NOT FOUND -"
+			echo `color 31 "ERROR : Key GARMIN Forerunner - NOT FOUND -"`
 			echo""
 			echo "PLease check your setting HARDWARE / SOFTWARE."
 			echo `color 31 "============================================="`	
