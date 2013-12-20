@@ -248,7 +248,7 @@ F_Uninstall(){
 
 F_garminplugin_UBU(){
 	echo `color 32 ">>> F_garminplugin_UBU"`
-	rm -f /tmp/Verror
+	rm -f /tmp/Verror 1>/dev/null
 	
 	if [ $(ls /etc/apt/sources.list.d/ | grep "andreas-diesner-garminplugin-$(lsb_release -cs).list ") ] || grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list ;
 	 then
@@ -324,6 +324,7 @@ F_clean_up(){
 
 F_Apt(){
 	F_Path
+	rm -f /tmp/Verror 1>/dev/null
 	echo `color 32 ">>> F_Apt"`
 	echo $(date +%Y-%m-%d_%H%M)"= BEFORE ==========================" >> $HOME/GFrun_Install.log
 
@@ -378,7 +379,8 @@ F_Apt(){
 		if [ -s /tmp/Verror ]
 			then
 			echo `color 31 "Check APT CONFIG and try again GFrun Install procedure"`
-			echo -e "ERROR: \n sudo apt-get install -y $VlisterrorForm \n Info(Verror): $Verror \n"
+			echo -e "ERROR: \n sudo apt-get install -y $VlisterrorForm \n Info(Verror):\n"
+			cat /tmp/Verror
 			read -p 'Press [Enter] key to continue...' null
 			#M_GFrunMenu	
 		fi
