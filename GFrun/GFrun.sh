@@ -787,9 +787,9 @@ F_Diag(){
 	echo '9 ======================================= python --version'>> $Vpath/logs/DIAG
 	python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))'>> $Vpath/logs/DIAG 
 	echo '10 ======================================= ls -al /usr/lib/mozilla/plugins/'>> $Vpath/logs/DIAG
-	ls -al /usr/lib/mozilla/plugins/ >> $Vpath/logs/DIAG 1>/dev/null
+	ls -al /usr/lib/mozilla/plugins/ >> $Vpath/logs/DIAG 2>/dev/null
 	echo '11 ======================================= ls -al $HOME/.mozilla/plugins/'>> $Vpath/logs/DIAG
-	ls -al $HOME/.mozilla/plugins/ >> $Vpath/logs/DIAG 1>/dev/null
+	ls -al $HOME/.mozilla/plugins/ >> $Vpath/logs/DIAG 2>/dev/null
 	
 	read -p 'Press [Enter] key to continue...' null
 }
