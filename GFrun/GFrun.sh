@@ -250,7 +250,7 @@ F_garminplugin_UBU(){
 	echo `color 32 ">>> F_garminplugin_UBU"`
 	rm -f /tmp/Verror 1>/dev/null
 	
-	if [ $(ls /etc/apt/sources.list.d/ | grep "andreas-diesner-garminplugin-$(lsb_release -cs).list ") ] || grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list ;
+	if [ $(ls /etc/apt/sources.list.d/ | grep "andreas-diesner-garminplugin-$(lsb_release -cs).list") ] #|| grep -q "deb http://ppa.launchpad.net/andreas-diesner/garminplugin/ubuntu $(lsb_release -cs) main" < /etc/apt/sources.list ;
 	 then
 		echo `color 36 "<<< apt-get update : ... "`
 		sudo apt-get update 1>/dev/null
@@ -672,6 +672,8 @@ F_config_Gconnect(){
 			echo " * * - : 2/3"
 			sleep 1
 			echo " * * * : 3/3"
+			sleep 1
+			echo " Restart Pairing ..."
 			F_config_Gconnect
 		else
 			clear
