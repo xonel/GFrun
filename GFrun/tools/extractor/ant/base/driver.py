@@ -166,11 +166,14 @@ try:
                         _logger.debug("   Endpoint %s", str(ep.bEndpointAddress))
 
             # unmount a kernel driver (TODO: should probably reattach later)
-            if dev.is_kernel_driver_active(0):
-                _logger.debug("A kernel driver active, detatching")
-                dev.detach_kernel_driver(0)
-            else:
-                _logger.debug("No kernel driver active")
+            try:
+                if dev.is_kernel_driver_active(0):
+                    _logger.debug("A kernel driver active, detatching")
+                    dev.detach_kernel_driver(0)
+                else:
+                    _logger.debug("No kernel driver active")
+            except NotImplementedError as e:
+                _logger.warning("Could not check if kernel driver was active, not implemented in usb backend")
 
             # set the active configuration. With no arguments, the first
             # configuration will be the active one
@@ -238,7 +241,7 @@ def find_driver():
     
     print "Driver available:", drivers
     
-    for driver in drivers:
+    for driver in reversed(drivers):
         if driver.find():
             print " - Using:", driver
             return driver()
