@@ -239,6 +239,8 @@ F_Uninstall(){
 				echo -e " Backup Activities DONE :\n $HOME/GFrun_Backup.zip "
 				read -p 'Press [Enter] key to continue...' null
 			else
+				
+				read -p '>> UNINSTALL CANCELED << : Press [Enter] key to continue...' null
 				M_GFrunMenu
 		fi
 	else
@@ -1142,16 +1144,29 @@ M_GFrunMenu(){
 
 if [ -z "$1" ]; then #the -z operator checks whether the string is null // -n operator checks whether the string is not null
 	G_Title
-	read -p 'Do you want run : (M)enu / (g)ui / (e)xit ?' Vo
-		case "$Vo" in
-			E|e)	G_Bye
-					sleep 2
-					exit;;
-					
-			G|g)	F_GFrunGui;;
-					
-			M|m|*)	M_GFrunMenu;;
-		esac
+	
+	if [ -d $H_GFrun/tools/GFrunGui ]; then
+		echo "Do you want run GFrun with :"
+		echo " (M)ENU -Cli"
+		echo " (G)UI -Graphic"
+		echo ""
+		echo " (e)xit ;o)"
+	else
+		echo "Do you want run GFrun with :"
+		echo " (M)ENU -Cli"
+		echo ""
+		echo " (e)xit ;o)"	
+	fi	
+		read -p ' : ' Vo
+			case "$Vo" in
+				E|e)	G_Bye
+						sleep 2
+						exit;;
+						
+				G|g)	F_GFrunGui;;
+						
+				M|m|*)	M_GFrunMenu;;
+			esac
 else
 	VMain=$1
 	Fscript=$2
