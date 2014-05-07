@@ -614,7 +614,7 @@ F_config_Gconnect(){
 	NBRS_DE_MONTRE=$(ls $H_conf_Gextractor/ | grep [0123456789] -c)
 
 	if [ -n "$NUMERO_DE_MA_MONTRE" ] && [ "$NBRS_DE_MONTRE" == "1" ]; then
-		echo $NUMERO_DE_MA_MONTRE >> $Vpath/logs/IDs
+		echo $NUMERO_DE_MA_MONTRE >> $Vpath/logs/DIAG
 		
 		PATH_ACTIVITES="$H_conf_Gextractor/$NUMERO_DE_MA_MONTRE/activities/"
 		if [ -d $HOME/.config/garmin-extractor ] && [ -d $PATH_ACTIVITES ] ; then
@@ -776,8 +776,8 @@ F_Diag(){
 	echo $(date +%Y-%m-%d_%H%M) >> $Vpath/logs/DIAG
 	echo '2 ======================================= usb-devices'>> $Vpath/logs/DIAG
 	usb-devices | grep Vendor=0fcf >> $Vpath/logs/DIAG
-	echo '3 ======================================= cat $H_GFrun/logs/IDs'>> $Vpath/logs/DIAG
-	cat $H_GFrun/logs/IDs >> $Vpath/logs/DIAG
+	echo '3 ======================================= cat $H_GFrun/logs/DIAG'>> $Vpath/logs/DIAG
+	cat $H_GFrun/logs/DIAG >> $Vpath/logs/DIAG
 	echo '4 ======================================= cat /etc/udev/rules.d/ant-usbstick2.rules'>> $Vpath/logs/DIAG
 	cat /etc/udev/rules.d/ant-usbstick2.rules >> $Vpath/logs/DIAG
 	echo '5 ======================================= ls /etc/udev/rules.d/'>> $Vpath/logs/DIAG
