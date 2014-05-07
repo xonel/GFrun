@@ -1156,17 +1156,18 @@ if [ -z "$1" ]; then #the -z operator checks whether the string is null // -n op
 		echo " (M)ENU -Cli"
 		echo ""
 		echo " (e)xit ;o)"	
-	fi	
-		read -p ' : ' Vo
-			case "$Vo" in
-				E|e)	G_Bye
-						sleep 2
-						exit;;
-						
-				G|g)	F_GFrunGui;;
-						
-				M|m|*)	M_GFrunMenu;;
-			esac
+	fi
+	
+	read -p '...' Vo
+		case "$Vo" in
+			E|e)	G_Bye
+					sleep 2
+					exit;;
+					
+			G|g)	F_GFrunGui;;
+					
+			M|m|*)	M_GFrunMenu;;
+		esac
 else
 	VMain=$1
 	Fscript=$2
