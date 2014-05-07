@@ -32,17 +32,16 @@ import sys
 
 fittotcx = "/path/to/FIT-to-TCX/fittotcx.py"
 
-def main(action, filename, fit_type):
+def main(action, filename):
 
-    # Only new downloads which are activities
-    if action != "DOWNLOAD" or fit_type != "4":
+    if action != "DOWNLOAD":
         return 0
 
     basedir  = os.path.split(os.path.dirname(filename))[0]
     basefile = os.path.basename(filename)
 
     # Create directory
-    targetdir = os.path.join(basedir, "activities_tcx")
+    targetdir = os.path.join(basedir, "tcx")
     try:
         os.mkdir(targetdir)
     except:
@@ -71,5 +70,5 @@ def main(action, filename, fit_type):
     return 0
 
 if __name__ == "__main__":
-    sys.exit(main(*sys.argv[1:]))
+    sys.exit(main(sys.argv[1], sys.argv[2]))
 

@@ -1,10 +1,16 @@
 Requirements
 ==============================================================================
 
+- Python 2.7+
+
 - PyUSB 1.0 (seems to be a bug which makes it segfaults on version before
   Alpha 2). It is recommended to use pip to install PyUSB:
   
   pip install pyusb
+
+  Alternatively you can install it from GitHub:
+
+  https://github.com/walac/pyusb
 
 - Install udev rules (recommended). This is only needed if you want to avoid
   running the program as root. Install with:
@@ -22,15 +28,12 @@ been able to download data of their watches:
  - Garmin Forerunner 310XT
  - Garmin Forerunner 610
  - Garmin Forerunner 910XT
+ - Garmin FR70
+ - Garmin Swim
 
 It's possible that other manufactures using ANT+/ANT-FS, such as Suunto and
 Timex might work, but have *never* been tested as far as I know. Please let
 me know if you have any success with devices that are not listed here.
-
-The following USB sticks are known to work:
-
- - ANT USBStick2 (0fcf:1008 Dynastream Innovations, Inc.)
- - ANT USBStick3 (0fcf:1009 Dynastream Innovations, Inc.)
 
 Usage
 ==============================================================================

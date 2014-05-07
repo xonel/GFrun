@@ -41,25 +41,25 @@ class Runner:
                 scripts.append(filename)
         return sorted(scripts)
 
-    def _run_action(self, action, filename, fit_type):
+    def _run_action(self, action, filename):
         for script in self.get_scripts():
             try:
                 subprocess.call([os.path.join(self.directory, script),
-                                 action, filename, str(fit_type)])
+                                 action, filename])
             except OSError as e:
                 print " - Could not run", script, "-",\
                       errno.errorcode[e.errno], os.strerror(e.errno)
 
-    def run_action(self, action, filename, fit_type):
-        t = threading.Thread(target=self._run_action, args=(action, filename, fit_type))
+    def run_action(self, action, filename):
+        t = threading.Thread(target=self._run_action, args=(action, filename))
         t.start()
 
-    def run_download(self, filename, fit_type):
-        self.run_action("DOWNLOAD", filename, fit_type)
+    def run_download(self, filename):
+        self.run_action("DOWNLOAD", filename)
 
-    def run_upload(self, filename, fit_type):
-        self.run_action("UPLOAD", filename, fit_type)
+    def run_upload(self, filename):
+        self.run_action("UPLOAD", filename)
 
-    def run_delete(self, filename, fit_type):
-        self.run_action("DELETE", filename, fit_type)
+    def run_delete(self, filename):
+        self.run_action("DELETE", filename)
 
