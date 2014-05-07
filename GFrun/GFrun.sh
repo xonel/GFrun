@@ -1146,19 +1146,23 @@ if [ -z "$1" ]; then #the -z operator checks whether the string is null // -n op
 	G_Title
 	
 	if [ -d $H_GFrun/tools/GFrunGui ]; then
-		echo "Do you want run GFrun with :"
+		echo "DO YOU WANT START GFrun :"
+		echo `color 32 " =================================="`
 		echo " (M)ENU -Cli"
-		echo " (G)UI -Graphic"
+		echo " (G)UI  -Graphic"
 		echo ""
-		echo " (e)xit ;o)"
+		echo " (E)XIT ;o)"
+		echo ""
 	else
-		echo "Do you want run GFrun with :"
+		echo "DO YOU WANT START GFrun :"
+		echo `color 32 " =================================="`
 		echo " (M)ENU -Cli"
 		echo ""
-		echo " (e)xit ;o)"	
+		echo " (E)XIT ;o)"
+		echo ""	
 	fi
-	
-	read -p '...' Vo
+	echo `color 32 " =================================="`	
+	read -p ': ' Vo
 		case "$Vo" in
 			E|e)	G_Bye
 					sleep 2
