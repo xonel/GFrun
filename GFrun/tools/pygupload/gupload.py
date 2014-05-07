@@ -91,8 +91,9 @@ parser.add_argument('-l', type=str, nargs=2, help='Garmin Connect login credenti
 parser.add_argument('-v', type=int, nargs=1, default=[3], choices=[1, 2, 3, 4, 5] , help='Verbose - select level of verbosity. 1=DEBUG(most verbose), 2=INFO, 3=WARNING, 4=ERROR, 5= CRITICAL(least verbose). [default=3]')
 
 myargs = parser.parse_args()
+logLevel = myargs.v[0]*10
 
-logging.basicConfig(level=(myargs.v[0]*10))
+logging.basicConfig(level=logLevel)
 
 if platform.system() == 'Windows':
     configFile='gupload.ini'
@@ -192,7 +193,7 @@ if myargs.a and len(workouts)==1:
     logging.debug('Activity Name: ' + activityName)
 
 # Create object
-g = UploadGarmin.UploadGarmin()
+g = UploadGarmin.UploadGarmin(logLevel=logLevel)
 
 # LOGIN
 if not g.login(username, password):

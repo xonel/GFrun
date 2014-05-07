@@ -5,7 +5,7 @@
 #  Auteurs : Le.NoX ;o)
 #  M@il : le . nox @ free . fr
 #  https://github.com/xonel/GFrun
-Version="0.5.1"
+Version="0.5.2"
 #
 #  Licence: GNU GPL
 #
@@ -574,6 +574,7 @@ F_Update(){
 F_config_plugins(){
 	echo `color 32 ">>> F_config_plugins"`
 	clear
+	G_Title
 	echo ""
 	echo `color 32 "=================================="`
 	echo "SELECT Plugins"
@@ -624,7 +625,8 @@ F_config_Gconnect(){
 
 			#Garminplugin GarminDevice.xml
 			src=ID_MA_MONTRE && cibl=$NUMERO_DE_MA_MONTRE && echo "sed -i 's|$src|$cibl|g' $H_conf_Gplugin/Garmin/GarminDevice.xml" >> /tmp/ligneCmd.sh
-			#02_convert_to_tcx.py
+			#0x_Script.py
+			src=/path/to/bin/gupload.py && cibl=$H_GFrun/tools/pygupload/gupload.py && echo "sed -i 's|$src|$cibl|g' $H_conf_Gextractor/scripts/01_upload_gconnect.py" >> /tmp/ligneCmd.sh
 			src=/path/to/FIT-to-TCX/fittotcx.py && cibl=$H_GFrun/tools/FIT-to-TCX/fittotcx.py && echo "sed -i 's|$src|$cibl|g' $H_conf_Gextractor/scripts/02_convert_to_tcx.py" >> /tmp/ligneCmd.sh
 			src=MON_HOME && cibl=$HOME && echo "sed -i 's|$src|$cibl|g' $H_conf_Gplugin/garminplugin.xml" >> /tmp/ligneCmd.sh
 			#start ligneCmd.sh & check config garminplugin
@@ -796,31 +798,35 @@ F_Diag(){
 	read -p 'Press [Enter] key to continue...' null
 }
 
-F_Upload_Gconnect_Go(){
-	echo `color 32 ">>> F_Upload_Gconnect_Go"`
-	echo `color 31 "============================================="`
-	echo " LOCAL > ...> Upload Activities on going >... > GARMIN.COM" 
-	echo `color 31 "============================================="`	
-	echo " Script >>> python $H_GFrun/tools/pygupload/gupload.py -v 1 $Vactivities"
-	
+F_Upload_Gconnect_Go(){	
 	NUMERO_DE_MA_MONTRE=$(ls $H_conf_Gextractor/ | grep [0123456789])
-	cd $H_conf_Gextractor/$NUMERO_DE_MA_MONTRE/activities && python $H_GFrun/tools/pygupload/gupload.py -v 1 $Vactivities
+	CHECK_ACTIVITES=$(ls $H_conf_Gextractor/$NUMERO_DE_MA_MONTRE/activities | grep $Vactivities)
+	
+	if [ -n "$CHECK_ACTIVITES" ]; then	
+		echo ""
+		echo `color 32 ">>> F_Upload_Gconnect_Go"`
+		echo `color 36 "<<< python $H_GFrun/tools/pygupload/gupload.py -v 5 $Vactivities"`
+		echo `color 31 "========================================================================"`
+		
+		cd $H_conf_Gextractor/$NUMERO_DE_MA_MONTRE/activities && python $H_GFrun/tools/pygupload/gupload.py -v 5 $Vactivities
+	else
+		echo "<<< $Vactivities - EMPTY"		
+	fi
 }
 
 F_Upload_Gconnect(){
 	clear
 	echo `color 32 ">>> F_Upload_Gconnect"`
 	echo ""
-	echo `color 32 "=================================="`
-	echo "SELECT ACTIVITIES PERIOD"
-	echo `color 32 "=================================="`
+	G_Title
+	echo " SELECT ACTIVITIES PERIOD"
 	echo ""
-	echo " (T) - Today"
-	echo " (W) - Week" 
-	echo " (M) - Month"
-	echo " (Y) - Years" 
-	echo ""
-	echo -n "Choise : (t) . (w) . (m) . (y) "
+	echo "    (T) - Today"
+	echo "    (W) - Week (Default)" 
+	echo "    (M) - Month"
+	echo "    (Y) - Years" 
+	echo `color 32 " =================================="`
+	echo -n " Choise : (t) . (w) . (m) . (y) : "
 	read Vchoix
 
         case $Vchoix
@@ -828,14 +834,6 @@ F_Upload_Gconnect(){
           [tT]) # (T) - Today
 			Vactivities=$(date +%Y-%m-%d_*)
 			F_Upload_Gconnect_Go
-            ;;
-
-          [wW]) # (W) - Week	
-			for c in 1 2 3 4 5 6 7
-				do 
-				Vactivities=$(date "+%Y-%m-%d_*" -d "$c days ago")
-				F_Upload_Gconnect_Go
-			done
             ;;
 
           [mM]) # (M) - Month
@@ -846,6 +844,14 @@ F_Upload_Gconnect(){
           [yY]) # (Y) - Years
 			Vactivities=$(date +%Y-*)
 			F_Upload_Gconnect_Go
+            ;;
+            
+          w|W|*) # (W) - Week	
+			for c in 1 2 3 4 5 6 7
+				do 
+				Vactivities=$(date "+%Y-%m-%d_*" -d "$c days ago")
+				F_Upload_Gconnect_Go
+			done
             ;;
         esac
 }

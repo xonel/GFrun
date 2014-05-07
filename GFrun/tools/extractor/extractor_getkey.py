@@ -134,7 +134,7 @@ class Device:
 
 class Garmin(Application):
 
-    PRODUCT_NAME = "garmin-extractor"
+    PRODUCT_NAME = "GFrun"
 
     def __init__(self, uploading):
         Application.__init__(self)

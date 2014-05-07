@@ -2,7 +2,33 @@
 RELEASE:
 Garmin Connect Python Uploader Release Notes:
 
-Release 2013.05.05:
+Release 2014.03.01:
+  Comments:
+  Garmin Connect completley chaged their login authentication scheme rendering
+  Gcp completely inoperable.  Code from another open source project was 
+  leveraged to get authorization working again.  
+
+  Changes:
+  1) Python package 'requests' is now required.
+  2) Minor change to gupload.py to pass logging level to UploadGarmin.py
+  3) Major overhaul of UploadGarmin.py leveraging heavily from Tapiriik project
+     (https://github.com/cpfair/tapiriik) for the new authentication scheme.
+  4) License for new UploadGarmin.py was changed to Apache 2.0 to match the
+     source from which work was heavily leveraged.
+  4) MultipartPostHandler.py no longer required. Remove from project.
+
+Release 2014.02.16:
+  Comments:
+  Something changed with the Garmin Connect web site causing uploads to fail.
+  They are now particular about the order of parts in the Multi-part post.
+  Specifically, they want the filename as the first part of the multi-part
+  post.
+  
+  Changes:
+  1) UploadGarmin.py now give better information if an upload fails
+  2) MultipartPostHandler.py now outputs the filename part first.
+
+Release 2012.05.05:
   Comments:
   Fixed issue where script failed if user's Garmin Connect display name was 
   not the same as their login name.  Garmin Connect returns the user's 

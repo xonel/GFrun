@@ -1,12 +1,16 @@
 LICENSE:
 
-See LICENSE.txt
+File: gupload.py 
+License: GNU General Public License (GPL)
+
+File: UploadGarmin.py
+License: Apache 2.0
 
 
 DISCLAIMER:
 
 # THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM 
-# “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR 
+# 'AS IS' WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR 
 # IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
 # OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE 
 # ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM 
@@ -25,34 +29,59 @@ devices to the http://connect.garmin.com web site.
 REQUIREMENTS:
 Tested on Python 2.6.5 under Linux and 2.7.2 under Windows XP.
 
-Required Python Modules:
-argparse
-ConfigParser
+Pip:  
+pip is a tool for installing and managing Python packages, 
+such as those found on Python Package Index(pypi).  It is
+a replacement/enhancement for easy_install.  
+
+Linux Pip Installation:
+If you use and Ubuntu distro search for python-pip in your 
+package browser.  Other distros my have a similar package. 
+Otherwise, check out the following link.
+
+http://www.pip-installer.org/en/latest/
+
+
+Windows Pip Installation:
+1) Download the last easy installer for Windows that fits your 
+   installed python version: (download the .exe at the bottom 
+   of http://pypi.python.org/pypi/setuptools ). Install it.
+2) Add c:\Python2x\Scripts to the Windows path (replace 
+   Python2x with the correct directory)
+3) Open a NEW (!) DOS prompt. From there run 'easy_install pip'
+
+http://stackoverflow.com/questions/4750806/how-to-install-pip-on-windows
+
+Note that for Windows you MUST add your python 'scripts'
+directory to your PATH environment variable.  
+
+
+Required Python Modules: (automatically installed by pip)
 logging
-glob
-platform
-string
-urllib
-urllib2
-mimetools
-mimetypes
-os
-stat
-cStringIO
-json or simplejson
+simplejson
+requests
+
+Garmin Connect Account:
+You must already have a Garmin Connect account set up.  If you
+don't have one, go to http://connect.garmin.com and create your
+user account.  The login credentials for this account are 
+required for uploading data to Garmin Connect.
+
 
 INSTALL:
 
-Linux Install: 
-unzip gupload.zip to /opt/pygupload
-create a symbolic link
-sudo ln -s  /opt/pygupload/gupload.py /usr/local/bin/gupload.py
+The following command should download and install GcpUploader...
 
-Windows Install:
-unzip pygupload.zip file to c:\pygupload
-add c:\pygupload to your PATH environment variable (use google)
+Linux: 
+sudo pip install GcpUploader
 
-Linux + Windows:
+
+Win: 
+pip install GcpUploader
+
+
+
+Config File:
 You may create a config file containing your Garmin Connect
 username and password to eliminate the need to type it in 
 on the command line.  WARNING!!! The username and password
