@@ -456,6 +456,7 @@ F_Install(){
 	sudo cp -f $H_GFrun/tools/extractor/resources/ant-usbstick2.rules /etc/udev/rules.d/
 	sudo cp -f $H_GFrun/tools/10-ant-usbstick2.rules /lib/udev/rules.d/
 	sudo udevadm control --reload-rules
+	sudo udevadm trigger --subsystem-match=usb --attr-match=idVendor=0fcf
 	
 	mkdir -p $H_conf_Gextractor/scripts
 	cp -f $H_GFrun/tools/extractor/scripts/* $H_conf_Gextractor/scripts/
