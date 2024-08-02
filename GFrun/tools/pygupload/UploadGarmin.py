@@ -1,12 +1,12 @@
 """
-Upload Garmin 
+Upload Garmin
 
 Handle the operation to upload to the Garmin Connect Website.
 
 """
-# 
-# 
-# This version of UploadGarmin.py leverages heavily from work done in the 
+#
+#
+# This version of UploadGarmin.py leverages heavily from work done in the
 # tapiriik project (https://github.com/cpfair/tapiriik), particularly the new
 # Garmin Connect user authentication using Jasig CAS.
 #
@@ -15,17 +15,17 @@ Handle the operation to upload to the Garmin Connect Website.
 # License: Apache 2.0
 #
 # Information: 2/26/2014
-# Complete redesign of UploadGarmin.py due to major changes in the Garmin 
-# Connect authorization scheme which rolled out in late Feb 2014. License has 
+# Complete redesign of UploadGarmin.py due to major changes in the Garmin
+# Connect authorization scheme which rolled out in late Feb 2014. License has
 # change from previous version of this file to comply with licence of the work
 # from which this work was derived.
 #
-# THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM 
-# 'AS IS' WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR 
-# IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
-# OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE 
-# ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM 
-# IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME 
+# THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM
+# 'AS IS' WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
+# IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+# OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE
+# ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM
+# IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME
 # THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
 #
 
@@ -33,11 +33,6 @@ import requests
 import time
 import re
 import logging
-
-try:
-    import simplejson
-except ImportError:
-    import json as simplejson
 import os.path
 
 class ServiceExceptionScope:
@@ -108,10 +103,10 @@ class UploadGarmin:
         min_period = 1 # I appear to been banned from Garmin Connect while determining this.
         if not self._last_req_start:
             self._last_req_start = 0.0
-        
+
         wait_time = max(0, min_period - (time.time() - self._last_req_start))
         time.sleep(wait_time)
-        
+
         self._last_req_start = time.time()
         #print("Rate limited for %f" % wait_time)
         logging.info("Rate limited for %f" % wait_time)
@@ -131,100 +126,111 @@ class UploadGarmin:
         if username is None or password is None:
             raise APIException("Username and/or password missing")
 
+        # Start session
+        session = requests.Session()
+
+        # First, get SSO server hostname
         self._rate_limit()
-        gcPreResp = requests.get("http://connect.garmin.com/", allow_redirects=False)
-        # New site gets this redirect, old one does not
-        if gcPreResp.status_code == 200:
-            self._rate_limit()
-            gcPreResp = requests.get("https://connect.garmin.com/signin", allow_redirects=False)
-            req_count = int(re.search("j_id(\d+)", gcPreResp.text).groups(1)[0])
-            params = {"login": "login", "login:loginUsernameField": username, "login:password": password, "login:signInButton": "Sign In"}
-            auth_retries = 3 # Did I mention Garmin Connect is silly?
-            for retries in range(auth_retries):
-                params["javax.faces.ViewState"] = "j_id%d" % req_count
-                req_count += 1
-                self._rate_limit()
-                resp = requests.post("https://connect.garmin.com/signin", data=params, allow_redirects=False, cookies=gcPreResp.cookies)
-                if resp.status_code >= 500 and resp.status_code < 600:
-                    raise APIException("Remote API failure")
-                if resp.status_code != 302: # yep
-                    if "errorMessage" in resp.text:
-                        if retries < auth_retries - 1:
-                            time.sleep(1)
-                            continue
-                        else:
-                            raise APIException("Invalid login", block=True, user_exception=UserException(UserExceptionType.Authorization, intervention_required=True))
-                    else:
-                        raise APIException("Mystery login error %s" % resp.text)
-                break
-        elif gcPreResp.status_code == 302:
-            # JSIG CAS, cool I guess.
-            # Not quite OAuth though, so I'll continue to collect raw credentials.
-            # Commented stuff left in case this ever breaks because of missing parameters...
-            data = {
-                "username": username,
-                "password": password,
-                "_eventId": "submit",
-                "embed": "true",
-                # "displayNameRequired": "false"
-            }
-            params = {
-                "service": "http://connect.garmin.com/post-auth/login",
-                # "redirectAfterAccountLoginUrl": "http://connect.garmin.com/post-auth/login",
-                # "redirectAfterAccountCreationUrl": "http://connect.garmin.com/post-auth/login",
-                # "webhost": "olaxpw-connect00.garmin.com",
-                "clientId": "GarminConnect",
-                # "gauthHost": "https://sso.garmin.com/sso",
-                # "rememberMeShown": "true",
-                # "rememberMeChecked": "false",
-                "consumeServiceTicket": "false",
-                # "id": "gauth-widget",
-                # "embedWidget": "false",
-                # "cssUrl": "https://static.garmincdn.com/com.garmin.connect/ui/src-css/gauth-custom.css",
-                # "source": "http://connect.garmin.com/en-US/signin",
-                # "createAccountShown": "true",
-                # "openCreateAccount": "false",
-                # "usernameShown": "true",
-                # "displayNameShown": "false",
-                # "initialFocus": "true",
-                # "locale": "en"
-            }
-            # I may never understand what motivates people to mangle a perfectly good protocol like HTTP in the ways they do...
-            preResp = requests.get("https://sso.garmin.com/sso/login", params=params)
-            if preResp.status_code != 200:
-                raise APIException("SSO prestart error %s %s" % (preResp.status_code, preResp.text))
-            data["lt"] = re.search("name=\"lt\"\s+value=\"([^\"]+)\"", preResp.text).groups(1)[0]
+        sso_resp = session.get('https://connect.garmin.com/gauth/hostname')
+        if sso_resp.status_code != 200:
+            raise APIException("SSO Hostname retrieval failed")
+        sso_hostname = sso_resp.json().get('host', None).rstrip('.garmin.com')
+        logging.debug('SSO Hostname: %s' % sso_hostname)
 
-            ssoResp = requests.post("https://sso.garmin.com/sso/login", params=params, data=data, allow_redirects=False, cookies=preResp.cookies)
-            if ssoResp.status_code != 200:
-                raise APIException("SSO error %s %s" % (ssoResp.status_code, ssoResp.text))
+        # Then get login ticket
+        # With full parameters from a web browser request
+        # Don't ask me why Garmin needs all this garbage :/
+        self._rate_limit()
+        params = {
+            'clientId' : 'GarminConnect',
+            'webhost' : sso_hostname,
+            'consumeServiceTicket' : 'false',
+            'createAccountShown' : 'true',
+            'cssUrl' : 'https://static.garmincdn.com/com.garmin.connect/ui/css/gauth-custom-v1.1-min.css',
+            'displayNameShown' : 'false',
+            'embedWidget' : 'false',
+            'gauthHost' : 'https://sso.garmin.com/sso',
+            'generateExtraServiceTicket' : 'false',
+            'id' : 'gauth-widget',
+            'initialFocus' : 'true',
+            'locale' : 'fr',
+            'openCreateAccount' : 'false',
+            'redirectAfterAccountCreationUrl' : 'https://connect.garmin.com/post-auth/login',
+            'redirectAfterAccountLoginUrl' : 'https://connect.garmin.com/post-auth/login',
+            'rememberMeChecked' : 'false',
+            'rememberMeShown' : 'true',
+            'service' : 'https://connect.garmin.com/post-auth/login',
+            'source' : 'https://connect.garmin.com/fr-FR/signin',
+            'usernameShown' : 'false',
+        }
+        ticket_resp = session.get('https://sso.garmin.com/sso/login', params=params)
+        if ticket_resp.status_code != 200:
+            raise APIException("Ticket retrieval failed")
 
-            ticket_match = re.search("ticket=([^']+)'", ssoResp.text)
-            if not ticket_match:
-                raise APIException("Invalid login", block=True, user_exception=UserException(UserExceptionType.Authorization, intervention_required=True))
-            ticket = ticket_match.groups(1)[0]
+        # Get the login ticket value
+        regex = '<input\s+type="hidden"\s+name="lt"\s+value="(?P<lt>\w+)"\s+/>'
+        res = re.search(regex, ticket_resp.text)
+        if not res:
+          raise APIException('No login ticket')
+        login_ticket = res.group('lt')
+        logging.debug('Found login ticket %s', login_ticket)
 
-            # ...AND WE'RE NOT DONE YET!
+        # Login/Password with login ticket
+        # Send through POST
+        data = {
+          # All parameters are needed
+          '_eventId' : 'submit',
+          'displayNameRequired' : 'false',
+          'embed' : 'true',
+          'lt' : login_ticket,
+          'username' : username,
+          'password' : password,
+        }
+        headers = {
+          'Host' : 'sso.garmin.com', # Don't ask. Really.
+        }
 
-            self._rate_limit()
-            gcRedeemResp1 = requests.get("http://connect.garmin.com/post-auth/login", params={"ticket": ticket}, allow_redirects=False, cookies=gcPreResp.cookies)
-            if gcRedeemResp1.status_code != 302:
-                raise APIException("GC redeem 1 error %s %s" % (gcRedeemResp1.status_code, gcRedeemResp1.text))
+        self._rate_limit()
+        login_resp = session.post('https://sso.garmin.com/sso/login', params=params, data=data, headers=headers)
+        if login_resp.status_code != 200:
+          raise APIException('First authentification failed.')
 
-            self._rate_limit()
-            gcRedeemResp2 = requests.get(gcRedeemResp1.headers["location"], cookies=gcPreResp.cookies, allow_redirects=False)
-            if gcRedeemResp2.status_code != 302:
-                raise APIException("GC redeem 2 error %s %s" % (gcRedeemResp2.status_code, gcRedeemResp2.text))
+        # Try to find the full post login url in response
+        # From JS code source :
+        # var response_url = 'https://connect.garmin.com/post-auth/login?ticket=ST-03582405-W6gvTaVCJe0Yx93AB2yu-cas'
+        regex = 'var response_url(\s+)= \'https://connect.garmin.com/post-auth/login\?ticket=(?P<ticket>.+)\''
+        matches = re.search(regex, login_resp.text)
+        if not matches:
+            raise APIException('Authentication ticket not found')
+        params = {
+            'ticket' : matches.group('ticket'),
+        }
+        logging.debug('Found service ticket %s', params['ticket'])
 
-        else:
-            raise APIException("Unknown GC prestart response %s %s" % (gcPreResp.status_code, gcPreResp.text))
+        # Lastly, do a final auth with the service ticket
+        self._rate_limit()
+        headers = {
+            'Host' : 'connect.garmin.com',
+        }
+        final_resp = session.get('https://connect.garmin.com/post-auth/login', params=params, headers=headers)
+        if final_resp.status_code != 200 and not final_resp.history:
+            raise APIException('Second auth step failed.')
 
-        self.cookies = gcPreResp.cookies
+        # Check login
+        check_resp = session.get('https://connect.garmin.com/user/username')
+        if check_resp.status_code != 200:
+            raise APIException("Login check retrieval failed")
+        garmin_user = check_resp.json()
+        if not garmin_user.get('username', None):
+            raise APIException("Login check failed.")
+        logging.info('Logged in as %s' % (garmin_user['username']))
+
+        self.cookies = session.cookies
         return self.cookies
 
 
     def upload_file(self, uploadFile):
-        
+
         extension = os.path.splitext(uploadFile)[1].lower()
 
         # Valid File extensions are .tcx, .fit, and .gpx
@@ -236,10 +242,12 @@ class UploadGarmin:
         else:
             mode = 'r'
 
-        files = {"data": (uploadFile, open(uploadFile, mode))}
+        files = {"file": (uploadFile, open(uploadFile, mode))}
         cookies = self._get_cookies()
         self._rate_limit()
-        res = requests.post("http://connect.garmin.com/proxy/upload-service-1.1/json/upload/%s" % extension, files=files, cookies=cookies)
+        res = requests.post("https://connect.garmin.com/modern/proxy/upload-service/upload/%s" % extension, files=files, cookies=cookies)
+        if res.status_code not in (200, 201, 409):
+            return ['FAIL', 'Upload failed, status %d' % res.status_code]
         res = res.json()["detailedImportResult"]
 
         if len(res["successes"]) == 0:
@@ -257,7 +265,7 @@ class UploadGarmin:
         self._rate_limit()
         res = requests.post('http://connect.garmin.com/proxy/activity-service-1.0/json/name/%d' % (workout_id), data=data, cookies=cookies)
         res = res.json()["display"]["value"]
-        
+
         if res != workout_name:
             raise Exception("Naming workout has failed")
 
